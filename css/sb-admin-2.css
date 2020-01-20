@@ -223,8 +223,14 @@ caption {
   caption-side: bottom;
 }
 
+td {
+  text-align: right;
+  white-space: nowrap;
+}
+
 th {
-  text-align: inherit;
+  text-align: center;
+  white-space: nowrap;
 }
 
 label {
@@ -1376,6 +1382,7 @@ pre code {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #e3e6f0;
+
 }
 
 .table thead th {
