@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Laporan Bongkaran</title>
+  <title>Data Tagihan Nasabah</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -224,53 +224,174 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Laporan Bongkaran</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <h1 class="h3 mb-0 text-gray-800">Data Tagihan Nasabah</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Print Tagihan</a>
           </div>
 
-          <!-- DataTales Example -->
+          <!-- Data LAPORAN -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Tabel Laporan Bongkaran</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tabel Data Tagihan</h6>
+                <p></p>
+                <label for="sel1">(Kode Kontrol Nasabah disini)</label>
+                <p></p>
+                <label for="sel1">(Nama Nasabah disini)</label>
+                <p></p>
+              <label for="">Dari</label>
+              <input type="date" name="" id="">
+              <label for="">Sampai</label>
+              <input type="date" name="" id="">
+              <div class="form-group">
+                <!--Option Menu-->
+                <label for="sel1">Tampilkan Data :</label>
+                <select class="form-control" id="sel1">
+                  <option>Pilih Data</option>
+                  <option value="air">Air Bersih</option>
+                  <option value="listrik">Listrik</option>
+                  <option value="keamanan">IPK & Keamanan</option>
+                  <option value="kebersihan">Kebersihan</option>
+                </select>
+              </div>
             </div>
-            <div class="card-body">
+            <!--AIR BERSIH-->
+            <div class="air box card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                          <th>Tanggal</th>
+                          <th>Kode Kontrol</th>
+                          <th>Nama</th>
+                          <th>Pakai Air (M<sup>3</sup>)</th>
+                          <th>Tagihan</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                           <th>Tanggal</th>
+                           <th>Kode Kontrol</th>
+                           <th>Nama</th>
+                           <th>Pakai Air (M<sup>3</sup>)</th>
+                           <th>Tagihan</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr>
+                          <td class="text-center">2020-01-15</td>
+                          <td class="text-left">A-1-001</td>
+                          <td class="text-left">PT.BTN</td>
+                          <td>100</td>
+                          <td>120,000</td>
+                        </tr>
+                      </tbody>
+                </table>
+              </div>
+            </div>
+            <!--LISTRIK-->
+            <div class="listrik box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                          <th>Tanggal</th>
+                          <th>Kode Kontrol</th>
+                          <th>Nama</th>
+                          <th>Pakai Air (M<sup>3</sup>)</th>
+                          <th>Tagihan</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                           <th>Tanggal</th>
+                           <th>Kode Kontrol</th>
+                           <th>Nama</th>
+                           <th>Pakai Listrik (kWh)</th>
+                           <th>Tagihan</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr>
+                          <td class="text-center">2020-01-15</td>
+                          <td class="text-left">A-1-001</td>
+                          <td class="text-left">PT.BTN</td>
+                          <td>100</td>
+                          <td>120,000</td>
+                        </tr>
+                      </tbody>
+                </table>
+              </div>
+            </div>
+            <!--KEAMANAN-->
+            <div class="keamanan box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                          <th>Tanggal</th>
+                          <th>Kode Kontrol</th>
+                          <th>Nama</th>
+                          <th>Jumlah Unit</th>
+                          <th>Tagihan</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                           <th>Tanggal</th>
+                           <th>Kode Kontrol</th>
+                           <th>Nama</th>
+                           <th>Jumlah Unit</th>
+                           <th>Tagihan</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr>
+                          <td class="text-center">2020-01-15</td>
+                          <td class="text-left">A-1-001</td>
+                          <td class="text-left">PT.BTN</td>
+                          <td class="text-center">1</td>
+                          <td>120,000</td>
+                        </tr>
+                      </tbody>
+                </table>
+              </div>
+            </div>
+            <!--KEBERSIHAN-->
+            <div class="kebersihan box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Tanggal</th>
+                      <th>Kode Kontrol</th>
                       <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th>Jumlah Unit</th>
+                      <th>Tagihan</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                       <th>Tanggal</th>
+                       <th>Kode Kontrol</th>
+                       <th>Nama</th>
+                       <th>Jumlah Unit</th>
+                       <th>Tagihan</th>
                     </tr>
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td>Donna Snider</td>
-                      <td>Customer Support</td>
-                      <td>New York</td>
-                      <td>27</td>
-                      <td>2011/01/25</td>
-                      <td>$112,000</td>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-left">A-1-001</td>
+                      <td class="text-left">PT.BTN</td>
+                      <td class="text-center">1</td>
+                      <td>120,000</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+            <!-- End Tables -->
           </div>
-
+          <!-- END Data LAPORAN -->
         </div>
         <!-- /.container-fluid -->
 
@@ -333,6 +454,31 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Selection Menu Scripts (Levind) -->
+  <script>
+    $(document).ready(function(){
+        $("select").change(function(){
+            $(this).find("option:selected").each(function(){
+                var optionValue = $(this).attr("value");
+                if(optionValue){
+                    $(".box").not("." + optionValue).hide();
+                    $("." + optionValue).show();
+                } else{
+                    $(".box").hide();
+                }
+            });
+        }).change();
+    });
+  </script>
+
+  <!-- Multiple Datatable Scripts (Levind) -->
+  <script>
+	  $(document).ready(function() {
+      $('table.display').DataTable();
+	  } );
+	</script>
+
 
 </body>
 
