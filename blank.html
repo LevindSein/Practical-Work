@@ -33,14 +33,14 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Said</div>
+        <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -50,7 +50,43 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Tagihan -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTagihan" aria-expanded="true" aria-controls="collapseTagihan">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Tagihan</span>
+        </a>
+        <div id="collapseTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <div class="collapse-divider"></div>
+            <a class="collapse-item" href="tagihan-air.html">Tagihan Air</a>
+            <a class="collapse-item" href="tagihan-listrik.html">Tagihan Listrik</a>
+            <a class="collapse-item" href="tagihan-kebersihan.html">Tagihan Kebersihan</a>
+            <a class="collapse-item" href="tagihan-keamanan.html">Tagihan IPK & Keamanan</a>
+            <a class="collapse-item" href="data-tagihan.html">Data Tagihan</a>
+          </div>
+        </div>
+      </li>
+      
+      <!-- Nav Item - Tarif -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTarif" aria-expanded="true" aria-controls="collapseTarif">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Tarif</span>
+        </a>
+        <div id="collapseTarif" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <div class="collapse-divider"></div>
+            <a class="collapse-item" href="tarif-air.html">Tarif Air</a>
+            <a class="collapse-item" href="tarif-listrik.html">Tarif Listrik</a>
+            <a class="collapse-item" href="tarif-kebersihan.html">Tarif Kebersihan</a>
+            <a class="collapse-item" href="tarif-ipk.html">Tarif IPK</a>
+            <a class="collapse-item" href="tarif-keamanan.html">Tarif Keamanan</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Laporan -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
@@ -59,44 +95,43 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" href="blank.html">Laporan Harian</a>
-            <a class="collapse-item" href="blank.html">Laporan Bulanan</a>
-            <a class="collapse-item" href="blank.html">Laporan Tahunan</a>
-            <a class="collapse-item" href="blank.html">Laporan Tagihan</a>
-            <a class="collapse-item" href="blank.html">Laporan Tunggakan</a>
-            <a class="collapse-item" href="blank.html">Laporan Bongkaran</a>
-            <a class="collapse-item" href="blank.html">Laporan Penghapusan</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Akun</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Lupa Password</a>
+            <a class="collapse-item" href="laporan-harian.html">Laporan Harian</a>
+            <a class="collapse-item" href="laporan-bulanan.html">Laporan Bulanan</a>
+            <a class="collapse-item" href="laporan-tahunan.html">Laporan Tahunan</a>
+            <a class="collapse-item" href="laporan-tagihan.html">Laporan Tagihan</a>
+            <a class="collapse-item" href="laporan-tunggakan.html">Laporan Tunggakan</a>
+            <a class="collapse-item" href="laporan-bongkaran.html">Laporan Bongkaran</a>
+            <a class="collapse-item" href="laporan-penghapusan.html">Laporan Penghapusan</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Nasabah -->
       <li class="nav-item">
-        <a class="nav-link" href="blank.html">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNasabah" aria-expanded="true" aria-controls="collapseNasabah">
           <i class="fas fa-fw fa-user"></i>
-          <span>Nasabah</span></a>
+          <span>Nasabah</span>
+        </a>
+        <div id="collapseNasabah" class="collapse" aria-labelledby="headingNasabah" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="tambah-nasabah.html">Tambah Nasabah</a>
+            <a class="collapse-item" href="data-nasabah.html">Data Nasabah</a>
+          </div>
+        </div>
       </li>
 
-      <!-- Nav Item - Tables -->
+      <!-- Nav Item - User -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tabel</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
+          <i class="fas fa-fw fa-user"></i>
+          <span>User</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="tambah-user.html">Tambah User</a>
+            <a class="collapse-item" href="data-user.html">Data User</a>
+          </div>
+        </div>
       </li>
 
       <!-- Divider -->
@@ -165,7 +200,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Muhammad Said</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle" src="https://dw9to29mmj727.cloudfront.net/misc/newsletter-naruto3.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
