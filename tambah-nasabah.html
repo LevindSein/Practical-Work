@@ -241,13 +241,13 @@
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input type="number" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
+                  <input type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
                 </div>
                 <div class="form-group">
                   <label for="sel1">Status Kepemilikan</label>
                   <select class="form-control" id="exampleInputStatus">
-                    <option>Pemilik</option>
-                    <option>Penyewa</option>
+                    <option value="pemilik">Pemilik</option>
+                    <option value="penyewa">Penyewa</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -261,6 +261,13 @@
                 <div class="form-group">
                   Nomor NPWP Nasabah
                   <input type="number" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="sel1">Kategori Tarif IPK</label>
+                  <select class="form-control" id="exampleInputStatus">
+                    <option>0</option>
+                    <option>200000</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="sel1">Kategori Tarif Keamanan</label>
