@@ -247,83 +247,286 @@
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
                 <select class="form-control" id="sel1">
-                  <option>Air</option>
-                  <option>Listrik</option>
-                  <option>Keamanan</option>
-                  <option>Kebersihan</option>
+                  <option>Pilih Data</option>
+                  <option value="air">Air Bersih</option>
+                  <option value="listrik">Listrik</option>
+                  <option value="keamanan">IPK & Keamanan</option>
+                  <option value="kebersihan">Kebersihan</option>
                 </select>
+                <p></p>
+                <label for="sel2">Blok :</label>
+                <select class="col-1" id="sel2" style="width: 10%;">
+                  <option value="allAbjad">A-Z</option>
+                  <option value="a">A</option>
+                  <option value="b">B</option>
+                  <option value="c">C</option>
+                  <option value="d">D</option>
+                  <option value="e">E</option>
+                  <option value="f">F</option>
+                  <option value="g">G</option>
+                  <option value="h">H</option>
+                  <option value="i">I</option>
+                  <option value="j">J</option>
+                  <option value="k">K</option>
+                  <option value="l">L</option>
+                  <option value="m">M</option>
+                  <option value="n">N</option>
+                  <option value="o">O</option>
+                  <option value="p">P</option>
+                  <option value="q">Q</option>
+                  <option value="r">R</option>
+                  <option value="s">S</option>
+                  <option value="t">T</option>
+                  <option value="u">U</option>
+                  <option value="v">V</option>
+                  <option value="w">W</option>
+                  <option value="x">X</option>
+                  <option value="y">Y</option>
+                  <option value="z">Z</option>
+                </select>
+                <select class="col-1" id="sel3" style="width: 10%;">
+                  <option value="allNumber">0-9</option>
+                  <option value="number0">0</option>
+                  <option value="number1">1</option>
+                  <option value="number2">2</option>
+                  <option value="number3">3</option>
+                  <option value="number4">4</option>
+                  <option value="number5">5</option>
+                  <option value="number6">6</option>
+                  <option value="number7">7</option>
+                  <option value="number8">8</option>
+                  <option value="number9">9</option>
+                </select>
+                <p></p>
+                <form class="form-inline mr-auto w-100 navbar-search">
+                <label for="sel2">Blok Manual : &nbsp</label>
+                  <div class="input-group">
+                    <input id="manualBlok" type="text" class="form-control" aria-describedby="basic-addon2">
+                  </div>
+                </form>
+                
               </div>
             </div>
-            <div class="card-body">
+            <!--AIR BERSIH-->
+            <div class="air box card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th rowspan="2">Tanggal</th>
+                      <th rowspan="2">Kode</th>
+                      <th rowspan="2">Nama Pemilik</th>
+                      <th rowspan="2">No.Los</th>
+                      <th rowspan="2">M.Lalu</th>
+                      <th rowspan="2">M.baru</th>
+                      <th rowspan="2">Pakai</th>
+                      <th rowspan="2">B.Pemakaian</th>
+                      <th rowspan="2">B.Beban</th>
+                      <th rowspan="2">B.Pemeliharaan</th>
+                      <th rowspan="2">B.Air Kotor</th>
+                      <th rowspan="2">Pembayaran</th>
+                      <th colspan="2">Realisasi</th>
+                    </tr>
+                    <tr style="display:none">
+                      <th></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th>Tanggal</th>
+                      <th>Kode</th>
+                      <th>Nama Pemilik</th>
+                      <th>No.Los</th>
+                      <th>M.Lalu</th>
+                      <th>M.baru</th>
+                      <th>Pakai</th>
+                      <th>B.Pemakaian</th>
+                      <th>B.Beban</th>
+                      <th>B.Pemeliharaan</th>
+                      <th>B.Air Kotor</th>
+                      <th>Pembayaran</th>
+                      <th colspan="2">Realisasi</th>
                     </tr>
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td>Lael Greer</td>
-                      <td>Systems Administrator</td>
-                      <td>London</td>
-                      <td>21</td>
-                      <td>2009/02/27</td>
-                      <td>$103,500</td>
-                    </tr>
-                    <tr>
-                      <td>Jonas Alexander</td>
-                      <td>Developer</td>
-                      <td>San Francisco</td>
-                      <td>30</td>
-                      <td>2010/07/14</td>
-                      <td>$86,500</td>
-                    </tr>
-                    <tr>
-                      <td>Shad Decker</td>
-                      <td>Regional Director</td>
-                      <td>Edinburgh</td>
-                      <td>51</td>
-                      <td>2008/11/13</td>
-                      <td>$183,000</td>
-                    </tr>
-                    <tr>
-                      <td>Michael Bruce</td>
-                      <td>Javascript Developer</td>
-                      <td>Singapore</td>
-                      <td>29</td>
-                      <td>2011/06/27</td>
-                      <td>$183,000</td>
-                    </tr>
-                    <tr>
-                      <td>Donna Snider</td>
-                      <td>Customer Support</td>
-                      <td>New York</td>
-                      <td>27</td>
-                      <td>2011/01/25</td>
-                      <td>$112,000</td>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-left">A-2-003</td>
+                      <td class="text-left">PT.LPP</td>
+                      <td class="text-center">3</td>
+                      <td>996</td>
+                      <td>1,006</td>
+                      <td>10</td>
+                      <td>60,000</td>
+                      <td>22,700</td>
+                      <td>10,000</td>
+                      <td>18,000</td>
+                      <td>121,782</td>
+                      <td>&nbsp</td>
+                      <td>&nbsp</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+            <!--LISTRIK-->
+            <div class="listrik box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Tanggal</th>
+                      <th rowspan="2">Kode</th>
+                      <th rowspan="2">Nama Pemilik</th>
+                      <th rowspan="2">No.Los</th>
+                      <th rowspan="2">Daya</th>
+                      <th rowspan="2">M.Lalu</th>
+                      <th rowspan="2">M.baru</th>
+                      <th rowspan="2">Pakai</th>
+                      <th rowspan="2">Rek.Min</th>
+                      <th rowspan="2">B.Blok 1</th>
+                      <th rowspan="2">B.Blok 2</th>
+                      <th rowspan="2">B.Beban</th>
+                      <th rowspan="2">BPJU</th>
+                      <th rowspan="2">Pembayaran</th>
+                      <th colspan="2">Realisasi</th>
+                    </tr>
+                    <tr style="display:none">
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Kode</th>
+                      <th>Nama Pemilik</th>
+                      <th>No.Los</th>
+                      <th>Daya</th>
+                      <th>M.Lalu</th>
+                      <th>M.baru</th>
+                      <th>Pakai</th>
+                      <th>Rek.Min</th>
+                      <th>B.Blok 1</th>
+                      <th>B.Blok 2</th>
+                      <th>B.Beban</th>
+                      <th>BPJU</th>
+                      <th>Pembayaran</th>
+                      <th colspan="2">Realisasi</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-left">A-2-003</td>
+                      <td class="text-left">PT.LPP</td>
+                      <td class="text-center">3</td>
+                      <td>2,200</td>
+                      <td>89,788</td>
+                      <td>90,383</td>
+                      <td>595</td>
+                      <td>0</td>
+                      <td>53,440</td>
+                      <td>1,334,220</td>
+                      <td>77,000</td>
+                      <td>146,466</td>
+                      <td>1,820,572</td>
+                      <td>&nbsp</td>
+                      <td>&nbsp</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!--KEAMANAN-->
+            <div class="keamanan box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Blok</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Unit</th>
+                      <th>Besar Tagihan</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Blok</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Unit</th>
+                      <th>Besar Tagihan</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-center">A-1</td>
+                      <td class="text-left">BTPN</td>
+                      <td class="text-center">8</td>
+                      <td class="text-center">1</td>
+                      <td>200,000</td>
+                      <td>120,000</td>
+                      <td>80,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!--KEBERSIHAN-->
+            <div class="kebersihan box card-body">
+              <div class="table-responsive">
+                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Blok</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Unit</th>
+                      <th>Besar Tagihan</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Blok</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Unit</th>
+                      <th>Besar Tagihan</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-center">A-1</td>
+                      <td class="text-left">PT.BTN</td>
+                      <td class="text-center">1</td>
+                      <td class="text-center">1</td>
+                      <td>120,000</td>
+                      <td>120,000</td>
+                      <td>&mdash;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- End Tables -->
           </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -386,6 +589,30 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Selection Menu Scripts (Levind) -->
+  <script>
+    $(document).ready(function(){
+        $("select").change(function(){
+            $(this).find("option:selected").each(function(){
+                var optionValue = $(this).attr("value");
+                if(optionValue){
+                    $(".box").not("." + optionValue).hide();
+                    $("." + optionValue).show();
+                } else{
+                    $(".box").hide();
+                }
+            });
+        }).change();
+    });
+  </script>
+
+  <!-- Multiple Datatable Scripts (Levind) -->
+  <script>
+	  $(document).ready(function() {
+      $('table.display').DataTable();
+	  } );
+	</script>
 
 </body>
 
