@@ -33,9 +33,6 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
         <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
@@ -89,7 +86,7 @@
       </li>
 
       <!-- Nav Item - Laporan -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Laporan</span>
@@ -296,7 +293,7 @@
             <!--AIR BERSIH-->
             <div class="air box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
@@ -318,23 +315,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Kode</th>
-                      <th>Nama Pemilik</th>
-                      <th>No.Los</th>
-                      <th>M.Lalu</th>
-                      <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>B.Pemakaian</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>B.Air Kotor</th>
-                      <th>Pembayaran</th>
-                      <th colspan="2">Realisasi</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -359,7 +340,7 @@
             <!--LISTRIK-->
             <div class="listrik box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
@@ -383,25 +364,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Kode</th>
-                      <th>Nama Pemilik</th>
-                      <th>No.Los</th>
-                      <th>Daya</th>
-                      <th>M.Lalu</th>
-                      <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>Rek.Min</th>
-                      <th>B.Blok 1</th>
-                      <th>B.Blok 2</th>
-                      <th>B.Beban</th>
-                      <th>BPJU</th>
-                      <th>Pembayaran</th>
-                      <th colspan="2">Realisasi</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -428,7 +391,7 @@
             <!--KEAMANAN-->
             <div class="keamanan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
@@ -441,18 +404,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Jumlah Unit</th>
-                      <th>Besar Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -471,7 +423,7 @@
             <!--KEBERSIHAN-->
             <div class="kebersihan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
@@ -484,18 +436,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Jumlah Unit</th>
-                      <th>Besar Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -576,7 +517,7 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
 
-  <!-- Selection Menu Scripts (Levind) -->
+  <!-- Selection Menu Scripts -->
   <script>
     $(document).ready(function(){
         $("select").change(function(){
@@ -592,6 +533,40 @@
         }).change();
     });
   </script>
+
+  <!-- Scroll Table -->
+  <script>
+    $(document).ready(function () {
+      $('#tableAir').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('#tableListrik').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('#tableKebersihan').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('#tableKeamanan').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+  <!-- End Scroll Table -->
 
   <!-- Multiple Datatable Scripts (Levind) -->
   <script>

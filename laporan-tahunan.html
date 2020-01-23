@@ -33,9 +33,6 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
         <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
@@ -89,7 +86,7 @@
       </li>
 
       <!-- Nav Item - Laporan -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Laporan</span>
@@ -301,7 +298,7 @@
             <!--AIR BERSIH-->
             <div class="air box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
@@ -315,19 +312,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tahun</th>
-                      <th>Blok</th>
-                      <th>Vol.Pakai (M<sup>3</sup>)</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>Air Kotor</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
@@ -347,7 +332,7 @@
             <!--LISTRIK-->
             <div class="listrik box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
@@ -360,18 +345,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tahun</th>
-                      <th>Blok</th>
-                      <th>Daya Pakai (kWh)</th>
-                      <th>Biaya Pemakaian</th>
-                      <th>BPJU</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
@@ -390,7 +364,7 @@
             <!--KEAMANAN-->
             <div class="keamanan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
@@ -400,15 +374,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tahun</th>
-                      <th>Blok</th>
-                      <th>Total Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
@@ -424,7 +390,7 @@
             <!--KEBERSIHAN-->
             <div class="kebersihan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
@@ -434,15 +400,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Tahun</th>
-                      <th>Blok</th>
-                      <th>Total Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </tfoot>
+                
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
@@ -536,6 +494,24 @@
         }).change();
     });
   </script>
+
+  <!-- Scroll Table -->
+  <script>
+    $(document).ready(function () {
+      $('#tableAir').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('#tableListrik').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+  <!-- End Scroll Table -->
 
   <!-- Multiple Datatable Scripts (Levind) -->
   <script>

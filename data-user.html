@@ -33,9 +33,6 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
         <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
@@ -123,7 +120,7 @@
       </li>
 
       <!-- Nav Item - User -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
           <i class="fas fa-fw fa-user"></i>
           <span>User</span>
@@ -231,7 +228,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="tableUser" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Nama</th>
@@ -242,16 +239,7 @@
                       <th>Gaji</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                     <tr>
                       <td>Tiger Nixon</td>
@@ -777,6 +765,16 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Scroll Table -->
+  <script>
+    $(document).ready(function () {
+      $('#tableUser').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+  <!-- End Scroll Table -->
 
 </body>
 

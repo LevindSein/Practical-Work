@@ -33,9 +33,6 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
         <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
@@ -109,7 +106,7 @@
       </li>
 
       <!-- Nav Item - Nasabah -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNasabah" aria-expanded="true" aria-controls="collapseNasabah">
           <i class="fas fa-fw fa-user"></i>
           <span>Nasabah</span>
@@ -231,7 +228,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="tableNasabah" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Kode Nasabah</th>
@@ -246,20 +243,7 @@
                       <th>Kategori Kebersihan</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Kode Nasabah</th>
-                      <th>Nama</th>
-                      <th>No. Los</th>
-                      <th>Bentuk Usaha</th>
-                      <th>No. KTP</th>
-                      <th>NPWP</th>
-                      <th>Status</th>
-                      <th>Kategori IPK</th>
-                      <th>Kategori Keamanan</th>
-                      <th>Kategori Kebersihan</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                     <tr>
                       <td class="text-left">A-1-001</td>
@@ -341,6 +325,16 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Scroll Table -->
+  <script>
+    $(document).ready(function () {
+      $('#tableNasabah').DataTable({
+        "scrollX": true
+      });
+    });
+  </script>
+  <!-- End Scroll Table -->
 
 </body>
 

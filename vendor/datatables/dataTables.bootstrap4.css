@@ -170,11 +170,14 @@ table.dataTable.table-sm .sorting_asc:before,
 table.dataTable.table-sm .sorting_desc:before {
   top: 5px;
   right: 0.85em;
+  padding-right: 20px;
 }
 table.dataTable.table-sm .sorting:after,
 table.dataTable.table-sm .sorting_asc:after,
 table.dataTable.table-sm .sorting_desc:after {
   top: 5px;
+  right: 0.85em;
+  padding-right: 20px;
 }
 
 table.table-bordered.dataTable th,
