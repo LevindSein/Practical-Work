@@ -247,7 +247,7 @@
             <!--AIR BERSIH-->
             <div class="air box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
@@ -271,19 +271,23 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Tanggal</th>
-                      <th>Kode</th>
-                      <th>Nama Pemilik</th>
-                      <th>No.Los</th>
-                      <th>M.Lalu</th>
-                      <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>B.Pemakaian</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>B.Air Kotor</th>
-                      <th>Pembayaran</th>
+                      <th rowspan="2">Tanggal</th>
+                      <th rowspan="2">Kode</th>
+                      <th rowspan="2">Nama Pemilik</th>
+                      <th rowspan="2">No.Los</th>
+                      <th rowspan="2">M.Lalu</th>
+                      <th rowspan="2">M.baru</th>
+                      <th rowspan="2">Pakai</th>
+                      <th rowspan="2">B.Pemakaian</th>
+                      <th rowspan="2">B.Beban</th>
+                      <th rowspan="2">B.Pemeliharaan</th>
+                      <th rowspan="2">B.Air Kotor</th>
+                      <th rowspan="2">Pembayaran</th>
                       <th colspan="2">Realisasi</th>
+                    </tr>
+                    <tr style="display:none">
+                      <th></th>
+                      <th></th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -310,7 +314,7 @@
             <!--LISTRIK-->
             <div class="listrik box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
@@ -379,7 +383,7 @@
             <!--KEAMANAN-->
             <div class="keamanan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
@@ -422,7 +426,7 @@
             <!--KEBERSIHAN-->
             <div class="kebersihan box card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
@@ -550,8 +554,7 @@
 	  $(document).ready(function() {
       $('table.display').DataTable();
 	  } );
-	</script>
-
+  </script>
 
 </body>
 
