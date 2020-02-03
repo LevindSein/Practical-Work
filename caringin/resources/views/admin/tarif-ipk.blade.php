@@ -55,13 +55,6 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Kategori</th>
-                      <th>Tarif (Unit)</th>
-                      <th>Action</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
                     <tr>
                       <td class="text-center">1</td>

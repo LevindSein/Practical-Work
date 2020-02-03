@@ -35,5 +35,11 @@ Route::get('showformtariflistrik','tarifListrikController@show');
 Route::get('showlaporanharian','laporanHarianController@show');
 Route::get('showlaporanbulanan','laporanBulananController@show');
 Route::get('showlaporantahunan','laporanTahunanController@show');
-Route::get('showlaporantagihan','laporanTagihanController@show'); 
+Route::get('showlaporantagihan','laporanTagihanController@show');
+Route::get('showlaporantunggakan','laporanTunggakanController@show');
+Route::get('showlaporanbongkaran','laporanBongkaranController@show');
+Route::get('showlaporanpenghapusan','laporanPenghapusanController@show'); 
 
+//User
+Route::get('showdatauser','dataUserController@show');
+Route::get('showtambahuser','tambahUserController@show');

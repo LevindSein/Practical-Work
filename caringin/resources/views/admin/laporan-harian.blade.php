@@ -22,17 +22,17 @@
               <div class="form-group">
                 <!--Option Menu-->
                 <label for="sel1">Tampilkan Data :</label>
-                <select class="form-control" id="sel1">
-                  <option>Pilih Data</option>
-                  <option value="air">Air Bersih</option>
-                  <option value="listrik">Listrik</option>
-                  <option value="keamanan">IPK & Keamanan</option>
-                  <option value="kebersihan">Kebersihan</option>
+                <select class="form-control" id="table" name="table">
+                  <option value="Pilih">Pilih Data</option>
+                  <option value="Air">Air Bersih</option>
+                  <option value="Listrik">Listrik</option>
+                  <option value="Keamanan">IPK & Keamanan</option>
+                  <option value="Kebersihan">Kebersihan</option>
                 </select>
               </div>
             </div>
             <!--AIR BERSIH-->
-            <div class="air box card-body">
+            <div class="card-body" id="tAir">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
@@ -61,7 +61,7 @@
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-2-003</td>
-                      <td class="text-left">PT.LPP</td>
+                      <td class="text-left">PT.LPP sadhkashdkhakshdjhaskjhd</td>
                       <td class="text-center">3</td>
                       <td>996</td>
                       <td>1,006</td>
@@ -79,7 +79,7 @@
               </div>
             </div>
             <!--LISTRIK-->
-            <div class="listrik box card-body">
+            <div class="card-body" id="tListrik">
               <div class="table-responsive">
                 <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
@@ -130,7 +130,7 @@
               </div>
             </div>
             <!--KEAMANAN-->
-            <div class="keamanan box card-body">
+            <div class="card-body" id="tKeamanan">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
@@ -145,7 +145,7 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-
+                 
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -162,7 +162,7 @@
               </div>
             </div>
             <!--KEBERSIHAN-->
-            <div class="kebersihan box card-body">
+            <div class="card-body" id="tKebersihan">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
@@ -177,12 +177,12 @@
                       <th>Selisih</th>
                     </tr>
                   </thead>
-
+                 
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
-                      <td class="text-left">Muhammad Said Marzuqi</td>
+                      <td class="text-left">PT.BTN</td>
                       <td class="text-center">1</td>
                       <td class="text-center">1</td>
                       <td>120,000</td>
@@ -205,61 +205,29 @@
 @endsection
 
 @section('js')
-  <!-- Selection Menu Scripts (Levind) -->
+  <!-- Selection Menu Scripts -->
   <script>
-    $(document).ready(function () {
-      $("select").change(function () {
-        $(this).find("option:selected").each(function () {
-          var optionValue = $(this).attr("value");
-          if (optionValue) {
-            $(".box").not("." + optionValue).hide();
-            $("." + optionValue).show();
-          } else {
-            $(".box").hide();
-          }
-        });
-      }).change();
+    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
+    $('#table').change(function() {
+    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
+    $('#t' + $(this).val()).show();
     });
   </script>
 
   <!-- Scroll Table -->
   <script>
     $(document).ready(function () {
-      $('#tableAir').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $('#tableListrik').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $('#tableKeamanan').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $('#tableKebersihan').DataTable({
+      $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan').DataTable({
         "scrollX": true
       });
     });
   </script>
   <!-- End Scroll Table -->
 
-  <!-- Multiple Datatable Scripts -->
+  <!-- Multiple Datatable Scripts (Levind) -->
   <script>
-    $(document).ready(function () {
+	  $(document).ready(function() {
       $('table.display').DataTable();
-    });
-  </script>
+	  } );
+	</script>
 @endsection

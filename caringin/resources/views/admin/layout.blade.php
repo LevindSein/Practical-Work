@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Data Nasabah</title>
+  <title>App for Caringin</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -98,9 +98,9 @@
             <a class="collapse-item" href="showlaporanbulanan">Laporan Bulanan</a>
             <a class="collapse-item" href="showlaporantahunan">Laporan Tahunan</a>
             <a class="collapse-item" href="showlaporantagihan">Laporan Tagihan</a>
-            <a class="collapse-item" href="laporan-tunggakan.html">Laporan Tunggakan</a>
-            <a class="collapse-item" href="laporan-bongkaran.html">Laporan Bongkaran</a>
-            <a class="collapse-item" href="laporan-penghapusan.html">Laporan Penghapusan</a>
+            <a class="collapse-item" href="showlaporantunggakan">Laporan Tunggakan</a>
+            <a class="collapse-item" href="showlaporanbongkaran">Laporan Bongkaran</a>
+            <a class="collapse-item" href="showlaporanpenghapusan">Laporan Penghapusan</a>
           </div>
         </div>
       </li>
@@ -127,8 +127,8 @@
         </a>
         <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="tambah-user.html">Tambah User</a>
-            <a class="collapse-item" href="data-user.html">Data User</a>
+            <a class="collapse-item" href="showtambahuser">Tambah User</a>
+            <a class="collapse-item" href="showdatauser">Data User</a>
           </div>
         </div>
       </li>

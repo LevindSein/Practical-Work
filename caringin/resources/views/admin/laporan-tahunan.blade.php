@@ -15,34 +15,26 @@
               <h6 class="m-0 font-weight-bold text-primary">Tabel Laporan Tahunan</h6>
             </div>
             <div class="card-body">
-              <label for="">Tahun</label>
-              <input type="text" class="date-own form-control" style="width: 20%;">
-              <script>
-              $('.date-own').datepicker({
-                minViewMode:2,
-                format: 'yyyy'
-              });
-              </script>
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
-                <select class="form-control" id="sel1">
-                  <option>Pilih Data</option>
-                  <option value="air">Air Bersih</option>
-                  <option value="listrik">Listrik</option>
-                  <option value="keamanan">IPK & Keamanan</option>
-                  <option value="kebersihan">Kebersihan</option>
+                <select class="form-control" id="table" name="table">
+                  <option value="Pilih">Pilih Data</option>
+                  <option value="Air">Air Bersih</option>
+                  <option value="Listrik">Listrik</option>
+                  <option value="Keamanan">IPK & Keamanan</option>
+                  <option value="Kebersihan">Kebersihan</option>
                 </select>
 
               </div>
             </div>
             <!--AIR BERSIH-->
-            <div class="air box card-body">
+            <div class="card-body" id="tAir">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
-                      <th>Blok</th>
+                      <th>Bulan</th>
                       <th>Vol.Pakai (M<sup>3</sup>)</th>
                       <th>B.Beban</th>
                       <th>B.Pemeliharaan</th>
@@ -56,7 +48,7 @@
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
-                      <td class="text-center">A-1</td>
+                      <td class="text-center">Januari</td>
                       <td>5,714</td>
                       <td>7,513,000</td>
                       <td>3,310,000</td>
@@ -70,13 +62,13 @@
               </div>
             </div>
             <!--LISTRIK-->
-            <div class="listrik box card-body">
+            <div class="card-body" id="tListrik">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
-                      <th>Blok</th>
+                      <th>Bulan</th>
                       <th>Daya Pakai (kWh)</th>
                       <th>Biaya Pemakaian</th>
                       <th>BPJU</th>
@@ -89,7 +81,7 @@
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
-                      <td class="text-center">A-1</td>
+                      <td class="text-center">Januari</td>
                       <td>220,412</td>
                       <td>39,637,150</td>
                       <td>55,181,190</td>
@@ -102,13 +94,13 @@
               </div>
             </div>
             <!--KEAMANAN-->
-            <div class="keamanan box card-body">
+            <div class="card-body" id="tKeamanan">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
-                      <th>Blok</th>
+                      <th>Bulan</th>
                       <th>Total Tagihan</th>
                       <th>Realisasi</th>
                       <th>Selisih</th>
@@ -118,7 +110,7 @@
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
-                      <td class="text-center">A-1</td>
+                      <td class="text-center">Januari</td>
                       <td>15,100,000</td>
                       <td>13,100,000</td>
                       <td>2,000,000</td>
@@ -128,13 +120,13 @@
               </div>
             </div>
             <!--KEBERSIHAN-->
-            <div class="kebersihan box card-body">
+            <div class="card-body" id="tKebersihan">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tahun</th>
-                      <th>Blok</th>
+                      <th>Bulan</th>
                       <th>Total Tagihan</th>
                       <th>Realisasi</th>
                       <th>Selisih</th>
@@ -144,7 +136,7 @@
                   <tbody>
                     <tr>
                       <td class="text-center">2019</td>
-                      <td class="text-center">A-1</td>
+                      <td class="text-center">Januari</td>
                       <td>11,130,000</td>
                       <td>8,785,000</td>
                       <td>2,345,000</td>
@@ -163,36 +155,19 @@
 @endsection
 
 @section('js')
-
-  <!-- Selection Menu Scripts (Levind) -->
+  <!-- Selection Menu Scripts -->
   <script>
-    $(document).ready(function(){
-        $("select").change(function(){
-            $(this).find("option:selected").each(function(){
-                var optionValue = $(this).attr("value");
-                if(optionValue){
-                    $(".box").not("." + optionValue).hide();
-                    $("." + optionValue).show();
-                } else{
-                    $(".box").hide();
-                }
-            });
-        }).change();
+    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
+    $('#table').change(function() {
+    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
+    $('#t' + $(this).val()).show();
     });
   </script>
 
   <!-- Scroll Table -->
   <script>
     $(document).ready(function () {
-      $('#tableAir').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      $('#tableListrik').DataTable({
+      $('#tableAir,#tableListrik').DataTable({
         "scrollX": true
       });
     });
