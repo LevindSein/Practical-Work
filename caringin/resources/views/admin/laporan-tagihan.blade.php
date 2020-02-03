@@ -30,7 +30,7 @@
                       <td class="text-left">A-1-001</td>
                       <td class="text-left">Fahni Amsyari</td>
                       <td class="text-center">
-                        <a href="data-tagihan.html" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                        <a href="datatagihannasabah" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i> Lihat</a>
                       </td>
                     </tr>

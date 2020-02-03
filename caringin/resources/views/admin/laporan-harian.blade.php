@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('content')
-
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -61,7 +60,7 @@
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-2-003</td>
-                      <td class="text-left">PT.LPP sadhkashdkhakshdjhaskjhd</td>
+                      <td class="text-left">PT.LPP hasjhdahjsdjhashgda</td>
                       <td class="text-center">3</td>
                       <td>996</td>
                       <td>1,006</td>

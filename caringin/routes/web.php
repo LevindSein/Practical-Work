@@ -43,3 +43,6 @@ Route::get('showlaporanpenghapusan','laporanPenghapusanController@show');
 //User
 Route::get('showdatauser','dataUserController@show');
 Route::get('showtambahuser','tambahUserController@show');
+
+//DataTagihan
+Route::get('datatagihannasabah','dataTagihanController@show');

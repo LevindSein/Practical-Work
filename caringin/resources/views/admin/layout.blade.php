@@ -53,7 +53,7 @@
       <!-- Nav Item - Tagihan -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTagihan" aria-expanded="true" aria-controls="collapseTagihan">
-          <i class="fas fa-fw fa-list"></i>
+          <i class="fas fa-fw fa-plus"></i>
           <span>Tagihan</span>
         </a>
         <div id="collapseTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
