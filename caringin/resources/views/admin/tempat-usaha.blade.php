@@ -26,6 +26,9 @@
                       <th>Bentuk Usaha</th>
                       <th>No. Meter Listrik</th>
                       <th>No. Meter Air</th>
+                      <th>Tarif IPK</th>
+                      <th>Tarif Keamanan</th>
+                      <th>Tarif Kebersihan</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -39,6 +42,9 @@
                       <td class="text-left">Pedagang Kasur</td>
                       <td class="text-center">1238242947</td>
                       <td class="text-center">32749872947</td>
+                      <td>50000</td>
+                      <td>100000</td>
+                      <td>120000</td>
                       <td class="text-center">
                         <a href="updatetempat" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
