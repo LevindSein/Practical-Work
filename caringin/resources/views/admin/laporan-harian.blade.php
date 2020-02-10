@@ -191,7 +191,7 @@
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
-                      <td class="text-left">PT.BTN yang makmur</td>
+                      <td class="text-left">PT.BTN yang makmur yang sukarela mengabdi</td>
                       <td class="text-center">1</td>
                       <td class="text-center">1</td>
                       <td>120,000</td>
@@ -224,11 +224,5 @@
       });
     });
   </script>
-  <!--for column table toggle-->
-  <script>
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-   $($.fn.dataTable.tables(true)).DataTable()
-      .columns.adjust();
-    });
-  </script>
+  
 @endsection

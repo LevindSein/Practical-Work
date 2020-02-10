@@ -268,6 +268,14 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!--for column table toggle-->
+  <script>
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+   $($.fn.dataTable.tables(true)).DataTable()
+      .columns.adjust();
+    });
+  </script>
 @yield('js')
 </body>
 

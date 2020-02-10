@@ -54,7 +54,7 @@
                     <tr>
                       <td class="text-center">2020-12-01</td>
                       <td class="text-center">A-1-001</td>
-                      <td class="text-left">Said</td>
+                      <td class="text-left">Said Marzuqi Irfan Fahni Amsyari</td>
                       <td class="text-center">1</td>
                       <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
@@ -131,11 +131,11 @@
                     <tr>
                       <td class="text-center">2020-12-01</td>
                       <td class="text-center">A-1-001</td>
-                      <td class="text-left">Said</td>
+                      <td class="text-left">Said Marzuqi Irfan Fahni Amsyari</td>
                       <td class="text-center">1</td>
                       <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
-                      <td class="text-left">998099876</td>
+                      <td class="text-left">99809987672163131</td>
                       <td class="text">10000</td>
                       <td class="text">10000</td>
                       <td class="text-center">
