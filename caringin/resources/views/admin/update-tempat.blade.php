@@ -33,7 +33,7 @@
                 </div> -->
                 <div class="form-group">
                   Bentuk Usaha
-                  <input type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="">
+                  <input type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-2">Fasilitas</div>
@@ -63,6 +63,14 @@
                       </label>
                     </div>
                   </div>
+                </div>
+                <div class="form-group" style="display:none" id="myDiv1">
+                  Nomor Meter Air
+                  <input type="text" class="form-control form-control-user" id="exampleInputStatus" placeholder="1484xxxx">
+                </div>
+                <div class="form-group" style="display:none" id="myDiv2">
+                  Nomor Meter Listrik
+                  <input type="text" class="form-control form-control-user" id="exampleInputStatus" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none" id="myDiv3a">
                   <label for="sel1">Kategori Tarif IPK</label>
@@ -111,6 +119,20 @@
     $(document).ready(function() {
     $('#myCheck4').change(function() {
         $('#myDiv4').toggle();
+    });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+    $('#myCheck1').change(function() {
+        $('#myDiv1').toggle();
+    });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+    $('#myCheck2').change(function() {
+        $('#myDiv2').toggle();
     });
     });
   </script>

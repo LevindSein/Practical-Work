@@ -35,20 +35,3 @@
 
     <!-- End of Main Content -->
 @endsection
-
-@section('js')
-  <script>
-    $(document).ready(function() {
-    $('#myCheck3').change(function() {
-        $('#myDiv3b,#myDiv3a').toggle();
-    });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-    $('#myCheck4').change(function() {
-        $('#myDiv4').toggle();
-    });
-    });
-  </script>
-@endsection
