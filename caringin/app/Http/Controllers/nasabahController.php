@@ -15,4 +15,7 @@ class nasabahController extends Controller
     public function showform(){
         return view('admin.tambah-nasabah');
     }
+    public function updateNasabah(){
+        return view('admin.update-nasabah');
+    }
 }

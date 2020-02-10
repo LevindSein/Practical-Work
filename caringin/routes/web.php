@@ -18,31 +18,31 @@ Route::get('/', function () {
 
 //Nasabah
 Route::get('showdatanasabah','nasabahController@showdata');
+Route::get('updatenasabah','nasabahController@updateNasabah');
 Route::get('showformnasabah','nasabahController@showform');
 
 //Tagihan
-Route::get('showformtagihanair','tagihanAirController@show');
-Route::get('showformtagihanlistrik','tagihanListrikController@show');
+Route::get('showformtagihanair','tagihanController@tagihanAir');
+Route::get('showformtagihanlistrik','tagihanController@tagihanListrik');
 
 //Tarif
-Route::get('showformtarifair','tarifAirController@show');
-Route::get('showformtarifipk','tarifIPKController@show');
-Route::get('showformtarifkeamanan','tarifKeamananController@show');
-Route::get('showformtarifkebersihan','tarifKebersihanController@show');
-Route::get('showformtariflistrik','tarifListrikController@show');
+Route::get('showformtarifair','tarifController@showTAir');
+Route::get('showformtarifipk','tarifController@showTIpk');
+Route::get('showformtarifkeamanan','tarifController@showTKeamanan');
+Route::get('showformtarifkebersihan','tarifController@showTkebersihan');
+Route::get('showformtariflistrik','tarifController@showTListrik');
 
 //Laporan
-Route::get('showlaporanharian','laporanHarianController@show');
-Route::get('showlaporanbulanan','laporanBulananController@show');
-Route::get('showlaporantahunan','laporanTahunanController@show');
-Route::get('showlaporantagihan','laporanTagihanController@show');
-Route::get('showlaporantunggakan','laporanTunggakanController@show');
-Route::get('showlaporanbongkaran','laporanBongkaranController@show');
-Route::get('showlaporanpenghapusan','laporanPenghapusanController@show'); 
+Route::get('showlaporanharian','laporanController@showHarian');
+Route::get('showlaporanbulanan','laporanController@showBulanan');
+Route::get('showlaporantahunan','laporanController@showTahunan');
+Route::get('showlaporantagihan','laporanController@showTagihan');
+Route::get('showlaporantunggakan','laporanController@showTunggakan');
+Route::get('showlaporanbongkaran','laporanController@showBongkaran');
+Route::get('showlaporanpenghapusan','laporanController@showPenghapusan'); 
+//DataTagihan
+Route::get('datatagihannasabah','laporanController@dataTagihan');
 
 //User
-Route::get('showdatauser','dataUserController@show');
-Route::get('showtambahuser','tambahUserController@show');
-
-//DataTagihan
-Route::get('datatagihannasabah','dataTagihanController@show');
+Route::get('showdatauser','userController@showdatauser');
+Route::get('showtambahuser','userController@tambahuser');
