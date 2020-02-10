@@ -108,7 +108,7 @@
       <!-- Nav Item - Nasabah -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNasabah" aria-expanded="true" aria-controls="collapseNasabah">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-fw fa-users"></i>
           <span>Nasabah</span>
         </a>
         <div id="collapseNasabah" class="collapse" aria-labelledby="headingNasabah" data-parent="#accordionSidebar">
