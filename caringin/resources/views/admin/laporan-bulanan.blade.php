@@ -18,25 +18,31 @@
               <input type="month" name="" id="">
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
-                <select class="form-control" id="table" name="table">
-                  <option value="Pilih">Pilih Data</option>
-                  <option value="Air">Air Bersih</option>
-                  <option value="Listrik">Listrik</option>
-                  <option value="Keamanan">IPK & Keamanan</option>
-                  <option value="Kebersihan">Kebersihan</option>
-                </select>
-                
-              </div>
-            </div>
-            <!--AIR BERSIH-->
-            <div class="card-body" id="tAir">
-              <div class="table-responsive">
-                <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Air Bersih</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Listrik</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">IPK & Keamanan</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu3">Kebersihan</a>
+                  </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <!--AIR BERSIH-->
+                  <div id="home" class="container tab-pane active"><br>
+                  <div class="table-responsive">
+                  <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
                       <th rowspan="2">Kode</th>
-                      <th rowspan="2">Nama Pemilik</th>
+                      <th rowspan="2">Nama Nasabah</th>
                       <th rowspan="2">No.Los</th>
                       <th rowspan="2">M.Lalu</th>
                       <th rowspan="2">M.baru</th>
@@ -53,7 +59,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  
+
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -72,18 +78,19 @@
                       <td>&nbsp</td>
                     </tr>
                   </tbody>
-                </table>
-              </div>
-            </div>
-            <!--LISTRIK-->
-            <div class="card-body" id="tListrik">
-              <div class="table-responsive">
-                <table class="table display table-bordered" id="tableListrik" width="100%" cellspacing="0">
+                  </table>
+                  </div>
+                  </div>
+                  <!--END AIR BERSIH-->
+                  <!--LISTRIK-->
+                  <div id="menu1" class="container tab-pane fade"><br>
+                  <div class="table-responsive">
+                  <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th rowspan="2">Tanggal</th>
                       <th rowspan="2">Kode</th>
-                      <th rowspan="2">Nama Pemilik</th>
+                      <th rowspan="2">Nama Nasabah</th>
                       <th rowspan="2">No.Los</th>
                       <th rowspan="2">Daya</th>
                       <th rowspan="2">M.Lalu</th>
@@ -102,7 +109,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  
+
                   <tbody>
                     <tr>
                       <td class="text-center">2020-01-15</td>
@@ -123,18 +130,19 @@
                       <td>&nbsp</td>
                     </tr>
                   </tbody>
-                </table>
-              </div>
-            </div>
-            <!--KEAMANAN-->
-            <div class="card-body" id="tKeamanan">
-              <div class="table-responsive">
-                <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
+                  </table>
+                  </div>
+                  </div>
+                  <!--END LISTRIK-->
+                  <!--IPK & KEAMANAN-->
+                  <div id="menu2" class="container tab-pane fade"><br>
+                  <div class="table-responsive">
+                  <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
                       <th>Blok</th>
-                      <th>Nama</th>
+                      <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
                       <th>Besar Tagihan</th>
@@ -155,18 +163,19 @@
                       <td>80,000</td>
                     </tr>
                   </tbody>
-                </table>
-              </div>
-            </div>
-            <!--KEBERSIHAN-->
-            <div class="card-body" id="tKebersihan">
-              <div class="table-responsive">
-                <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
+                  </table>
+                  </div>
+                  </div>
+                  <!--END IPK&KEAMANAN-->
+                  <!--KEBERSIHAN-->
+                  <div id="menu3" class="container tab-pane fade"><br>
+                  <div class="table-responsive">
+                  <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tanggal</th>
                       <th>Blok</th>
-                      <th>Nama</th>
+                      <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
                       <th>Besar Tagihan</th>
@@ -179,7 +188,7 @@
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
-                      <td class="text-left">PT.BTN</td>
+                      <td class="text-left">PT.BTN yang makmur</td>
                       <td class="text-center">1</td>
                       <td class="text-center">1</td>
                       <td>120,000</td>
@@ -187,10 +196,13 @@
                       <td>&mdash;</td>
                     </tr>
                   </tbody>
-                </table>
+                  </table>
+                  </div>
+                  </div>
+                  <!--END KEBERSIHAN-->
+                </div>
               </div>
             </div>
-            <!-- End Tables -->
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -200,29 +212,19 @@
 @endsection
 
 @section('js')
-  <!-- Selection Menu Scripts -->
-  <script>
-    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
-    $('#table').change(function() {
-    $('#tAir,#tListrik,#tKeamanan,#tKebersihan').hide();
-    $('#t' + $(this).val()).show();
-    });
-  </script>
-
-  <!-- Scroll Table -->
+  <!--for scrolling table-->
   <script>
     $(document).ready(function () {
       $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan').DataTable({
-        "scrollX": true
+        scrollX: true
       });
     });
   </script>
-  <!-- End Scroll Table -->
-
-  <!-- Multiple Datatable Scripts (Levind) -->
+  <!--for column table toggle-->
   <script>
-	  $(document).ready(function() {
-      $('table.display').DataTable();
-	  } );
-	</script>
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+   $($.fn.dataTable.tables(true)).DataTable()
+      .columns.adjust();
+    });
+  </script>
 @endsection
