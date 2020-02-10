@@ -43,6 +43,7 @@
                       <th>Kode Kontrol</th>
                       <th>Nama</th>
                       <th>No. Los</th>
+                      <th>Status</th>
                       <th>KTP</th>
                       <th>NPWP</th>
                       <th>No. Meter</th>
@@ -55,6 +56,7 @@
                       <td class="text-center">A-1-001</td>
                       <td class="text-left">Said</td>
                       <td class="text-center">1</td>
+                      <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
                       <td class="text-left">998099876</td>
                       <td class="text">10000</td>
@@ -78,6 +80,7 @@
                       <th>Kode Kontrol</th>
                       <th>Nama</th>
                       <th>No. Los</th>
+                      <th>Status</th>
                       <th>KTP</th>
                       <th>NPWP</th>
                       <th>Daya</th>
@@ -91,6 +94,7 @@
                       <td class="text-center">A-1-001</td>
                       <td class="text-left">Said</td>
                       <td class="text-center">1</td>
+                      <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
                       <td class="text-left">998099876</td>
                       <td class="text">10000</td>
@@ -115,6 +119,7 @@
                       <th>Kode Kontrol</th>
                       <th>Nama</th>
                       <th>No. Los</th>
+                      <th>Status</th>
                       <th>KTP</th>
                       <th>NPWP</th>
                       <th>Tarif IPK</th>
@@ -128,6 +133,7 @@
                       <td class="text-center">A-1-001</td>
                       <td class="text-left">Said</td>
                       <td class="text-center">1</td>
+                      <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
                       <td class="text-left">998099876</td>
                       <td class="text">10000</td>
@@ -152,6 +158,7 @@
                       <th>No. Kontrol</th>
                       <th>Nama</th>
                       <th>No. Los</th>
+                      <th>Status</th>
                       <th>KTP</th>
                       <th>NPWP</th>
                       <th>Tarif Kebersihan</th>
@@ -164,6 +171,7 @@
                       <td class="text-center">A-1-001</td>
                       <td class="text-left">Said</td>
                       <td class="text-center">1</td>
+                      <td class="text-center">Pemilik</td>
                       <td class="text-left">32123456789</td>
                       <td class="text-left">998099876</td>
                       <td class="text">10000</td>
