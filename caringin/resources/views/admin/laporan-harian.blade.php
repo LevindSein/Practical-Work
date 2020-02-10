@@ -204,6 +204,7 @@
                   </div>
                   <!--END KEBERSIHAN-->
                 </div>
+                <!--END Tab Panes-->
               </div>
             </div>
           </div>
