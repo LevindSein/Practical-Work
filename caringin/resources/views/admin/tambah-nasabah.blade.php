@@ -43,56 +43,57 @@
                   Nomor NPWP Nasabah
                   <input type="number" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="">
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
+                  <div class="col-sm-2">Fasilitas</div>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="myCheck1">
+                      <label class="form-check-label" for="myCheck1">
+                        Air
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="myCheck2">
+                      <label class="form-check-label" for="myCheck2">
+                        Listrik
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="myCheck3">
+                      <label class="form-check-label" for="myCheck3">
+                        IPK & Keamanan
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="myCheck4">
+                      <label class="form-check-label" for="myCheck4">
+                        Kebersihan
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" style="display:none" id="myDiv3a">
                   <label for="sel1">Kategori Tarif IPK</label>
                   <select class="form-control" id="exampleInputStatus">
                     <option>0</option>
                     <option>200000</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none" id="myDiv3b">
                   <label for="sel1">Kategori Tarif Keamanan</label>
                   <select class="form-control" id="exampleInputStatus">
                     <option>0</option>
                     <option>200000</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none" id="myDiv4">
                   <label for="sel1">Kategori Tarif Kebersihan</label>
                   <select class="form-control" id="exampleInputStatus">
                     <option>0</option>
                     <option>100000</option>
                   </select>
                 </div>
-                <div class="form-group row">
-                  <div class="col-sm-2">Fasilitas</div>
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Air
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2">
-                      <label class="form-check-label" for="gridCheck2">
-                        Listrik
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck3">
-                      <label class="form-check-label" for="gridCheck3">
-                        IPK & Keamanan
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck4">
-                      <label class="form-check-label" for="gridCheck4">
-                        Kebersihan
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                
 
                 <a href="index.html" class="btn btn-primary btn-user btn-block">
                   Tambah Nasabah
@@ -104,4 +105,21 @@
         </div>
 
     <!-- End of Main Content -->
+@endsection
+
+@section('js')
+  <script>
+    $(document).ready(function() {
+    $('#myCheck3').change(function() {
+        $('#myDiv3b,#myDiv3a').toggle();
+    });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+    $('#myCheck4').change(function() {
+        $('#myDiv4').toggle();
+    });
+    });
+  </script>
 @endsection
