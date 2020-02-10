@@ -18,4 +18,13 @@ class nasabahController extends Controller
     public function updateNasabah(){
         return view('admin.update-nasabah');
     }
+    public function showtempatusaha(){
+        return view('admin.tempat-usaha');
+    }
+    public function showformtempat(){
+        return view('admin.tambah-tempat');
+    }
+    public function updateTempat(){
+        return view('admin.update-tempat');
+    }
 }

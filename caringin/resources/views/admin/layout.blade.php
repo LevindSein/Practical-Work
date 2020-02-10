@@ -115,6 +115,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="showformnasabah">Tambah Nasabah</a>
             <a class="collapse-item" href="showdatanasabah">Data Nasabah</a>
+            <a class="collapse-item" href="showformtempatusaha">Tambah Tempat Usaha</a>
+            <a class="collapse-item" href="showtempatusaha">Data Tempat Usaha</a>
           </div>
         </div>
       </li>
@@ -276,6 +278,7 @@
       .columns.adjust();
     });
   </script>
+  
 @yield('js')
 </body>
 

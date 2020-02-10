@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('showdatanasabah','nasabahController@showdata');
 Route::get('updatenasabah','nasabahController@updateNasabah');
 Route::get('showformnasabah','nasabahController@showform');
+Route::get('showformtempatusaha','nasabahController@showformtempat');
+Route::get('showtempatusaha','nasabahController@showtempatusaha');
+Route::get('updatetempat','nasabahController@updateTempat');
 
 //Tagihan
 Route::get('showformtagihanair','tagihanController@tagihanAir');
