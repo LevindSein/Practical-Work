@@ -22,7 +22,7 @@
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
                       <th>No. Los</th>
-                      <th>Jumlah Los</th>
+                      <th>Jumlah Unit</th>
                       <th>Bentuk Usaha</th>
                       <th>No. Meter Listrik</th>
                       <th>No. Meter Air</th>
