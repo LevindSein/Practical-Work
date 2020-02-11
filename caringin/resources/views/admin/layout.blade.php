@@ -12,14 +12,14 @@
   <title>App for Caringin</title>
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
 </head>
 
@@ -59,10 +59,8 @@
         <div id="collapseTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" href="showformtagihanair">Tagihan Air</a>
-            <a class="collapse-item" href="showformtagihanlistrik">Tagihan Listrik</a>
-            <!-- <a class="collapse-item" href="tagihan-kebersihan.html">Tagihan Kebersihan</a>
-            <a class="collapse-item" href="showtagihankeamanan">Tagihan IPK & Keamanan</a> -->
+            <a class="collapse-item" href="{{url('showformtagihanair')}}">Tagihan Air</a>
+            <a class="collapse-item" href="{{url('showformtagihanlistrik')}}">Tagihan Listrik</a>
           </div>
         </div>
       </li>
@@ -76,11 +74,11 @@
         <div id="collapseTarif" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" href="showformtarifair">Tarif Air</a>
-            <a class="collapse-item" href="showformtariflistrik">Tarif Listrik</a>
-            <a class="collapse-item" href="showformtarifkebersihan">Tarif Kebersihan</a>
-            <a class="collapse-item" href="showformtarifipk">Tarif IPK</a>
-            <a class="collapse-item" href="showformtarifkeamanan">Tarif Keamanan</a>
+            <a class="collapse-item" href="{{url('showformtarifair')}}">Tarif Air</a>
+            <a class="collapse-item" href="{{url('showformtariflistrik')}}">Tarif Listrik</a>
+            <a class="collapse-item" href="{{url('showformtarifkebersihan')}}">Tarif Kebersihan</a>
+            <a class="collapse-item" href="{{url('showformtarifipk')}}">Tarif IPK</a>
+            <a class="collapse-item" href="{{url('showformtarifkeamanan')}}">Tarif Keamanan</a>
           </div>
         </div>
       </li>
@@ -94,13 +92,13 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" href="showlaporanharian">Laporan Harian</a>
-            <a class="collapse-item" href="showlaporanbulanan">Laporan Bulanan</a>
-            <a class="collapse-item" href="showlaporantahunan">Laporan Tahunan</a>
-            <a class="collapse-item" href="showlaporantagihan">Laporan Tagihan</a>
-            <a class="collapse-item" href="showlaporantunggakan">Laporan Tunggakan</a>
-            <a class="collapse-item" href="showlaporanbongkaran">Laporan Bongkaran</a>
-            <a class="collapse-item" href="showlaporanpenghapusan">Laporan Penghapusan</a>
+            <a class="collapse-item" href="{{url('showlaporanharian')}}">Laporan Harian</a>
+            <a class="collapse-item" href="{{url('showlaporanbulanan')}}">Laporan Bulanan</a>
+            <a class="collapse-item" href="{{url('showlaporantahunan')}}">Laporan Tahunan</a>
+            <a class="collapse-item" href="{{url('showlaporantagihan')}}">Laporan Tagihan</a>
+            <a class="collapse-item" href="{{url('showlaporantunggakan')}}">Laporan Tunggakan</a>
+            <a class="collapse-item" href="{{url('showlaporanbongkaran')}}">Laporan Bongkaran</a>
+            <a class="collapse-item" href="{{url('showlaporanpenghapusan')}}">Laporan Penghapusan</a>
           </div>
         </div>
       </li>
@@ -113,10 +111,10 @@
         </a>
         <div id="collapseNasabah" class="collapse" aria-labelledby="headingNasabah" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="showformnasabah">Tambah Nasabah</a>
-            <a class="collapse-item" href="showdatanasabah">Data Nasabah</a>
-            <a class="collapse-item" href="showformtempatusaha">Tambah Tempat Usaha</a>
-            <a class="collapse-item" href="showtempatusaha">Data Tempat Usaha</a>
+            <a class="collapse-item" href="{{url('showformnasabah')}}">Tambah Nasabah</a>
+            <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
+            <a class="collapse-item" href="{{url('showformtempatusaha')}}">Tambah Tempat Usaha</a>
+            <a class="collapse-item" href="{{url('showtempatusaha')}}">Data Tempat Usaha</a>
           </div>
         </div>
       </li>
@@ -129,8 +127,8 @@
         </a>
         <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="showtambahuser">Tambah User</a>
-            <a class="collapse-item" href="showdatauser">Data User</a>
+            <a class="collapse-item" href="{{url('showtambahuser')}}">Tambah User</a>
+            <a class="collapse-item" href="{{url('showdatauser')}}">Data User</a>
           </div>
         </div>
       </li>
@@ -255,21 +253,21 @@
 </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
   <!--for column table toggle-->
   <script>

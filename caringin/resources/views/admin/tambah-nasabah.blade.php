@@ -1,6 +1,7 @@
 @extends('admin.layout')
 @section('content')
        <!-- Begin Page Content -->
+  
        <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -11,28 +12,26 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
+              <form class="user" action="storenasabah" method="POST">
+              @csrf
                 <div class="form-group">
                   Nama Nasabah
-                  <input type="text" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
+                  <input required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
                 </div>
                 <div class="form-group">
                   Nomor KTP Nasabah
-                  <input type="number" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
+                  <input required type="number" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
                 </div>
                 <div class="form-group">
                   Nomor NPWP Nasabah
-                  <input type="number" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
+                  <input required type="text" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="xx.xxx.xxx.x-xxx.xxx">
                 </div>
                 <div class="form-group">
                   Nomor Telpon
-                  <input type="number" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
+                  <input required type="number" name="telpon" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
                 </div>
-                <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  Tambah Nasabah
-                </a>
-              </form>
-              
+                <input type="submit" value="Tambah Nasabah" class="btn btn-primary btn-user btn-block">
+              </form>      
             </div>
           </div>
         </div>

@@ -18,8 +18,11 @@ Route::get('/', function () {
 
 //Nasabah
 Route::get('showdatanasabah','nasabahController@showdata');
-Route::get('updatenasabah','nasabahController@updateNasabah');
+Route::get('shownasabah','nasabahController@showdata')->name('show');
+Route::get('updatenasabah/{id}','nasabahController@updateNasabah');
 Route::get('showformnasabah','nasabahController@showform');
+Route::post('storenasabah','nasabahController@store');
+Route::post('update/store/{id}','nasabahController@updateStore');
 Route::get('showformtempatusaha','nasabahController@showformtempat');
 Route::get('showtempatusaha','nasabahController@showtempatusaha');
 Route::get('updatetempat','nasabahController@updateTempat');

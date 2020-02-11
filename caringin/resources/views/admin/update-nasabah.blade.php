@@ -11,22 +11,27 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
+            @foreach ($dataset as $data)
+            <form class="user" action="{{url('update/store',[$data->ID_NASABAH])}}" method="POST">
+              @csrf
                 <div class="form-group">
                   Nama Nasabah
-                  <input type="text" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
+                  <input value="{{$data->NM_NASABAH}}" required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
                 </div>
                 <div class="form-group">
                   Nomor KTP Nasabah
-                  <input type="number" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
+                  <input value="{{$data->NO_KTP}}" required type="number" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
                 </div>
                 <div class="form-group">
                   Nomor NPWP Nasabah
-                  <input type="number" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
+                  <input value="{{$data->NO_NPWP}}" required type="text" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="xx.xxx.xxx.x-xxx.xxx">
                 </div>
-                <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  Update Nasabah
-                </a>
+                <div class="form-group">
+                  Nomor Telpon
+                  <input value="{{$data->NO_TLP}}" required type="number" name="telpon" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
+                </div>
+                @endforeach
+                <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
               </form>
               
             </div>

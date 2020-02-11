@@ -19,8 +19,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>No. KTP</th>
                       <th>Nama Nasabah</th>
+                      <th>No. KTP</th>
                       <th>No. NPWP</th>
                       <th>No. Telp</th>
                       <th>Action</th>
@@ -28,16 +28,18 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $data)
                     <tr>
-                      <td class="text-left">32151301293880002</td>
-                      <td class="text-left">Fahni Amsyari</td>
-                      <td class="text-left">9921301283</td>
-                      <td class="text-left">085213293847</td>
+                      <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-left">{{$data->NO_KTP}}</td>
+                      <td class="text-left">{{$data->NO_NPWP}}</td>
+                      <td class="text-left">{{$data->NO_TLP}}</td>
                       <td class="text-center">
-                        <a href="updatenasabah" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                        <a href="{{url('updatenasabah',[$data->ID_NASABAH])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
