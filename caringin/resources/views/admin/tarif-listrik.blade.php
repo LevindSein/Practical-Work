@@ -17,8 +17,8 @@
                     <input type="number" class="form-control form-control-user" id="exampleInputTarifListrik" placeholder="Rp.">
                   </div>
                   <div class="form-group">
-                    Pengali Listrik
-                    <input type="number" class="form-control form-control-user" id="exampleInputTarifPengaliListrik" placeholder="">
+                    Waktu Kerja
+                    <input type="number" class="form-control form-control-user" id="exampleInputTarifPengaliListrik" placeholder="Jam">
                   </div>
                   <div class="form-group">
                     Tarif Beban Daya

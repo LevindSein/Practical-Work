@@ -24,6 +24,10 @@
                   Nomor NPWP Nasabah
                   <input type="number" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
                 </div>
+                <div class="form-group">
+                  Nomor Telpon
+                  <input type="number" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
+                </div>
                 <a href="index.html" class="btn btn-primary btn-user btn-block">
                   Tambah Nasabah
                 </a>
