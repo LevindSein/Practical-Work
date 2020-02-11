@@ -11,31 +11,39 @@
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <div class="p-4">
-                <form class="user">
+              @foreach ($dataset as $data)
+                <form class="user" action="{{url('update/storeL',[$data->ID_TRFLISTRIK])}}" method="POST">
+                @csrf
                   <div class="form-group">
-                    Tarif Listrik
-                    <input type="number" class="form-control form-control-user" id="exampleInputTarifListrik" placeholder="Rp.">
+                    Tarif Blok 1
+                    <input value="{{$data->VAR_BLOK1}}" required type="number" name="tarifblok1" class="form-control form-control-user" id="exampleInputTarifListrik" placeholder="Rp.">
+                  </div>
+                  <div class="form-group">
+                    Tarif Blok 2
+                    <input value="{{$data->VAR_BLOK2}}" required type="number" name="tarifblok2" class="form-control form-control-user" id="exampleInputTarifListrik" placeholder="Rp.">
                   </div>
                   <div class="form-group">
                     Waktu Kerja
-                    <input type="number" class="form-control form-control-user" id="exampleInputTarifPengaliListrik" placeholder="Jam">
+                    <input value="{{$data->VAR_STANDAR}}" required type="number" name="tarifstandar" class="form-control form-control-user" id="exampleInputTarifPengaliListrik" placeholder="Jam">
                   </div>
                   <div class="form-group">
                     Tarif Beban Daya
-                    <input type="number" class="form-control form-control-user" id="exampleInputTarifBebanDayaListrik" placeholder="Watt">
+                    <input value="{{$data->VAR_BEBAN}}" required type="number" name="tarifbeban" class="form-control form-control-user" id="exampleInputTarifListrik" placeholder="Rp.">
                   </div>
                   <div class="form-group">
-                    Rek. Min
-                    <input type="number" class="form-control form-control-user" id="exampleInputTarifBebanRekMin" placeholder="Watt">
+                    Tarif BPJU
+                    <input value="{{$data->VAR_BPJU}}" required type="number" name="tarifbpju" class="form-control form-control-user" id="exampleInputTarifBebanDayaListrik" placeholder="Watt">
+                  </div>
+                  <div class="form-group">
+                    Tarif Denda
+                    <input value="{{$data->VAR_DENDA}}" required type="number" name="tarifdenda" class="form-control form-control-user" id="exampleInputTarifBebanRekMin" placeholder="Watt">
                   </div>
                   <div class="form-group">
                     PPN Listrik
-                    <input type="number" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
+                    <input value="{{$data->PPN_LISTRIK}}" required type="number" name="ppnlistrik" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
                   </div>
-  
-                  <a href="index.html" class="btn btn-primary btn-user btn-block">
-                    Save
-                  </a>
+                  @endforeach
+                  <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
                 </form>
                 
               </div>

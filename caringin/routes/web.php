@@ -33,6 +33,8 @@ Route::get('showformtagihanlistrik','tagihanController@tagihanListrik');
 
 //Tarif
 Route::get('showformtarifair','tarifController@showTAir');
+Route::post('update/storeA/{id}','tarifController@updateStoreA');
+Route::post('update/storeL/{id}','tarifController@updateStoreL');
 Route::get('showformtarifipk','tarifController@showTIpk');
 Route::get('showformtarifkeamanan','tarifController@showTKeamanan');
 Route::get('showformtarifkebersihan','tarifController@showTkebersihan');

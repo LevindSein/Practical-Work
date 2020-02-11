@@ -12,35 +12,39 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
+            @foreach ($dataset as $data)
+              <form class="user" action="{{url('update/storeA',[$data->ID_TRFAIR])}}" method="POST">
+              @csrf
                 <div class="form-group">
                   Tarif Air 1
-                  <input type="number" class="form-control form-control-user" id="exampleInputTarifAir" placeholder="Rp.">
+                  <input value="{{$data->TRF_AIR1}}" required type="number" name="tarif1" class="form-control form-control-user" id="exampleInputTarifAir" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tarif Air 2 (diatas 10 M<sup>3</sup>)
-                  <input type="number" class="form-control form-control-user" id="exampleInputTarifAir" placeholder="Rp.">
-                </div>
-                <div class="form-group">
-                  Tarif Beban Air
-                  <input type="number" class="form-control form-control-user" id="exampleInputTarifBebanAir" placeholder="Rp.">
+                  <input value="{{$data->TRF_AIR2}}" required type="number" name="tarif2" class="form-control form-control-user" id="exampleInputTarifAir" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tarif Pemeliharaan Air
-                  <input type="number" class="form-control form-control-user" id="exampleInputTarifPemeliharaanAir" placeholder="Rp.">
+                  <input value="{{$data->TRF_PEMELIHARAAN}}" required type="number" name="tarifpemeliharaan" class="form-control form-control-user" id="exampleInputTarifPemeliharaanAir" placeholder="Rp.">
+                </div>
+                <div class="form-group">
+                  Tarif Beban Air
+                  <input value="{{$data->TRF_BEBAN}}" required type="number" name="tarifbeban" class="form-control form-control-user" id="exampleInputTarifBebanAir" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tarif Air Kotor
-                  <input type="number" class="form-control form-control-user" id="exampleInputTarifAirKotor" placeholder="%">
+                  <input value="{{$data->TRF_ARKOT}}" required type="number" name="tarifarkot" class="form-control form-control-user" id="exampleInputTarifAirKotor" placeholder="%">
+                </div>
+                <div class="form-group">
+                  Tarif Denda
+                  <input value="{{$data->TRF_DENDA}}" required type="number" name="tarifdenda" class="form-control form-control-user" id="exampleInputTarifAirKotor" placeholder="%">
                 </div>
                 <div class="form-group">
                   PPN Air
-                  <input type="number" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
+                  <input value="{{$data->PPN_AIR}}" required type="number" name="ppnair" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
                 </div>
-
-                <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  Save
-                </a>
+                @endforeach
+                <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
               </form>
               
             </div>

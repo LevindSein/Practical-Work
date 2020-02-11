@@ -19,7 +19,6 @@ class nasabahController extends Controller
     }
     public function store(Request $request){
         $data = new Nasabah([
-            'id_nasabah'=>$request->get('nasabah'),
             'nm_nasabah'=>$request->get('nama'),
             'no_ktp'=>$request->get('ktp'),
             'no_npwp'=>$request->get('npwp'),
