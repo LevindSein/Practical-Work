@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tarif_air;
 use App\Tarif_listrik;
+use App\Tarif_kebersihan;
 use Illuminate\Support\Facades\DB;
 
 class tarifController extends Controller
@@ -51,7 +52,31 @@ class tarifController extends Controller
     public function showTKeamanan(){
         return view('admin.tarif-keamanan');
     }
+
+    //Tarif Kebersihan
     public function showTKebersihan(){
-        return view('admin.tarif-kebersihan');
+        $dataset = DB::table('tarif_kebersihan')->get();
+        return view('admin.tarif-kebersihan',['dataset'=>$dataset]);
+    }
+    public function showKebersihan(){
+        return view('admin.tambah-kebersihan');
+    }
+    public function updateKebersihan($id){
+        $dataset = DB::table('tarif_kebersihan')->where('ID_TRFKEBERSIHAN',$id)->get();
+        return view('admin.update-kebersihan',['dataset'=>$dataset]);
+    }
+    public function updateStoreB(Request $request, $id){
+        DB::table('tarif_kebersihan')->where('ID_TRFKEBERSIHAN', $id)->update([
+            'ID_TRFKEBERSIHAN'=>$request->get('kategori'),
+            'TRF_KEBERSIHAN'=>$request->get('tarif')
+        ]);
+        return redirect()->route('showb');
+    }
+    public function storekebersihan(Request $request){
+        $data = new Tarif_kebersihan([
+            'trf_kebersihan'=>$request->get('tarif')
+        ]);
+        $data->save();
+        return redirect()->route('showb');
     }
 }

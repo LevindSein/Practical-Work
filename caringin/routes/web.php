@@ -23,6 +23,7 @@ Route::get('updatenasabah/{id}','nasabahController@updateNasabah');
 Route::get('showformnasabah','nasabahController@showform');
 Route::post('storenasabah','nasabahController@store');
 Route::post('update/store/{id}','nasabahController@updateStore');
+//Tempat Usaha
 Route::get('showformtempatusaha','nasabahController@showformtempat');
 Route::get('showtempatusaha','nasabahController@showtempatusaha');
 Route::get('updatetempat','nasabahController@updateTempat');
@@ -32,13 +33,22 @@ Route::get('showformtagihanair','tagihanController@tagihanAir');
 Route::get('showformtagihanlistrik','tagihanController@tagihanListrik');
 
 //Tarif
+    //Air
 Route::get('showformtarifair','tarifController@showTAir');
 Route::post('update/storeA/{id}','tarifController@updateStoreA');
-Route::post('update/storeL/{id}','tarifController@updateStoreL');
-Route::get('showformtarifipk','tarifController@showTIpk');
-Route::get('showformtarifkeamanan','tarifController@showTKeamanan');
-Route::get('showformtarifkebersihan','tarifController@showTkebersihan');
+    //Listrik
 Route::get('showformtariflistrik','tarifController@showTListrik');
+Route::post('update/storeL/{id}','tarifController@updateStoreL');
+    //IPK
+Route::get('showformtarifipk','tarifController@showTIpk');
+    //Keamanan
+Route::get('showformtarifkeamanan','tarifController@showTKeamanan');
+    //Kebersihan
+Route::get('showformtarifkebersihan','tarifController@showTKebersihan')->name('showb');
+Route::get('tambahkebersihan','tarifController@showKebersihan');
+Route::get('updatekebersihan/{id}','tarifController@updateKebersihan');
+Route::post('update/storeB/{id}','tarifController@updateStoreB');
+Route::post('storekebersihan','tarifController@storekebersihan');
 
 //Laporan
 Route::get('showlaporanharian','laporanController@showHarian');

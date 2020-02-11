@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Nasabah;
-use App\Jasa_air;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 
 class nasabahController extends Controller
 {
+    //Nasabah
     public function showdata(){
         $dataset = DB::table('nasabah')->get();
         return view('admin.data-nasabah',['dataset'=>$dataset]);
@@ -40,6 +40,8 @@ class nasabahController extends Controller
         ]);
         return redirect()->route('show');
     }
+
+    //Tempat Usaha
     public function showtempatusaha(){
         return view('admin.tempat-usaha');
     }
