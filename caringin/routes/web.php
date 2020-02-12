@@ -29,8 +29,8 @@ Route::get('showtempatusaha','nasabahController@showtempatusaha');
 Route::get('updatetempat','nasabahController@updateTempat');
 
 //Tagihan
-Route::get('showformtagihanair','tagihanController@tagihanAir');
-Route::get('showformtagihanlistrik','tagihanController@tagihanListrik');
+Route::get('tambahtagihan','tagihanController@tagihanNas');
+Route::get('showformtagihan','tagihanController@formtagihan');
 
 //Tarif
     //Air

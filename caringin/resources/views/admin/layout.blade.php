@@ -59,8 +59,7 @@
         <div id="collapseTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" href="{{url('showformtagihanair')}}">Tagihan Air</a>
-            <a class="collapse-item" href="{{url('showformtagihanlistrik')}}">Tagihan Listrik</a>
+            <a class="collapse-item" href="{{url('tambahtagihan')}}">Tagihan Nasabah</a>
           </div>
         </div>
       </li>

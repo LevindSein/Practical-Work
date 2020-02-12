@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class tagihanController extends Controller
 {
-    public function tagihanAir(){
-        return view('admin.tagihan-air');
+    public function formtagihan(){
+        return view('admin.form-tagihan');
     }
-    public function tagihanListrik(){
-        return view('admin.tagihan-listrik');
+    public function tagihanNas(){
+        return view('admin.tagihan-nasabah');
     }
 }
