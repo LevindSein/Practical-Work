@@ -14,36 +14,8 @@
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
               <h6 class="m-0 font-weight-bold text-primary">Kategori Tarif</h6>
 
-              <!--Modal Tambah Kategori-->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                data-whatever="@getbootstrap">Tambah Kategori</button>
-
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">Tarif Keamanan</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                      <button type="button" class="btn btn-primary">Simpan</button>
-                    </div>
-                  </div>
-                </div>
-                <!--Modal Close-->
-              </div>
+              <!--Tambah Kategori-->
+              <a href="tambahkeamanan" type="submit" class="btn btn-primary">Tambah Kategori</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -56,30 +28,16 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($dataset as $data)
                     <tr>
-                      <td class="text-center">1</td>
-                      <td>50,000</td>
+                      <td class="text-center">{{$data->ID_TRFKEAMANAN}}</td>
+                      <td>{{$data->TRF_KEAMANAN}}</td>
                       <td class="text-center">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i> Update</a>
+                        <a href="{{url('updatekeamanan',[$data->ID_TRFKEAMANAN])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="text-center">2</td>
-                      <td>90,000</td>
-                      <td class="text-center">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i> Update</a>
-                      </td>
-                      <tr>
-                        <td class="text-center">3</td>
-                        <td>108,000</td>
-                        <td class="text-center">
-                          <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
-                              class="fas fa- fa-sm text-white-50"></i> Update</a>
-                        </td>
-                      </tr>
-                    </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

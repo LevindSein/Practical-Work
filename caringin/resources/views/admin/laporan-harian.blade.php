@@ -15,9 +15,11 @@
             </div>
             <div class="card-body">
               <label for="">Dari</label>
-              <input type="date" name="" id="">
+              <input type="date" name="" id="" class="form-control form-control-user" style="width:20%">
+              <br>
               <label for="">Sampai</label>
-              <input type="date" name="" id="">
+              <input type="date" name="" id="" class="form-control form-control-user" style="width:20%">
+              <br><a href="#" type="submit" class="btn btn-primary">Submit</a><p>
               <div class="form-group">
                 <!--Option Menu-->
                 <label for="sel1">Tampilkan Data :</label>

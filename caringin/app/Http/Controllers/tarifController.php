@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Tarif_air;
 use App\Tarif_listrik;
 use App\Tarif_kebersihan;
+use App\Tarif_keamanan;
+use App\Tarif_ipk;
 use Illuminate\Support\Facades\DB;
 
 class tarifController extends Controller
@@ -46,13 +48,6 @@ class tarifController extends Controller
         return redirect()->back()->with('alert-success','Data Tersimpan');;
     }
 
-    public function showTIpk(){
-        return view('admin.tarif-ipk');
-    }
-    public function showTKeamanan(){
-        return view('admin.tarif-keamanan');
-    }
-
     //Tarif Kebersihan
     public function showTKebersihan(){
         $dataset = DB::table('tarif_kebersihan')->get();
@@ -78,5 +73,59 @@ class tarifController extends Controller
         ]);
         $data->save();
         return redirect()->route('showb');
+    }
+
+    //Tarif IPK
+    public function showTIpk(){
+        $dataset = DB::table('tarif_ipk')->get();
+        return view('admin.tarif-ipk',['dataset'=>$dataset]);
+    }
+    public function showIpk(){
+        return view('admin.tambah-ipk');
+    }
+    public function updateIpk($id){
+        $dataset = DB::table('tarif_ipk')->where('ID_TRFIPK',$id)->get();
+        return view('admin.update-ipk',['dataset'=>$dataset]);
+    }
+    public function updateStoreI(Request $request, $id){
+        DB::table('tarif_ipk')->where('ID_TRFIPK', $id)->update([
+            'ID_TRFIPK'=>$request->get('kategori'),
+            'TRF_IPK'=>$request->get('tarif')
+        ]);
+        return redirect()->route('showi');
+    }
+    public function storeipk(Request $request){
+        $data = new Tarif_ipk([
+            'trf_ipk'=>$request->get('tarif')
+        ]);
+        $data->save();
+        return redirect()->route('showi');
+    }
+
+    //Tarif Keamanan
+    public function showTKeamanan(){
+        $dataset = DB::table('tarif_keamanan')->get();
+        return view('admin.tarif-keamanan',['dataset'=>$dataset]);
+    }
+    public function showKeamanan(){
+        return view('admin.tambah-keamanan');
+    }
+    public function updateKeamanan($id){
+        $dataset = DB::table('tarif_keamanan')->where('ID_TRFKEAMANAN',$id)->get();
+        return view('admin.update-keamanan',['dataset'=>$dataset]);
+    }
+    public function updateStoreK(Request $request, $id){
+        DB::table('tarif_keamanan')->where('ID_TRFKEAMANAN', $id)->update([
+            'ID_TRFKEAMANAN'=>$request->get('kategori'),
+            'TRF_KEAMANAN'=>$request->get('tarif')
+        ]);
+        return redirect()->route('showk');
+    }
+    public function storekeamanan(Request $request){
+        $data = new Tarif_keamanan([
+            'trf_keamanan'=>$request->get('tarif')
+        ]);
+        $data->save();
+        return redirect()->route('showk');
     }
 }

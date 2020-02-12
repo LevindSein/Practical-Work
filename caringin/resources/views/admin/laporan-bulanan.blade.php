@@ -15,7 +15,8 @@
             </div>
             <div class="card-body">
               <label for="">Filter Bulan</label>
-              <input type="month" name="" id="">
+              <input type="month" name="" id="" class="form-control form-control-user" style="width:20%">
+              <br><a href="#" type="submit" class="btn btn-primary">Submit</a><p>
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
                 <ul class="nav nav-tabs" role="tablist">

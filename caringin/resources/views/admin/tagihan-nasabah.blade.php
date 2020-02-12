@@ -31,7 +31,7 @@
                       <td class="text-left">Fahni Amsyari</td>
                       <td class="text-center">
                         <a href="showformtagihan" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i> Tambah</a>
+                            class="fas fa- fa-sm text-white-50"></i>Tambah</a>
                       </td>
                     </tr>
                   </tbody>
