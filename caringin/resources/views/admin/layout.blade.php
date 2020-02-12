@@ -32,7 +32,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-text mx-3">ADMIN</div>
       </a>
 
@@ -52,7 +52,7 @@
 
       <!-- Nav Item - Tagihan -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTagihan" aria-expanded="true" aria-controls="collapseTagihan">
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTagihan" aria-expanded="true" aria-controls="collapseTagihan">
           <i class="fas fa-fw fa-plus"></i>
           <span>Tagihan</span>
         </a>
@@ -61,7 +61,11 @@
             <div class="collapse-divider"></div>
             <a class="collapse-item" href="{{url('tambahtagihan')}}">Tagihan Nasabah</a>
           </div>
-        </div>
+        </div> -->
+        
+        <a class="nav-link" href="{{url('tambahtagihan')}}">
+          <i class="fas fa-fw fa-plus"></i>
+          <span>Tagihan</span></a>
       </li>
       
       <!-- Nav Item - Tarif -->
@@ -112,6 +116,18 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('showformnasabah')}}">Tambah Nasabah</a>
             <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Tempat Usaha -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsaha" aria-expanded="true" aria-controls="collapseUsaha">
+          <i class="fas fa-fw fa-store"></i>
+          <span>Tempat Usaha</span>
+        </a>
+        <div id="collapseUsaha" class="collapse" aria-labelledby="headingUsaha" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('showformtempatusaha')}}">Tambah Tempat Usaha</a>
             <a class="collapse-item" href="{{url('showtempatusaha')}}">Data Tempat Usaha</a>
           </div>
@@ -215,7 +231,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Aplikasi Pengelola Tagihan</span>
+            <span>Copyright &copy; Pengelola Pusat Perdagangan</span>
           </div>
         </div>
       </footer>

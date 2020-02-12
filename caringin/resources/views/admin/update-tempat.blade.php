@@ -14,11 +14,11 @@
               <form class="user">
                 <div class="form-group">
                   Blok
-                  <input type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
+                  <input type="text" readonly class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
+                  <input type="text" readonly class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
                 </div>
                 <div class="form-group">
                   No. KTP
