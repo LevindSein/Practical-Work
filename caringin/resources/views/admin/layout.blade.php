@@ -306,10 +306,9 @@
         scrollX: true,
         dom: 'Bflrtip',
         buttons: [
-            { extend: 'copy'},
-            { extend: 'print'},
             { extend: 'excel'},
-            { extend: 'pdf'}
+            { extend: 'pdf'},
+            { extend: 'print'}
           ]
       });
     });
