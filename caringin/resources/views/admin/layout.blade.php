@@ -304,11 +304,26 @@
     $(document).ready(function () {
       $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah').DataTable({
         scrollX: true,
-        dom: 'Bflrtip',
+        dom:  "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+              "<'row'<'col-sm-12'tr>>" +
+              "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+
         buttons: [
-            { extend: 'excel'},
-            { extend: 'pdf'},
-            { extend: 'print'}
+            { 
+              text:'<i class="fas fa-file-pdf fa-lg"></i>',
+              extend: 'pdf',
+              className: 'btn btn-danger bg-gradient-danger',
+              title: 'Caringin PDF'},
+            { 
+              text:'<i class="fas fa-file-excel fa-lg"></i>',
+              extend: 'excel',
+              className: 'btn btn-success bg-gradient-success',
+              title: 'Caringin Excel'},
+            { 
+              text:'<i class="fas fa-print fa-lg"></i>',
+              extend: 'print',
+              className: 'btn btn-info bg-gradient-info'
+            }
           ]
       });
     });
