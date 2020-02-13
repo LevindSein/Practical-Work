@@ -60,7 +60,7 @@
                     <tr>
                       <td class="text-left">A-1-001</td>
                       <td class="text-left">Fahni Amsyari</td>
-                      <td class="text-center">3 - 4</td>
+                      <td class="text-center">1 - 2</td>
                       <td class="text-center">2</td>
                       <td class="text-left">Pedagang Kasur</td>
                       <td class="text-center">1238242947</td>

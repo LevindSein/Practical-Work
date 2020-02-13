@@ -5,7 +5,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-center">
-          <h1 class="h3 mb-0 text-gray-800">Tambah Tempat Usaha</h1>
+          <h1 class="h3 mb-0 text-gray-800">Update Tempat Usaha</h1>
         </div>
 
         <div class="row justify-content-center">
@@ -14,11 +14,11 @@
               <form class="user">
                 <div class="form-group">
                   Blok
-                  <input type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
+                  <input readonly type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="A-1">
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
+                  <input readonly type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="1 - 2">
                 </div>
                 <div class="form-group">
                   No. KTP
