@@ -39,25 +39,25 @@
                   <div class="col-sm-2">Fasilitas</div>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck1">
+                      <input class="form-check-input" type="checkbox" id="myCheck1" data-related-item="myDiv1">
                       <label class="form-check-label" for="myCheck1">
                         Air
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck2">
+                      <input class="form-check-input" type="checkbox" id="myCheck2" data-related-item="myDiv2">
                       <label class="form-check-label" for="myCheck2">
                         Listrik
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck3">
+                      <input class="form-check-input" type="checkbox" id="myCheck3" data-related-item="myDiv3">
                       <label class="form-check-label" for="myCheck3">
                         IPK & Keamanan
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck4">
+                      <input class="form-check-input" type="checkbox" id="myCheck4" data-related-item="myDiv4">
                       <label class="form-check-label" for="myCheck4">
                         Kebersihan
                       </label>
@@ -65,32 +65,31 @@
                   </div>
                 </div>
                 
-                <div class="form-group" style="display:none" id="myDiv1">
+                <div class="form-group" style="display:none">
                   Nomor Meter Air
-                  <input type="text" class="form-control form-control-user" id="exampleInputStatus" placeholder="1484xxxx">
+                  <input type="text" class="form-control form-control-user"  id="myDiv1" placeholder="1484xxxx">
                 </div>
-                <div class="form-group" style="display:none" id="myDiv2">
+                <div class="form-group" style="display:none">
                   Nomor Meter Listrik
-                  <input type="text" class="form-control form-control-user" id="exampleInputStatus" placeholder="1484xxxx">
+                  <input type="text" class="form-control form-control-user" id="myDiv2" placeholder="1484xxxx">
                 </div>
-                <div class="form-group" style="display:none" id="myDiv3a">
+                <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
-                  <select class="form-control" id="exampleInputStatus">
-                    <option>0</option>
+                  <select class="form-control" id="myDiv3">
+                    <option disabled selected hidden>Pilih Tarif</option>
                     <option>200000</option>
                   </select>
-                </div>
-                <div class="form-group" style="display:none" id="myDiv3b">
+                  <br>
                   <label for="sel1">Kategori Tarif Keamanan</label>
-                  <select class="form-control" id="exampleInputStatus">
-                    <option>0</option>
+                  <select class="form-control">
+                    <option disabled selected hidden>Pilih Tarif</option>
                     <option>200000</option>
                   </select>
                 </div>
-                <div class="form-group" style="display:none" id="myDiv4">
+                <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif Kebersihan</label>
-                  <select class="form-control" id="exampleInputStatus">
-                    <option>0</option>
+                  <select class="form-control" id="myDiv4">
+                    <option disabled selected hidden>Pilih Tarif</option>
                     <option>100000</option>
                   </select>
                 </div>
@@ -110,31 +109,16 @@
 
 @section('js')
   <script>
-    $(document).ready(function() {
-    $('#myCheck3').change(function() {
-        $('#myDiv3b,#myDiv3a').toggle();
-    });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-    $('#myCheck4').change(function() {
-        $('#myDiv4').toggle();
-    });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-    $('#myCheck1').change(function() {
-        $('#myDiv1').toggle();
-    });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-    $('#myCheck2').change(function() {
-        $('#myDiv2').toggle();
-    });
-    });
+  function evaluate(){
+    var item = $(this);
+    var relatedItem = $("#" + item.attr("data-related-item")).parent();
+   
+    if(item.is(":checked")){
+        relatedItem.fadeIn();
+    }else{
+        relatedItem.fadeOut();   
+    }
+  }
+  $('input[type="checkbox"]').click(evaluate).each(evaluate);
   </script>
 @endsection

@@ -284,6 +284,15 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
+  <!-- Button -->
+  <script src="{{asset('https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js')}}" rel="stylesheet"></script>
+  <script src="{{asset('https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js')}}" rel="stylesheet"></script>
+ 
   <!--for column table toggle-->
   <script>
   $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
@@ -291,7 +300,20 @@
       .columns.adjust();
     });
   </script>
-  
+  <script>
+    $(document).ready(function () {
+      $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah').DataTable({
+        scrollX: true,
+        dom: 'Bflrtip',
+        buttons: [
+            { extend: 'copy'},
+            { extend: 'print'},
+            { extend: 'excel'},
+            { extend: 'pdf'}
+          ]
+      });
+    });
+  </script>
 @yield('js')
 </body>
 

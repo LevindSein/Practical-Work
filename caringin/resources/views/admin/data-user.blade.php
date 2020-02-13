@@ -52,14 +52,3 @@
       <!-- End of Main Content -->
 
 @endsection
-@section('js')
-  <!-- Scroll Table -->
-  <script>
-    $(document).ready(function () {
-      $('#tableUser').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-  <!-- End Scroll Table -->
-@endsection

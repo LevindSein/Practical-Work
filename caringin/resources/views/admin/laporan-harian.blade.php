@@ -193,7 +193,7 @@
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
-                      <td class="text-left">PT.BTN yang makmur yang sukarela mengabdi</td>
+                      <td class="text-left">PT.BTN</td>
                       <td class="text-center">1</td>
                       <td class="text-center">1</td>
                       <td>120,000</td>
@@ -215,16 +215,4 @@
       </div>
       <!-- End of Main Content -->
 
-@endsection
-
-@section('js')
-  <!--for scrolling table-->
-  <script>
-    $(document).ready(function () {
-      $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan').DataTable({
-        scrollX: true
-      });
-    });
-  </script>
-  
 @endsection

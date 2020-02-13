@@ -212,21 +212,3 @@
       </div>
       <!-- End of Main Content -->
 @endsection
-
-@section('js')
-  <!--for scrolling table-->
-  <script>
-    $(document).ready(function () {
-      $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan').DataTable({
-        scrollX: true
-      });
-    });
-  </script>
-  <!--for column table toggle-->
-  <script>
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-   $($.fn.dataTable.tables(true)).DataTable()
-      .columns.adjust();
-    });
-  </script>
-@endsection

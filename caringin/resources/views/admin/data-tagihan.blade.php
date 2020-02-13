@@ -14,9 +14,6 @@
               <h6 class="h-3 m-0 font-weight-bold text-primary">Tabel Tagihan Nasabah</h6>
             </div>
             <div class="card-body">
-              
-            </div>
-            <div class="card-body">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
@@ -60,23 +57,4 @@
       </div>
       <!-- End of Main Content -->
 
-@endsection
-
-@section('js')
-  <!-- Scroll Table -->
-  <script>
-    $(document).ready(function () {
-      $('#tableTagihan').DataTable({
-        "scrollX": true
-      });
-    });
-  </script>
-  <!-- End Scroll Table -->
-
-  <!-- Multiple Datatable Scripts (Levind) -->
-  <script>
-	  $(document).ready(function() {
-      $('table.display').DataTable();
-	  } );
-	</script>
 @endsection
