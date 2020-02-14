@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>PT Pengelola Pusat Perdagangan</title>
+  <title>PT Pengelola Pusat Perdagangan Caringin</title>
 
   <!-- Custom fonts for this template -->
   <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -231,7 +231,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Pengelola Pusat Perdagangan</span>
+            <span>Copyright &copy;PT Pengelola Pusat Perdagangan Caringin</span>
           </div>
         </div>
       </footer>
