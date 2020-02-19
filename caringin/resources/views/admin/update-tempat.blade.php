@@ -14,27 +14,44 @@
               <form class="user">
                 <div class="form-group">
                   Blok
-                  <input readonly type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="A-1">
+                  <input readonly type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input readonly type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="1 - 2">
+                  <input readonly type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
                 </div>
-                <div class="form-group">
-                  No. KTP
-                  <input type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="321xxxxx">
-                </div>
-                <!-- <div class="form-group">
-                  <label for="sel1">Status Kepemilikan</label>
-                  <select class="form-control" id="exampleInputStatus">
-                    <option value="pemilik">Pemilik</option>
-                    <option value="penyewa">Penyewa</option>
-                  </select>
-                </div> -->
                 <div class="form-group">
                   Bentuk Usaha
                   <input type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
                 </div>
+                <div class="form-group row">
+                  <div class="col-sm-2">Identitas</div>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioKTP" checked>
+                      <label class="form-check-label" for="myRadioKTP">
+                        KTP
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioNPWP">
+                      <label class="form-check-label" for="myRadioNPWP">
+                        NPWP
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hidden Identitas -->
+                <div class="form-group" style="display:none" id="myDivKTP">
+                  No. KTP
+                  <input type="text" class="form-control form-control-user" placeholder="1484xxxx">
+                </div>
+                <div class="form-group" style="display:none" id="myDivNPWP">
+                  No. NPWP
+                  <input type="text" class="form-control form-control-user" placeholder="xx.xxx.xxx.x-xxx.xxx">
+                </div>
+
                 <div class="form-group row">
                   <div class="col-sm-2">Fasilitas</div>
                   <div class="col-sm-10">
@@ -45,7 +62,7 @@
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck2" data-related-item="myDiv2" checked>
+                      <input class="form-check-input" type="checkbox" id="myCheck2" data-related-item="myDiv2">
                       <label class="form-check-label" for="myCheck2">
                         Listrik
                       </label>
@@ -65,6 +82,7 @@
                   </div>
                 </div>
                 
+                <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
                   Nomor Meter Air
                   <input type="text" class="form-control form-control-user"  id="myDiv1" placeholder="1484xxxx">
@@ -108,6 +126,7 @@
 @endsection
 
 @section('js')
+  <!-- Fasilitas Button -->
   <script>
   function evaluate(){
     var item = $(this);
@@ -120,5 +139,21 @@
     }
   }
   $('input[type="checkbox"]').click(evaluate).each(evaluate);
+  </script>
+
+  <!-- Identitas Button -->
+  <script>
+  function radioKTP(){
+    if($('#myRadioKTP').is(':checked'))
+    {
+      document.getElementById('myDivKTP').style.display ='block';
+      document.getElementById('myDivNPWP').style.display ='none';
+    }
+    else{
+      document.getElementById('myDivKTP').style.display ='none';
+      document.getElementById('myDivNPWP').style.display ='block';
+    }
+  }
+  $('input[type="radio"]').click(radioKTP).each(radioKTP);
   </script>
 @endsection
