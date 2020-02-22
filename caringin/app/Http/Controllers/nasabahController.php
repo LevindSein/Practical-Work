@@ -239,9 +239,106 @@ class nasabahController extends Controller
     }
     public function updateTempat($id){
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
-        return view('admin.update-tempat',['dataset'=>$dataset]);
+
+        //get value in row
+        $dataku = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->first();
+        $id_nasabah = $dataku->ID_NASABAH;
+        $id_air = $dataku->ID_TRFAIR;
+        $id_listrik = $dataku->ID_TRFLISTRIK;
+        $id_ipk = $dataku->ID_TRFIPK;
+        $id_keamanan = $dataku->ID_TRFKEAMANAN;
+        $id_kebersihan = $dataku->ID_TRFKEBERSIHAN;
+
+        // if($id_air != null)
+
+        // if($id_listrik != null)
+
+        //tarif ipk & keamanan
+        if($id_ipk != null && $id_keamanan != null)
+        {
+            $tipk = DB::table('tarif_ipk')->where('id_trfipk', $id_ipk)->first();
+            $taman = DB::table('tarif_keamanan')->where('id_trfkeamanan', $id_keamanan)->first();
+            $trfipk = $tipk->TRF_IPK;
+            $trfaman = $taman->TRF_KEAMANAN;
+        }
+        else{
+            $trfipk = "Pilih Tarif";
+            $trfaman = "Pilih Tarif";
+        }
+
+        //identitas
+        $nasabah = DB::table('nasabah')->where('id_nasabah', $id_nasabah)->first();
+        $noktp = $nasabah->NO_KTP;
+        $nonpwp = $nasabah->NO_NPWP;
+
+        //tarif kebersihan
+        if($id_kebersihan != null)
+        {
+            $tbersih = DB::table('tarif_kebersihan')->where('id_trfkebersihan', $id_kebersihan)->first();
+            $trfkebersihan = $tbersih->TRF_KEBERSIHAN;
+        }
+        else
+            $trfkebersihan = "Pilih Tarif";
+
+        //selection
+        $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
+        $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
+        $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
+
+        return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,
+                    'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
+                    'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
+                    'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
+                    'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan
+        ]);
     }
     public function updateStoreTempat(Request $request, $id){
+        //Identitas
+        $radio = $request->get('identitas');
+        if($radio = "k")
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp'))->first();
+        else
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp'))->first();
+        
+        $id_nas = $nasabah->ID_NASABAH;
+        
+        //fasilitas
+        $mAir = $request->get('meterAir');
+        $airId = 1;
+        $mListrik = $request->get('meterListrik');
+        $listrikId = 1;
+        $kebersihanId = $request->get('kebersihanId');
+        $ipkId = $request->get('ipkId');
+        $keamananId = $request->get('keamananId');
+
+        if(empty($request->get('air'))){
+            $mAir = NULL;
+            $airId = NULL;
+        }
+        if(empty($request->get('listrik'))){
+            $mListrik = NULL;
+            $listrikId = NULL;
+        }
+        if(empty($request->get('keamanan'))){
+            $keamananId = NULL;
+            $ipkId = NULL;
+        }
+        if(empty($request->get('kebersihan'))){
+            $kebersihanId = NULL;
+        }
+
+        
+        DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
+            'BENTUK_USAHA'=>$request->get('bentuk_usaha'),
+            'ID_NASABAH'=>$id_nas,
+            'ID_TRFKEBERSIHAN'=>$kebersihanId,
+            'ID_TRFIPK'=>$ipkId,
+            'ID_TRFKEAMANAN'=>$keamananId,
+            'ID_TRFLISTRIK'=>$listrikId,
+            'ID_TRFAIR'=>$airId,
+            'NOMTR_AIR'=>$mAir,
+            'NOMTR_LISTRIK'=>$mListrik
+        ]);
         return redirect()->route('tempat');
     }
 }

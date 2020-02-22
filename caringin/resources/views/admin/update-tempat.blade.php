@@ -47,11 +47,11 @@
                 <!-- Hidden Identitas -->
                 <div class="form-group" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input type="text" name="ktp" class="form-control form-control-user" placeholder="(kosong)">
+                  <input value="{{$noktp}}" type="text" name="ktp" class="form-control form-control-user" placeholder="(kosong)">
                 </div>
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input type="text" name="npwp" class="form-control form-control-user" placeholder="(kosong)">
+                  <input value="{{$nonpwp}}" type="text" name="npwp" class="form-control form-control-user" placeholder="(kosong)">
                 </div>
 
                 <div class="form-group row">
@@ -96,21 +96,27 @@
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
                   <select class="form-control" name="ipkId" id="myDiv3">
-                    <option disabled selected hidden>Pilih Tarif</option>
-                    <option>200000</option>
+                    <option disabled selected hidden value="{{$id_ipk}}">{{$trfipk}}</option>
+                    @foreach($tarif_ipk as $data)
+                    <option value='{{$data->ID_TRFIPK}}'>{{$data->TRF_IPK}}</option>
+                    @endforeach
                   </select>
                   <br>
                   <label for="sel1">Kategori Tarif Keamanan</label>
                   <select class="form-control" name="keamananId">
-                    <option disabled selected hidden>Pilih Tarif</option>
-                    <option>200000</option>
+                    <option disabled selected hidden value="{{$id_keamanan}}">{{$trfaman}}</option>
+                    @foreach($tarif_keamanan as $data)
+                    <option value='{{$data->ID_TRFKEAMANAN}}'>{{$data->TRF_KEAMANAN}}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif Kebersihan</label>
                   <select class="form-control" name="kebersihanId" id="myDiv4">
-                    <option disabled selected hidden>Pilih Tarif</option>
-                    <option>100000</option>
+                    <option disabled selected hidden value="{{$id_kebersihan}}">{{$trfkebersihan}}</option>
+                    @foreach($tarif_kebersihan as $data)
+                    <option value='{{$data->ID_TRFKEBERSIHAN}}'>{{$data->TRF_KEBERSIHAN}}</option>
+                    @endforeach
                   </select>
                 </div>
                 @endforeach
