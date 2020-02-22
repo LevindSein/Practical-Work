@@ -87,11 +87,11 @@
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
                   Nomor Meter Air
-                  <input type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
+                  <input value="{{$data->NOMTR_AIR}}" type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
                   Nomor Meter Listrik
-                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  <input value="{{$data->NOMTR_LISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
