@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                   Nomor NPWP Nasabah
-                  <input value="{{$data->NO_NPWP}}" required type="text" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="xx.xxx.xxx.x-xxx.xxx">
+                  <input value="{{$data->NO_NPWP}}" required type="text" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
                 </div>
                 <div class="form-group">
                   Nomor Telpon

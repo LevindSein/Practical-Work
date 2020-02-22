@@ -11,30 +11,31 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
+              <form class="user" action="storetempat" method="POST">
+              @csrf
                 <div class="form-group">
                   Blok
-                  <input type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
+                  <input required name="blok" type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
+                  <input required name="los" type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
                 </div>
                 <div class="form-group">
                   Bentuk Usaha
-                  <input type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
+                  <input required name="bentuk_usaha" type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-2">Identitas</div>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="identitas" id="myRadioKTP" checked>
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioKTP" value="k" checked>
                       <label class="form-check-label" for="myRadioKTP">
                         KTP
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="identitas" id="myRadioNPWP">
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioNPWP" value="n">
                       <label class="form-check-label" for="myRadioNPWP">
                         NPWP
                       </label>
@@ -45,36 +46,36 @@
                 <!-- Hidden Identitas -->
                 <div class="form-group" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input type="text" class="form-control form-control-user" placeholder="1484xxxx">
+                  <input name="ktp" type="text" class="form-control form-control-user" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input type="text" class="form-control form-control-user" placeholder="xx.xxx.xxx.x-xxx.xxx">
+                  <input name="npwp" type="text" class="form-control form-control-user" placeholder="xx.xxx.xxx.x-xxx.xxx">
                 </div>
 
                 <div class="form-group row">
                   <div class="col-sm-2">Fasilitas</div>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck1" data-related-item="myDiv1">
+                      <input class="form-check-input" type="checkbox" name="air" id="myCheck1" data-related-item="myDiv1">
                       <label class="form-check-label" for="myCheck1">
                         Air
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck2" data-related-item="myDiv2">
+                      <input class="form-check-input" type="checkbox" name="listrik" id="myCheck2" data-related-item="myDiv2">
                       <label class="form-check-label" for="myCheck2">
                         Listrik
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck3" data-related-item="myDiv3">
+                      <input class="form-check-input" type="checkbox" name="keamanan" id="myCheck3" data-related-item="myDiv3">
                       <label class="form-check-label" for="myCheck3">
                         IPK & Keamanan
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck4" data-related-item="myDiv4">
+                      <input class="form-check-input" type="checkbox" name="kebersihan" id="myCheck4" data-related-item="myDiv4">
                       <label class="form-check-label" for="myCheck4">
                         Kebersihan
                       </label>
@@ -85,37 +86,41 @@
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
                   Nomor Meter Air
-                  <input type="text" class="form-control form-control-user"  id="myDiv1" placeholder="1484xxxx">
+                  <input type="text" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
                   Nomor Meter Listrik
-                  <input type="text" class="form-control form-control-user" id="myDiv2" placeholder="1484xxxx">
+                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
-                  <select class="form-control" id="myDiv3">
+                  <select class="form-control" name="ipkId" id="myDiv3">
                     <option disabled selected hidden>Pilih Tarif</option>
-                    <option>200000</option>
+                    @foreach($tarif_ipk as $data)
+                    <option value='{{$data->ID_TRFIPK}}'>{{$data->TRF_IPK}}</option>
+                    @endforeach
                   </select>
                   <br>
                   <label for="sel1">Kategori Tarif Keamanan</label>
-                  <select class="form-control">
+                  <select class="form-control" name="keamananId">
                     <option disabled selected hidden>Pilih Tarif</option>
-                    <option>200000</option>
+                    @foreach($tarif_keamanan as $data)
+                    <option value='{{$data->ID_TRFKEAMANAN}}'>{{$data->TRF_KEAMANAN}}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif Kebersihan</label>
-                  <select class="form-control" id="myDiv4">
+                  <select class="form-control" name="kebersihanId" id="myDiv4">
                     <option disabled selected hidden>Pilih Tarif</option>
-                    <option>100000</option>
+                    @foreach($tarif_kebersihan as $data)
+                    <option value="{{$data->ID_TRFKEBERSIHAN}}">{{$data->TRF_KEBERSIHAN}}</option>
+                    @endforeach
                   </select>
                 </div>
                 
 
-                <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  Tambah Tempat
-                </a>
+                <input type="submit" value="Tambah Tempat" class="btn btn-primary btn-user btn-block">
               </form>
               
             </div>

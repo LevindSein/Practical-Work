@@ -8,6 +8,7 @@ use App\Jasa_air;
 use App\Jasa_listrik;
 use App\Jasa_ipkeamanan;
 use App\Jasa_kebersihan;
+use App\Tempat_usaha;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 
@@ -134,7 +135,107 @@ class nasabahController extends Controller
 
     }
     public function showformtempat(){
-        return view('admin.tambah-tempat');
+        $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
+        $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
+        $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
+        return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan]);
+    }
+    public function storeTempat(Request $request){
+        //Kode Kontrol
+        $blok = $request->get("blok"); 
+        $los = $request->get("los"); 
+
+
+        $split = preg_split ('/,/', $los);
+        $variable = $split[0];
+        $aa = str_split($variable,1);
+        $hitung = count($aa);
+        $tt=array();
+        $huruf="";
+        $jumLos = count($split);
+
+        if (is_numeric($aa[0]))
+        {
+            if(ctype_alpha($aa[$hitung-1])){
+                for($j=0;$j<=$hitung-1;$j++){
+                    if(ctype_alpha($aa[$j])){
+                        $tt[$j]=$aa[$j];
+                        $huruf=$huruf.$tt[$j];
+                    }
+                }
+                $x = strtoupper($huruf);
+                $bb = $aa[0];
+                for($i=1; $i<$hitung-1; $i++){
+                    $bb = $bb.$aa[$i];
+                }
+                $cc = (int)$bb;
+                $dd = sprintf("%'03d",$cc);
+                $cc = (string)$dd;
+                $ff = $cc.$x;
+                $join = $blok."-".$ff;
+            }
+            else{
+                $format = sprintf("%'03d",$split[0]);
+                $join = $blok."-".$format;
+            }    
+        }
+        else {
+            $join = $blok."-".$split[0];
+        }
+
+
+        //Identitas
+        $radio = $request->get('identitas');
+        if($radio = "k")
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp'))->first();
+        else
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp'))->first();
+        
+        $id_nas = $nasabah->ID_NASABAH;
+        
+        //fasilitas
+        $mAir = $request->get('meterAir');
+        $airId = 1;
+        $mListrik = $request->get('meterListrik');
+        $listrikId = 1;
+        $kebersihanId = $request->get('kebersihanId');
+        $ipkId = $request->get('ipkId');
+        $keamananId = $request->get('keamananId');
+
+        if(empty($request->get('air'))){
+            $mAir = NULL;
+            $airId = NULL;
+        }
+        if(empty($request->get('listrik'))){
+            $mListrik = NULL;
+            $listrikId = NULL;
+        }
+        if(empty($request->get('keamanan'))){
+            $keamananId = NULL;
+            $ipkId = NULL;
+        }
+        if(empty($request->get('kebersihan'))){
+            $kebersihanId = NULL;
+        }
+
+        //Tambah Data
+        $dataTempat = new Tempat_usaha([
+            'blok'=>$request->get('blok'),
+            'no_alamat'=>$request->get('los'),
+            'jml_alamat'=>$jumLos,
+            'bentuk_usaha'=>$request->get('bentuk_usaha'),
+            'id_nasabah'=>$id_nas,
+            'id_trfkebersihan'=>$kebersihanId,
+            'id_trfipk'=>$ipkId,
+            'id_trfkeamanan'=>$keamananId,
+            'id_trflistrik'=>$listrikId,
+            'id_trfair'=>$airId,
+            'kd_kontrol'=>$join,
+            'nomtr_air'=>$mAir,
+            'nomtr_listrik'=>$mListrik
+        ]);
+        $dataTempat->save();
+        return redirect('showformtempatusaha')->with('alert-success','Data Ditambah');
     }
     public function updateTempat(){
         return view('admin.update-tempat');

@@ -27,6 +27,7 @@ Route::post('update/store/{id}','nasabahController@updateStore');
 Route::get('showformtempatusaha','nasabahController@showformtempat');
 Route::get('showtempatusaha','nasabahController@showtempatusaha');
 Route::get('updatetempat','nasabahController@updateTempat');
+Route::post('storetempat','nasabahController@storeTempat');
 
 //Tagihan
 Route::get('tambahtagihan','tagihanController@tagihanNas');

@@ -61,7 +61,7 @@
                     <tr>
                       <td class="text-left">{{$data->KD_KONTROL}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
-                      <td class="text-center">{{$data->NO_ALAMAT}}</td>
+                      <td class="text-center" style="white-space:normal;">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">{{$data->JML_ALAMAT}}</td>
                       <td class="text-left">{{$data->BENTUK_USAHA}}</td>
                       <td class="text-center">

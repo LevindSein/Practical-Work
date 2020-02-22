@@ -303,12 +303,15 @@
   <script>
     $(document).ready(function () {
       $('#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah').DataTable({
-        scrollX: true,
-        dom:  "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+        "scrollX": true,
+        "processing":true,
+        "bSortable":false,
+        "deferRender": true,
+        "dom":  "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
               "<'row'<'col-sm-12'tr>>" +
               "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 
-        buttons: [
+        "buttons": [
             { 
               text:'<i class="fas fa-file-pdf fa-lg"></i>',
               extend: 'pdf',
