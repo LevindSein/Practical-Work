@@ -100,7 +100,7 @@
                       @endif
                       </td>
                       <td class="text-center">
-                        <a href="updatetempat" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                        <a href="{{url('updatetempat',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
                     </tr>

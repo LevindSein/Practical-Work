@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input name="npwp" type="text" class="form-control form-control-user" placeholder="xx.xxx.xxx.x-xxx.xxx">
+                  <input name="npwp" type="text" class="form-control form-control-user" placeholder="261xxxxxx">
                 </div>
 
                 <div class="form-group row">

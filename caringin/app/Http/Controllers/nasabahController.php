@@ -237,7 +237,11 @@ class nasabahController extends Controller
         $dataTempat->save();
         return redirect('showformtempatusaha')->with('alert-success','Data Ditambah');
     }
-    public function updateTempat(){
-        return view('admin.update-tempat');
+    public function updateTempat($id){
+        $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
+        return view('admin.update-tempat',['dataset'=>$dataset]);
+    }
+    public function updateStoreTempat(Request $request, $id){
+        return redirect()->route('tempat');
     }
 }

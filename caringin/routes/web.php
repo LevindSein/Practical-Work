@@ -17,17 +17,17 @@ Route::get('/', function () {
 
 
 //Nasabah
-Route::get('showdatanasabah','nasabahController@showdata');
-Route::get('shownasabah','nasabahController@showdata')->name('show');
-Route::get('updatenasabah/{id}','nasabahController@updateNasabah');
+Route::get('showdatanasabah','nasabahController@showdata')->name('show');
 Route::get('showformnasabah','nasabahController@showform');
 Route::post('storenasabah','nasabahController@store');
+Route::get('updatenasabah/{id}','nasabahController@updateNasabah');
 Route::post('update/store/{id}','nasabahController@updateStore');
 //Tempat Usaha
+Route::get('showtempatusaha','nasabahController@showtempatusaha')->name('tempat');
 Route::get('showformtempatusaha','nasabahController@showformtempat');
-Route::get('showtempatusaha','nasabahController@showtempatusaha');
-Route::get('updatetempat','nasabahController@updateTempat');
 Route::post('storetempat','nasabahController@storeTempat');
+Route::get('updatetempat/{id}','nasabahController@updateTempat');
+Route::post('update/storetempat/{id}','nasabahController@updateStoreTempat');
 
 //Tagihan
 Route::get('tambahtagihan','tagihanController@tagihanNas');
