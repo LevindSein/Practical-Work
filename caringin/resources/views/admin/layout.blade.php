@@ -280,7 +280,7 @@
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nama User disini</span>
                                     <img
                                         class="img-profile rounded-circle"
-                                        src="http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/User-Administrator-Blue-icon.png">
+                                        src="{{asset('img/icon_user.png')}}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div
