@@ -16,7 +16,7 @@
             <div class="card-body">
               <label for="">Filter Bulan</label>
               <input type="month" name="" id="" class="form-control form-control-user" style="width:20%">
-              <br><a href="#" type="submit" class="btn btn-primary">Submit</a><p>
+              <br><a href="#" type="submit" class="btn btn-primary btn-sm">Submit</a><p>
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
                 <ul class="nav nav-tabs" role="tablist">
@@ -44,7 +44,6 @@
                       <th rowspan="2">Tanggal</th>
                       <th rowspan="2">Kode</th>
                       <th rowspan="2">Nama Nasabah</th>
-                      <th rowspan="2">No.Los</th>
                       <th rowspan="2">M.Lalu</th>
                       <th rowspan="2">M.baru</th>
                       <th rowspan="2">Pakai</th>
@@ -66,7 +65,6 @@
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-2-003</td>
                       <td class="text-left">PT.LPP</td>
-                      <td class="text-center">3</td>
                       <td>996</td>
                       <td>1,006</td>
                       <td>10</td>
@@ -92,7 +90,6 @@
                       <th rowspan="2">Tanggal</th>
                       <th rowspan="2">Kode</th>
                       <th rowspan="2">Nama Nasabah</th>
-                      <th rowspan="2">No.Los</th>
                       <th rowspan="2">Daya</th>
                       <th rowspan="2">M.Lalu</th>
                       <th rowspan="2">M.baru</th>
@@ -116,7 +113,6 @@
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-2-003</td>
                       <td class="text-left">PT.LPP</td>
-                      <td class="text-center">3</td>
                       <td>2,200</td>
                       <td>89,788</td>
                       <td>90,383</td>

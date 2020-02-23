@@ -35,7 +35,7 @@
                       <td class="text-left">{{$data->NO_NPWP}}</td>
                       <td class="text-left">{{$data->NO_TLP}}</td>
                       <td class="text-center">
-                        <a href="{{url('updatenasabah',[$data->ID_NASABAH])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                        <a href="{{url('updatenasabah',[$data->ID_NASABAH])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
                     </tr>

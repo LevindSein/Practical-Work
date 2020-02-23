@@ -21,7 +21,6 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Jumlah Unit</th>
                       <th>Pakai Air (M<sup>3</sup>)</th>
                       <th>Pakai Listrik (Watt)</th>
                       <th>Tagihan Air</th>
@@ -36,7 +35,6 @@
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-1-001</td>
                       <td class="text-left">PT.BTN</td>
-                      <td class="text-center">2</td>
                       <td>120</td>
                       <td>200</td>
                       <td>120,000</td>

@@ -32,7 +32,7 @@
                       <td class="text-center">{{$data->ID_TRFKEBERSIHAN}}</td>
                       <td>{{$data->TRF_KEBERSIHAN}}</td>
                       <td class="text-center">
-                        <a href="{{url('updatekebersihan',[$data->ID_TRFKEBERSIHAN])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                        <a href="{{url('updatekebersihan',[$data->ID_TRFKEBERSIHAN])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
                     </tr>

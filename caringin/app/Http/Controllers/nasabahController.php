@@ -243,15 +243,9 @@ class nasabahController extends Controller
         //get value in row
         $dataku = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->first();
         $id_nasabah = $dataku->ID_NASABAH;
-        $id_air = $dataku->ID_TRFAIR;
-        $id_listrik = $dataku->ID_TRFLISTRIK;
         $id_ipk = $dataku->ID_TRFIPK;
         $id_keamanan = $dataku->ID_TRFKEAMANAN;
         $id_kebersihan = $dataku->ID_TRFKEBERSIHAN;
-
-        // if($id_air != null)
-
-        // if($id_listrik != null)
 
         //tarif ipk & keamanan
         if($id_ipk != null && $id_keamanan != null)

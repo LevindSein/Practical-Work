@@ -26,7 +26,7 @@
                   <input type="number" class="form-control form-control-user" id="exampleInputMeterBaruListrik" placeholder="Meter baru listrik">
                 </div>
                 <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  TAMBAH
+                  Tambah
                 </a>
               </form>
               
