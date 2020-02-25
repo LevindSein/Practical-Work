@@ -59,7 +59,7 @@ class nasabahController extends Controller
             'tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH', 
             'tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tarif_kebersihan.TRF_KEBERSIHAN',
             'tempat_usaha.NO_ALAMAT','tempat_usaha.JML_ALAMAT','tempat_usaha.BENTUK_USAHA',
-            'tempat_usaha.NOMTR_AIR','tempat_usaha.NOMTR_LISTRIK', 'tempat_usaha.ID_TEMPAT','tempat_usaha.TGL_TEMPAT')
+            'tempat_usaha.NOMTR_AIR','tempat_usaha.NOMTR_LISTRIK', 'tempat_usaha.ID_TEMPAT','tempat_usaha.TGL_TEMPAT','tempat_usaha.DAYA')
         ->get();
 
         $datasets = json_decode($dataset, true);
@@ -114,7 +114,7 @@ class nasabahController extends Controller
         $dataJasaListrik = DB::table('jasa_listrik')
         ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_listrik.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('jasa_listrik.TGL_JSLISTRIK','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tempat_usaha.NOMTR_LISTRIK','tempat_usaha.BENTUK_USAHA')
+        ->select('jasa_listrik.TGL_JSLISTRIK','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tempat_usaha.NOMTR_LISTRIK','tempat_usaha.BENTUK_USAHA','tempat_usaha.DAYA')
         ->get();
         $dataJasaKebersihan = DB::table('jasa_kebersihan')
         ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_kebersihan.ID_TEMPAT')
@@ -144,7 +144,6 @@ class nasabahController extends Controller
         //Kode Kontrol
         $blok = $request->get("blok"); 
         $los = $request->get("los"); 
-
 
         $split = preg_split ('/,/', $los);
         $variable = $split[0];
@@ -197,6 +196,7 @@ class nasabahController extends Controller
         $mAir = $request->get('meterAir');
         $airId = 1;
         $mListrik = $request->get('meterListrik');
+        $daya = $request->get('dayaListrik');
         $listrikId = 1;
         $kebersihanId = $request->get('kebersihanId');
         $ipkId = $request->get('ipkId');
@@ -208,6 +208,7 @@ class nasabahController extends Controller
         }
         if(empty($request->get('listrik'))){
             $mListrik = NULL;
+            $daya = NULL;
             $listrikId = NULL;
         }
         if(empty($request->get('keamanan'))){
@@ -222,6 +223,7 @@ class nasabahController extends Controller
         $dataTempat = new Tempat_usaha([
             'blok'=>$request->get('blok'),
             'no_alamat'=>$request->get('los'),
+            'daya'=>$daya,
             'jml_alamat'=>$jumLos,
             'bentuk_usaha'=>$request->get('bentuk_usaha'),
             'id_nasabah'=>$id_nas,

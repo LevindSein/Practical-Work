@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                   Bentuk Usaha
-                  <input value="{{$data->BENTUK_USAHA}}" type="text" name="bentuk_usaha" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="(kosong)">
+                  <input value="{{$data->BENTUK_USAHA}}" style="text-transform: capitalize;" type="text" name="bentuk_usaha" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="(kosong)">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-2">Identitas</div>
@@ -92,6 +92,9 @@
                 <div class="form-group" style="display:none">
                   Nomor Meter Listrik
                   <input value="{{$data->NOMTR_LISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  <br>
+                  Daya
+                  <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="myDiv2" placeholder="12xx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>

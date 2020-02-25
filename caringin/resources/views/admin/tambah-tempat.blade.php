@@ -15,7 +15,7 @@
               @csrf
                 <div class="form-group">
                   Blok
-                  <input required name="blok" type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="Misal: A-1">
+                  <input required name="blok" style="text-transform: uppercase;" type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="A-1">
                 </div>
                 <div class="form-group">
                   No. Los
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                   Bentuk Usaha
-                  <input required name="bentuk_usaha" type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
+                  <input required name="bentuk_usaha" style="text-transform: capitalize;" type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-2">Identitas</div>
@@ -91,6 +91,9 @@
                 <div class="form-group" style="display:none">
                   Nomor Meter Listrik
                   <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  <br>
+                  Daya
+                  <input type="text" class="form-control form-control-user" name="dayaListrik" placeholder="12xx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>

@@ -16,7 +16,7 @@
               @csrf
                 <div class="form-group">
                   Nama Nasabah
-                  <input required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
+                  <input required type="text" style="text-transform: capitalize;" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
                 </div>
                 <div class="form-group">
                   Nomor KTP Nasabah

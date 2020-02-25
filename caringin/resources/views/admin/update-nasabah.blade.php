@@ -16,7 +16,7 @@
               @csrf
                 <div class="form-group">
                   Nama Nasabah
-                  <input value="{{$data->NM_NASABAH}}" required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
+                  <input value="{{$data->NM_NASABAH}}" style="text-transform: capitalize;" required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
                 </div>
                 <div class="form-group">
                   Nomor KTP Nasabah

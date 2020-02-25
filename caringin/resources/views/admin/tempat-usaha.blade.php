@@ -48,6 +48,7 @@
                       <th>Jumlah Unit</th>
                       <th>Bentuk Usaha</th>
                       <th>No. Meter Listrik</th>
+                      <th>Daya Listrik</th>
                       <th>No. Meter Air</th>
                       <th>Tarif IPK</th>
                       <th>Tarif Keamanan</th>
@@ -69,6 +70,13 @@
                         &mdash;
                       @else
                         {{$data->NOMTR_LISTRIK}}
+                      @endif
+                      </td>
+                      <td class="text-center">
+                      @if($data->DAYA == null)
+                        &mdash;
+                      @else
+                        {{$data->DAYA}}
                       @endif
                       </td>
                       <td class="text-center">
@@ -148,6 +156,7 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
+                      <th>Daya</th>
                       <th>No. Meter Listrik</th>
                       <th>Bentuk Usaha</th>
                     </tr>
@@ -159,6 +168,7 @@
                       <td class="text-center">{{$dataL->TGL_JSLISTRIK}}</td>
                       <td class="text-center">{{$dataL->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataL->NM_NASABAH}}</td>
+                      <td class="text-left">{{$dataL->DAYA}}</td>
                       <td class="text-center">{{$dataL->NOMTR_LISTRIK}}</td>
                       <td class="text-left">{{$dataL->BENTUK_USAHA}}</td>
                     </tr>
