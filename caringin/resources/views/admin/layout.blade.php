@@ -382,6 +382,7 @@
             <script src="{{asset('js/vfs_fonts.js')}}"></script>
             <script src="{{asset('js/buttons.html5.min.js')}}"></script>
             <script src="{{asset('js/buttons.print.min.js')}}"></script>
+            <script src="{{asset('js/buttons.colvis.min.js')}}"></script>
 
             <!--for column table toggle-->
             <script>
@@ -395,8 +396,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUse' +
-                        'r,#tableTagihan,#dataNasabah'
+                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah'
                     ).DataTable({
                         "scrollX": true,
                         "processing": true,
@@ -410,16 +410,43 @@
                                 text: '<i class="fas fa-file-pdf fa-lg"></i>',
                                 extend: 'pdf',
                                 className: 'btn btn-danger bg-gradient-danger',
-                                title: 'Caringin PDF'
+                                title: 'BP3C PDF',
+                                exportOptions: {
+                                    columns: ':visible(.export-col)'
+                                },
+                                customize: function (doc) {
+                                    doc.pageMargins = [25,25,25,25];
+                                    doc.defaultStyle.fontSize = 12;
+                                    doc.styles.tableHeader.fontSize = 14;
+                                    doc.styles.title.fontSize = 20;
+                                }
                             }, {
                                 text: '<i class="fas fa-file-excel fa-lg"></i>',
                                 extend: 'excel',
                                 className: 'btn btn-success bg-gradient-success',
-                                title: 'Caringin Excel'
+                                title: 'BP3C Excel',
+                                exportOptions: {
+                                    columns: ':visible(.export-col)'
+                                }
                             }, {
                                 text: '<i class="fas fa-print fa-lg"></i>',
                                 extend: 'print',
-                                className: 'btn btn-info bg-gradient-info'
+                                className: 'btn btn-info bg-gradient-info',
+                                title: 'BP3C Print',
+                                exportOptions: {
+                                    columns: ':visible(.export-col)'
+                                },
+                                customize: function ( win ) {
+                                    $(win.document.body)
+                                    .css( 'font-size', '11pt' )
+                                    .prepend(
+                                    '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                    );;
+                                }
+                            },{
+                                text: '<i class="fas fa-filter"></i>',
+                                extend: 'colvis',
+                                className: 'btn btn-warning bg-gradient-warning'
                             }
                         ]
                     });
