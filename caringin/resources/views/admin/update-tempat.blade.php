@@ -58,25 +58,29 @@
                   <div class="col-sm-2">Fasilitas</div>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck1" name="air" data-related-item="myDiv1">
+                      <input class="form-check-input" type="checkbox" id="myCheck1" name="air" data-related-item="myDiv1"
+                      <?php if($id_air != NULL){ ?> checked="checked" <?php } ?>>
                       <label class="form-check-label" for="myCheck1">
                         Air
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck2" name="listrik" data-related-item="myDiv2">
+                      <input class="form-check-input" type="checkbox" id="myCheck2" name="listrik" data-related-item="myDiv2"
+                      <?php if($id_listrik != NULL){ ?> checked="checked" <?php } ?>>
                       <label class="form-check-label" for="myCheck2">
                         Listrik
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck3" name="keamanan" data-related-item="myDiv3">
-                      <label class="form-check-label" for="myCheck3">
+                      <input class="form-check-input" type="checkbox" id="myCheck3" name="keamanan" data-related-item="myDiv3"
+                      <?php if($id_keamanan != NULL){ ?> checked="checked" <?php } ?>>
+                      <label class="form-check-label" for="myCheck3" >
                         IPK & Keamanan
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="myCheck4" name="kebersihan" data-related-item="myDiv4">
+                      <input class="form-check-input" type="checkbox" id="myCheck4" name="kebersihan" data-related-item="myDiv4"
+                      <?php if($id_kebersihan != NULL){ ?> checked="checked" <?php } ?>>
                       <label class="form-check-label" for="myCheck4">
                         Kebersihan
                       </label>
@@ -99,7 +103,7 @@
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
                   <select class="form-control" name="ipkId" id="myDiv3">
-                    <option disabled selected hidden value="{{$id_ipk}}">{{$trfipk}}</option>
+                    <option selected hidden value="{{$id_ipk}}">{{$trfipk}}</option>
                     @foreach($tarif_ipk as $data)
                     <option value='{{$data->ID_TRFIPK}}'>{{$data->TRF_IPK}}</option>
                     @endforeach
@@ -107,7 +111,7 @@
                   <br>
                   <label for="sel1">Kategori Tarif Keamanan</label>
                   <select class="form-control" name="keamananId">
-                    <option disabled selected hidden value="{{$id_keamanan}}">{{$trfaman}}</option>
+                    <option selected hidden value="{{$id_keamanan}}">{{$trfaman}}</option>
                     @foreach($tarif_keamanan as $data)
                     <option value='{{$data->ID_TRFKEAMANAN}}'>{{$data->TRF_KEAMANAN}}</option>
                     @endforeach
@@ -116,7 +120,7 @@
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif Kebersihan</label>
                   <select class="form-control" name="kebersihanId" id="myDiv4">
-                    <option disabled selected hidden value="{{$id_kebersihan}}">{{$trfkebersihan}}</option>
+                    <option selected hidden value="{{$id_kebersihan}}">{{$trfkebersihan}}</option>
                     @foreach($tarif_kebersihan as $data)
                     <option value='{{$data->ID_TRFKEBERSIHAN}}'>{{$data->TRF_KEBERSIHAN}}</option>
                     @endforeach

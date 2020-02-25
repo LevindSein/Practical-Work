@@ -244,6 +244,8 @@ class nasabahController extends Controller
 
         //get value in row
         $dataku = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->first();
+        $id_air = $dataku->ID_TRFAIR;
+        $id_listrik = $dataku->ID_TRFLISTRIK;
         $id_nasabah = $dataku->ID_NASABAH;
         $id_ipk = $dataku->ID_TRFIPK;
         $id_keamanan = $dataku->ID_TRFKEAMANAN;
@@ -285,7 +287,8 @@ class nasabahController extends Controller
                     'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
                     'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
-                    'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan
+                    'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
+                    'id_air'=>$id_air,'id_listrik'=>$id_listrik
         ]);
     }
     public function updateStoreTempat(Request $request, $id){
