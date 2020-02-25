@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tagihan_air extends Model
+class Tagihan extends Model
 {
     //
 }

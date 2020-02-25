@@ -12,25 +12,29 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
-              @csrf
+              @foreach ($dataset as $data)
+              <form class="user" action="{{url('tagihan/store',[$data->ID_TEMPAT])}}" method="POST">
+                @csrf
                 <div class="form-group">
                   Kode Kontrol
-                  <input readonly type="text" name="kode" class="form-control form-control-user" id="exampleInputKode" placeholder="A-1-001">
+                  <input readonly value="{{$data->KD_KONTROL}}" type="text" name="kode" class="form-control form-control-user" id="exampleInputKode" placeholder="A-1-001">
                 </div>
                 <div class="form-group">
                   Nama Nasabah
-                  <input readonly type="text" name="nama" class="form-control form-control-user" id="exampleInputNama" placeholder="Fahni Amsyari">
+                  <input readonly value="{{$data->NM_NASABAH}}" type="text" name="nama" class="form-control form-control-user" id="exampleInputNama" placeholder="Fahni Amsyari">
                 </div>
                 <div class="form-group">
                   Meter Baru Air
-                  <input type="number" name="mAir" class="form-control form-control-user" id="exampleInputAir" placeholder="12345">
+                  <input type="number" name="mAir" class="form-control form-control-user" id="exampleInputAir"
+                  <?php if($data->ID_TRFAIR == NULL){ ?> readonly placeholder="(kosong)" <?php } ?>>
                 </div>
                 <div class="form-group">
                   Meter Baru Listrik
-                  <input type="number" name="mListrik" class="form-control form-control-user" id="exampleInputListrik" placeholder="12345">
+                  <input type="number" name="mListrik" class="form-control form-control-user" id="exampleInputListrik"
+                  <?php if($data->ID_TRFLISTRIK == NULL){ ?> readonly placeholder="(kosong)" <?php } ?>>
                 </div>
-                <input type="submit" value="Tambah Nasabah" class="btn btn-primary btn-user btn-block">
+                @endforeach
+                <Input type="submit" value="Tambah Tagihan" class="btn btn-primary btn-user btn-block">
               </form>      
             </div>
           </div>

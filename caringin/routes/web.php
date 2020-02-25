@@ -30,8 +30,9 @@ Route::get('updatetempat/{id}','nasabahController@updateTempat');
 Route::post('update/storetempat/{id}','nasabahController@updateStoreTempat');
 
 //Tagihan
-Route::get('tambahtagihan','tagihanController@tagihanNas');
-Route::get('showformtagihan','tagihanController@formtagihan');
+Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
+Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
+Route::post('tagihan/store/{id}','tagihanController@storetagihan');
 
 //Tarif
     //Air

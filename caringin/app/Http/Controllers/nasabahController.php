@@ -105,7 +105,6 @@ class nasabahController extends Controller
                 }
             }
         }
-
         $dataJasaAir = DB::table('jasa_air')
         ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_air.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
@@ -326,6 +325,10 @@ class nasabahController extends Controller
             $kebersihanId = NULL;
         }
 
+        DB::table('jasa_air')->where('id_tempat',$id)->delete();
+        DB::table('jasa_listrik')->where('id_tempat',$id)->delete();
+        DB::table('jasa_ipkeamanan')->where('id_tempat',$id)->delete();
+        DB::table('jasa_kebersihan')->where('id_tempat',$id)->delete();
         
         DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
             'BENTUK_USAHA'=>$request->get('bentuk_usaha'),
