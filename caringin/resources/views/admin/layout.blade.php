@@ -176,6 +176,32 @@
                     </div>
                 </li>
 
+                <!-- Nav Item - METERAN -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseMeter"
+                        aria-expanded="true"
+                        aria-controls="collapseMeter">
+                        <i class="fas fa-pencil-ruler"></i>
+                        <span>Alat Meter</span>
+                    </a>
+                    <div
+                        id="collapseMeter"
+                        class="collapse"
+                        aria-labelledby="headingMeter"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{url('tambahalatlistrik')}}">Tambah Alat Listrik</a>
+                            <a class="collapse-item" href="{{url('dataalatlistrik')}}">Data Alat Listrik</a>
+                            <a class="collapse-item" href="{{url('tambahalatair')}}">Tambah Alat Air</a>
+                            <a class="collapse-item" href="{{url('dataalatair')}}">Data Alat Air</a>
+                        </div>
+                    </div>
+                </li>
+
                 <!-- Nav Item - User -->
                 <li class="nav-item">
                     <a
