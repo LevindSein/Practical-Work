@@ -88,3 +88,6 @@ Route::post('update/storealatlistrik/{id}','meteranController@storeupdatealatlis
 //User
 Route::get('showdatauser','userController@showdatauser');
 Route::get('showtambahuser','userController@tambahuser');
+
+//Dashboard
+Route::get('showdashboard','dashboardController@dashboard');

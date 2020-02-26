@@ -18,6 +18,7 @@
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Status</th>
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
@@ -32,6 +33,7 @@
 
                   <tbody>
                     <tr>
+                      <td class="text-center"></td>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-1-001</td>
                       <td class="text-left">PT.BTN</td>
