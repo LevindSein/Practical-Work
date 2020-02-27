@@ -66,10 +66,14 @@
                       <td class="text-center">{{$data->JML_ALAMAT}}</td>
                       <td class="text-left">{{$data->BENTUK_USAHA}}</td>
                       <td class="text-center">
-                      @if($data->NOMTR_LISTRIK == null)
-                        &mdash;
+                      @if($data->ID_TRFLISTRIK != null)
+                        @if($data->NOMTR_LISTRIK == null)
+                          0
+                        @else
+                          {{$data->NOMTR_LISTRIK}}
+                        @endif
                       @else
-                        {{$data->NOMTR_LISTRIK}}
+                        &mdash;
                       @endif
                       </td>
                       <td class="text-center">
@@ -80,10 +84,14 @@
                       @endif
                       </td>
                       <td class="text-center">
-                      @if($data->NOMTR_AIR == null)
-                        &mdash;
+                      @if($data->ID_TRFAIR != null)
+                        @if($data->NOMTR_AIR == null)
+                          0
+                        @else
+                          {{$data->NOMTR_AIR}}
+                        @endif
                       @else
-                        {{$data->NOMTR_AIR}}
+                        &mdash;
                       @endif
                       </td>
                       <td>
@@ -138,7 +146,13 @@
                       <td class="text-center">{{$dataA->TGL_JSAIR}}</td>
                       <td class="text-center">{{$dataA->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataA->NM_NASABAH}}</td>
-                      <td class="text-center">{{$dataA->NOMTR_AIR}}</td>
+                      <td class="text-center">
+                      @if($dataA->NOMTR_AIR == null)
+                          0
+                      @else
+                          {{$dataA->NOMTR_AIR}}
+                      @endif
+                      </td>
                       <td class="text-left">{{$dataA->BENTUK_USAHA}}</td>
                     </tr>
                   @endforeach
@@ -169,7 +183,13 @@
                       <td class="text-center">{{$dataL->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataL->NM_NASABAH}}</td>
                       <td class="text-left">{{$dataL->DAYA}}</td>
-                      <td class="text-center">{{$dataL->NOMTR_LISTRIK}}</td>
+                      <td class="text-center">
+                      @if($dataL->NOMTR_LISTRIK == null)
+                          0
+                      @else
+                          {{$dataL->NOMTR_LISTRIK}}
+                      @endif
+                      </td>
                       <td class="text-left">{{$dataL->BENTUK_USAHA}}</td>
                     </tr>
                   @endforeach

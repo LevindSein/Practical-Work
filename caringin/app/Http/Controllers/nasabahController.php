@@ -59,7 +59,8 @@ class nasabahController extends Controller
             'tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH', 
             'tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tarif_kebersihan.TRF_KEBERSIHAN',
             'tempat_usaha.NO_ALAMAT','tempat_usaha.JML_ALAMAT','tempat_usaha.BENTUK_USAHA',
-            'tempat_usaha.NOMTR_AIR','tempat_usaha.NOMTR_LISTRIK', 'tempat_usaha.ID_TEMPAT','tempat_usaha.TGL_TEMPAT','tempat_usaha.DAYA')
+            'tempat_usaha.NOMTR_AIR','tempat_usaha.NOMTR_LISTRIK', 'tempat_usaha.ID_TEMPAT','tempat_usaha.TGL_TEMPAT','tempat_usaha.DAYA',
+            'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK')
         ->get();
 
         $datasets = json_decode($dataset, true);
@@ -302,6 +303,7 @@ class nasabahController extends Controller
         
         //fasilitas
         $mAir = $request->get('meterAir');
+        $daya = $request->get('dayaListrik');
         $airId = 1;
         $mListrik = $request->get('meterListrik');
         $listrikId = 1;
@@ -316,6 +318,7 @@ class nasabahController extends Controller
         if(empty($request->get('listrik'))){
             $mListrik = NULL;
             $listrikId = NULL;
+            $daya = NULL;
         }
         if(empty($request->get('keamanan'))){
             $keamananId = NULL;
@@ -339,7 +342,8 @@ class nasabahController extends Controller
             'ID_TRFLISTRIK'=>$listrikId,
             'ID_TRFAIR'=>$airId,
             'NOMTR_AIR'=>$mAir,
-            'NOMTR_LISTRIK'=>$mListrik
+            'NOMTR_LISTRIK'=>$mListrik,
+            'DAYA'=>$daya
         ]);
         return redirect()->route('tempat');
     }

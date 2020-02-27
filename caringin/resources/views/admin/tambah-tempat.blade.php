@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                   No. Los
-                  <input required name="los" type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="Misal: 1, 2, 2A">
+                  <input required name="los" style="text-transform: uppercase;" type="text" class="form-control form-control-user" id="exampleInputBanyakLos" placeholder="1, 2, 2A">
                 </div>
                 <div class="form-group">
                   Bentuk Usaha
@@ -57,13 +57,13 @@
                   <div class="col-sm-2">Fasilitas</div>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="air" id="myCheck1" data-related-item="myDiv1">
+                      <input class="form-check-input" type="checkbox" name="air" id="myCheck1" value="a" data-related-item="myDiv1">
                       <label class="form-check-label" for="myCheck1">
                         Air
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="listrik" id="myCheck2" data-related-item="myDiv2">
+                      <input class="form-check-input" type="checkbox" name="listrik" id="myCheck2" value="l" data-related-item="myDiv2">
                       <label class="form-check-label" for="myCheck2">
                         Listrik
                       </label>
@@ -93,7 +93,8 @@
                   <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                   <br>
                   Daya
-                  <input type="text" class="form-control form-control-user" name="dayaListrik" placeholder="12xx">
+                  <input type="text" class="form-control form-control-user" name="dayaListrik" placeholder="12xx"
+                  <?php if(isset($request->listrik)){ ?> required="required" <?php } ?>>
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>

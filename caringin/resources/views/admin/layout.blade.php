@@ -422,7 +422,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah'
+                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
                     ).DataTable({
                         "scrollX": true,
                         "processing": true,

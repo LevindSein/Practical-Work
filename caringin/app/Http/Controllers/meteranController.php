@@ -50,7 +50,6 @@ class meteranController extends Controller
     public function storealatlistrik(Request $request){
         $dataL = new Meteran_listrik([
             'nomtr_listrik'=>$request->get('noalat'),
-            'daya'=>$request->get('daya'),
             'makhir_listrik'=>$request->get('meteranlistrik')
         ]);
         $dataL->save();
@@ -63,7 +62,6 @@ class meteranController extends Controller
     public function storeupdatealatlistrik(Request $request, $id){
         DB::table('meteran_listrik')->where('ID_MLISTRIK', $id)->update([
             'NOMTR_LISTRIK'=>$request->get('noalat'),
-            'DAYA'=>$request->get('daya'),
             'MAKHIR_LISTRIK'=>$request->get('meteranlistrik')
         ]);
         return redirect()->route('alatlistrik');

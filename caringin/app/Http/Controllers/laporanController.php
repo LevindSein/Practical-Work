@@ -27,8 +27,4 @@ class laporanController extends Controller
     public function showPenghapusan(){
         return view('admin.laporan-penghapusan');
     }
-
-    public function dataTagihan(){
-        return view('admin.data-tagihan');
-    }
 }

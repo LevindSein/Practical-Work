@@ -28,12 +28,16 @@
                       <th>Tagihan Listrik</th>
                       <th>Tagihan IPK & Keamanan</th>
                       <th>Tagihan Kebersihan</th>
+                      <th>Total Tagihan</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
+                      <th>Bayar</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr>
-                      <td class="text-center"></td>
+                      <td class="text-center">False</td>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-1-001</td>
                       <td class="text-left">PT.BTN</td>
@@ -43,6 +47,13 @@
                       <td>120,000</td>
                       <td>200,000</td>
                       <td>140,000</td>
+                      <td>500,000</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td class="text-center">
+                          <a href="bayartagihan" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

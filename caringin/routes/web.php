@@ -67,9 +67,14 @@ Route::get('showlaporantahunan','laporanController@showTahunan');
 Route::get('showlaporantagihan','laporanController@showTagihan');
 Route::get('showlaporantunggakan','laporanController@showTunggakan');
 Route::get('showlaporanbongkaran','laporanController@showBongkaran');
-Route::get('showlaporanpenghapusan','laporanController@showPenghapusan'); 
-//DataTagihan
-Route::get('datatagihannasabah','laporanController@dataTagihan');
+Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
+
+//Tagihan
+Route::get('datatagihannasabah','tagihanController@dataTagihan');
+Route::get('bayartagihan','tagihanController@bayarTagihan');
+
+//Tunggakan
+Route::get('bayartunggakan','tunggakanController@bayarTunggakan');
 
 //Meteran
     //AIR

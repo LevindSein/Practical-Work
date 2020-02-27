@@ -21,7 +21,6 @@
                     <tr>
                       <th>Nomor Alat</th>
                       <th>Meter Akhir</th>
-                      <th>Daya Listrik</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -31,7 +30,6 @@
                     <tr>
                       <td class="text-left">{{$data->NOMTR_LISTRIK}}</td>
                       <td class="text-left">{{$data->MAKHIR_LISTRIK}}</td>
-                      <td class="text-left">{{$data->DAYA}}</td>
                       <td class="text-center">
                         <a href="{{url('updatealatlistrik',[$data->ID_MLISTRIK])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>

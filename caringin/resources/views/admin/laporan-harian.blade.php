@@ -45,22 +45,19 @@
                   <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th rowspan="2">Tanggal</th>
-                      <th rowspan="2">Kode</th>
-                      <th rowspan="2">Nama Nasabah</th>
-                      <th rowspan="2">M.Lalu</th>
-                      <th rowspan="2">M.baru</th>
-                      <th rowspan="2">Pakai</th>
-                      <th rowspan="2">B.Pemakaian</th>
-                      <th rowspan="2">B.Beban</th>
-                      <th rowspan="2">B.Pemeliharaan</th>
-                      <th rowspan="2">B.Air Kotor</th>
-                      <th rowspan="2">Pembayaran</th>
-                      <th colspan="2">Realisasi</th>
-                    </tr>
-                    <tr style="display:none">
-                      <th></th>
-                      <th></th>
+                      <th>Tanggal</th>
+                      <th>Kode</th>
+                      <th>Nama Nasabah</th>
+                      <th>M.Lalu</th>
+                      <th>M.baru</th>
+                      <th>Pakai</th>
+                      <th>B.Pemakaian</th>
+                      <th>B.Beban</th>
+                      <th>B.Pemeliharaan</th>
+                      <th>B.Air Kotor</th>
+                      <th>Pembayaran</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
                     </tr>
                   </thead>
 
@@ -77,8 +74,8 @@
                       <td>10,000</td>
                       <td>18,000</td>
                       <td>121,782</td>
-                      <td>&nbsp</td>
-                      <td>&nbsp</td>
+                      <td>121,782</td>
+                      <td>&mdash;</td>
                     </tr>
                   </tbody>
                   </table>
@@ -91,24 +88,21 @@
                   <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th rowspan="2">Tanggal</th>
-                      <th rowspan="2">Kode</th>
-                      <th rowspan="2">Nama Nasabah</th>
-                      <th rowspan="2">Daya</th>
-                      <th rowspan="2">M.Lalu</th>
-                      <th rowspan="2">M.baru</th>
-                      <th rowspan="2">Pakai</th>
-                      <th rowspan="2">Rek.Min</th>
-                      <th rowspan="2">B.Blok 1</th>
-                      <th rowspan="2">B.Blok 2</th>
-                      <th rowspan="2">B.Beban</th>
-                      <th rowspan="2">BPJU</th>
-                      <th rowspan="2">Pembayaran</th>
-                      <th colspan="2">Realisasi</th>
-                    </tr>
-                    <tr style="display:none">
-                      <th></th>
-                      <th></th>
+                      <th>Tanggal</th>
+                      <th>Kode</th>
+                      <th>Nama Nasabah</th>
+                      <th>Daya</th>
+                      <th>M.Lalu</th>
+                      <th>M.baru</th>
+                      <th>Pakai</th>
+                      <th>Rek.Min</th>
+                      <th>B.Blok 1</th>
+                      <th>B.Blok 2</th>
+                      <th>B.Beban</th>
+                      <th>BPJU</th>
+                      <th>Pembayaran</th>
+                      <th>Realisasi</th>
+                      <th>Selisih</th>
                     </tr>
                   </thead>
 
@@ -127,8 +121,8 @@
                       <td>77,000</td>
                       <td>146,466</td>
                       <td>1,820,572</td>
-                      <td>&nbsp</td>
-                      <td>&nbsp</td>
+                      <td>1,820,572</td>
+                      <td>&mdash;</td>
                     </tr>
                   </tbody>
                   </table>
@@ -146,7 +140,7 @@
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
-                      <th>Besar Tagihan</th>
+                      <th>Pembayaran</th>
                       <th>Realisasi</th>
                       <th>Selisih</th>
                     </tr>
@@ -160,8 +154,8 @@
                       <td class="text-center">8</td>
                       <td class="text-center">1</td>
                       <td>200,000</td>
-                      <td>120,000</td>
-                      <td>80,000</td>
+                      <td>200,000</td>
+                      <td>&mdash;</td>
                     </tr>
                   </tbody>
                   </table>
@@ -179,7 +173,7 @@
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
-                      <th>Besar Tagihan</th>
+                      <th>Pembayaran</th>
                       <th>Realisasi</th>
                       <th>Selisih</th>
                     </tr>

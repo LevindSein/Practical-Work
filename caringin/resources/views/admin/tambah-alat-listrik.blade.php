@@ -19,10 +19,6 @@
                   <input required type="text" style="text-transform: uppercase;" name="noalat" class="form-control form-control-user" id="exampleInputNomorL" placeholder="89A82xxx">
                 </div>
                 <div class="form-group">
-                  Daya Listrik
-                  <input type="number" name="daya" class="form-control form-control-user" id="exampleInputDayaL" placeholder="12xx">
-                </div>
-                <div class="form-group">
                   Kondisi Meteran Akhir
                   <input type="number" name="meteranlistrik" class="form-control form-control-user" id="exampleInputMeteran" placeholder="123xx">
                 </div>

@@ -15,26 +15,31 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableTunggakan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th>Status</th>
+                      <th>Tanggal</th>
+                      <th>Kode Kontrol</th>
+                      <th>Nama Nasabah</th>
+                      <th>Tunggakan</th>
+                      <th>Denda</th>
+                      <th>Bayar</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr>
-                      <td>Lael Greer</td>
-                      <td>Systems Administrator</td>
-                      <td>London</td>
-                      <td>21</td>
-                      <td>2009/02/27</td>
-                      <td>$103,500</td>
+                      <td class="text-center">False</td>
+                      <td class="text-center">2020-01-15</td>
+                      <td class="text-center">A-1-001</td>
+                      <td class="text-left">Fahni Amsyari</td>
+                      <td>120,000</td>
+                      <td>200,000</td>
+                      <td class="text-center">
+                      <a href="bayartunggakan" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
