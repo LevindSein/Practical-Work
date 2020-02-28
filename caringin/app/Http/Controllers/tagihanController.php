@@ -35,22 +35,132 @@ class tagihanController extends Controller
     public function storetagihan(Request $request ,$id){
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
 
+        $meterAirID = DB::table('tempat_usaha')
+        ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
+        ->where('tempat_usaha.ID_TEMPAT',$id)
+        ->first();
+        $akhirAir = $meterAirID->MAKHIR_AIR;
+        $airId = $meterAirID->ID_MAIR;
 
+        $meterListrikID = DB::table('tempat_usaha')
+        ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
+        ->where('tempat_usaha.ID_TEMPAT',$id)
+        ->first();
+        $akhirListrik = $meterListrikID->MAKHIR_LISTRIK;
+        $listrikId = $meterListrikID->ID_MLISTRIK;
+
+        //ipk keamanan kebersihan
         $tarif_ipk = 0;
         $tarif_keamanan = 0;
         $ttl_ipkeamanan = 0;
         $tarif_kebersihan = 0;
         $ttl_kebersihan = 0;
 
+        //air
+        $inputAir = 0;
+        $pakai_air = 0;
+        $byr_air = 0;
+        $byr_pemeliharaan = 0;
+        $byr_arkot = 0;
+        $byr_beban = 0;
+        $ttl_air = 0;
+
+        //listrik
+        $inputListrik = 0;
+        $pakai = 0;
+        $byr_listrik = 0;
+        $rekmin = 0;
+        $b_blok1 = 0;
+        $b_blok2 = 0;
+        $b_beban = 0;
+        $bpju = 0;
+        $ttl_listrik = 0;
+
         for($i=0;$i<4;$i++){
             if($i == 0){
                  //Kal Air
                 if($usaha->ID_TRFAIR != Null){
+                    $tarif_air = DB::table('tarif_air')->first();
+                    $inputAir = $request->get('mAir');
+                    $awal_air = $akhirAir;
+                    
+                    if($inputAir < $awal_air)
+                    {
+                        return redirect()->route('showformtagihan',['id'=>$id])->with('alert-warning','Meter Baru Salah');
+                    }
+                    else
+                    {                
+                        $pakai_air = $inputAir - $awal_air;
+                        if($pakai_air > 10){
+                            $a = 10 * $tarif_air->TRF_AIR1;
+                            $b = ($pakai_air - 10) * $tarif_air->TRF_AIR2;
+                            $byr_air = $a + $b;
+                    
+                            $byr_pemeliharaan = $tarif_air->TRF_PEMELIHARAAN;
+                            $byr_beban = $tarif_air->TRF_BEBAN;
+                            $byr_arkot = ($tarif_air->TRF_ARKOT / 100) * $byr_air;
+                    
+                            $c = ($byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot) * ($tarif_air->PPN_AIR / 100);
+
+                            $ttl_air = $byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot + $c;
+                        }
+                        else{
+                            $byr_air = $pakai_air * $tarif_air->TRF_AIR1;
+
+                            $byr_pemeliharaan = $tarif_air->TRF_PEMELIHARAAN;
+                            $byr_beban = $tarif_air->TRF_BEBAN;
+                            $byr_arkot = ($tarif_air->TRF_ARKOT / 100) * $byr_air;
+                    
+                            $c = ($byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot) * ($tarif_air->PPN_AIR / 100);
+
+                            $ttl_air = $byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot + $c;
+                        }
+                    }
                 }
             }
             else if($i == 1){
                 //Kal Listrik
                 if($usaha->ID_TRFLISTRIK != Null){
+                    $tarif_listrik = DB::table('tarif_listrik')->first();
+                
+                    $inputListrik = $request->get('mListrik');
+                    $awal_listrik = $akhirListrik;
+            
+                    if($inputListrik < $akhirListrik)
+                    {
+                        return redirect()->route('showformtagihan',['id'=>$id])->with('alert-warning','Meter Baru Salah');
+                    }
+                    else
+                    {
+                        $pakai = $inputListrik - $awal_listrik;
+        
+                        $a = round($usaha->DAYA * $tarif_listrik->VAR_STANDAR / 1000);
+                        $b_blok1 = $tarif_listrik->VAR_BLOK1 * $a;
+
+                        $b = $pakai - $a;
+                        $b_blok2 = $tarif_listrik->VAR_BLOK2 * $b;
+                        $b_beban = $usaha->DAYA * $tarif_listrik->VAR_BEBAN;
+
+                        $c = $b_blok1 + $b_blok2 + $b_beban;
+                        $rekmin = 53.44 * $usaha->DAYA;
+
+                        if($rekmin > $c){
+                            $bpju = ($tarif_listrik->VAR_BPJU / 100) * $rekmin;
+                            $b_blok1 = 0;
+                            $b_blok2 = 0;
+                            $b_beban = 0;
+                            $byr_listrik = $bpju + $rekmin;
+                            $ppn_listrik = ($tarif_listrik->PPN_LISTRIK / 100) * $byr_listrik;
+                            $ttl_listrik = $byr_listrik + $ppn_listrik;
+                        }
+                        else{
+                            $bpju = ($tarif_listrik->VAR_BPJU / 100) * $c;
+                            $rekmin = 0;
+                            $byr_listrik = $bpju + $b_blok1 + $b_blok2 + $b_beban;
+                            $ppn_listrik = ($tarif_listrik->PPN_LISTRIK / 100) * $byr_listrik;
+                            $ttl_listrik = $byr_listrik + $ppn_listrik;
+                        }
+                    }
                 }
             }
             else if($i == 2){
@@ -93,6 +203,24 @@ class tagihanController extends Controller
         $data = new Tagihan([
             'id_tempat'=>$id,
             'stt_bayar'=>0,
+            'awal_air'=>$akhirAir,
+            'akhir_air'=>$inputAir,
+            'pakai_air'=>$pakai_air,
+            'byr_air'=>$byr_air,
+            'byr_pemeliharaan'=>$byr_pemeliharaan,
+            'byr_beban'=>$byr_beban,
+            'byr_arkot'=>$byr_arkot,
+            'ttl_air'=>$ttl_air,
+            'awal_listrik'=>$akhirListrik,
+            'akhir_listrik'=>$inputListrik,
+            'pakai_listrik'=>$pakai,
+            'byr_listrik'=>$byr_listrik,
+            'rek_min'=>$rekmin,
+            'b_blok1'=>$b_blok1,
+            'b_blok2'=>$b_blok2,
+            'b_beban'=>$b_beban,
+            'bpju'=>$bpju,
+            'ttl_listrik'=>$ttl_listrik,
             'byr_kebersihan'=>$tarif_kebersihan,
             'ttl_kebersihan'=>$ttl_kebersihan,
             'byr_ipk'=>$tarif_ipk,
@@ -100,6 +228,13 @@ class tagihanController extends Controller
             'ttl_ipkeamanan'=>$ttl_ipkeamanan
         ]);
         $data->save();
+
+        DB::table('meteran_air')->where('ID_MAIR',$airId)->update([
+            'MAKHIR_AIR'=>$inputAir
+        ]);
+        DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
+            'MAKHIR_LISTRIK'=>$inputListrik
+        ]);
         return redirect()->route('tagihan');
     }
 
