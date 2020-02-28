@@ -136,9 +136,12 @@ class nasabahController extends Controller
         ->select('jasa_ipkeamanan.TGL_JSIPKEAMANAN','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tempat_usaha.BENTUK_USAHA')
         ->get();
 
-        return view('admin.tempat-usaha',['dataset'=>$dataset,'dataJasaAir'=>$dataJasaAir,'dataJasaListrik'=>$dataJasaListrik,'dataJasaKebersihan'=>$dataJasaKebersihan,'dataJasaKeamanan'=>$dataJasaKeamanan]);
-
-
+        return view('admin.tempat-usaha',[
+            'dataset'=>$dataset,
+            'dataJasaAir'=>$dataJasaAir,
+            'dataJasaListrik'=>$dataJasaListrik,
+            'dataJasaKebersihan'=>$dataJasaKebersihan,
+            'dataJasaKeamanan'=>$dataJasaKeamanan]);
     }
     public function showformtempat(){
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();

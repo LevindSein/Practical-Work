@@ -5,13 +5,15 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-center mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Tagihan Nasabah</h1>
+            <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
           </div>
 
           <!-- Data LAPORAN -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="h-3 m-0 font-weight-bold text-primary">Tabel Tagihan Nasabah</h6>
+              @foreach($dataset as $data)
+              <h6 class="h-3 m-0 font-weight-bold text-primary">{{$data->KD_KONTROL}} {{$data->NM_NASABAH}}</h6>
+              @endforeach
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -20,8 +22,6 @@
                     <tr>
                       <th>Status</th>
                       <th>Tanggal</th>
-                      <th>Kode Kontrol</th>
-                      <th>Nama Nasabah</th>
                       <th>Pakai Air (M<sup>3</sup>)</th>
                       <th>Pakai Listrik (Watt)</th>
                       <th>Tagihan Air</th>
@@ -36,12 +36,9 @@
                   </thead>
 
                   <tbody>
-                  @foreach($dataset as $data)
                     <tr>
                       <td class="text-center">False</td>
                       <td class="text-center">2020-01-15</td>
-                      <td class="text-left">{{$data->KD_KONTROL}}</td>
-                      <td class="text-left">{{$data->NM_NASABAH}}</td>
                       <td>120</td>
                       <td>200</td>
                       <td>120,000</td>
@@ -56,7 +53,6 @@
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>
-                  @endforeach
                   </tbody>
                 </table>
               </div>
