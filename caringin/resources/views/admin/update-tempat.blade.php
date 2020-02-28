@@ -90,12 +90,12 @@
                 
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
-                  Nomor Meter Air
-                  <input value="{{$data->NOMTR_AIR}}" type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
+                  ID Alat Meter Air
+                  <input value="{{$data->ID_MAIR}}" type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
-                  Nomor Meter Listrik
-                  <input value="{{$data->NOMTR_LISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  ID Alat Meter Listrik
+                  <input value="{{$data->ID_MLISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                   <br>
                   Daya
                   <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="myDiv2" placeholder="12xx">

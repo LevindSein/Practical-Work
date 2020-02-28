@@ -19,6 +19,7 @@
                 <table class="table table-bordered" id="dataNasabah" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>ID Alat</th>
                       <th>Nomor Alat</th>
                       <th>Meter Akhir</th>
                       <th>Action</th>
@@ -28,8 +29,15 @@
                   <tbody>
                   @foreach($dataset as $data)
                     <tr>
-                      <td class="text-left">{{$data->NOMTR_LISTRIK}}</td>
-                      <td class="text-left">{{$data->MAKHIR_LISTRIK}}</td>
+                      <td class="text-center">{{$data->ID_MLISTRIK}}</td>
+                      <td class="text-center">
+                      @if($data->NOMTR_LISTRIK == null)
+                          0
+                      @else
+                          {{$data->NOMTR_LISTRIK}}
+                      @endif
+                      </td>
+                      <td class="text-center">{{$data->MAKHIR_LISTRIK}}</td>
                       <td class="text-center">
                         <a href="{{url('updatealatlistrik',[$data->ID_MLISTRIK])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>

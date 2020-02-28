@@ -85,12 +85,12 @@
                 
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
-                  Nomor Meter Air
-                  <input type="text" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1484xxxx">
+                  ID Alat Meter Air
+                  <input type="text" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1xx">
                 </div>
                 <div class="form-group" style="display:none">
-                  Nomor Meter Listrik
-                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  ID Alat Meter Listrik
+                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1xx">
                   <br>
                   Daya
                   <input type="text" class="form-control form-control-user" name="dayaListrik" placeholder="12xx"
