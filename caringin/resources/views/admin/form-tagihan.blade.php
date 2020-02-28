@@ -24,6 +24,21 @@
                   <input readonly value="{{$data->NM_NASABAH}}" type="text" name="nama" class="form-control form-control-user" id="exampleInputNama" placeholder="Fahni Amsyari">
                 </div>
                 <div class="form-group">
+                  Bayar IPK
+                  <input readonly type="number" value="{{$data->TRF_IPK}}" name="bayarI" class="form-control form-control-user" id="exampleInputIpk"
+                  <?php if($data->TRF_IPK == NULL){ ?>placeholder="(kosong)" <?php } ?>>
+                </div>
+                <div class="form-group">
+                  Bayar Keamanan
+                  <input readonly type="number" value="{{$data->TRF_KEAMANAN}}" name="bayarK" class="form-control form-control-user" id="exampleInputKeamanan"
+                  <?php if($data->TRF_KEAMANAN == NULL){ ?>placeholder="(kosong)" <?php } ?>>
+                </div>
+                <div class="form-group">
+                  Bayar Kebersihan
+                  <input readonly type="number" value="{{$data->TRF_KEBERSIHAN}}" name="bayarB" class="form-control form-control-user" id="exampleInputKebersihan"
+                  <?php if($data->TRF_KEBERSIHAN == NULL){ ?>placeholder="(kosong)" <?php } ?>>
+                </div>
+                <div class="form-group">
                   Meter Baru Air
                   <input type="number" name="mAir" class="form-control form-control-user" id="exampleInputAir"
                   <?php if($data->ID_TRFAIR == NULL){ ?> readonly placeholder="(kosong)" <?php } ?>>

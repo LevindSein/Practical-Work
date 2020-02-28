@@ -21,6 +21,8 @@
                     <tr>
                       <th>Kode</th>
                       <th>Nama</th>
+                      <th>No.KTP</th>
+                      <th>No.NPWP</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -30,6 +32,8 @@
                     <tr>
                       <td class="text-left">{{$data->KD_KONTROL}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-center">{{$data->NO_KTP}}</td>
+                      <td class="text-center">{{$data->NO_NPWP}}</td>
                       <td class="text-center">
                         <a href="{{url('showformtagihan',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Tambah</a>
