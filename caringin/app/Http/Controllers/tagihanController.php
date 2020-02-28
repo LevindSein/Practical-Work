@@ -35,6 +35,10 @@ class tagihanController extends Controller
     public function storetagihan(Request $request ,$id){
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
 
+
+        $tarif_ipk = 0;
+        $tarif_keamanan = 0;
+        $ttl_ipkeamanan = 0;
         $tarif_kebersihan = 0;
         $ttl_kebersihan = 0;
 
