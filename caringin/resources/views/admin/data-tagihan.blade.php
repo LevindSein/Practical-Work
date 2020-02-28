@@ -36,11 +36,12 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $data)
                     <tr>
                       <td class="text-center">False</td>
                       <td class="text-center">2020-01-15</td>
-                      <td class="text-left">A-1-001</td>
-                      <td class="text-left">PT.BTN</td>
+                      <td class="text-left">{{$data->KD_KONTROL}}</td>
+                      <td class="text-left">{{$data->NM_NASABAH}}</td>
                       <td>120</td>
                       <td>200</td>
                       <td>120,000</td>
@@ -55,6 +56,7 @@
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

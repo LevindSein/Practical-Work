@@ -28,16 +28,18 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $data)
                     <tr>
-                      <td class="text-left">A-1-001</td>
-                      <td class="text-left">Fahni Amsyari</td>
-                      <td class="text-center">1</td>
-                      <td class="text-center">1</td>
+                    <td class="text-left">{{$data->KD_KONTROL}}</td>
+                      <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-center">{{$data->NO_KTP}}</td>
+                      <td class="text-center">{{$data->NO_NPWP}}</td>
                       <td class="text-center">
-                        <a href="datatagihannasabah" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                        <a href="{{url('datatagihannasabah',[$data->ID_NASABAH])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Lihat</a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

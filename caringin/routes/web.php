@@ -29,11 +29,6 @@ Route::post('storetempat','nasabahController@storeTempat');
 Route::get('updatetempat/{id}','nasabahController@updateTempat');
 Route::post('update/storetempat/{id}','nasabahController@updateStoreTempat');
 
-//Tagihan
-Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
-Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
-Route::post('tagihan/store/{id}','tagihanController@storetagihan');
-
 //Tarif
     //Air
 Route::get('showformtarifair','tarifController@showTAir');
@@ -70,8 +65,12 @@ Route::get('showlaporanbongkaran','laporanController@showBongkaran');
 Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
 
 //Tagihan
-Route::get('datatagihannasabah','tagihanController@dataTagihan');
+Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan');
 Route::get('bayartagihan','tagihanController@bayarTagihan');
+Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
+Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
+Route::post('tagihan/store/{id}','tagihanController@storetagihan');
+
 
 //Tunggakan
 Route::get('bayartunggakan','tunggakanController@bayarTunggakan');

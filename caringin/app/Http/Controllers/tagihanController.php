@@ -200,8 +200,15 @@ class tagihanController extends Controller
             }
         }
 
+        //Set Tanggal Tagihan
+        $timezone = date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d", time());
+        $time = strtotime($date);
+        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+
         $data = new Tagihan([
             'id_tempat'=>$id,
+            'tgl_tagihan'=>$finalDate,
             'stt_bayar'=>0,
             'awal_air'=>$akhirAir,
             'akhir_air'=>$inputAir,
@@ -238,8 +245,14 @@ class tagihanController extends Controller
         return redirect()->route('tagihan');
     }
 
-    public function dataTagihan(){
-        return view('admin.data-tagihan');
+    public function dataTagihan($id){
+        $dataset = DB::table('tempat_usaha')
+        ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH')
+        ->where('tempat_usaha.ID_TEMPAT',$id)
+        ->get();
+
+        return view('admin.data-tagihan',['dataset'=>$dataset]);
     }
 
     public function bayarTagihan(){

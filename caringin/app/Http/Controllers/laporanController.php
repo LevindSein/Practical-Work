@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tagihan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Redirector;
 
 class laporanController extends Controller
 {
@@ -16,7 +19,11 @@ class laporanController extends Controller
         return view('admin.laporan-tahunan');
     }
     public function showTagihan(){
-        return view('admin.laporan-tagihan');
+        $dataset = DB::table('tempat_usaha')
+        ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+        ->get();
+        return view('admin.laporan-tagihan',['dataset'=>$dataset]);
     }
     public function showTunggakan(){
         return view('admin.laporan-tunggakan');
