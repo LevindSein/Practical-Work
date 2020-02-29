@@ -288,37 +288,145 @@ class tagihanController extends Controller
 
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
 
-        if($bayar >= $dataset->TTL_TAGIHAN){
+        $ttl_listrik = $dataset->TTL_LISTRIK;
+        $ttl_air = $dataset->TTL_AIR;
+        $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
+        $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
+        $ttl_tagihan = $dataset->TTL_TAGIHAN;
+
+        if($bayar >= $ttl_tagihan){
+            $sisaTotal = $bayar - $ttl_tagihan;
+
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
                 'STT_BAYAR'=>1,
                 'STT_LUNAS'=>1,
-                'REALISASI_AIR'=>$dataset->TTL_AIR,
+                'REALISASI_AIR'=>$ttl_air,
                 'SELISIH_AIR'=>0,
-                'REALISASI_LISTRIK'=>$dataset->TTL_LISTRIK,
+                'REALISASI_LISTRIK'=>$ttl_listrik,
                 'SELISIH_LISTRIK'=>0,
-                'REALISASI_IPKEAMANAN'=>$dataset->TTL_IPKEAMANAN,
+                'REALISASI_IPKEAMANAN'=>$ttl_ipkeamanan,
                 'SELISIH_IPKEAMANAN'=>0,
-                'REALISASI_KEBERSIHAN'=>$dataset->TTL_KEBERSIHAN,
+                'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
                 'SELISIH_KEBERSIHAN'=>0,
-                'REALISASI'=>$dataset->TTL_TAGIHAN,
+                'REALISASI'=>$ttl_tagihan,
                 'SELISIH'=>0
             ]);
         }
         else{
-            if($bayar > $dataset->TTL_LISTRIK){
-                
+            if($bayar >= $ttl_listrik){
+                $reaL = $ttl_listrik;
+                $selL = 0;
+                $sisaL = $bayar - $ttl_listrik;
+                if($sisaL >= $ttl_air){
+                    $reaA = $ttl_air;
+                    $selA = 0;
+                    $sisaA = $sisaL - $ttl_air;
+                    if($sisaA >= $ttl_ipkeamanan){
+                        $reaK = $ttl_ipkeamanan;
+                        $selK = 0;
+                        $sisaK = $sisaA - $ttl_ipkeamanan;
+                        if($sisaK >= $ttl_kebersihan){
+                            $reaB = $ttl_kebersihan;
+                            $selB = 0;
+                        }
+                        else if($sisaK > 0 && $sisaK < $ttl_kebersihan){
+                            $reaB = $sisaK;
+                            $selB = $ttl_kebersihan - $sisaK;
+                        }
+                    }
+                    else if($sisaA > 0 && $sisaA < $ttl_ipkeamanan){
+                        $reaK = $sisaA;
+                        $selK = $ttl_ipkeamanan - $sisaA;
+                        $reaB = 0;
+                        $selB = $ttl_kebersihan;
+                    }
+                }
+                else if($sisaL > 0 && $sisaL < $ttl_air){
+                    $reaA = $sisaL;
+                    $selA = $ttl_air - $sisaL;
+                    $reaK = 0;
+                    $selK = $ttl_ipkeamanan;
+                    $reaB = 0;
+                    $selB = $ttl_kebersihan;
+                }
             }
-            else if($bayar > $dataset->TTL_AIR){
-
+            else if($bayar >= $ttl_air){
+                $reaL = 0;
+                $selL = $ttl_listrik;
+                $reaA = $ttl_air;
+                $selA = 0;
+                $sisaA = $bayar - $ttl_air;
+                if($sisaA >= $ttl_ipkeamanan){
+                    $reaK = $ttl_ipkeamanan;
+                    $selK = 0;
+                    $sisaK = $sisaA - $ttl_ipkeamanan;
+                    if($sisaK >= $ttl_kebersihan){
+                        $reaB = $ttl_kebersihan;
+                        $selB = 0;
+                    }
+                    else if($sisaK > 0 && $sisaK < $ttl_kebersihan){
+                        $reaB = $sisaK;
+                        $selB = $ttl_kebersihan - $sisaK;
+                    }
+                }
+                else if($sisaA > 0 && $sisaA < $ttl_air){
+                    $reaA = $sisaA;
+                    $selA = $ttl_air - $sisaA;
+                    $reaK = 0;
+                    $selK = $ttl_ipkeamanan;
+                    $reaB = 0;
+                    $selB = $ttl_kebersihan;
+                }
             }
-            else if($bayar > $dataset->TTL_IPKEAMANAN){
-
+            else if($bayar >= $ttl_ipkeamanan){
+                $reaL = 0;
+                $selL = $ttl_listrik;
+                $reaA = 0;
+                $selA = $ttl_air;
+                $reaK = $ttl_ipkeamanan;
+                $selK = 0;
+                $sisaK = $bayar - $ttl_ipkeamanan;
+                if($sisaK >= $ttl_kebersihan){
+                    $reaB = $ttl_kebersihan;
+                    $selB = 0;
+                }
+                else if($sisaK > 0 && $sisaK < $ttl_kebersihan){
+                    $reaB = $sisaK;
+                    $selB = $ttl_kebersihan - $sisaK;
+                }
             }
-            else if($bayar > $dataset->TTL_KEBERSIHAN){
-
+            else if($bayar >= $ttl_kebersihan){
+                $reaL = 0;
+                $selL = $ttl_listrik;
+                $reaA = 0;
+                $selA = $ttl_air;
+                $reaK = 0;
+                $selK = $ttl_ipkeamanan;
+                $reaB = $ttl_kebersihan;
+                $selB = 0;
+                $sisaTotal = $bayar - $ttl_kebersihan;
             }
+            else{
+                return redirect()->route('bayartagihan',['id'=>$id])->with('alert-warning','Pembayaran Tidak Dapat Dilakukan');
+            }
+            
+            $rea = $reaL + $reaA + $reaK + $reaB;
+            $sel = $selL + $selA + $selK + $selB;
+            DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
+                'STT_BAYAR'=>1,
+                'STT_LUNAS'=>0,
+                'REALISASI_AIR'=>$reaA,
+                'SELISIH_AIR'=>$selA,
+                'REALISASI_LISTRIK'=>$reaL,
+                'SELISIH_LISTRIK'=>$selL,
+                'REALISASI_IPKEAMANAN'=>$reaK,
+                'SELISIH_IPKEAMANAN'=>$selK,
+                'REALISASI_KEBERSIHAN'=>$reaB,
+                'SELISIH_KEBERSIHAN'=>$selB,
+                'REALISASI'=>$rea,
+                'SELISIH'=>$sel
+            ]);
         }
-
         return redirect()->route('lapTagihan');
     }
 }
