@@ -200,6 +200,8 @@ class tagihanController extends Controller
             }
         }
 
+        $ttl_tagihan = $ttl_air + $ttl_listrik + $ttl_ipkeamanan + $ttl_kebersihan;
+
         //Set Tanggal Tagihan
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
@@ -232,7 +234,8 @@ class tagihanController extends Controller
             'ttl_kebersihan'=>$ttl_kebersihan,
             'byr_ipk'=>$tarif_ipk,
             'byr_keamanan'=>$tarif_keamanan,
-            'ttl_ipkeamanan'=>$ttl_ipkeamanan
+            'ttl_ipkeamanan'=>$ttl_ipkeamanan,
+            'ttl_tagihan'=>$ttl_tagihan
         ]);
         $data->save();
 
@@ -252,7 +255,9 @@ class tagihanController extends Controller
         ->where('tempat_usaha.ID_TEMPAT',$id)
         ->get();
 
-        return view('admin.data-tagihan',['dataset'=>$dataset]);
+        $dataTagihan = DB::table('tagihanku')->where('tagihanku.ID_TEMPAT',$id)->get();
+
+        return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
     public function bayarTagihan(){

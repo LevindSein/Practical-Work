@@ -43,7 +43,9 @@ class Tagihan extends Model
         'ttl_kebersihan',
         'realisasi_kebersihan',
         'selisih_kebersihan',
-        'bulan',
+        'ttl_tagihan',
+        'realisasi',
+        'selisih',
         'updated_at',
         'created_at'
     ];

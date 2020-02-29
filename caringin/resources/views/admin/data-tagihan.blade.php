@@ -36,23 +36,34 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataTagihan as $data)
                     <tr>
-                      <td class="text-center">False</td>
-                      <td class="text-center">2020-01-15</td>
-                      <td>120</td>
-                      <td>200</td>
-                      <td>120,000</td>
-                      <td>120,000</td>
-                      <td>200,000</td>
-                      <td>140,000</td>
-                      <td>500,000</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
+                      <td class="text-center" 
+                      <?php if($data->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($data->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>
+                      >
+                      @if($data->STT_BAYAR == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center">{{$data->TGL_TAGIHAN}}</td>
+                      <td>{{$data->PAKAI_AIR}}</td>
+                      <td>{{$data->PAKAI_LISTRIK}}</td>
+                      <td>{{$data->TTL_AIR}}</td>
+                      <td>{{$data->TTL_LISTRIK}}</td>
+                      <td>{{$data->TTL_IPKEAMANAN}}</td>
+                      <td>{{$data->TTL_KEBERSIHAN}}</td>
+                      <td>{{$data->TTL_TAGIHAN}}</td>
+                      <td>{{$data->REALISASI}}</td>
+                      <td>{{$data->SELISIH}}</td>
                       <td class="text-center">
                           <a href="bayartagihan" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>
