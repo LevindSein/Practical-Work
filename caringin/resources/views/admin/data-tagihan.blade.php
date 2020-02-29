@@ -20,7 +20,8 @@
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Status</th>
+                      <th>Bayar</th>
+                      <th>Lunas</th>
                       <th>Tanggal</th>
                       <th>Pakai Air (M<sup>3</sup>)</th>
                       <th>Pakai Listrik (Watt)</th>
@@ -40,8 +41,16 @@
                     <tr>
                       <td class="text-center" 
                       <?php if($data->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
-                      <?php if($data->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>
-                      >
+                      <?php if($data->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
+                      @if($data->STT_BAYAR == 1)
+                        Dibayar
+                      @else
+                        Belum Dibayar
+                      @endif
+                      </td>
+                      <td class="text-center" 
+                      <?php if($data->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($data->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
                       @if($data->STT_BAYAR == 1)
                         Lunas
                       @else
@@ -59,7 +68,7 @@
                       <td>{{$data->REALISASI}}</td>
                       <td>{{$data->SELISIH}}</td>
                       <td class="text-center">
-                          <a href="bayartagihan" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('bayartagihan',[$data->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>

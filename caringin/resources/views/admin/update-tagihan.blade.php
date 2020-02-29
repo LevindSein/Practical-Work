@@ -11,18 +11,20 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-            <form class="user">
+            @foreach ($dataset as $data)
+            <form class="user" action="{{url('bayartagihan/store',[$data->ID_TAGIHANKU])}}" method="POST">
+              @csrf
                 <div class="form-group">
                   Kode Kontrol
-                  <input readonly type="text" name="kode" class="form-control form-control-user" id="exampleInputKode" placeholder="A-1-001">
+                  <input readonly value="{{$data->KD_KONTROL}}" type="text" name="kode" class="form-control form-control-user" id="exampleInputKode" placeholder="A-1-001">
                 </div>
                 <div class="form-group">
                   Nama Nasabah
-                  <input readonly type="text" name="nama" class="form-control form-control-user" id="exampleInputNama" placeholder="Fahni Amsyari">
+                  <input readonly type="text" name="nama" class="form-control form-control-user" id="exampleInputNama">
                 </div>
                 <div class="form-group">
                   Total Tagihan
-                  <input readonly type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                  <input readonly value="{{$data->TTL_TAGIHAN}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Realisasi Pembayaran
@@ -30,6 +32,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
               </form>
+            @endforeach
             </div>
           </div>
         </div>

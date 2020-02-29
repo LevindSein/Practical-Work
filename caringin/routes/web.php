@@ -59,14 +59,15 @@ Route::post('storekebersihan','tarifController@storekebersihan');
 Route::get('showlaporanharian','laporanController@showHarian');
 Route::get('showlaporanbulanan','laporanController@showBulanan');
 Route::get('showlaporantahunan','laporanController@showTahunan');
-Route::get('showlaporantagihan','laporanController@showTagihan');
+Route::get('showlaporantagihan','laporanController@showTagihan')->name('lapTagihan');
 Route::get('showlaporantunggakan','laporanController@showTunggakan');
 Route::get('showlaporanbongkaran','laporanController@showBongkaran');
 Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
 
 //Tagihan
 Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan');
-Route::get('bayartagihan','tagihanController@bayarTagihan');
+Route::get('bayartagihan/{id}','tagihanController@bayarTagihan');
+Route::post('bayartagihan/store/{id}','tagihanController@storeBayar');
 Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
 Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
 Route::post('tagihan/store/{id}','tagihanController@storetagihan');

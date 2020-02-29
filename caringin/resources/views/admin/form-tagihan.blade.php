@@ -39,9 +39,19 @@
                   <?php if($data->TRF_KEBERSIHAN == NULL){ ?>placeholder="(kosong)" <?php } ?>>
                 </div>
                 <div class="form-group">
+                  Meter Lalu Air
+                  <input readonly type="number" value="{{$data->MAKHIR_AIR}}" name="laluAir" class="form-control form-control-user" id="exampleInputLaluA"
+                  <?php if($data->ID_TRFAIR == NULL){ ?>placeholder="(kosong)" <?php } ?>>
+                </div>
+                <div class="form-group">
                   Meter Baru Air
                   <input type="number" name="mAir" class="form-control form-control-user" id="exampleInputAir"
                   <?php if($data->ID_TRFAIR == NULL){ ?> readonly placeholder="(kosong)" <?php } ?>>
+                </div>
+                <div class="form-group">
+                  Meter Lalu Listrik
+                  <input readonly type="number" value="{{$data->MAKHIR_LISTRIK}}" name="laluListrik" class="form-control form-control-user" id="exampleInputLaluL"
+                  <?php if($data->ID_TRFLISTRIK == NULL){ ?>placeholder="(kosong)" <?php } ?>>
                 </div>
                 <div class="form-group">
                   Meter Baru Listrik

@@ -20,10 +20,13 @@ class tagihanController extends Controller
     public function formtagihan($id){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
+        ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
         ->leftJoin('tarif_kebersihan','tempat_usaha.ID_TRFKEBERSIHAN','=','tarif_kebersihan.ID_TRFKEBERSIHAN')
         ->leftJoin('tarif_ipk','tempat_usaha.ID_TRFIPK','=','tarif_ipk.ID_TRFIPK')
         ->leftJoin('tarif_keamanan','tempat_usaha.ID_TRFKEAMANAN','=','tarif_keamanan.ID_TRFKEAMANAN')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','tempat_usaha.ID_TRFAIR',
+                'meteran_air.MAKHIR_AIR','meteran_listrik.MAKHIR_LISTRIK',
                 'tempat_usaha.ID_TRFLISTRIK', 'nasabah.NM_NASABAH',
                 'tarif_kebersihan.TRF_KEBERSIHAN','tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN')
         ->where('tempat_usaha.ID_TEMPAT',$id)
@@ -212,6 +215,7 @@ class tagihanController extends Controller
             'id_tempat'=>$id,
             'tgl_tagihan'=>$finalDate,
             'stt_bayar'=>0,
+            'stt_lunas'=>0,
             'awal_air'=>$akhirAir,
             'akhir_air'=>$inputAir,
             'pakai_air'=>$pakai_air,
@@ -255,12 +259,66 @@ class tagihanController extends Controller
         ->where('tempat_usaha.ID_TEMPAT',$id)
         ->get();
 
-        $dataTagihan = DB::table('tagihanku')->where('tagihanku.ID_TEMPAT',$id)->get();
+        $dataTagihan = DB::table('tagihanku')
+        ->where('tagihanku.ID_TEMPAT',$id)
+        ->get();
 
         return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
-    public function bayarTagihan(){
-        return view('admin.update-tagihan');
+    public function bayarTagihan($id){
+        $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tempat_usaha.ID_TEMPAT','tagihanku.ID_TAGIHANKU')
+        ->where('tagihanku.ID_TEMPAT',$id)
+        ->get();
+        
+        // $usaha = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
+        // $tempatId = $usaha->ID_TEMPAT;
+        // $nasabah = DB::table('tempat_usaha')->where('ID_NASABAH',$tempatId)->first();
+        // $nasabahId = $nasabah->ID_NASABAH;
+        // $nama = DB::table('nasabah')->select('nasabah.NM_NASABAH')->where('ID_NASABAH',$nasabahId)->first();
+        // $namaku = $nama->NM_NASABAH;
+
+        return view('admin.update-tagihan',['dataset'=>$dataset]);
+    }
+
+    public function storeBayar(Request $request,$id){
+        $bayar = $request->get('bayar');
+
+        $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
+
+        if($bayar >= $dataset->TTL_TAGIHAN){
+            DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
+                'STT_BAYAR'=>1,
+                'STT_LUNAS'=>1,
+                'REALISASI_AIR'=>$dataset->TTL_AIR,
+                'SELISIH_AIR'=>0,
+                'REALISASI_LISTRIK'=>$dataset->TTL_LISTRIK,
+                'SELISIH_LISTRIK'=>0,
+                'REALISASI_IPKEAMANAN'=>$dataset->TTL_IPKEAMANAN,
+                'SELISIH_IPKEAMANAN'=>0,
+                'REALISASI_KEBERSIHAN'=>$dataset->TTL_KEBERSIHAN,
+                'SELISIH_KEBERSIHAN'=>0,
+                'REALISASI'=>$dataset->TTL_TAGIHAN,
+                'SELISIH'=>0
+            ]);
+        }
+        else{
+            if($bayar > $dataset->TTL_LISTRIK){
+                
+            }
+            else if($bayar > $dataset->TTL_AIR){
+
+            }
+            else if($bayar > $dataset->TTL_IPKEAMANAN){
+
+            }
+            else if($bayar > $dataset->TTL_KEBERSIHAN){
+
+            }
+        }
+
+        return redirect()->route('lapTagihan');
     }
 }

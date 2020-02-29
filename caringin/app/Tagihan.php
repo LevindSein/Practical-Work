@@ -12,6 +12,7 @@ class Tagihan extends Model
         'id_tempat',
         'tgl_tagihan',
         'stt_bayar',
+        'stt_lunas',
         'awal_air',
         'akhir_air',
         'pakai_air',
