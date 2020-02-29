@@ -267,10 +267,10 @@ class tagihanController extends Controller
     }
 
     public function bayarTagihan($id){
-        $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)
+        $dataset = DB::table('tagihanku')
         ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tempat_usaha.ID_TEMPAT','tagihanku.ID_TAGIHANKU')
-        ->where('tagihanku.ID_TEMPAT',$id)
+        ->where('ID_TAGIHANKU',$id)
         ->get();
         
         // $usaha = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
@@ -288,6 +288,7 @@ class tagihanController extends Controller
 
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
 
+        
         $ttl_listrik = $dataset->TTL_LISTRIK;
         $ttl_air = $dataset->TTL_AIR;
         $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
@@ -427,6 +428,7 @@ class tagihanController extends Controller
                 'SELISIH'=>$sel
             ]);
         }
+
         return redirect()->route('lapTagihan');
     }
 }

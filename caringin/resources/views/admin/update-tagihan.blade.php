@@ -30,9 +30,9 @@
                   Realisasi Pembayaran
                   <input required type="number" name="bayar" class="form-control form-control-user" id="exampleInputBayar" placeholder="Rp.">
                 </div>
+                @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
               </form>
-            @endforeach
             </div>
           </div>
         </div>
