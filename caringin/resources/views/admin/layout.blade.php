@@ -407,9 +407,7 @@
             <script src="{{asset('js/buttons.html5.min.js')}}"></script>
             <script src="{{asset('js/buttons.print.min.js')}}"></script>
             <script src="{{asset('js/buttons.colvis.min.js')}}"></script>
-            <script src="{{asset('js/autoNumeric.min.js')}}"></script>
-            <script src="{{asset('js/autoNumeric.min.js.map')}}"></script>
-
+            
             <!--for column table toggle-->
             <script>
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -486,11 +484,6 @@
                             }
                         ]
                     });
-                });
-            </script>
-            <script>
-                $(document).ready(function () {
-                    $('#exampleInputIpk').autoNumeric('init');
                 });
             </script>
             @yield('js')
