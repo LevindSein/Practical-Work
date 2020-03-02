@@ -48,15 +48,17 @@ class meteranController extends Controller
     public function storealat(Request $request){
         $radio = $request->get('alat');
         if($radio == "A"){
+            $noalat = strtoupper($request->get('noalat'));
             $dataA = new Meteran_air([
-                'nomtr_air'=>$request->get('noalat'),
+                'nomtr_air'=>$noalat,
                 'makhir_air'=>$request->get('meteran')
             ]);
             $dataA->save();
         }
         else{
+            $noalat = strtoupper($request->get('noalat'));
             $dataL = new Meteran_listrik([
-                'nomtr_listrik'=>$request->get('noalat'),
+                'nomtr_listrik'=>$noalat,
                 'makhir_listrik'=>$request->get('meteran')
             ]);
             $dataL->save();
