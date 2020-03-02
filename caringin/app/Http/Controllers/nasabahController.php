@@ -194,7 +194,7 @@ class nasabahController extends Controller
 
         //Identitas
         $radio = $request->get('identitas');
-        if($radio = "k")
+        if($radio == "k")
             $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp'))->first();
         else
             $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp'))->first();
@@ -202,9 +202,13 @@ class nasabahController extends Controller
         $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();
         $mListrik = DB::table('meteran_listrik')->select('ID_MLISTRIK')->where('id_mlistrik',$request->get('meterListrik'))->first();
 
-        $id_mair = $mAir->ID_MAIR;
-        $id_mlistrik = $mListrik->ID_MLISTRIK;
+        if(!empty($request->get('air')))
+            $id_mair = $mAir->ID_MAIR;
+
         $id_nas = $nasabah->ID_NASABAH;
+
+        if(!empty($request->get('listrik')))
+            $id_mlistrik = $mListrik->ID_MLISTRIK;
         
         //fasilitas
         $airId = 1;

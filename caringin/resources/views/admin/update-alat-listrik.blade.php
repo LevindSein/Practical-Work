@@ -19,10 +19,6 @@
                   <input value="{{$data->NOMTR_LISTRIK}}" required type="text" style="text-transform: uppercase;" name="noalat" class="form-control form-control-user" id="exampleInputNomor" placeholder="89A82xxx">
                 </div>
                 <div class="form-group">
-                  Daya Listrik
-                  <input required value="{{$data->DAYA}}" type="number" name="daya" class="form-control form-control-user" id="exampleInputDaya" placeholder="12xx">
-                </div>
-                <div class="form-group">
                   Kondisi Meteran Akhir
                   <input required value="{{$data->MAKHIR_LISTRIK}}" type="number" name="meteranlistrik" class="form-control form-control-user" id="exampleInputMeteran" placeholder="123xx">
                 </div>

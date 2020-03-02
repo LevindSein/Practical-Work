@@ -37,38 +37,80 @@
                   </thead>
 
                   <tbody>
-                  @foreach($dataTagihan as $data)
+                  @foreach($dataTagihan as $dataT)
                     <tr>
                       <td class="text-center" 
-                      <?php if($data->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
-                      <?php if($data->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
-                      @if($data->STT_BAYAR == 1)
+                      <?php if($dataT->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($dataT->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
+                      @if($dataT->STT_BAYAR == 1)
                         Dibayar
                       @else
                         Belum Dibayar
                       @endif
                       </td>
                       <td class="text-center" 
-                      <?php if($data->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
-                      <?php if($data->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($data->STT_BAYAR == 1)
+                      <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($dataT->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($dataT->STT_BAYAR == 1)
                         Lunas
                       @else
                         Belum Lunas
                       @endif
                       </td>
-                      <td class="text-center">{{$data->TGL_TAGIHAN}}</td>
-                      <td>{{$data->PAKAI_AIR}}</td>
-                      <td>{{$data->PAKAI_LISTRIK}}</td>
-                      <td>{{$data->TTL_AIR}}</td>
-                      <td>{{$data->TTL_LISTRIK}}</td>
-                      <td>{{$data->TTL_IPKEAMANAN}}</td>
-                      <td>{{$data->TTL_KEBERSIHAN}}</td>
-                      <td>{{$data->TTL_TAGIHAN}}</td>
-                      <td>{{$data->REALISASI}}</td>
-                      <td>{{$data->SELISIH}}</td>
+                      <td class="text-center">{{$dataT->TGL_TAGIHAN}}</td>
+                      <td>
+                      @if($dataT->PAKAI_AIR == null)
+                        0
+                      @else
+                        {{$dataT->PAKAI_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->PAKAI_LISTRIK == null)
+                        0
+                      @else
+                        {{$dataT->PAKAI_LISTRIK}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_AIR == null)
+                        0
+                      @else
+                        {{$dataT->TTL_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_LISTRIK == null)
+                        0
+                      @else
+                        {{$dataT->TTL_LISTRIK}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_IPKEAMANAN == null)
+                        0
+                      @else
+                        {{$dataT->TTL_IPKEAMANAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_KEBERSIHAN == null)
+                        0
+                      @else
+                        {{$dataT->TTL_KEBERSIHAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_TAGIHAN == null)
+                        0
+                      @else
+                        {{$dataT->TTL_TAGIHAN}}
+                      @endif
+                      </td>
+                      <td>{{$dataT->REALISASI}}</td>
+                      <td>{{$dataT->SELISIH}}</td>
                       <td class="text-center">
-                          <a href="{{url('bayartagihan',[$data->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('bayartagihan',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>

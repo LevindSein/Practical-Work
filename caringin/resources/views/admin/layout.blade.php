@@ -194,10 +194,8 @@
                         aria-labelledby="headingMeter"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('tambahalatlistrik')}}">Tambah Alat Listrik</a>
-                            <a class="collapse-item" href="{{url('dataalatlistrik')}}">Data Alat Listrik</a>
-                            <a class="collapse-item" href="{{url('tambahalatair')}}">Tambah Alat Air</a>
-                            <a class="collapse-item" href="{{url('dataalatair')}}">Data Alat Air</a>
+                            <a class="collapse-item" href="{{url('tambahalat')}}">Tambah Alat</a>
+                            <a class="collapse-item" href="{{url('dataalat')}}">Data Alat</a>
                         </div>
                     </div>
                 </li>
@@ -422,7 +420,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
+                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan,#dataAir,#dataListrik'
                     ).DataTable({
                         "scrollX": true,
                         "processing": true,

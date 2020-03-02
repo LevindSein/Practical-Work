@@ -53,31 +53,31 @@ class tagihanController extends Controller
         $listrikId = $meterListrikID->ID_MLISTRIK;
 
         //ipk keamanan kebersihan
-        $tarif_ipk = 0;
-        $tarif_keamanan = 0;
-        $ttl_ipkeamanan = 0;
-        $tarif_kebersihan = 0;
-        $ttl_kebersihan = 0;
+        $tarif_ipk = NULL;
+        $tarif_keamanan = NULL;
+        $ttl_ipkeamanan = NULL;
+        $tarif_kebersihan = NULL;
+        $ttl_kebersihan = NULL;
 
         //air
-        $inputAir = 0;
-        $pakai_air = 0;
-        $byr_air = 0;
-        $byr_pemeliharaan = 0;
-        $byr_arkot = 0;
-        $byr_beban = 0;
-        $ttl_air = 0;
+        $inputAir = NULL;
+        $pakai_air = NULL;
+        $byr_air = NULL;
+        $byr_pemeliharaan = NULL;
+        $byr_arkot = NULL;
+        $byr_beban = NULL;
+        $ttl_air = NULL;
 
         //listrik
-        $inputListrik = 0;
-        $pakai = 0;
-        $byr_listrik = 0;
-        $rekmin = 0;
-        $b_blok1 = 0;
-        $b_blok2 = 0;
-        $b_beban = 0;
-        $bpju = 0;
-        $ttl_listrik = 0;
+        $inputListrik = NULL;
+        $pakai = NULL;
+        $byr_listrik = NULL;
+        $rekmin = NULL;
+        $b_blok1 = NULL;
+        $b_blok2 = NULL;
+        $b_beban = NULL;
+        $bpju = NULL;
+        $ttl_listrik = NULL;
 
         for($i=0;$i<4;$i++){
             if($i == 0){

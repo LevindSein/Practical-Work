@@ -77,16 +77,13 @@ Route::post('tagihan/store/{id}','tagihanController@storetagihan');
 Route::get('bayartunggakan','tunggakanController@bayarTunggakan');
 
 //Meteran
+Route::get('dataalat','meteranController@dataalat')->name('alat');
+Route::get('tambahalat','meteranController@formalat');
+Route::post('storealat','meteranController@storealat');
     //AIR
-Route::get('dataalatair','meteranController@dataalatair')->name('alatair');
-Route::get('tambahalatair','meteranController@formalatair');
-Route::post('storealatair','meteranController@storealatair');
 Route::get('updatealatair/{id}','meteranController@updatealatair');
 Route::post('update/storealatair/{id}','meteranController@storeupdatealatair');
     //LISTRIK
-Route::get('dataalatlistrik','meteranController@dataalatlistrik')->name('alatlistrik');
-Route::get('tambahalatlistrik','meteranController@formalatlistrik');
-Route::post('storealatlistrik','meteranController@storealatlistrik');
 Route::get('updatealatlistrik/{id}','meteranController@updatealatlistrik');
 Route::post('update/storealatlistrik/{id}','meteranController@storeupdatealatlistrik');
 

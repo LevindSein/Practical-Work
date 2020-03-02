@@ -35,7 +35,7 @@
                       <td class="text-center">{{$data->NO_KTP}}</td>
                       <td class="text-center">{{$data->NO_NPWP}}</td>
                       <td class="text-center">
-                        <a href="{{url('datatagihannasabah',[$data->ID_NASABAH])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                        <a href="{{url('datatagihannasabah',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Lihat</a>
                       </td>
                     </tr>
