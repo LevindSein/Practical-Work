@@ -19,23 +19,24 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th>Tanggal</th>
+                      <th>Kode Kontrol</th>
+                      <th>Nama Nasabah</th>
+                      <th>Fasilitas</th>
+                      <th>Perintah</th>
                     </tr>
                   </thead>
                   
                   <tbody>
                     <tr>
-                      <td>Donna Snider</td>
-                      <td>Customer Support</td>
-                      <td>New York</td>
-                      <td>27</td>
-                      <td>2011/01/25</td>
-                      <td>$112,000</td>
+                      <td class="text-center">01-15-2020</td>
+                      <td class="text-center">A-1-005</td>
+                      <td class="text-left">New York</td>
+                      <td class="text-center">Air</td>
+                      <td class="text-center">
+                      <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Print</a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
