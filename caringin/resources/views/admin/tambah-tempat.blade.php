@@ -130,7 +130,7 @@
             </div>
           </div>
         </div>
-
+      </div>
     <!-- End of Main Content -->
 @endsection
 
