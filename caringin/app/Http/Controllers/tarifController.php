@@ -27,7 +27,7 @@ class tarifController extends Controller
             'TRF_DENDA'=>$request->get('tarifdenda'),
             'PPN_AIR'=>$request->get('ppnair')
         ]);
-        return redirect()->back()->with('alert-success','Data Tersimpan');
+        return redirect()->back()->with('success','Tarif Tersimpan');
     }
 
     //Tarif Listrik
@@ -45,7 +45,7 @@ class tarifController extends Controller
             'VAR_DENDA'=>$request->get('tarifdenda'),
             'PPN_LISTRIK'=>$request->get('ppnlistrik')
         ]);
-        return redirect()->back()->with('alert-success','Data Tersimpan');;
+        return redirect()->back()->with('success','Tarif Tersimpan');;
     }
 
     //Tarif Kebersihan
@@ -65,14 +65,14 @@ class tarifController extends Controller
             'ID_TRFKEBERSIHAN'=>$request->get('kategori'),
             'TRF_KEBERSIHAN'=>$request->get('tarif')
         ]);
-        return redirect()->route('showb');
+        return redirect()->route('showb')->with('success','Tarif Tersimpan');
     }
     public function storekebersihan(Request $request){
         $data = new Tarif_kebersihan([
             'trf_kebersihan'=>$request->get('tarif')
         ]);
         $data->save();
-        return redirect()->route('showb');
+        return redirect()->route('showb')->with('success','Tarif Ditambah');
     }
 
     //Tarif IPK
@@ -92,14 +92,14 @@ class tarifController extends Controller
             'ID_TRFIPK'=>$request->get('kategori'),
             'TRF_IPK'=>$request->get('tarif')
         ]);
-        return redirect()->route('showi');
+        return redirect()->route('showi')->with('success','Tarif Tersimpan');
     }
     public function storeipk(Request $request){
         $data = new Tarif_ipk([
             'trf_ipk'=>$request->get('tarif')
         ]);
         $data->save();
-        return redirect()->route('showi');
+        return redirect()->route('showi')->with('success','Tarif Ditambah');
     }
 
     //Tarif Keamanan
@@ -119,13 +119,13 @@ class tarifController extends Controller
             'ID_TRFKEAMANAN'=>$request->get('kategori'),
             'TRF_KEAMANAN'=>$request->get('tarif')
         ]);
-        return redirect()->route('showk');
+        return redirect()->route('showk')->with('success','Tarif Tersimpan');
     }
     public function storekeamanan(Request $request){
         $data = new Tarif_keamanan([
             'trf_keamanan'=>$request->get('tarif')
         ]);
         $data->save();
-        return redirect()->route('showk');
+        return redirect()->route('showk')->with('success','Tarif Ditambah');
     }
 }

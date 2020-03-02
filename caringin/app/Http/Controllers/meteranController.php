@@ -21,7 +21,7 @@ class meteranController extends Controller
             'NOMTR_AIR'=>$request->get('noalat'),
             'MAKHIR_AIR'=>$request->get('meteranair')
         ]);
-        return redirect()->route('alat');
+        return redirect()->route('alat')->with('success','Data Tersimpan');
     }
 
     //meteran listrik
@@ -34,7 +34,7 @@ class meteranController extends Controller
             'NOMTR_LISTRIK'=>$request->get('noalat'),
             'MAKHIR_LISTRIK'=>$request->get('meteranlistrik')
         ]);
-        return redirect()->route('alat');
+        return redirect()->route('alat')->with('success','Data Tersimpan');
     }
 
     public function dataalat(){
@@ -64,7 +64,7 @@ class meteranController extends Controller
             $dataL->save();
         }
     
-        return redirect('dataalat')->with('alert-success','Data Tersimpan');
+        return redirect('dataalat')->with('success','Data Ditambah');
     }
 
     public function printform(){

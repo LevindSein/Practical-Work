@@ -12,7 +12,7 @@
           <div class="col-lg-6">
             <div class="p-4">
             @foreach ($dataset as $data)
-            <form class="user" action="{{url('bayartagihan/store',[$data->ID_TAGIHANKU])}}" method="POST">
+            <form class="user" action="{{url('bayaran/store',[$data->ID_TAGIHANKU])}}" method="POST">
               @csrf
                 <div class="form-group">
                   Kode Kontrol

@@ -30,7 +30,7 @@ class nasabahController extends Controller
             'no_tlp'=>$request->get('telpon')
         ]);
         $data->save();
-        return redirect('showformnasabah')->with('alert-success','Data Tersimpan');
+        return redirect('showformnasabah')->with('success','Data Ditambah');
     }
     public function updateNasabah($id){
         $dataset = DB::table('nasabah')->where('ID_NASABAH',$id)->get();
@@ -43,7 +43,7 @@ class nasabahController extends Controller
             'NO_NPWP'=>$request->get('npwp'),
             'NO_TLP'=>$request->get('telpon')
         ]);
-        return redirect()->route('show');
+        return redirect()->route('show')->with('success','Data Tersimpan');
     }
 
     //Tempat Usaha
@@ -253,7 +253,7 @@ class nasabahController extends Controller
             'id_mlistrik'=>$id_mlistrik
         ]);
         $dataTempat->save();
-        return redirect('showformtempatusaha')->with('alert-success','Data Ditambah');
+        return redirect('showformtempatusaha')->with('success','Data Ditambah');
     }
     public function updateTempat($id){
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
@@ -366,6 +366,6 @@ class nasabahController extends Controller
             'ID_MLISTRIK'=>$id_mlistrik,
             'DAYA'=>$daya
         ]);
-        return redirect()->route('tempat');
+        return redirect()->route('tempat')->with('success','Data Tersimpan');
     }
 }

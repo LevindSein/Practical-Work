@@ -89,7 +89,7 @@ class tagihanController extends Controller
                     
                     if($inputAir < $awal_air)
                     {
-                        return redirect()->route('showformtagihan',['id'=>$id])->with('alert-warning','Meter Baru Salah');
+                        return redirect()->route('showformtagihan',['id'=>$id])->with('warning','Meter Baru Salah');
                     }
                     else
                     {                
@@ -131,7 +131,7 @@ class tagihanController extends Controller
             
                     if($inputListrik < $akhirListrik)
                     {
-                        return redirect()->route('showformtagihan',['id'=>$id])->with('alert-warning','Meter Baru Salah');
+                        return redirect()->route('showformtagihan',['id'=>$id])->with('warning','Meter Baru Salah');
                     }
                     else
                     {
@@ -249,7 +249,7 @@ class tagihanController extends Controller
         DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
             'MAKHIR_LISTRIK'=>$inputListrik
         ]);
-        return redirect()->route('tagihan');
+        return redirect()->route('tagihan')->with('success','Tagihan Ditambah');
     }
 
     public function dataTagihan($id){
@@ -307,10 +307,10 @@ class tagihanController extends Controller
             ]);
         }
         else{
-            return redirect()->route('bayartagihan',['id'=>$id])->with('alert-warning','Pembayaran Tidak Dapat Dilakukan');
+            return redirect()->route('bayartagihan',['id'=>$id])->with('warning','Pembayaran Belum Berhasil');
         }
 
-        return redirect()->route('lapTagihan');
+        return redirect()->route('lapTagihan')->with('success','Pembayaran Dilakukan');
     }
 
     public function printTagihan(){

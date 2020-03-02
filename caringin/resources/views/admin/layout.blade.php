@@ -334,6 +334,7 @@
 
                     </nav>
                     <!-- End of Topbar -->
+                    @include('admin.flash-message')
                     @yield('content')
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">
@@ -483,6 +484,14 @@
                                 className: 'btn btn-warning bg-gradient-warning'
                             }
                         ]
+                    });
+                });
+            </script>
+            
+            <script>
+                $(document).ready(function(){
+                    $("#success-alert,#warning-alert").fadeTo(750, 300).slideUp(300, function(){
+                        $("#success-alert,#warning-alert").slideUp(300);
                     });
                 });
             </script>
