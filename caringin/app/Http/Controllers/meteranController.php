@@ -64,4 +64,21 @@ class meteranController extends Controller
     
         return redirect('dataalat')->with('alert-success','Data Tersimpan');
     }
+
+    public function printform(){
+        $dataAir = DB::table('jasa_air')
+        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_air.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->join('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
+        ->select('tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_air.NOMTR_AIR','meteran_air.MAKHIR_AIR')
+        ->get();
+        $dataListrik = DB::table('jasa_listrik')
+        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_listrik.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
+        ->select('tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_listrik.NOMTR_LISTRIK','meteran_listrik.MAKHIR_LISTRIK')
+        ->get();
+
+        return view('admin.print-form',['dataAir'=>$dataAir,'dataListrik'=>$dataListrik]);
+    }
 }

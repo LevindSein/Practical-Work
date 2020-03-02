@@ -268,18 +268,11 @@ class tagihanController extends Controller
 
     public function bayarTagihan($id){
         $dataset = DB::table('tagihanku')
-        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tempat_usaha.ID_TEMPAT','tagihanku.ID_TAGIHANKU')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tempat_usaha.ID_TEMPAT','tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH')
         ->where('ID_TAGIHANKU',$id)
         ->get();
-        
-        // $usaha = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
-        // $tempatId = $usaha->ID_TEMPAT;
-        // $nasabah = DB::table('tempat_usaha')->where('ID_NASABAH',$tempatId)->first();
-        // $nasabahId = $nasabah->ID_NASABAH;
-        // $nama = DB::table('nasabah')->select('nasabah.NM_NASABAH')->where('ID_NASABAH',$nasabahId)->first();
-        // $namaku = $nama->NM_NASABAH;
-
         return view('admin.update-tagihan',['dataset'=>$dataset]);
     }
 

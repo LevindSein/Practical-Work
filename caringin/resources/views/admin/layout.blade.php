@@ -407,6 +407,8 @@
             <script src="{{asset('js/buttons.html5.min.js')}}"></script>
             <script src="{{asset('js/buttons.print.min.js')}}"></script>
             <script src="{{asset('js/buttons.colvis.min.js')}}"></script>
+            <script src="{{asset('js/autoNumeric.min.js')}}"></script>
+            <script src="{{asset('js/autoNumeric.min.js.map')}}"></script>
 
             <!--for column table toggle-->
             <script>
@@ -418,9 +420,19 @@
                 });
             </script>
             <script>
+                $(document).ready(function(){
+                    $('#dataAir,#dataListrik').DataTable({
+                        "scrollX": true,
+                        "processing": true,
+                        "bSortable": false,
+                        "deferRender": true
+                    });
+                });
+            </script>
+            <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan,#dataAir,#dataListrik'
+                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
                     ).DataTable({
                         "scrollX": true,
                         "processing": true,
@@ -474,6 +486,11 @@
                             }
                         ]
                     });
+                });
+            </script>
+            <script>
+                $(document).ready(function () {
+                    $('#exampleInputIpk').autoNumeric('init');
                 });
             </script>
             @yield('js')

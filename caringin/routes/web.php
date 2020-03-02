@@ -86,6 +86,8 @@ Route::post('update/storealatair/{id}','meteranController@storeupdatealatair');
     //LISTRIK
 Route::get('updatealatlistrik/{id}','meteranController@updatealatlistrik');
 Route::post('update/storealatlistrik/{id}','meteranController@storeupdatealatlistrik');
+    //Form
+Route::get('printform','meteranController@printform');
 
 //User
 Route::get('showdatauser','userController@showdatauser');

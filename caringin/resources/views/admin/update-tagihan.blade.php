@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                   Nama Nasabah
-                  <input readonly type="text" name="nama" class="form-control form-control-user" id="exampleInputNama">
+                  <input readonly value="{{$data->NM_NASABAH}}" type="text" name="nama" class="form-control form-control-user" id="exampleInputNama">
                 </div>
                 <div class="form-group">
                   Total Tagihan
