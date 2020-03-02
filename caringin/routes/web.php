@@ -71,7 +71,7 @@ Route::post('bayartagihan/store/{id}','tagihanController@storeBayar');
 Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
 Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
 Route::post('tagihan/store/{id}','tagihanController@storetagihan');
-
+Route::get('semuatagihan','tagihanController@printTagihan');
 
 //Tunggakan
 Route::get('bayartunggakan','tunggakanController@bayarTunggakan');

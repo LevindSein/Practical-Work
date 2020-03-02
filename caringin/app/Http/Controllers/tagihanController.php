@@ -312,4 +312,25 @@ class tagihanController extends Controller
 
         return redirect()->route('lapTagihan');
     }
+
+    public function printTagihan(){
+        //Set Tanggal Tagihan
+        $timezone = date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d", time());
+        $time = strtotime($date);
+        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN',
+                 'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH',
+                 'tagihanku.PAKAI_AIR','tagihanku.PAKAI_LISTRIK',
+                 'tagihanku.TTL_AIR','tagihanku.TTL_LISTRIK',
+                 'tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_KEBERSIHAN',
+                 'tagihanku.TGL_TAGIHAN')
+        ->where('TGL_TAGIHAN',$finalDate)
+        ->get();
+        return view('admin.print-tagihan',['dataset'=>$dataset]);
+    }
 }

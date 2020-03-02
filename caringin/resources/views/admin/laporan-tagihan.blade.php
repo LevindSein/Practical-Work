@@ -11,8 +11,10 @@
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
               <h6 class="m-0 font-weight-bold text-primary">Tabel Laporan Tagihan</h6>
+              
+              <a href="semuatagihan" type="submit" class="btn btn-primary"><i class="fas fa-download fa-sm text-white-50"></i> Print Tagihan</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">

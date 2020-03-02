@@ -166,7 +166,7 @@
                         $(win.document.body)
                             .css('font-size', '11pt')
                             .prepend(
-                                '<img src="http://datatables.net/media/images/logo-fade.png" style="position:ab' +
+                                '<img src="{{asset('img/bp3c.png')}}" style="position:ab' +
                                 'solute; top:0; left:0;" />'
                             );;
                     }

@@ -14,7 +14,7 @@
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
               <h6 class="m-0 font-weight-bold text-primary">Tabel Alat Meteran</h6>
               <!--Print Form-->
-              <a href="printform" type="submit" class="btn btn-primary"><i class="fas fa-download fa-sm text-white-50"></i>   Print Form</a>
+              <a href="printform" type="submit" class="btn btn-primary"><i class="fas fa-download fa-sm text-white-50"></i> Print Form</a>
             </div>
             <div class="card-body">
               <div class="form-group">
