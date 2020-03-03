@@ -1,6 +1,6 @@
 @if ($message = Session::get('success'))
 <div class="alert alert-success alert-block" id="success-alert">
-        <strong>Yeay! </strong>{{ $message }}
+        <strong>Yeah! </strong>{{ $message }}
 </div>
 @endif
 

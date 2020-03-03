@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tagihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
+use Exception;
 
 class tagihanController extends Controller
 {
@@ -36,6 +37,7 @@ class tagihanController extends Controller
     }
 
     public function storetagihan(Request $request ,$id){
+    try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
 
         $meterAirID = DB::table('tempat_usaha')
@@ -249,6 +251,9 @@ class tagihanController extends Controller
         DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
             'MAKHIR_LISTRIK'=>$inputListrik
         ]);
+    } catch(\Exception $e){
+        return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
+    }
         return redirect()->route('tagihan')->with('success','Tagihan Ditambah');
     }
 
@@ -277,6 +282,7 @@ class tagihanController extends Controller
     }
 
     public function storeBayar(Request $request,$id){
+    try{
         $bayar = $request->get('bayar');
 
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
@@ -309,7 +315,9 @@ class tagihanController extends Controller
         else{
             return redirect()->route('bayartagihan',['id'=>$id])->with('warning','Pembayaran Belum Berhasil');
         }
-
+    } catch(\Exception $e){
+        return redirect()->route('bayartagihan',['id'=>$id])->with('error','Pembayaran Gagal');
+    }
         return redirect()->route('lapTagihan')->with('success','Pembayaran Dilakukan');
     }
 

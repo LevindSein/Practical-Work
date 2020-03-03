@@ -8,6 +8,7 @@ use App\Meteran_air;
 use App\Meteran_listrik;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
+use Exception;
 
 class meteranController extends Controller
 {
@@ -17,10 +18,14 @@ class meteranController extends Controller
         return view('admin.update-alat-air',['dataset'=>$dataset]);
     }
     public function storeupdatealatair(Request $request, $id){
+    try{
         DB::table('meteran_air')->where('ID_MAIR', $id)->update([
             'NOMTR_AIR'=>$request->get('noalat'),
             'MAKHIR_AIR'=>$request->get('meteranair')
         ]);
+    } catch(\Exception $e){
+        return redirect()->route('alatair',['id'=>$id])->with('error','Data Gagal Disimpan');
+    }
         return redirect()->route('alat')->with('success','Data Tersimpan');
     }
 
@@ -30,10 +35,14 @@ class meteranController extends Controller
         return view('admin.update-alat-listrik',['dataset'=>$dataset]);
     }
     public function storeupdatealatlistrik(Request $request, $id){
+    try{
         DB::table('meteran_listrik')->where('ID_MLISTRIK', $id)->update([
             'NOMTR_LISTRIK'=>$request->get('noalat'),
             'MAKHIR_LISTRIK'=>$request->get('meteranlistrik')
         ]);
+    }catch(\Exception $e){
+        return redirect()->route('alatlistrik',['id'=>$id])->with('error','Data Gagal Disimpan');
+    }
         return redirect()->route('alat')->with('success','Data Tersimpan');
     }
 
@@ -46,6 +55,7 @@ class meteranController extends Controller
         return view('admin.tambah-alat');
     }
     public function storealat(Request $request){
+    try{    
         $radio = $request->get('alat');
         if($radio == "A"){
             $noalat = strtoupper($request->get('noalat'));
@@ -63,7 +73,9 @@ class meteranController extends Controller
             ]);
             $dataL->save();
         }
-    
+    }catch(\Exception $e){
+        return redirect('formalat')->with('error','Data Gagal Ditambah');
+    }
         return redirect('dataalat')->with('success','Data Ditambah');
     }
 

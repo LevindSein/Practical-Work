@@ -47,11 +47,11 @@
                 <!-- Hidden Identitas -->
                 <div class="form-group" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input value="{{$noktp}}" type="text" name="ktp" class="form-control form-control-user" placeholder="(kosong)">
+                  <input value="{{$noktp}}" type="text" name="ktp" id="ktpku" class="form-control form-control-user" placeholder="(kosong)">
                 </div>
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input value="{{$nonpwp}}" type="text" name="npwp" class="form-control form-control-user" placeholder="(kosong)">
+                  <input value="{{$nonpwp}}" type="text" name="npwp" id="npwpku" class="form-control form-control-user" placeholder="(kosong)">
                 </div>
 
                 <div class="form-group row">
@@ -98,7 +98,7 @@
                   <input value="{{$data->ID_MLISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                   <br>
                   Daya
-                  <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="myDiv2" placeholder="12xx">
+                  <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
@@ -160,12 +160,45 @@
     {
       document.getElementById('myDivKTP').style.display ='block';
       document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('ktpku').required = true;
+      document.getElementById('npwpku').required = false;
     }
     else{
       document.getElementById('myDivKTP').style.display ='none';
       document.getElementById('myDivNPWP').style.display ='block';
+      document.getElementById('npwpku').required = true;
+      document.getElementById('ktpku').required = false;
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);
+  </script>
+
+  <!-- Checking -->
+  <script>
+  function checkListrik(){
+    if($('#myCheck2').is(':checked'))
+    {
+      document.getElementById('myDiv2').required = true;
+      document.getElementById('dayaL').required = true;
+    }
+    else{
+      document.getElementById('myDiv2').required = false;
+      document.getElementById('dayaL').required = false;
+    }
+  }
+  $('input[type="checkbox"]').click(checkListrik).each(checkListrik);
+  </script>
+
+  <script>
+  function checkAir(){
+    if($('#myCheck1').is(':checked'))
+    {
+      document.getElementById('myDiv1').required = true;
+    }
+    else{
+      document.getElementById('myDiv1').required = false;
+    }
+  }
+  $('input[type="checkbox"]').click(checkAir).each(checkAir);
   </script>
 @endsection

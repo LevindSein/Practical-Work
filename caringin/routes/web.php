@@ -20,13 +20,13 @@ Route::get('/', function () {
 Route::get('showdatanasabah','nasabahController@showdata')->name('show');
 Route::get('showformnasabah','nasabahController@showform');
 Route::post('storenasabah','nasabahController@store');
-Route::get('updatenasabah/{id}','nasabahController@updateNasabah');
+Route::get('updatenasabah/{id}','nasabahController@updateNasabah')->name('updnasabah');
 Route::post('update/store/{id}','nasabahController@updateStore');
 //Tempat Usaha
 Route::get('showtempatusaha','nasabahController@showtempatusaha')->name('tempat');
 Route::get('showformtempatusaha','nasabahController@showformtempat');
 Route::post('storetempat','nasabahController@storeTempat');
-Route::get('updatetempat/{id}','nasabahController@updateTempat');
+Route::get('updatetempat/{id}','nasabahController@updateTempat')->name('updtempat');
 Route::post('update/storetempat/{id}','nasabahController@updateStoreTempat');
 
 //Tarif
@@ -39,19 +39,19 @@ Route::post('update/storeL/{id}','tarifController@updateStoreL');
     //IPK
 Route::get('showformtarifipk','tarifController@showTIpk')->name('showi');
 Route::get('tambahipk','tarifController@showIpk');
-Route::get('updateipk/{id}','tarifController@updateIpk');
+Route::get('updateipk/{id}','tarifController@updateIpk')->name('uptrfI');
 Route::post('update/storeI/{id}','tarifController@updateStoreI');
 Route::post('storeipk','tarifController@storeipk');
     //Keamanan
 Route::get('showformtarifkeamanan','tarifController@showTKeamanan')->name('showk');
 Route::get('tambahkeamanan','tarifController@showKeamanan');
-Route::get('updatekeamanan/{id}','tarifController@updateKeamanan');
+Route::get('updatekeamanan/{id}','tarifController@updateKeamanan')->name('uptrfK');
 Route::post('update/storeK/{id}','tarifController@updateStoreK');
 Route::post('storekeamanan','tarifController@storekeamanan');
     //Kebersihan
 Route::get('showformtarifkebersihan','tarifController@showTKebersihan')->name('showb');
 Route::get('tambahkebersihan','tarifController@showKebersihan');
-Route::get('updatekebersihan/{id}','tarifController@updateKebersihan');
+Route::get('updatekebersihan/{id}','tarifController@updateKebersihan')->name('uptrfB');
 Route::post('update/storeB/{id}','tarifController@updateStoreB');
 Route::post('storekebersihan','tarifController@storekebersihan');
 
@@ -78,13 +78,13 @@ Route::get('bayartunggakan','tunggakanController@bayarTunggakan');
 
 //Meteran
 Route::get('dataalat','meteranController@dataalat')->name('alat');
-Route::get('tambahalat','meteranController@formalat');
+Route::get('tambahalat','meteranController@formalat')->name('formalat');
 Route::post('storealat','meteranController@storealat');
     //AIR
-Route::get('updatealatair/{id}','meteranController@updatealatair');
+Route::get('updatealatair/{id}','meteranController@updatealatair')->name('alatair');
 Route::post('update/storealatair/{id}','meteranController@storeupdatealatair');
     //LISTRIK
-Route::get('updatealatlistrik/{id}','meteranController@updatealatlistrik');
+Route::get('updatealatlistrik/{id}','meteranController@updatealatlistrik')->name('alatlistrik');
 Route::post('update/storealatlistrik/{id}','meteranController@storeupdatealatlistrik');
     //Form
 Route::get('printform','meteranController@printform');

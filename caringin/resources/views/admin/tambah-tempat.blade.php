@@ -46,11 +46,11 @@
                 <!-- Hidden Identitas -->
                 <div class="form-group" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input name="ktp" type="text" class="form-control form-control-user" placeholder="1484xxxx">
+                  <input name="ktp" type="text" class="form-control form-control-user" id="ktpku" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input name="npwp" type="text" class="form-control form-control-user" placeholder="261xxxxxx">
+                  <input name="npwp" type="text" class="form-control form-control-user" id="npwpku" placeholder="261xxxxxx">
                 </div>
 
                 <div class="form-group row">
@@ -86,15 +86,14 @@
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
                   ID Alat Meter Air
-                  <input type="text" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1xx">
+                  <input type="number" min="0" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1xx">
                 </div>
                 <div class="form-group" style="display:none">
                   ID Alat Meter Listrik
-                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1xx">
+                  <input type="number" min="0" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1xx">
                   <br>
                   Daya
-                  <input type="text" class="form-control form-control-user" name="dayaListrik" placeholder="12xx"
-                  <?php if(isset($request->listrik)){ ?> required="required" <?php } ?>>
+                  <input type="number" min="0" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
@@ -157,12 +156,45 @@
     {
       document.getElementById('myDivKTP').style.display ='block';
       document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('ktpku').required = true;
+      document.getElementById('npwpku').required = false;
     }
     else{
       document.getElementById('myDivKTP').style.display ='none';
       document.getElementById('myDivNPWP').style.display ='block';
+      document.getElementById('npwpku').required = true;
+      document.getElementById('ktpku').required = false;
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);
+  </script>
+
+  <!-- Checking -->
+  <script>
+  function checkListrik(){
+    if($('#myCheck2').is(':checked'))
+    {
+      document.getElementById('myDiv2').required = true;
+      document.getElementById('dayaL').required = true;
+    }
+    else{
+      document.getElementById('myDiv2').required = false;
+      document.getElementById('dayaL').required = false;
+    }
+  }
+  $('input[type="checkbox"]').click(checkListrik).each(checkListrik);
+  </script>
+
+  <script>
+  function checkAir(){
+    if($('#myCheck1').is(':checked'))
+    {
+      document.getElementById('myDiv1').required = true;
+    }
+    else{
+      document.getElementById('myDiv1').required = false;
+    }
+  }
+  $('input[type="checkbox"]').click(checkAir).each(checkAir);
   </script>
 @endsection

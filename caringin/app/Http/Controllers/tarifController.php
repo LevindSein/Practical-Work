@@ -8,6 +8,7 @@ use App\Tarif_listrik;
 use App\Tarif_kebersihan;
 use App\Tarif_keamanan;
 use App\Tarif_ipk;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class tarifController extends Controller
@@ -18,6 +19,7 @@ class tarifController extends Controller
         return view('admin.tarif-air',['dataset'=>$dataset]);
     }
     public function updateStoreA(Request $request, $id){
+    try{
         DB::table('tarif_air')->where('ID_TRFAIR', $id)->update([
             'TRF_AIR1'=>$request->get('tarif1'),
             'TRF_AIR2'=>$request->get('tarif2'),
@@ -27,6 +29,9 @@ class tarifController extends Controller
             'TRF_DENDA'=>$request->get('tarifdenda'),
             'PPN_AIR'=>$request->get('ppnair')
         ]);
+    } catch(\Exception $e){
+        return redirect()->back()->with('error','Tarif Gagal Disimpan');
+    }
         return redirect()->back()->with('success','Tarif Tersimpan');
     }
 
@@ -36,6 +41,7 @@ class tarifController extends Controller
         return view('admin.tarif-listrik',['dataset'=>$dataset]);
     }
     public function updateStoreL(Request $request, $id){
+    try{
         DB::table('tarif_listrik')->where('ID_TRFLISTRIK', $id)->update([
             'VAR_BEBAN'=>$request->get('tarifbeban'),
             'VAR_BLOK1'=>$request->get('tarifblok1'),
@@ -45,7 +51,10 @@ class tarifController extends Controller
             'VAR_DENDA'=>$request->get('tarifdenda'),
             'PPN_LISTRIK'=>$request->get('ppnlistrik')
         ]);
-        return redirect()->back()->with('success','Tarif Tersimpan');;
+    }catch(\Exception $e){
+        return redirect()->back()->with('error','Tarif Gagal Disimpan');
+    }
+        return redirect()->back()->with('success','Tarif Tersimpan');
     }
 
     //Tarif Kebersihan
@@ -61,17 +70,25 @@ class tarifController extends Controller
         return view('admin.update-kebersihan',['dataset'=>$dataset]);
     }
     public function updateStoreB(Request $request, $id){
+    try{
         DB::table('tarif_kebersihan')->where('ID_TRFKEBERSIHAN', $id)->update([
             'ID_TRFKEBERSIHAN'=>$request->get('kategori'),
             'TRF_KEBERSIHAN'=>$request->get('tarif')
         ]);
+    }catch(\Exception $e){
+        return redirect()->route('uptrfB',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+    }
         return redirect()->route('showb')->with('success','Tarif Tersimpan');
     }
     public function storekebersihan(Request $request){
+    try{    
         $data = new Tarif_kebersihan([
             'trf_kebersihan'=>$request->get('tarif')
         ]);
         $data->save();
+    } catch(\Exception $e){
+        return redirect()->route('tambahkebersihan')->with('error','Tarif Gagal Ditambah');
+    }
         return redirect()->route('showb')->with('success','Tarif Ditambah');
     }
 
@@ -88,17 +105,25 @@ class tarifController extends Controller
         return view('admin.update-ipk',['dataset'=>$dataset]);
     }
     public function updateStoreI(Request $request, $id){
+    try{
         DB::table('tarif_ipk')->where('ID_TRFIPK', $id)->update([
             'ID_TRFIPK'=>$request->get('kategori'),
             'TRF_IPK'=>$request->get('tarif')
         ]);
+    }catch(\Exception $e){
+        return redirect()->route('uptrfI',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+    }
         return redirect()->route('showi')->with('success','Tarif Tersimpan');
     }
     public function storeipk(Request $request){
+    try{
         $data = new Tarif_ipk([
             'trf_ipk'=>$request->get('tarif')
         ]);
         $data->save();
+    }catch(\Exception $e){
+        return redirect()->route('tambahipk')->with('error','Tarif Gagal Ditambah');
+    }
         return redirect()->route('showi')->with('success','Tarif Ditambah');
     }
 
@@ -115,17 +140,25 @@ class tarifController extends Controller
         return view('admin.update-keamanan',['dataset'=>$dataset]);
     }
     public function updateStoreK(Request $request, $id){
+    try{
         DB::table('tarif_keamanan')->where('ID_TRFKEAMANAN', $id)->update([
             'ID_TRFKEAMANAN'=>$request->get('kategori'),
             'TRF_KEAMANAN'=>$request->get('tarif')
         ]);
+    }catch(\Exception $e){
+        return redirect()->route('uptrfK',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+    }
         return redirect()->route('showk')->with('success','Tarif Tersimpan');
     }
     public function storekeamanan(Request $request){
+    try{
         $data = new Tarif_keamanan([
             'trf_keamanan'=>$request->get('tarif')
         ]);
         $data->save();
+    }catch(\Exception $e){
+        return redirect()->route('tambahkeamanan')->with('error','Tarif Gagal Ditambah');
+    }
         return redirect()->route('showk')->with('success','Tarif Ditambah');
     }
 }

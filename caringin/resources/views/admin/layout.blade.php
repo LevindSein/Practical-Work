@@ -495,6 +495,7 @@
                     });
                 });
             </script>
+
             @yield('js')
         </body>
 

@@ -52,7 +52,7 @@ class nasabahController extends Controller
             ]);
         }
         catch(\Exception $e){
-            return redirect()->route('show')->with('error','Data Gagal Disimpan');    
+            return redirect()->route('updnasabah',['id'=>$id])->with('error','Data Gagal Disimpan');    
         }
         return redirect()->route('show')->with('success','Data Tersimpan');
     }
@@ -161,8 +161,10 @@ class nasabahController extends Controller
         return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan]);
     }
     public function storeTempat(Request $request){
+    try{
         //Kode Kontrol
-        $blok = $request->get("blok"); 
+        $bl = $request->get("blok");
+        $blok = strtoupper($bl); 
         $los = $request->get("los"); 
 
         $split = preg_split ('/,/', $los);
@@ -264,6 +266,9 @@ class nasabahController extends Controller
             'id_mlistrik'=>$id_mlistrik
         ]);
         $dataTempat->save();
+    } catch(\Exception $e){
+        return redirect('showformtempatusaha')->with('error','Data Gagal Ditambah');
+    }
         return redirect('showformtempatusaha')->with('success','Data Ditambah');
     }
     public function updateTempat($id){
@@ -321,6 +326,7 @@ class nasabahController extends Controller
         ]);
     }
     public function updateStoreTempat(Request $request, $id){
+    try{
         //Identitas
         $radio = $request->get('identitas');
         if($radio = "k")
@@ -377,6 +383,9 @@ class nasabahController extends Controller
             'ID_MLISTRIK'=>$id_mlistrik,
             'DAYA'=>$daya
         ]);
+    } catch(\Exception $e){
+        return redirect()->route('updtempat',['id'=>$id])->with('error','Data Gagal Disimpan');
+    }
         return redirect()->route('tempat')->with('success','Data Tersimpan');
     }
 }
