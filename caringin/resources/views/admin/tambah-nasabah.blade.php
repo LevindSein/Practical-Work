@@ -20,15 +20,15 @@
                 </div>
                 <div class="form-group">
                   Nomor KTP Nasabah
-                  <input type="number" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
+                  <input type="number" min="0" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
                 </div>
                 <div class="form-group">
                   Nomor NPWP Nasabah
-                  <input type="text" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
+                  <input type="number" min="0" name="npwp" class="form-control form-control-user" id="exampleInputNpwpPelanggan" placeholder="99xxxxx">
                 </div>
                 <div class="form-group">
                   Nomor Telpon
-                  <input required type="number" name="telpon" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
+                  <input required type="number" min="0" name="telpon" class="form-control form-control-user" id="exampleInput" placeholder="0818xxxxx">
                 </div>
                 <input type="submit" value="Tambah Nasabah" class="btn btn-primary btn-user btn-block">
               </form>      

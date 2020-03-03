@@ -490,7 +490,7 @@
             
             <script>
                 $(document).ready(function(){
-                    $("#success-alert,#warning-alert").fadeTo(750, 300).slideUp(300, function(){
+                    $("#success-alert,#warning-alert,#error-alert").fadeTo(750, 300).slideUp(300, function(){
                         $("#success-alert,#warning-alert").slideUp(300);
                     });
                 });
