@@ -89,6 +89,11 @@ Route::post('update/storealatlistrik/{id}','meteranController@storeupdatealatlis
     //Form
 Route::get('printform','meteranController@printform');
 
+//Hari Libur
+Route::get('showdatalibur','liburanController@dataLibur');
+Route::get('tambahlibur','liburanController@tambahLibur');
+Route::post('storelibur','liburanController@storeLibur');
+
 //User
 Route::get('showdatauser','userController@showdatauser');
 Route::get('showtambahuser','userController@tambahuser');

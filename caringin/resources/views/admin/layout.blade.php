@@ -30,9 +30,13 @@
             href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}"
             rel="stylesheet">
 
+        <script src="{{asset('js/animate.min.js')}}"></script>
+
     </head>
 
     <body id="page-top">
+        
+    <div class="se-pre-con"></div>
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -185,7 +189,7 @@
                         data-target="#collapseMeter"
                         aria-expanded="true"
                         aria-controls="collapseMeter">
-                        <i class="fas fa-pencil-ruler"></i>
+                        <i class="fas fa-tools"></i>
                         <span>Alat Meter</span>
                     </a>
                     <div
@@ -196,6 +200,30 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{url('tambahalat')}}">Tambah Alat</a>
                             <a class="collapse-item" href="{{url('dataalat')}}">Data Alat</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Hari Libur -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseLibur"
+                        aria-expanded="true"
+                        aria-controls="collapseLibur">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>Hari Libur</span>
+                    </a>
+                    <div
+                        id="collapseLibur"
+                        class="collapse"
+                        aria-labelledby="headingLibur"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{url('tambahlibur')}}">Tambah Hari Libur</a>
+                            <a class="collapse-item" href="{{url('showdatalibur')}}">Data Hari Libur</a>
                         </div>
                     </div>
                 </li>
@@ -382,6 +410,12 @@
                 </div>
             </div>
 
+            <script>
+                $(window).load(function() {
+            		$(".se-pre-con").fadeIn("slow").fadeOut("slow");;
+	            });
+            </script>
+
             <!-- Bootstrap core JavaScript-->
             <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
             <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -419,6 +453,13 @@
                 });
             </script>
             <script>
+                jQuery.fn.dataTable.Api.register( 'processing()', function ( show ) {
+                    return this.iterator( 'table', function ( ctx ) {
+                        ctx.oApi._fnProcessingDisplay( ctx, show );
+                    } );
+                });
+            </script>
+            <script>
                 $(document).ready(function(){
                     $('#dataAir,#dataListrik').DataTable({
                         "scrollX": true,
@@ -433,11 +474,16 @@
                     $(
                         '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
                     ).DataTable({
-                        "scrollX": true,
                         "processing": true,
+                        "bProcessing":true,
+                        "language": {
+                            'loadingRecords': '&nbsp;',
+                            'processing': '<i class="fas fa-spinner"></i>'
+                        },
+                        "scrollX": true,
                         "bSortable": false,
                         "deferRender": true,
-                        "dom": "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
+                        "dom": "r" + "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
                                 "ow'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 
                         "buttons": [
@@ -487,7 +533,6 @@
                     });
                 });
             </script>
-            
             <script>
                 $(document).ready(function(){
                     $("#success-alert,#warning-alert,#error-alert").fadeTo(750, 300).slideUp(300, function(){
