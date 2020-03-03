@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                   Kondisi Meteran Awal
-                  <input type="number" name="meteran" class="form-control form-control-user" id="exampleInputMeteran" placeholder="123xx">
+                  <input required type="number" name="meteran" class="form-control form-control-user" id="exampleInputMeteran" placeholder="123xx">
                 </div>
                 <input type="submit" value="Tambah Alat" class="btn btn-primary btn-user btn-block">
               </form>      
