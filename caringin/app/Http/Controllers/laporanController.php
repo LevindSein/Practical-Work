@@ -15,7 +15,7 @@ class laporanController extends Controller
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where('STT_BAYAR',1)
         ->get();
-        
+
         return view('admin.laporan-harian',['dataset'=>$dataset]);
     }
     public function showBulanan(){

@@ -65,18 +65,18 @@
                   @foreach($dataset as $d)
                     <tr>
                       <td class="text-center">{{$d->TGL_BAYAR}}</td>
-                      <td class="text-left">A-2-003</td>
-                      <td class="text-left">fahni amsyari</td>
-                      <td>996</td>
-                      <td>1,006</td>
-                      <td>10</td>
-                      <td>60,000</td>
-                      <td>22,700</td>
-                      <td>10,000</td>
-                      <td>18,000</td>
-                      <td>121,782</td>
-                      <td>121,782</td>
-                      <td>&mdash;</td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td>{{$d->AWAL_AIR}}</td>
+                      <td>{{$d->AKHIR_AIR}}</td>
+                      <td>{{$d->PAKAI_AIR}}</td>
+                      <td>{{$d->BYR_AIR}}</td>
+                      <td>{{$d->BYR_BEBAN}}</td>
+                      <td>{{$d->BYR_PEMELIHARAAN}}</td>
+                      <td>{{$d->BYR_ARKOT}}</td>
+                      <td>{{$d->TTL_AIR}}</td>
+                      <td>{{$d->REALISASI_AIR}}</td>
+                      <td>{{$d->SELISIH_AIR}}</td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -111,21 +111,21 @@
                   <tbody>
                   @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-left">A-2-003</td>
-                      <td class="text-left">PT.LPP</td>
-                      <td>2,200</td>
-                      <td>89,788</td>
-                      <td>90,383</td>
-                      <td>595</td>
-                      <td>0</td>
-                      <td>53,440</td>
-                      <td>1,334,220</td>
-                      <td>77,000</td>
-                      <td>146,466</td>
-                      <td>1,820,572</td>
-                      <td>1,820,572</td>
-                      <td>&mdash;</td>
+                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td>{{$d->DAYA}}</td>
+                      <td>{{$d->AWAL_LISTRIK}}</td>
+                      <td>{{$d->AKHIR_LISTRIK}}</td>
+                      <td>{{$d->PAKAI_LISTRIK}}</td>
+                      <td>{{$d->REK_MIN}}</td>
+                      <td>{{$d->B_BLOK1}}</td>
+                      <td>{{$d->B_BLOK2}}</td>
+                      <td>{{$d->B_BEBAN}}</td>
+                      <td>{{$d->BPJU}}</td>
+                      <td>{{$d->TTL_LISTRIK}}</td>
+                      <td>{{$d->REALISASI_LISTRIK}}</td>
+                      <td>{{$d->SELISIH_LISTRIK}}</td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -153,14 +153,14 @@
                   <tbody>
                   @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-center">A-1</td>
-                      <td class="text-left">BTPN</td>
-                      <td class="text-center">8</td>
-                      <td class="text-center">1</td>
-                      <td>200,000</td>
-                      <td>200,000</td>
-                      <td>&mdash;</td>
+                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
+                      <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
+                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
+                      <td>{{$d->TTL_IPKEAMANAN}}</td>
+                      <td>{{$d->REALISASI_IPKEAMANAN}}</td>
+                      <td>{{$d->SELISIH_IPKEAMANAN}}</td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -188,14 +188,14 @@
                   <tbody>
                   @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-center">A-1</td>
-                      <td class="text-left">PT.BTN</td>
-                      <td class="text-center">1</td>
-                      <td class="text-center">1</td>
-                      <td>120,000</td>
-                      <td>120,000</td>
-                      <td>&mdash;</td>
+                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
+                      <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
+                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
+                      <td>{{$d->TTL_KEBERSIHAN}}</td>
+                      <td>{{$d->REALISASI_KEBERSIHAN}}</td>
+                      <td>{{$d->SELISIH_KEBERSIHAN}}</td>
                     </tr>
                   @endforeach
                   </tbody>
