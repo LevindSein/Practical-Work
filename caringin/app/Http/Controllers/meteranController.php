@@ -74,7 +74,7 @@ class meteranController extends Controller
             $dataL->save();
         }
     }catch(\Exception $e){
-        return redirect('formalat')->with('error','Data Gagal Ditambah');
+        return redirect()->back()->with('error','Data Gagal Ditambah');
     }
         return redirect('dataalat')->with('success','Data Ditambah');
     }
