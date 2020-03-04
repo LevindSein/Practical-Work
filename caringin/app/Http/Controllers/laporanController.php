@@ -10,7 +10,13 @@ use Illuminate\Routing\Redirector;
 class laporanController extends Controller
 {
     public function showHarian(){
-        return view('admin.laporan-harian');
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('STT_BAYAR',1)
+        ->get();
+        
+        return view('admin.laporan-harian',['dataset'=>$dataset]);
     }
     public function showBulanan(){
         return view('admin.laporan-bulanan');

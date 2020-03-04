@@ -11,6 +11,7 @@ class Tagihan extends Model
         'id_tagihanku',
         'id_tempat',
         'tgl_tagihan',
+        'tgl_bayar',
         'stt_bayar',
         'stt_lunas',
         'awal_air',
@@ -47,6 +48,7 @@ class Tagihan extends Model
         'ttl_tagihan',
         'realisasi',
         'selisih',
+        'denda',
         'updated_at',
         'created_at'
     ];

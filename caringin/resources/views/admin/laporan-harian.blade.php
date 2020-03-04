@@ -62,8 +62,9 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
+                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
                       <td class="text-left">A-2-003</td>
                       <td class="text-left">fahni amsyari</td>
                       <td>996</td>
@@ -77,6 +78,7 @@
                       <td>121,782</td>
                       <td>&mdash;</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -107,6 +109,7 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-left">A-2-003</td>
@@ -124,6 +127,7 @@
                       <td>1,820,572</td>
                       <td>&mdash;</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -147,6 +151,7 @@
                   </thead>
                  
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
@@ -157,6 +162,7 @@
                       <td>200,000</td>
                       <td>&mdash;</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -180,6 +186,7 @@
                   </thead>
                  
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
                       <td class="text-center">2020-01-15</td>
                       <td class="text-center">A-1</td>
@@ -190,6 +197,7 @@
                       <td>120,000</td>
                       <td>&mdash;</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>

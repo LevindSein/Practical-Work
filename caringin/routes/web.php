@@ -65,7 +65,7 @@ Route::get('showlaporanbongkaran','laporanController@showBongkaran');
 Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
 
 //Tagihan
-Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan');
+Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan')->name('datatagihan');
 Route::get('bayartagihan/{id}','tagihanController@bayarTagihan')->name('bayartagihan');
 Route::post('bayaran/store/{id}','tagihanController@storeBayar');
 Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');

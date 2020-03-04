@@ -535,8 +535,8 @@
             </script>
             <script>
                 $(document).ready(function(){
-                    $("#success-alert,#warning-alert,#error-alert").fadeTo(750, 300).slideUp(300, function(){
-                        $("#success-alert,#warning-alert").slideUp(300);
+                    $("#success-alert,#warning-alert,#error-alert,#info-alert").fadeTo(1200, 300).slideUp(300, function(){
+                        $("#success-alert,#warning-alert,#error-alert,#info-alert").slideUp(300);
                     });
                 });
             </script>

@@ -20,8 +20,8 @@
 
 
 @if ($message = Session::get('info'))
-<div class="alert alert-info alert-block">	
-	<strong>{{ $message }}</strong>
+<div class="alert alert-info alert-block" id="warning-alert">	
+	<strong>OKE! </strong>{{ $message }}
 </div>
 @endif
 
