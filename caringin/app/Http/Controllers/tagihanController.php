@@ -319,10 +319,10 @@ class tagihanController extends Controller
         $idNas = $check->ID_NASABAH;
 
         if($bayar == $tagihan){
-            return redirect()->route('datatagihan',['id'=>$idNas])->with('info','Tagihan Sudah Dibayar');
+            return redirect()->route('lapTagihan')->with('info','Tagihan Sudah Dibayar');
         }
     }catch(\Eception $e){
-        return redirect()->route('lapTagihan')->with('error','Ada yang Salah Nih');
+        return redirect()->route('lapTagihan')->with('error','Kesalahan Sistem');
     }
         return view('admin.update-tagihan',['dataset'=>$dataset]);
     }

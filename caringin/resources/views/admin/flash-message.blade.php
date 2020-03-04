@@ -14,14 +14,14 @@
 
 @if ($message = Session::get('warning'))
 <div class="alert alert-warning alert-block" id="warning-alert">
-	<strong>Oops! </strong> {{ $message }}
+	<strong>Wah! </strong> {{ $message }}
 </div>
 @endif
 
 
 @if ($message = Session::get('info'))
 <div class="alert alert-info alert-block" id="warning-alert">	
-	<strong>OKE! </strong>{{ $message }}
+	<strong>Oke! </strong>{{ $message }}
 </div>
 @endif
 

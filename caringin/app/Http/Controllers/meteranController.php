@@ -24,7 +24,7 @@ class meteranController extends Controller
             'MAKHIR_AIR'=>$request->get('meteranair')
         ]);
     } catch(\Exception $e){
-        return redirect()->route('alatair',['id'=>$id])->with('error','Data Gagal Disimpan');
+        return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('alat')->with('success','Data Tersimpan');
     }
@@ -41,7 +41,7 @@ class meteranController extends Controller
             'MAKHIR_LISTRIK'=>$request->get('meteranlistrik')
         ]);
     }catch(\Exception $e){
-        return redirect()->route('alatlistrik',['id'=>$id])->with('error','Data Gagal Disimpan');
+        return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('alat')->with('success','Data Tersimpan');
     }

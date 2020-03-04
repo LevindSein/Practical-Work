@@ -34,7 +34,7 @@ class nasabahController extends Controller
             $data->save();
         }
         catch(\Exception $e){
-            return redirect('showformnasabah')->with('error','Data Sudah Digunakan');
+            return redirect('showformnasabah')->with('warning','Data Sudah Digunakan');
         }
         return redirect('showformnasabah')->with('success','Data Ditambah');
     }
@@ -52,7 +52,7 @@ class nasabahController extends Controller
             ]);
         }
         catch(\Exception $e){
-            return redirect()->route('updnasabah',['id'=>$id])->with('error','Data Gagal Disimpan');    
+            return redirect()->back()->with('error','Data Gagal Disimpan');    
         }
         return redirect()->route('show')->with('success','Data Tersimpan');
     }
@@ -384,7 +384,7 @@ class nasabahController extends Controller
             'DAYA'=>$daya
         ]);
     } catch(\Exception $e){
-        return redirect()->route('updtempat',['id'=>$id])->with('error','Data Gagal Disimpan');
+        return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('tempat')->with('success','Data Tersimpan');
     }

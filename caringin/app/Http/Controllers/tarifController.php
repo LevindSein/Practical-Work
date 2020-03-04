@@ -76,7 +76,7 @@ class tarifController extends Controller
             'TRF_KEBERSIHAN'=>$request->get('tarif')
         ]);
     }catch(\Exception $e){
-        return redirect()->route('uptrfB',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+        return redirect()->back()->with('error','Tarif Gagal Disimpan');
     }
         return redirect()->route('showb')->with('success','Tarif Tersimpan');
     }
@@ -111,7 +111,7 @@ class tarifController extends Controller
             'TRF_IPK'=>$request->get('tarif')
         ]);
     }catch(\Exception $e){
-        return redirect()->route('uptrfI',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+        return redirect()->back()->with('error','Tarif Gagal Disimpan');
     }
         return redirect()->route('showi')->with('success','Tarif Tersimpan');
     }
@@ -146,7 +146,7 @@ class tarifController extends Controller
             'TRF_KEAMANAN'=>$request->get('tarif')
         ]);
     }catch(\Exception $e){
-        return redirect()->route('uptrfK',['id'=>$id])->with('error','Tarif Gagal Disimpan');
+        return redirect()->back()->with('error','Tarif Gagal Disimpan');
     }
         return redirect()->route('showk')->with('success','Tarif Tersimpan');
     }
