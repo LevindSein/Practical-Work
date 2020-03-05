@@ -17,7 +17,11 @@ class nasabahController extends Controller
 {
     //Nasabah
     public function showdata(){
+    try{
         $dataset = DB::table('nasabah')->get();
+    }catch(\Exception $e){
+        return view('admin.data-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.data-nasabah',['dataset'=>$dataset]);
     }
     public function showform(){
@@ -39,7 +43,11 @@ class nasabahController extends Controller
         return redirect('showformnasabah')->with('success','Data Ditambah');
     }
     public function updateNasabah($id){
+    try{
         $dataset = DB::table('nasabah')->where('ID_NASABAH',$id)->get();
+    }catch(\Exception $e){
+        return view('admin.update-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-nasabah',['dataset'=>$dataset]);
     }
     public function updateStore(Request $request, $id){
@@ -59,6 +67,7 @@ class nasabahController extends Controller
 
     //Tempat Usaha
     public function showtempatusaha(){
+    try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -146,7 +155,14 @@ class nasabahController extends Controller
         ->join('tarif_keamanan','tempat_usaha.ID_TRFKEAMANAN','=','tarif_keamanan.ID_TRFKEAMANAN')
         ->select('jasa_ipkeamanan.TGL_JSIPKEAMANAN','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tempat_usaha.BENTUK_USAHA')
         ->get();
-
+    }catch(\Exception $e){
+        return view('admin.tempat-usaha',[
+            'dataset'=>$dataset,
+            'dataJasaAir'=>$dataJasaAir,
+            'dataJasaListrik'=>$dataJasaListrik,
+            'dataJasaKebersihan'=>$dataJasaKebersihan,
+            'dataJasaKeamanan'=>$dataJasaKeamanan])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tempat-usaha',[
             'dataset'=>$dataset,
             'dataJasaAir'=>$dataJasaAir,
@@ -155,9 +171,14 @@ class nasabahController extends Controller
             'dataJasaKeamanan'=>$dataJasaKeamanan]);
     }
     public function showformtempat(){
+    try{
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
         $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
         $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
+    }catch(\Exception $e){
+        return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan])
+        ->with('error','Kesalahan Sistem');
+    }
         return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan]);
     }
     public function storeTempat(Request $request){
@@ -272,6 +293,7 @@ class nasabahController extends Controller
         return redirect('showformtempatusaha')->with('success','Data Ditambah');
     }
     public function updateTempat($id){
+    try{
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
 
         //get value in row
@@ -316,7 +338,15 @@ class nasabahController extends Controller
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
         $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
         $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
-
+    }catch(\Exception $e){
+        return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,
+                    'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
+                    'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
+                    'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
+                    'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
+                    'id_air'=>$id_air,'id_listrik'=>$id_listrik
+        ])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,
                     'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,

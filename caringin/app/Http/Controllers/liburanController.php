@@ -11,7 +11,11 @@ use Illuminate\Routing\Redirector;
 class liburanController extends Controller
 {
     public function dataLibur(){
+    try{
         $dataset = DB::table('hari_libur')->get();
+    }catch(\Exception $e){
+        return view('admin.data-libur',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.data-libur',['dataset'=>$dataset]);
     }
     

@@ -51,14 +51,14 @@
                       <th>Nama Nasabah</th>
                       <th>M.Lalu</th>
                       <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>B.Pemakaian</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>B.Air Kotor</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Pakai (M<sup>3</sup>)</th>
+                      <th>B.Pemakaian (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>B.Pemeliharaan (Rp.)</th>
+                      <th>B.Air Kotor (Rp.)</th>
+                      <th>Pembayaran (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -109,18 +109,18 @@
                       <th>Bulan</th>
                       <th>Kode</th>
                       <th>Nama Nasabah</th>
-                      <th>Daya</th>
+                      <th>Daya (W)</th>
                       <th>M.Lalu</th>
                       <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>Rek.Min</th>
-                      <th>B.Blok 1</th>
-                      <th>B.Blok 2</th>
-                      <th>B.Beban</th>
-                      <th>BPJU</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Pakai (kWh)</th>
+                      <th>Rek.Min (Rp.)</th>
+                      <th>B.Blok 1 (Rp.)</th>
+                      <th>B.Blok 2 (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>BPJU (Rp.)</th>
+                      <th>Pembayaran (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -175,9 +175,9 @@
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Total (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
                  
@@ -225,9 +225,9 @@
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Total (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
                  

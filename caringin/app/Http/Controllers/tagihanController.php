@@ -11,10 +11,14 @@ use Exception;
 class tagihanController extends Controller
 {
     public function tagihanNas(){
+    try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP')
         ->get();
+    }catch(\Exception $e){
+        return view('admin.tagihan-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tagihan-nasabah',['dataset'=>$dataset]);
     }
     
@@ -286,6 +290,7 @@ class tagihanController extends Controller
     }
 
     public function dataTagihan($id){
+    try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH')
@@ -295,7 +300,9 @@ class tagihanController extends Controller
         $dataTagihan = DB::table('tagihanku')
         ->where('tagihanku.ID_TEMPAT',$id)
         ->get();
-
+    }catch(\Exception $e){
+        return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
+    }
         return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
@@ -373,6 +380,7 @@ class tagihanController extends Controller
     }
 
     public function printTagihan(){
+    try{
         //Set Tanggal Tagihan
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
@@ -390,6 +398,9 @@ class tagihanController extends Controller
                  'tagihanku.TGL_TAGIHAN')
         ->where('TGL_TAGIHAN',$finalDate)
         ->get();
+    }catch(\Exception $e){
+        return view('admin.print-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.print-tagihan',['dataset'=>$dataset]);
     }
 }

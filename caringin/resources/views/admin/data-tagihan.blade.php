@@ -26,26 +26,26 @@
                       <th>Tanggal</th>
                       <th>Lalu Air</th>
                       <th>Baru Air</th>
-                      <th>Pakai Air</th>
-                      <th>Bayar Pakai</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>B.Air Kotor</th>
-                      <th>Tagihan Air</th>
+                      <th>Pakai Air (M<sup>3</sup>)</th>
+                      <th>Bayar Pakai (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>B.Pemeliharaan (Rp.)</th>
+                      <th>B.Air Kotor (Rp.)</th>
+                      <th>Tagihan Air (Rp.)</th>
                       <th>Lalu Listrik</th>
                       <th>Baru Listrik</th>
-                      <th>Pakai Listrik</th>
-                      <th>Rek.Min</th>
-                      <th>B.Blok 1</th>
-                      <th>B.Blok 2</th>
-                      <th>B.Beban</th>
-                      <th>BPJU</th>
-                      <th>Tagihan Listrik</th>
-                      <th>Tagihan IPK & Keamanan</th>
-                      <th>Tagihan Kebersihan</th>
-                      <th>Total Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Pakai Listrik (kWh)</th>
+                      <th>Rek.Min (Rp.)</th>
+                      <th>B.Blok 1 (Rp.)</th>
+                      <th>B.Blok 2 (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>BPJU (Rp.)</th>
+                      <th>Tagihan Listrik (Rp.)</th>
+                      <th>Tagihan IPK & Keamanan (Rp.)</th>
+                      <th>Tagihan Kebersihan (Rp.)</th>
+                      <th>Total Tagihan (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
 

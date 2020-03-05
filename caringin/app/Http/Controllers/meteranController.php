@@ -14,7 +14,11 @@ class meteranController extends Controller
 {
     //meteran air
     public function updatealatair($id){
+    try{
         $dataset = DB::table('meteran_air')->where('ID_MAIR',$id)->get();
+    }catch(\Exception $e){
+        return view('admin.update-alat-air',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-alat-air',['dataset'=>$dataset]);
     }
     public function storeupdatealatair(Request $request, $id){
@@ -31,7 +35,11 @@ class meteranController extends Controller
 
     //meteran listrik
     public function updatealatlistrik($id){
+    try{
         $dataset = DB::table('meteran_listrik')->where('ID_MLISTRIK',$id)->get();
+    }catch(\Exception $e){
+        return view('admin.update-alat-listrik',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-alat-listrik',['dataset'=>$dataset]);
     }
     public function storeupdatealatlistrik(Request $request, $id){
@@ -47,8 +55,12 @@ class meteranController extends Controller
     }
 
     public function dataalat(){
+    try{
         $datasetA = DB::table('meteran_air')->get();
         $datasetL = DB::table('meteran_listrik')->get();
+    }catch(\Exception $e){
+        return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL])->with('error','Kesalahan Sistem');
+    }
         return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL]);
     }
     public function formalat(){
@@ -80,6 +92,7 @@ class meteranController extends Controller
     }
 
     public function printform(){
+    try{
         $dataAir = DB::table('jasa_air')
         ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_air.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
@@ -92,7 +105,9 @@ class meteranController extends Controller
         ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
         ->select('tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_listrik.NOMTR_LISTRIK','meteran_listrik.MAKHIR_LISTRIK')
         ->get();
-
+    } catch(\Exception $e){
+        return view('admin.print-form',['dataAir'=>$dataAir,'dataListrik'=>$dataListrik])->with('error','Kesalahan SIstem');
+    }
         return view('admin.print-form',['dataAir'=>$dataAir,'dataListrik'=>$dataListrik]);
     }
 }

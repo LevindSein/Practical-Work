@@ -133,9 +133,9 @@
                     <tr>
                       <th>Tahun</th>
                       <th>Bulan</th>
-                      <th>Total Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Total Tagihan (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
                   
@@ -168,9 +168,9 @@
                     <tr>
                       <th>Tahun</th>
                       <th>Bulan</th>
-                      <th>Total Tagihan</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Total Tagihan (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
                 

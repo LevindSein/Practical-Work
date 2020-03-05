@@ -15,7 +15,11 @@ class tarifController extends Controller
 {
     //Tarif Air
     public function showTAir(){
+    try{
         $dataset = DB::table('tarif_air')->get();
+    }catch(\Exception $e){
+        return view('admin.tarif-air',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tarif-air',['dataset'=>$dataset]);
     }
     public function updateStoreA(Request $request, $id){
@@ -37,7 +41,11 @@ class tarifController extends Controller
 
     //Tarif Listrik
     public function showTListrik(){
+    try{
         $dataset = DB::table('tarif_listrik')->get();
+    }catch(\Exception $e){
+        return view('admin.tarif-listrik',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tarif-listrik',['dataset'=>$dataset]);
     }
     public function updateStoreL(Request $request, $id){
@@ -59,14 +67,22 @@ class tarifController extends Controller
 
     //Tarif Kebersihan
     public function showTKebersihan(){
+    try{
         $dataset = DB::table('tarif_kebersihan')->get();
+    }catch(\Exception $e){
+        return view('admin.tarif-kebersihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tarif-kebersihan',['dataset'=>$dataset]);
     }
     public function showKebersihan(){
         return view('admin.tambah-kebersihan');
     }
     public function updateKebersihan($id){
+    try{
         $dataset = DB::table('tarif_kebersihan')->where('ID_TRFKEBERSIHAN',$id)->get();
+    }catch(\Exception $e){
+        return view('admin.update-kebersihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-kebersihan',['dataset'=>$dataset]);
     }
     public function updateStoreB(Request $request, $id){
@@ -94,14 +110,22 @@ class tarifController extends Controller
 
     //Tarif IPK
     public function showTIpk(){
+    try{
         $dataset = DB::table('tarif_ipk')->get();
+    }catch(\Exception $e){
+        return view('admin.tarif-ipk',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tarif-ipk',['dataset'=>$dataset]);
     }
     public function showIpk(){
         return view('admin.tambah-ipk');
     }
     public function updateIpk($id){
+    try{
         $dataset = DB::table('tarif_ipk')->where('ID_TRFIPK',$id)->get();
+    } catch(\Exception $e){
+        return view('admin.update-ipk',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-ipk',['dataset'=>$dataset]);
     }
     public function updateStoreI(Request $request, $id){
@@ -129,14 +153,22 @@ class tarifController extends Controller
 
     //Tarif Keamanan
     public function showTKeamanan(){
+    try{
         $dataset = DB::table('tarif_keamanan')->get();
+    }catch(\Exception $e){
+        return view('admin.tarif-keamanan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.tarif-keamanan',['dataset'=>$dataset]);
     }
     public function showKeamanan(){
         return view('admin.tambah-keamanan');
     }
     public function updateKeamanan($id){
+    try{
         $dataset = DB::table('tarif_keamanan')->where('ID_TRFKEAMANAN',$id)->get();
+    }catch(\Exception $e){
+        return view('admin.update-keamanan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.update-keamanan',['dataset'=>$dataset]);
     }
     public function updateStoreK(Request $request, $id){

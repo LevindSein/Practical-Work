@@ -48,7 +48,7 @@
                       <th>Jumlah Unit</th>
                       <th>Bentuk Usaha</th>
                       <th>No. Meter Listrik</th>
-                      <th>Daya Listrik</th>
+                      <th>Daya Listrik (W)</th>
                       <th>No. Meter Air</th>
                       <th>Tarif IPK</th>
                       <th>Tarif Keamanan</th>
@@ -170,7 +170,7 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Daya</th>
+                      <th>Daya (W)</th>
                       <th>No. Meter Listrik</th>
                       <th>Bentuk Usaha</th>
                     </tr>
@@ -207,8 +207,8 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Tarif IPK</th>
-                      <th>Tarif Keamanan</th>
+                      <th>Tarif IPK (Rp.)</th>
+                      <th>Tarif Keamanan (Rp.)</th>
                       <th>Bentuk Usaha</th>
                     </tr>
                   </thead>
@@ -238,7 +238,7 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Tarif Kebersihan</th>
+                      <th>Tarif Kebersihan (Rp.)</th>
                       <th>Bentuk Usaha</th>
                     </tr>
                   </thead>
