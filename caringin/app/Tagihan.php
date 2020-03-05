@@ -12,7 +12,6 @@ class Tagihan extends Model
         'id_tempat',
         'tgl_tagihan',
         'bln_tagihan',
-        'thn_tagihan',
         'tgl_bayar',
         'stt_bayar',
         'stt_lunas',
