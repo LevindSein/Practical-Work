@@ -118,14 +118,34 @@ class laporanController extends Controller
         return view('admin.laporan-tahunan',['dataA'=>$dataA,'dataL'=>$dataL,'dataK'=>$dataK,'dataB'=>$dataB]);
     }
     public function showTagihan(){
+    try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
         ->get();
+    }catch(\Exception $e){
+        return view('admin.laporan-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
         return view('admin.laporan-tagihan',['dataset'=>$dataset]);
     }
+    
     public function showTunggakan(){
-        return view('admin.laporan-tunggakan');
+        $timezone = date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d", time());
+        $time = strtotime($date);
+        $tempo = date("Y-m-15", $time);
+
+        $tunggakan = DB::table('tagihanku')
+        ->where('STT_LUNAS',0)
+        ->get();
+
+        $nunggak = json_decode($tunggakan,true);
+        foreach($nunggak as $d){
+            
+        }
+
+        var_dump($tunggakan);
+        // return view('admin.laporan-tunggakan');
     }
     public function showBongkaran(){
         return view('admin.laporan-bongkaran');
