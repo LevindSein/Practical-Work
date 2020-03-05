@@ -238,10 +238,14 @@ class tagihanController extends Controller
         $date = date("Y-m-d", time());
         $time = strtotime($date);
         $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+        $bln = date("Y-m", strtotime($finalDate));
+        $thn = date("Y", strtotime($finalDate));
 
         $data = new Tagihan([
             'id_tempat'=>$id,
             'tgl_tagihan'=>$finalDate,
+            'bln_tagihan'=>$bln,
+            'thn_tagihan'=>$thn,
             'stt_bayar'=>0,
             'stt_lunas'=>0,
             'awal_air'=>$akhirAir,

@@ -20,25 +20,42 @@
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Action</th>
                       <th>Bayar</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
-                      <th>Pakai Air (M<sup>3</sup>)</th>
-                      <th>Pakai Listrik (Watt)</th>
+                      <th>Lalu Air</th>
+                      <th>Baru Air</th>
+                      <th>Pakai Air</th>
+                      <th>Bayar Pakai</th>
+                      <th>B.Beban</th>
+                      <th>B.Pemeliharaan</th>
+                      <th>B.Air Kotor</th>
                       <th>Tagihan Air</th>
+                      <th>Lalu Listrik</th>
+                      <th>Baru Listrik</th>
+                      <th>Pakai Listrik</th>
+                      <th>Rek.Min</th>
+                      <th>B.Blok 1</th>
+                      <th>B.Blok 2</th>
+                      <th>B.Beban</th>
+                      <th>BPJU</th>
                       <th>Tagihan Listrik</th>
                       <th>Tagihan IPK & Keamanan</th>
                       <th>Tagihan Kebersihan</th>
                       <th>Total Tagihan</th>
                       <th>Realisasi</th>
                       <th>Selisih</th>
-                      <th>Bayar</th>
                     </tr>
                   </thead>
 
                   <tbody>
                   @foreach($dataTagihan as $dataT)
                     <tr>
+                      <td class="text-center">
+                          <a href="{{url('bayartagihan',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
+                      </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
                       <?php if($dataT->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
@@ -59,10 +76,73 @@
                       </td>
                       <td class="text-center">{{$dataT->TGL_TAGIHAN}}</td>
                       <td>
+                      @if($dataT->AWAL_AIR == null)
+                        0
+                      @else
+                        {{$dataT->AWAL_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->AKHIR_AIR == null)
+                        0
+                      @else
+                        {{$dataT->AKHIR_AIR}}
+                      @endif
+                      </td>
+                      <td>
                       @if($dataT->PAKAI_AIR == null)
                         0
                       @else
                         {{$dataT->PAKAI_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->BYR_AIR == null)
+                        0
+                      @else
+                        {{$dataT->BYR_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->BYR_BEBAN == null)
+                        0
+                      @else
+                        {{$dataT->BYR_BEBAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->BYR_PEMELIHARAAN == null)
+                        0
+                      @else
+                        {{$dataT->BYR_PEMELIHARAAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->BYR_ARKOT == null)
+                        0
+                      @else
+                        {{$dataT->BYR_ARKOT}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->TTL_AIR == null)
+                        0
+                      @else
+                        {{$dataT->TTL_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->AWAL_LISTRIK == null)
+                        0
+                      @else
+                        {{$dataT->AWAL_LISTRIK}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->AKHIR_LISTRIK == null)
+                        0
+                      @else
+                        {{$dataT->AKHIR_LISTRIK}}
                       @endif
                       </td>
                       <td>
@@ -73,10 +153,38 @@
                       @endif
                       </td>
                       <td>
-                      @if($dataT->TTL_AIR == null)
+                      @if($dataT->REK_MIN == null)
                         0
                       @else
-                        {{$dataT->TTL_AIR}}
+                        {{$dataT->REK_MIN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->B_BLOK1 == null)
+                        0
+                      @else
+                        {{$dataT->B_BLOK1}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->B_BLOK2 == null)
+                        0
+                      @else
+                        {{$dataT->B_BLOK2}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->B_BEBAN == null)
+                        0
+                      @else
+                        {{$dataT->B_BEBAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->BPJU == null)
+                        0
+                      @else
+                        {{$dataT->BPJU}}
                       @endif
                       </td>
                       <td>
@@ -109,10 +217,6 @@
                       </td>
                       <td>{{$dataT->REALISASI}}</td>
                       <td>{{$dataT->SELISIH}}</td>
-                      <td class="text-center">
-                          <a href="{{url('bayartagihan',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
-                      </td>
                     </tr>
                   @endforeach
                   </tbody>

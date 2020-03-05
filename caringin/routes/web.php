@@ -58,6 +58,7 @@ Route::post('storekebersihan','tarifController@storekebersihan');
 //Laporan
 Route::get('showlaporanharian','laporanController@showHarian');
 Route::get('showlaporanbulanan','laporanController@showBulanan');
+Route::post('showlaporanbulanan/filter','laporanController@filterBulanan');
 Route::get('showlaporantahunan','laporanController@showTahunan');
 Route::get('showlaporantagihan','laporanController@showTagihan')->name('lapTagihan');
 Route::get('showlaporantunggakan','laporanController@showTunggakan');

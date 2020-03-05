@@ -19,8 +19,23 @@ class laporanController extends Controller
         return view('admin.laporan-harian',['dataset'=>$dataset]);
     }
     public function showBulanan(){
-        return view('admin.laporan-bulanan');
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->get();
+        return view('admin.laporan-bulanan',['dataset'=>$dataset]);
     }
+    public function filterBulanan(Request $request){
+        $filter = $request->get('filterbln');
+
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('BLN_TAGIHAN',$filter)
+        ->get();
+        return view('admin.laporan-bulanan',['dataset'=>$dataset]);
+    }
+
     public function showTahunan(){
         return view('admin.laporan-tahunan');
     }

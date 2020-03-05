@@ -14,9 +14,13 @@
               <h6 class="m-0 font-weight-bold text-primary">Tabel Laporan Bulanan</h6>
             </div>
             <div class="card-body">
-              <label for="">Filter Bulan</label>
-              <input type="month" name="" id="" class="form-control form-control-user" style="width:20%">
-              <br><a href="#" type="submit" class="btn btn-primary btn-sm">Submit</a><p>
+            <!-- <form onsubmit="setDate()" action="{{url('filterbulanan')}}" method="POST" id="bln"> -->
+            <form action="{{url('showlaporanbulanan/filter')}}" method="POST" id="bln">
+              <label>Filter Bulan</label>
+              @csrf
+              <input type="month" name="filterbln" id="" class="form-control form-control-user" style="width:20%">
+              <br><button type="submit" class="btn btn-primary btn-sm">Submit</button><p>
+            </form>
               <div class="form-group">
                 <label for="sel1">Tampilkan Data :</label>
                 <ul class="nav nav-tabs" role="tablist">
@@ -41,7 +45,8 @@
                   <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tanggal</th>
+                      <th>Status</th>
+                      <th>Bulan</th>
                       <th>Kode</th>
                       <th>Nama Nasabah</th>
                       <th>M.Lalu</th>
@@ -58,21 +63,37 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->ID_TRFAIR != null)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-left">A-2-003</td>
-                      <td class="text-left">PT.LPP</td>
-                      <td>996</td>
-                      <td>1,006</td>
-                      <td>10</td>
-                      <td>60,000</td>
-                      <td>22,700</td>
-                      <td>10,000</td>
-                      <td>18,000</td>
-                      <td>121,782</td>
-                      <td>121,782</td>
-                      <td>&mdash;</td>
+                      <td class="text-center"
+                      <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($d->STT_BAYAR == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center"
+                      <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
+                      {{$time}}
+                      </td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td>{{$d->AWAL_AIR}}</td>
+                      <td>{{$d->AKHIR_AIR}}</td>
+                      <td>{{$d->PAKAI_AIR}}</td>
+                      <td>{{$d->BYR_AIR}}</td>
+                      <td>{{$d->BYR_BEBAN}}</td>
+                      <td>{{$d->BYR_PEMELIHARAAN}}</td>
+                      <td>{{$d->BYR_ARKOT}}</td>
+                      <td>{{$d->TTL_AIR}}</td>
+                      <td>{{$d->REALISASI_AIR}}</td>
+                      <td>{{$d->SELISIH_AIR}}</td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -84,7 +105,8 @@
                   <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tanggal</th>
+                      <th>Status</th>
+                      <th>Bulan</th>
                       <th>Kode</th>
                       <th>Nama Nasabah</th>
                       <th>Daya</th>
@@ -103,23 +125,39 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->ID_TRFLISTRIK != null)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-left">A-2-003</td>
-                      <td class="text-left">PT.LPP</td>
-                      <td>2,200</td>
-                      <td>89,788</td>
-                      <td>90,383</td>
-                      <td>595</td>
-                      <td>0</td>
-                      <td>53,440</td>
-                      <td>1,334,220</td>
-                      <td>77,000</td>
-                      <td>146,466</td>
-                      <td>1,820,572</td>
-                      <td>1,820,572</td>
-                      <td>&mdash;</td>
+                    <td class="text-center"
+                      <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($d->STT_BAYAR == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center"
+                      <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
+                      {{$time}}
+                      </td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td>{{$d->DAYA}}</td>
+                      <td>{{$d->AWAL_LISTRIK}}</td>
+                      <td>{{$d->AKHIR_LISTRIK}}</td>
+                      <td>{{$d->PAKAI_LISTRIK}}</td>
+                      <td>{{$d->REK_MIN}}</td>
+                      <td>{{$d->B_BLOK1}}</td>
+                      <td>{{$d->B_BLOK2}}</td>
+                      <td>{{$d->B_BEBAN}}</td>
+                      <td>{{$d->BPJU}}</td>
+                      <td>{{$d->TTL_LISTRIK}}</td>
+                      <td>{{$d->REALISASI_LISTRIK}}</td>
+                      <td>{{$d->SELISIH_LISTRIK}}</td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -131,8 +169,9 @@
                   <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
+                      <th>Status</th>
+                      <th>Bulan</th>
+                      <th>Kode</th>
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
@@ -143,16 +182,32 @@
                   </thead>
                  
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->ID_TRFIPK != null || $d->ID_TRFKEAMANAN != null)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-center">A-1</td>
-                      <td class="text-left">BTPN</td>
-                      <td class="text-center">8</td>
-                      <td class="text-center">1</td>
-                      <td>200,000</td>
-                      <td>200,000</td>
-                      <td>&mdash;</td>
+                    <td class="text-center"
+                      <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($d->STT_BAYAR == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center"
+                      <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
+                      {{$time}}
+                      </td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
+                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
+                      <td>{{$d->TTL_IPKEAMANAN}}</td>
+                      <td>{{$d->REALISASI_IPKEAMANAN}}</td>
+                      <td>{{$d->SELISIH_IPKEAMANAN}}</td>
                     </tr>
+                  @endif
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -164,8 +219,9 @@
                   <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
+                      <th>Status</th>
+                      <th>Bulan</th>
+                      <th>Kode</th>
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
@@ -176,16 +232,32 @@
                   </thead>
                  
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->ID_TRFKEBERSIHAN != null)
                     <tr>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-center">A-1</td>
-                      <td class="text-left">PT.BTN yang makmur</td>
-                      <td class="text-center">1</td>
-                      <td class="text-center">1</td>
-                      <td>120,000</td>
-                      <td>120,000</td>
-                      <td>&mdash;</td>
+                    <td class="text-center"
+                      <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($d->STT_BAYAR == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center"
+                      <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
+                      {{$time}}
+                      </td>
+                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
+                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
+                      <td>{{$d->TTL_KEBERSIHAN}}</td>
+                      <td>{{$d->REALISASI_KEBERSIHAN}}</td>
+                      <td>{{$d->SELISIH_KEBERSIHAN}}</td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                   </table>
                   </div>

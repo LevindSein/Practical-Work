@@ -20,27 +20,6 @@
               <label for="">Sampai</label>
               <input type="date" name="" id="" class="form-control form-control-user" style="width:20%">
               <br><a href="#" type="submit" class="btn btn-primary btn-sm">Submit</a><p>
-              <div class="form-group">
-                <!--Option Menu-->
-                <label for="sel1">Tampilkan Data :</label>
-                <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home">Air Bersih</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Listrik</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">IPK & Keamanan</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu3">Kebersihan</a>
-                  </li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <!--AIR BERSIH-->
-                  <div id="home" class="container tab-pane active"><br>
                   <div class="table-responsive">
                   <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>
@@ -48,16 +27,13 @@
                       <th>Tanggal</th>
                       <th>Kode</th>
                       <th>Nama Nasabah</th>
-                      <th>M.Lalu</th>
-                      <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>B.Pemakaian</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>B.Air Kotor</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>Air Bersih (Rp.)</th>
+                      <th>Listrik (Rp.)</th>
+                      <th>IPK & Keamanan(Rp.)</th>
+                      <th>Kebersihan(Rp.)</th>
+                      <th>Total (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -67,147 +43,44 @@
                       <td class="text-center">{{$d->TGL_BAYAR}}</td>
                       <td class="text-left">{{$d->KD_KONTROL}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td>{{$d->AWAL_AIR}}</td>
-                      <td>{{$d->AKHIR_AIR}}</td>
-                      <td>{{$d->PAKAI_AIR}}</td>
-                      <td>{{$d->BYR_AIR}}</td>
-                      <td>{{$d->BYR_BEBAN}}</td>
-                      <td>{{$d->BYR_PEMELIHARAAN}}</td>
-                      <td>{{$d->BYR_ARKOT}}</td>
-                      <td>{{$d->TTL_AIR}}</td>
-                      <td>{{$d->REALISASI_AIR}}</td>
-                      <td>{{$d->SELISIH_AIR}}</td>
+                      <td>
+                      @if($d->TTL_AIR == null)
+                        &mdash;
+                      @else
+                        {{$d->TTL_AIR}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($d->TTL_LISTRIK == null)
+                        &mdash;
+                      @else
+                        {{$d->TTL_LISTRIK}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($d->TTL_IPKEAMANAN == null)
+                        &mdash;
+                      @else
+                        {{$d->TTL_IPKEAMANAN}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($d->TTL_KEBERSIHAN == null)
+                        &mdash;
+                      @else
+                        {{$d->TTL_KEBERSIHAN}}
+                      @endif
+                      </td>
+                      <td>{{$d->TTL_TAGIHAN}}</td>
+                      <td>{{$d->REALISASI}}</td>
+                      <td>{{$d->SELISIH}}</td>
                     </tr>
                   @endforeach
                   </tbody>
                   </table>
                   </div>
                   </div>
-                  <!--END AIR BERSIH-->
-                  <!--LISTRIK-->
-                  <div id="menu1" class="container tab-pane fade"><br>
-                  <div class="table-responsive">
-                  <table class="table display table-bordered nowrap" id="tableListrik" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Kode</th>
-                      <th>Nama Nasabah</th>
-                      <th>Daya</th>
-                      <th>M.Lalu</th>
-                      <th>M.baru</th>
-                      <th>Pakai</th>
-                      <th>Rek.Min</th>
-                      <th>B.Blok 1</th>
-                      <th>B.Blok 2</th>
-                      <th>B.Beban</th>
-                      <th>BPJU</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                  @foreach($dataset as $d)
-                    <tr>
-                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
-                      <td class="text-left">{{$d->KD_KONTROL}}</td>
-                      <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td>{{$d->DAYA}}</td>
-                      <td>{{$d->AWAL_LISTRIK}}</td>
-                      <td>{{$d->AKHIR_LISTRIK}}</td>
-                      <td>{{$d->PAKAI_LISTRIK}}</td>
-                      <td>{{$d->REK_MIN}}</td>
-                      <td>{{$d->B_BLOK1}}</td>
-                      <td>{{$d->B_BLOK2}}</td>
-                      <td>{{$d->B_BEBAN}}</td>
-                      <td>{{$d->BPJU}}</td>
-                      <td>{{$d->TTL_LISTRIK}}</td>
-                      <td>{{$d->REALISASI_LISTRIK}}</td>
-                      <td>{{$d->SELISIH_LISTRIK}}</td>
-                    </tr>
-                  @endforeach
-                  </tbody>
-                  </table>
                   </div>
-                  </div>
-                  <!--END LISTRIK-->
-                  <!--IPK & KEAMANAN-->
-                  <div id="menu2" class="container tab-pane fade"><br>
-                  <div class="table-responsive">
-                  <table class="table display table-bordered" id="tableKeamanan" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
-                      <th>Nama Nasabah</th>
-                      <th>Alamat</th>
-                      <th>Jumlah Unit</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </thead>
-                 
-                  <tbody>
-                  @foreach($dataset as $d)
-                    <tr>
-                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
-                      <td class="text-center">{{$d->KD_KONTROL}}</td>
-                      <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
-                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
-                      <td>{{$d->TTL_IPKEAMANAN}}</td>
-                      <td>{{$d->REALISASI_IPKEAMANAN}}</td>
-                      <td>{{$d->SELISIH_IPKEAMANAN}}</td>
-                    </tr>
-                  @endforeach
-                  </tbody>
-                  </table>
-                  </div>
-                  </div>
-                  <!--END IPK&KEAMANAN-->
-                  <!--KEBERSIHAN-->
-                  <div id="menu3" class="container tab-pane fade"><br>
-                  <div class="table-responsive">
-                  <table class="table display table-bordered" id="tableKebersihan" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Blok</th>
-                      <th>Nama Nasabah</th>
-                      <th>Alamat</th>
-                      <th>Jumlah Unit</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
-                    </tr>
-                  </thead>
-                 
-                  <tbody>
-                  @foreach($dataset as $d)
-                    <tr>
-                      <td class="text-center">{{$d->TGL_BAYAR}}</td>
-                      <td class="text-center">{{$d->KD_KONTROL}}</td>
-                      <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td class="text-center">{{$d->NO_ALAMAT}}</td>
-                      <td class="text-center">{{$d->JML_ALAMAT}}</td>
-                      <td>{{$d->TTL_KEBERSIHAN}}</td>
-                      <td>{{$d->REALISASI_KEBERSIHAN}}</td>
-                      <td>{{$d->SELISIH_KEBERSIHAN}}</td>
-                    </tr>
-                  @endforeach
-                  </tbody>
-                  </table>
-                  </div>
-                  </div>
-                  <!--END KEBERSIHAN-->
-                </div>
-                <!--END Tab Panes-->
-              </div>
-            </div>
-          </div>
         </div>
         <!-- /.container-fluid -->
       </div>
