@@ -171,7 +171,7 @@
                     <tr>
                       <th>Status</th>
                       <th>Bulan</th>
-                      <th>Kode</th>
+                      <th>Blok</th>
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
@@ -198,7 +198,7 @@
                       <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
                       {{$time}}
                       </td>
-                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-center">{{$d->BLOK}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">{{$d->NO_ALAMAT}}</td>
                       <td class="text-center">{{$d->JML_ALAMAT}}</td>
@@ -221,7 +221,7 @@
                     <tr>
                       <th>Status</th>
                       <th>Bulan</th>
-                      <th>Kode</th>
+                      <th>Blok</th>
                       <th>Nama Nasabah</th>
                       <th>Alamat</th>
                       <th>Jumlah Unit</th>
@@ -248,7 +248,7 @@
                       <?php $time = date("Y - M", strtotime($d->TGL_TAGIHAN)); ?>>
                       {{$time}}
                       </td>
-                      <td class="text-left">{{$d->KD_KONTROL}}</td>
+                      <td class="text-center">{{$d->BLOK}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">{{$d->NO_ALAMAT}}</td>
                       <td class="text-center">{{$d->JML_ALAMAT}}</td>
