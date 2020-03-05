@@ -18,6 +18,19 @@ class laporanController extends Controller
 
         return view('admin.laporan-harian',['dataset'=>$dataset]);
     }
+    public function filterHarian(Request $request){
+        $from = $request->get('dari');
+        $to = $request->get('sampai');
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->whereBetween('TGL_TAGIHAN',[$from,$to])
+        ->where('STT_BAYAR',1)
+        ->get();
+
+        return view('admin.laporan-harian',['dataset'=>$dataset]);
+    }
+    
     public function showBulanan(){
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
@@ -37,7 +50,55 @@ class laporanController extends Controller
     }
 
     public function showTahunan(){
-        return view('admin.laporan-tahunan');
+        //AIR
+        $dataA = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(PAKAI_AIR) as pakaiAir'),
+            DB::raw('SUM(BYR_AIR) as byrAir'),
+            DB::raw('SUM(BYR_BEBAN) as byrBeban'),
+            DB::raw('SUM(BYR_PEMELIHARAAN) as byrPemeliharaan'),
+            DB::raw('SUM(BYR_ARKOT) as byrArkot'),
+            DB::raw('SUM(TTL_AIR) as ttlAir'),
+            DB::raw('SUM(REALISASI_AIR) as realisasiAir'),
+            DB::raw('SUM(SELISIH_AIR) as selisihAir'),)
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+
+        //LISTRIK
+        $dataL = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(PAKAI_LISTRIK) as pakaiListrik'),
+            DB::raw('SUM(BYR_LISTRIK) as byrListrik'),
+            DB::raw('SUM(REK_MIN) as rekmin'),
+            DB::raw('SUM(B_BLOK1) as bBlok1'),
+            DB::raw('SUM(B_BLOK2) as bBlok2'),
+            DB::raw('SUM(B_BEBAN) as bBeban'),
+            DB::raw('SUM(BPJU) as bpju'),
+            DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
+            DB::raw('SUM(REALISASI_LISTRIK) as realisasiListrik'),
+            DB::raw('SUM(SELISIH_LISTRIK) as selisihListrik'))
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+
+        //KEAMANAN
+        $dataK = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(TTL_IPKEAMANAN) as ttlIpkeamanan'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as realisasiIpkeamanan'),
+            DB::raw('SUM(SELISIH_IPKEAMANAN) as selisihIpkeamanan'))
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        
+        //KEBERSIHAN
+        $dataB = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(TTL_KEBERSIHAN) as ttlKebersihan'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as realisasiKebersihan'),
+            DB::raw('SUM(SELISIH_KEBERSIHAN) as selisihKebersihan'))
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+
+        return view('admin.laporan-tahunan',['dataA'=>$dataA,'dataL'=>$dataL,'dataK'=>$dataK,'dataB'=>$dataB]);
     }
     public function showTagihan(){
         $dataset = DB::table('tempat_usaha')

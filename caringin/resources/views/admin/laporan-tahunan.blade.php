@@ -42,27 +42,37 @@
                       <th>Tahun</th>
                       <th>Bulan</th>
                       <th>Vol.Pakai (M<sup>3</sup>)</th>
-                      <th>B.Beban</th>
-                      <th>B.Pemeliharaan</th>
-                      <th>Air Kotor</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>B.Pakai (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>B.Pemeliharaan (Rp.)</th>
+                      <th>B.Arkot (Rp.)</th>
+                      <th>Total (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                  @foreach($dataA as $d)
                     <tr>
-                      <td class="text-center">2019</td>
-                      <td class="text-center">Januari</td>
-                      <td>5,714</td>
-                      <td>7,513,000</td>
-                      <td>3,310,000</td>
-                      <td>10,285,200</td>
-                      <td>60,938,312</td>
-                      <td>58,938,312</td>
-                      <td>2,000,000</td>
+                      <td class="text-center"
+                      <?php $tahun = date("Y", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$tahun}}
+                      </td>
+                      <td class="text-center"
+                      <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$bulan}}
+                      </td>
+                      <td>{{$d->pakaiAir}}</td>
+                      <td>{{$d->byrAir}}</td>
+                      <td>{{$d->byrBeban}}</td>
+                      <td>{{$d->byrPemeliharaan}}</td>
+                      <td>{{$d->byrArkot}}</td>
+                      <td>{{$d->ttlAir}}</td>
+                      <td>{{$d->realisasiAir}}</td>
+                      <td>{{$d->selisihAir}}</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -77,25 +87,41 @@
                       <th>Tahun</th>
                       <th>Bulan</th>
                       <th>Daya Pakai (kWh)</th>
-                      <th>Biaya Pemakaian</th>
-                      <th>BPJU</th>
-                      <th>Pembayaran</th>
-                      <th>Realisasi</th>
-                      <th>Selisih</th>
+                      <th>B.Pakai (Rp.)</th>
+                      <th>Rekmin (Rp.)</th>
+                      <th>B.Blok 1 (Rp.)</th>
+                      <th>B.Blok 2 (Rp.)</th>
+                      <th>B.Beban (Rp.)</th>
+                      <th>BPJU (Rp.)</th>
+                      <th>Total (Rp.)</th>
+                      <th>Realisasi (Rp.)</th>
+                      <th>Selisih (Rp.)</th>
                     </tr>
                   </thead>
                  
                   <tbody>
+                  @foreach($dataL as $d)
                     <tr>
-                      <td class="text-center">2019</td>
-                      <td class="text-center">Januari</td>
-                      <td>220,412</td>
-                      <td>39,637,150</td>
-                      <td>55,181,190</td>
-                      <td>685,901,814</td>
-                      <td>680,901,814</td>
-                      <td>5,000,000</td>
+                      <td class="text-center"
+                      <?php $tahun = date("Y", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$tahun}}
+                      </td>
+                      <td class="text-center"
+                      <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$bulan}}
+                      </td>
+                      <td>{{$d->pakaiListrik}}</td>
+                      <td>{{$d->byrListrik}}</td>
+                      <td>{{$d->rekmin}}</td>
+                      <td>{{$d->bBlok1}}</td>
+                      <td>{{$d->bBlok2}}</td>
+                      <td>{{$d->bBeban}}</td>
+                      <td>{{$d->bpju}}</td>
+                      <td>{{$d->ttlListrik}}</td>
+                      <td>{{$d->realisasiListrik}}</td>
+                      <td>{{$d->selisihListrik}}</td>
                     </tr>
+                    @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -116,13 +142,21 @@
                   </thead>
                   
                   <tbody>
+                  @foreach($dataK as $d)
                     <tr>
-                      <td class="text-center">2019</td>
-                      <td class="text-center">Januari</td>
-                      <td>15,100,000</td>
-                      <td>13,100,000</td>
-                      <td>2,000,000</td>
+                      <td class="text-center"
+                      <?php $tahun = date("Y", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$tahun}}
+                      </td>
+                      <td class="text-center"
+                      <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$bulan}}
+                      </td>
+                      <td>{{$d->ttlIpkeamanan}}</td>
+                      <td>{{$d->realisasiIpkeamanan}}</td>
+                      <td>{{$d->selisihIpkeamanan}}</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>
@@ -143,13 +177,21 @@
                   </thead>
                 
                   <tbody>
+                  @foreach($dataB as $d)
                     <tr>
-                      <td class="text-center">2019</td>
-                      <td class="text-center">Januari</td>
-                      <td>11,130,000</td>
-                      <td>8,785,000</td>
-                      <td>2,345,000</td>
+                      <td class="text-center"
+                      <?php $tahun = date("Y", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$tahun}}
+                      </td>
+                      <td class="text-center"
+                      <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
+                      {{$bulan}}
+                      </td>
+                      <td>{{$d->ttlKebersihan}}</td>
+                      <td>{{$d->realisasiKebersihan}}</td>
+                      <td>{{$d->selisihKebersihan}}</td>
                     </tr>
+                  @endforeach
                   </tbody>
                   </table>
                   </div>

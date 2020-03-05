@@ -14,12 +14,15 @@
               <h6 class="h-3 m-0 font-weight-bold text-primary">Tabel Laporan Harian</h6>
             </div>
             <div class="card-body">
+            <form  action="{{url('showlaporanharian/filter')}}" method="GET" id="hari">
+            @csrf
               <label for="">Dari</label>
-              <input type="date" name="" id="" class="form-control form-control-user" style="width:20%">
+              <input type="date" name="dari" id="" class="form-control form-control-user" style="width:20%">
               <br>
               <label for="">Sampai</label>
-              <input type="date" name="" id="" class="form-control form-control-user" style="width:20%">
-              <br><a href="#" type="submit" class="btn btn-primary btn-sm">Submit</a><p>
+              <input type="date" name="sampai" id="" class="form-control form-control-user" style="width:20%">
+              <br><button type="submit" class="btn btn-primary btn-sm">Submit</button><p>
+            </form>
                   <div class="table-responsive">
                   <table class="table display table-bordered" id="tableAir" width="100%" cellspacing="0">
                   <thead>

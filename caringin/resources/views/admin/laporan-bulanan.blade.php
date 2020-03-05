@@ -15,7 +15,7 @@
             </div>
             <div class="card-body">
             <!-- <form onsubmit="setDate()" action="{{url('filterbulanan')}}" method="POST" id="bln"> -->
-            <form action="{{url('showlaporanbulanan/filter')}}" method="POST" id="bln">
+            <form action="{{url('showlaporanbulanan/filter')}}" method="GET" id="bln">
               <label>Filter Bulan</label>
               @csrf
               <input type="month" name="filterbln" id="" class="form-control form-control-user" style="width:20%">
