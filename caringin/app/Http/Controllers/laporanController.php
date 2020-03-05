@@ -68,7 +68,6 @@ class laporanController extends Controller
         $dataL = DB::table('tagihanku')
         ->select('BLN_TAGIHAN',
             DB::raw('SUM(PAKAI_LISTRIK) as pakaiListrik'),
-            DB::raw('SUM(BYR_LISTRIK) as byrListrik'),
             DB::raw('SUM(REK_MIN) as rekmin'),
             DB::raw('SUM(B_BLOK1) as bBlok1'),
             DB::raw('SUM(B_BLOK2) as bBlok2'),

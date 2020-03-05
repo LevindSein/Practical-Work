@@ -87,7 +87,6 @@
                       <th>Tahun</th>
                       <th>Bulan</th>
                       <th>Daya Pakai (kWh)</th>
-                      <th>B.Pakai (Rp.)</th>
                       <th>Rekmin (Rp.)</th>
                       <th>B.Blok 1 (Rp.)</th>
                       <th>B.Blok 2 (Rp.)</th>
@@ -111,7 +110,6 @@
                       {{$bulan}}
                       </td>
                       <td>{{$d->pakaiListrik}}</td>
-                      <td>{{$d->byrListrik}}</td>
                       <td>{{$d->rekmin}}</td>
                       <td>{{$d->bBlok1}}</td>
                       <td>{{$d->bBlok2}}</td>
