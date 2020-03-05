@@ -273,7 +273,9 @@ class tagihanController extends Controller
             'byr_ipk'=>$tarif_ipk,
             'byr_keamanan'=>$tarif_keamanan,
             'ttl_ipkeamanan'=>$ttl_ipkeamanan,
-            'ttl_tagihan'=>$ttl_tagihan
+            'ttl_tagihan'=>$ttl_tagihan,
+            'realisasi'=>0,
+            'selisih'=>$ttl_tagihan
         ]);
         $data->save();
 
