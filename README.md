@@ -9,3 +9,6 @@ Please doing :
 2. composer install / composer update
 3. cp .env.example .env
 4. php artisan key:generate
+
+on Progress
+Check Tanggal Tunggakan dengan Hari Libur
