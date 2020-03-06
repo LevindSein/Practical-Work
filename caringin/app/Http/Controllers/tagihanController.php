@@ -241,9 +241,9 @@ class tagihanController extends Controller
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
         $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+        $finalDate = date("Y-m-01", strtotime("-3 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-15", strtotime("+2 month", $time));
+        $expired = date("Y-m-15", strtotime("-2 month", $time));
 
         $data = new Tagihan([
             'id_tempat'=>$id,
@@ -334,7 +334,7 @@ class tagihanController extends Controller
         $tagihan = $check->total;
         $idNas = $check->ID_NASABAH;
 
-        if($bayar == $tagihan){
+        if($bayar >= $tagihan){
             return redirect()->route('lapTagihan')->with('info','Tagihan Sudah Dibayar');
         }
     }catch(\Eception $e){

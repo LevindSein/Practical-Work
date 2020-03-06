@@ -183,7 +183,7 @@ class laporanController extends Controller
                         'DENDA'=>$total_denda
                     ]);
                 }
-                else if($d['DENDA'] >= $total_denda){
+                else if($d['DENDA'] == $total_denda){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA'=>$total_denda
@@ -198,7 +198,7 @@ class laporanController extends Controller
                         'DENDA'=>$total_denda
                     ]);
                 }
-                else if($d['DENDA'] >= ($total_denda + $denda_seb)){
+                else if($d['DENDA'] == ($total_denda + $denda_seb)){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA'=>$total_denda
