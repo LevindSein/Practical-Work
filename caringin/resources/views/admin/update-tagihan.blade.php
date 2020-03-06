@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                   Total Tagihan
-                  <input readonly value="{{$data->TTL_TAGIHAN}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                  <input readonly value="{{$data->TTL_TAGIHAN + $data->DENDA}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Realisasi Pembayaran

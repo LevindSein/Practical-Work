@@ -277,7 +277,8 @@ class tagihanController extends Controller
             'ttl_ipkeamanan'=>$ttl_ipkeamanan,
             'ttl_tagihan'=>$ttl_tagihan,
             'realisasi'=>0,
-            'selisih'=>$ttl_tagihan
+            'selisih'=>$ttl_tagihan,
+            'denda'=>0
         ]);
         $data->save();
 
@@ -315,7 +316,7 @@ class tagihanController extends Controller
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tempat_usaha.ID_TEMPAT',
+        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tagihanku.DENDA','tempat_usaha.ID_TEMPAT',
         'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH','tagihanku.REALISASI')
         ->where('ID_TAGIHANKU',$id)
         ->get();
@@ -323,12 +324,14 @@ class tagihanController extends Controller
         $check = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tagihanku.REALISASI','tagihanku.TTL_TAGIHAN','nasabah.ID_NASABAH')
+        ->select(
+            DB::raw('(tagihanku.TTL_TAGIHAN + tagihanku.DENDA) as total'),
+            'tagihanku.REALISASI','nasabah.ID_NASABAH')
         ->where('ID_TAGIHANKU',$id)
         ->first();
 
         $bayar = $check->REALISASI;
-        $tagihan = $check->TTL_TAGIHAN;
+        $tagihan = $check->total;
         $idNas = $check->ID_NASABAH;
 
         if($bayar == $tagihan){
@@ -349,7 +352,7 @@ class tagihanController extends Controller
 
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
 
-        $ttl_tagihan = $dataset->TTL_TAGIHAN; 
+        $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA; 
         $ttl_listrik = $dataset->TTL_LISTRIK;
         $ttl_air = $dataset->TTL_AIR;
         $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
@@ -371,7 +374,8 @@ class tagihanController extends Controller
                 'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
                 'SELISIH_KEBERSIHAN'=>0,
                 'REALISASI'=>$ttl_tagihan,
-                'SELISIH'=>0
+                'SELISIH'=>0,
+                'DENDA'=>0
             ]);
         }
         else{

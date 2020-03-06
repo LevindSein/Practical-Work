@@ -69,7 +69,7 @@
                       <td class="text-center"
                       <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($d->STT_BAYAR == 1)
+                      @if($d->STT_LUNAS == 1)
                         Lunas
                       @else
                         Belum Lunas

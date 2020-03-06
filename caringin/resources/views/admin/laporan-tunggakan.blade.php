@@ -19,7 +19,8 @@
                   <thead>
                     <tr>
                       <th>Status</th>
-                      <th>Tanggal</th>
+                      <th>Tgl Tagihan</th>
+                      <th>Jatuh Tempo</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
                       <th>Tunggakan</th>
@@ -29,18 +30,35 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">False</td>
-                      <td class="text-center">2020-01-15</td>
-                      <td class="text-center">A-1-001</td>
-                      <td class="text-left">Fahni Amsyari</td>
-                      <td>120,000</td>
-                      <td>200,000</td>
+                    <td class="text-center"
+                      <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
+                      @if($d->STT_LUNAS == 1)
+                        Lunas
+                      @else
+                        Belum Lunas
+                      @endif
+                      </td>
+                      <td class="text-center">{{$d->TGL_TAGIHAN}}</td>
+                      <td class="text-center">{{$d->EXPIRED}}</td>
+                      <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
+                      <td>{{$d->SELISIH}}</td>
+                      <td>
+                      @if($d->DENDA == NULL)
+                        0
+                      @else
+                        {{$d->DENDA}}
+                      @endif
+                      </td>
                       <td class="text-center">
-                      <a href="bayartunggakan" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('bayartagihan',[$d->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

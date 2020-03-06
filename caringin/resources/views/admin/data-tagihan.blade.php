@@ -46,6 +46,7 @@
                       <th>Total Tagihan (Rp.)</th>
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
+                      <th>Denda (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -217,6 +218,7 @@
                       </td>
                       <td>{{$dataT->REALISASI}}</td>
                       <td>{{$dataT->SELISIH}}</td>
+                      <td>{{$dataT->DENDA}}</td>
                     </tr>
                   @endforeach
                   </tbody>

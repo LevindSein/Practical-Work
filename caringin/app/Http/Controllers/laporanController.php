@@ -7,6 +7,7 @@ use App\Tagihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
+use Carbon\Carbon;
 
 class laporanController extends Controller
 {
@@ -130,29 +131,88 @@ class laporanController extends Controller
     }
     
     public function showTunggakan(){
-        $timezone = date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d", time());
-        $time = strtotime($date);
-        $batas = date("Y-m-15", $time);
-
-        //Cek Tanggal Show
-        //Cek Tanggal Libur
-        //Cek Selisih Bulan
-
-        if($date < $batas)
-            $tempo = $date;
-        else
-            $tempo = $batas;
-
-        $tunggakan = DB::table('tagihanku')
+    try{
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where('STT_LUNAS',0)
         ->get();
 
-        $nunggak = json_decode($tunggakan,true);
+        $nunggak = json_decode($dataset,true);
         foreach($nunggak as $d){
-            echo $d['EXPIRED'];
+            //Ambil Id Tagihannya
+            $id_tagihan = $d['ID_TAGIHANKU'];
+
+            //Ambil Id Tempat
+            $id_tempat = DB::table('tagihanku')
+            ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+            ->leftJoin('tarif_air','tempat_usaha.ID_TRFAIR','=','tarif_air.ID_TRFAIR')
+            ->leftJoin('tarif_listrik','tempat_usaha.ID_TRFLISTRIK','=','tarif_listrik.ID_TRFLISTRIK')
+            ->select('tarif_air.TRF_DENDA','tarif_listrik.VAR_DENDA','tagihanku.DENDA')
+            ->where('ID_TAGIHANKU',$id_tagihan)
+            ->get();
+
+            //Ambil Tarif Denda Fasilitas
+            foreach($id_tempat as $tarif){
+                $denda_seb = $tarif->DENDA;
+                $denda_air = $tarif->TRF_DENDA;
+                $denda_listrik = $tarif->VAR_DENDA;
+                $total_denda = $denda_air + $denda_listrik;
+            }
+
+            //Set Expired tagihan
+            $exp1 = $d['EXPIRED'];
+            $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
+            $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
+            $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
+            $now = Carbon::now()->toDateString();
+
+            if($now > $exp1 && $now < $exp2){
+                //Denda 1 Bulan
+                if($d['DENDA'] == 0){
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA'=>$total_denda
+                    ]);
+                }
+            }
+            else if ($now > $exp2 && $now < $exp3){
+                //Kena Denda 2 Bulan
+                if($d['DENDA'] ==  0){
+                    $total_denda = 2 * $total_denda;
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA'=>$total_denda
+                    ]);
+                }
+                else if($d['DENDA'] == $total_denda){
+                    $total_denda = $total_denda + $denda_seb;
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA'=>$total_denda
+                    ]);
+                }
+            }
+            else if ($now > $exp3 && $now < $exp4){
+                //kena Denda 3 Bulan
+                if($d['DENDA'] ==  0){
+                    $total_denda = 3 * $total_denda;
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA'=>$total_denda
+                    ]);
+                }
+                else if($d['DENDA'] == ($total_denda + $denda_seb)){
+                    $total_denda = $total_denda + $denda_seb;
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA'=>$total_denda
+                    ]);
+                }
+            }
+            else {
+                //Bongkar
+            }
         }
-        // return view('admin.laporan-tunggakan');
+    }catch(\Exception $e){
+        return view('admin.laporan-tunggakan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+    }
+        return view('admin.laporan-tunggakan',['dataset'=>$dataset]);
     }
     public function showBongkaran(){
         return view('admin.laporan-bongkaran');
