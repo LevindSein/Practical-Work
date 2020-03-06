@@ -243,10 +243,12 @@ class tagihanController extends Controller
         $time = strtotime($date);
         $finalDate = date("Y-m-01", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
+        $expired = date("Y-m-15", strtotime("+2 month", $time));
 
         $data = new Tagihan([
             'id_tempat'=>$id,
             'tgl_tagihan'=>$finalDate,
+            'expired'=>$expired,
             'bln_tagihan'=>$bln,
             'stt_bayar'=>0,
             'stt_lunas'=>0,

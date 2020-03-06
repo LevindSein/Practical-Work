@@ -133,7 +133,16 @@ class laporanController extends Controller
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
         $time = strtotime($date);
-        $tempo = date("Y-m-15", $time);
+        $batas = date("Y-m-15", $time);
+
+        //Cek Tanggal Show
+        //Cek Tanggal Libur
+        //Cek Selisih Bulan
+
+        if($date < $batas)
+            $tempo = $date;
+        else
+            $tempo = $batas;
 
         $tunggakan = DB::table('tagihanku')
         ->where('STT_LUNAS',0)
@@ -141,10 +150,8 @@ class laporanController extends Controller
 
         $nunggak = json_decode($tunggakan,true);
         foreach($nunggak as $d){
-            
+            echo $d['EXPIRED'];
         }
-
-        var_dump($tunggakan);
         // return view('admin.laporan-tunggakan');
     }
     public function showBongkaran(){
