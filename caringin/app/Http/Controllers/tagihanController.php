@@ -241,9 +241,9 @@ class tagihanController extends Controller
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
         $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("-3 month", $time));
+        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-15", strtotime("-2 month", $time));
+        $expired = date("Y-m-15", strtotime("+2 month", $time));
 
         $data = new Tagihan([
             'id_tempat'=>$id,
@@ -260,6 +260,8 @@ class tagihanController extends Controller
             'byr_beban'=>$byr_beban,
             'byr_arkot'=>$byr_arkot,
             'ttl_air'=>$ttl_air,
+            'realisasi_air'=>0,
+            'selisih_air'=>$ttl_air,
             'awal_listrik'=>$akhirListrik,
             'akhir_listrik'=>$inputListrik,
             'pakai_listrik'=>$pakai,
@@ -270,11 +272,17 @@ class tagihanController extends Controller
             'b_beban'=>$b_beban,
             'bpju'=>$bpju,
             'ttl_listrik'=>$ttl_listrik,
+            'realisasi_listrik'=>0,
+            'selisih_listrik'=>$ttl_listrik,
             'byr_kebersihan'=>$tarif_kebersihan,
             'ttl_kebersihan'=>$ttl_kebersihan,
+            'realisasi_kebersihan'=>0,
+            'selisih_kebersihan'=>$ttl_kebersihan,
             'byr_ipk'=>$tarif_ipk,
             'byr_keamanan'=>$tarif_keamanan,
             'ttl_ipkeamanan'=>$ttl_ipkeamanan,
+            'realisasi_ipkeamanan'=>0,
+            'selisih_ipkeamanan'=>$ttl_ipkeamanan,
             'ttl_tagihan'=>$ttl_tagihan,
             'realisasi'=>0,
             'selisih'=>$ttl_tagihan,
