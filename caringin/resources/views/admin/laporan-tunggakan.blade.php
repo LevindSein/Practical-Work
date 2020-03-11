@@ -18,6 +18,7 @@
                 <table class="table display table-bordered" id="tableTunggakan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Bayar</th>
                       <th>Status</th>
                       <th>Tgl Tagihan</th>
                       <th>Jatuh Tempo</th>
@@ -25,13 +26,16 @@
                       <th>Nama Nasabah</th>
                       <th>Tunggakan</th>
                       <th>Denda</th>
-                      <th>Bayar</th>
                     </tr>
                   </thead>
 
                   <tbody>
                   @foreach($dataset as $d)
                     <tr>
+                    <td class="text-center">
+                        <a href="{{url('bayartagihan',[$d->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          class="fas fa- fa-sm text-white-50"></i>Bayar</a>
+                    </td>
                     <td class="text-center"
                       <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
@@ -52,10 +56,6 @@
                       @else
                         {{number_format($d->DENDA)}}
                       @endif
-                      </td>
-                      <td class="text-center">
-                          <a href="{{url('bayartagihan',[$d->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                     </tr>
                   @endforeach

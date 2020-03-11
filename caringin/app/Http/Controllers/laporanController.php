@@ -16,7 +16,7 @@ class laporanController extends Controller
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->where('STT_BAYAR',1)
+        ->where('STT_LUNAS',1)
         ->get();
     }catch(\Exception $e){
         return view('admin.laporan-harian',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
@@ -31,7 +31,7 @@ class laporanController extends Controller
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->whereBetween('TGL_TAGIHAN',[$from,$to])
-        ->where('STT_BAYAR',1)
+        ->where('STT_LUNAS',1)
         ->get();
     }catch(\Exception $e){
         return view('admin.laporan-harian',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
@@ -171,8 +171,8 @@ class laporanController extends Controller
             $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
             $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            $now = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            // $now = Carbon::now()->toDateString();
+            // $now = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
+            $now = Carbon::now()->toDateString();
 
             if($now > $exp1 && $now <= $exp2){
                 //Denda 1 Bulan
@@ -196,7 +196,7 @@ class laporanController extends Controller
                         'DENDA'=>$total_denda
                     ]);
                 }
-                echo "denda 2 bulan";
+                // echo "denda 2 bulan";
             }
             else if ($now > $exp3 && $now <= $exp4){
                 //kena Denda 3 Bulan
@@ -212,10 +212,10 @@ class laporanController extends Controller
                         'DENDA'=>$total_denda
                     ]);
                 }
-                echo "denda 3 bulan";
+                // echo "denda 3 bulan";
             }
             else if($now > $exp4){
-                echo "lebih 3 bulan";
+                // echo "lebih 3 bulan";
             }
         }
     }catch(\Exception $e){
