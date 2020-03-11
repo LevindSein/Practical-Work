@@ -30,6 +30,8 @@
             href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}"
             rel="stylesheet">
 
+        <link rel="icon" href="{{asset('img/logo.png')}}">
+
         <script src="{{asset('js/animate.min.js')}}"></script>
 
     </head>
