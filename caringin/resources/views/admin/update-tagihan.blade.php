@@ -26,10 +26,6 @@
                   Total Tagihan
                   <input readonly value="{{$data->TTL_TAGIHAN + $data->DENDA}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
                 </div>
-                <div class="form-group">
-                  Realisasi Pembayaran
-                  <input required type="number" name="bayar" class="form-control form-control-user" id="exampleInputBayar" placeholder="Rp.">
-                </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
               </form>

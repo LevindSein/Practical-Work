@@ -39,49 +39,49 @@
                       @if($data->PAKAI_AIR == null)
                           0
                       @else
-                          {{$data->PAKAI_AIR}}
+                          {{number_format($data->PAKAI_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($data->PAKAI_LISTRIK == null)
                           0
                       @else
-                          {{$data->PAKAI_LISTRIK}}
+                          {{number_format($data->PAKAI_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($data->TTL_AIR == null)
                           0
                       @else
-                          {{$data->TTL_AIR}}
+                          {{number_format($data->TTL_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($data->TTL_LISTRIK == null)
                           0
                       @else
-                          {{$data->TTL_LISTRIK}}
+                          {{number_format($data->TTL_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($data->TTL_IPKEAMANAN == null)
                           0
                       @else
-                          {{$data->TTL_IPKEAMANAN}}
+                          {{number_format($data->TTL_IPKEAMANAN)}}
                       @endif
                       </td>
                       <td>
                       @if($data->TTL_KEBERSIHAN == null)
                           0
                       @else
-                          {{$data->TTL_KEBERSIHAN}}
+                          {{number_format($data->TTL_KEBERSIHAN)}}
                       @endif
                       </td>
                       <td>
                       @if($data->TTL_TAGIHAN == null)
                           0
                       @else
-                          {{$data->TTL_TAGIHAN}}
+                          {{number_format($data->TTL_TAGIHAN)}}
                       @endif
                       </td>
                     </tr>
@@ -90,8 +90,6 @@
                 </table>
                   </div>
                   </div>
-                  <!--END AIR BERSIH-->
-                  <!--END LISTRIK-->
                 </div>
                 <!--END Tab Panes-->
               </div>

@@ -371,8 +371,6 @@ class tagihanController extends Controller
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
 
-        $bayar = $request->get('bayar');
-
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
 
         $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA; 
@@ -380,29 +378,22 @@ class tagihanController extends Controller
         $ttl_air = $dataset->TTL_AIR;
         $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
         $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
-
-        if($bayar >= $ttl_tagihan){
-            $sisaTotal = $bayar - $ttl_tagihan;
-
-            DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
-                'TGL_BAYAR'=>$date,
-                'STT_LUNAS'=>1,
-                'REALISASI_AIR'=>$ttl_air,
-                'SELISIH_AIR'=>0,
-                'REALISASI_LISTRIK'=>$ttl_listrik,
-                'SELISIH_LISTRIK'=>0,
-                'REALISASI_IPKEAMANAN'=>$ttl_ipkeamanan,
-                'SELISIH_IPKEAMANAN'=>0,
-                'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
-                'SELISIH_KEBERSIHAN'=>0,
-                'REALISASI'=>$ttl_tagihan,
-                'SELISIH'=>0,
-                'DENDA'=>0
-            ]);
-        }
-        else{
-            return redirect()->route('bayartagihan',['id'=>$id])->with('warning','Pembayaran Belum Berhasil');
-        }
+        
+        DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
+            'TGL_BAYAR'=>$date,
+            'STT_LUNAS'=>1,
+            'REALISASI_AIR'=>$ttl_air,
+            'SELISIH_AIR'=>0,
+            'REALISASI_LISTRIK'=>$ttl_listrik,
+            'SELISIH_LISTRIK'=>0,
+            'REALISASI_IPKEAMANAN'=>$ttl_ipkeamanan,
+            'SELISIH_IPKEAMANAN'=>0,
+            'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
+            'SELISIH_KEBERSIHAN'=>0,
+            'REALISASI'=>$ttl_tagihan,
+            'SELISIH'=>0,
+            'DENDA'=>0
+        ]);
     } catch(\Exception $e){
         return redirect()->route('bayartagihan',['id'=>$id])->with('error','Pembayaran Gagal');
     }

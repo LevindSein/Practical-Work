@@ -50,7 +50,7 @@
                           {{$data->NOMTR_AIR}}
                       @endif
                       </td>
-                      <td class="text-center">{{$data->MAKHIR_AIR}}</td>
+                      <td class="text-center">{{number_format($data->MAKHIR_AIR)}}</td>
                       <td class="text-center">&nbsp;</td>
                     </tr>
                     @endforeach
@@ -85,7 +85,7 @@
                           {{$data->NOMTR_LISTRIK}}
                       @endif
                       </td>
-                      <td class="text-center">{{$data->MAKHIR_LISTRIK}}</td>
+                      <td class="text-center">{{number_format($data->MAKHIR_LISTRIK)}}</td>
                       <td class="text-center">&nbsp;</td>
                     </tr>
                     @endforeach
