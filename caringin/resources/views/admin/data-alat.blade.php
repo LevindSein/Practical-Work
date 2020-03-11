@@ -53,7 +53,7 @@
                           {{$data->NOMTR_AIR}}
                       @endif
                       </td>
-                      <td class="text-center">{{$data->MAKHIR_AIR}}</td>
+                      <td class="text-center">{{number_format($data->MAKHIR_AIR)}}</td>
                       <td class="text-center">
                         <a href="{{url('updatealatair',[$data->ID_MAIR])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
@@ -89,7 +89,7 @@
                           {{$data->NOMTR_LISTRIK}}
                       @endif
                       </td>
-                      <td class="text-center">{{$data->MAKHIR_LISTRIK}}</td>
+                      <td class="text-center">{{number_format($data->MAKHIR_LISTRIK)}}</td>
                       <td class="text-center">
                         <a href="{{url('updatealatlistrik',[$data->ID_MLISTRIK])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>

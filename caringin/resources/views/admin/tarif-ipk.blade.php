@@ -31,7 +31,7 @@
                   @foreach($dataset as $data)
                     <tr>
                       <td class="text-center">{{$data->ID_TRFIPK}}</td>
-                      <td>{{$data->TRF_IPK}}</td>
+                      <td>{{number_format($data->TRF_IPK)}}</td>
                       <td class="text-center">
                         <a href="{{url('updateipk',[$data->ID_TRFIPK])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>

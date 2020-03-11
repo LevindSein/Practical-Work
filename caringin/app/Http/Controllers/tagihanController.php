@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tagihan;
+use App\Hari_libur;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
@@ -69,6 +70,7 @@ class tagihanController extends Controller
     public function storetagihan(Request $request ,$id){
     try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
+        $dayaListrik = $usaha->DAYA;
 
         $meterAirID = DB::table('tempat_usaha')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -243,14 +245,26 @@ class tagihanController extends Controller
         $time = strtotime($date);
         $finalDate = date("Y-m-01", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-15", strtotime("+2 month", $time));
+        $expired = date("Y-m-14", strtotime("+2 month", $time));
 
+        //Cek Libur
+        $tgl_exp = $expired;
+        $i = 0;
+        do{
+            $tgl_exp = date("Y-m-d", strtotime($tgl_exp.'+1 day'));
+            $libur = DB::table('hari_libur')
+            ->where('hari_libur.TGL_HARI',$tgl_exp)
+            ->select('TGL_HARI')
+            ->first();
+            $i++;
+        } while($libur != null);
+
+        //Store Data Ke Database
         $data = new Tagihan([
             'id_tempat'=>$id,
             'tgl_tagihan'=>$finalDate,
-            'expired'=>$expired,
+            'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
-            'stt_bayar'=>0,
             'stt_lunas'=>0,
             'awal_air'=>$akhirAir,
             'akhir_air'=>$inputAir,
@@ -262,6 +276,7 @@ class tagihanController extends Controller
             'ttl_air'=>$ttl_air,
             'realisasi_air'=>0,
             'selisih_air'=>$ttl_air,
+            'daya_listrik'=>$dayaListrik,
             'awal_listrik'=>$akhirListrik,
             'akhir_listrik'=>$inputListrik,
             'pakai_listrik'=>$pakai,
@@ -371,7 +386,6 @@ class tagihanController extends Controller
 
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
                 'TGL_BAYAR'=>$date,
-                'STT_BAYAR'=>1,
                 'STT_LUNAS'=>1,
                 'REALISASI_AIR'=>$ttl_air,
                 'SELISIH_AIR'=>0,

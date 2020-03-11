@@ -57,6 +57,7 @@ class tarifController extends Controller
             'VAR_STANDAR'=>$request->get('tarifstandar'),
             'VAR_BPJU'=>$request->get('tarifbpju'),
             'VAR_DENDA'=>$request->get('tarifdenda'),
+            'DENDA_LEBIH'=>$request->get('dendalebih'),
             'PPN_LISTRIK'=>$request->get('ppnlistrik')
         ]);
     }catch(\Exception $e){

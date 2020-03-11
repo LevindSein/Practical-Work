@@ -63,14 +63,14 @@
                       <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
                       {{$bulan}}
                       </td>
-                      <td>{{$d->pakaiAir}}</td>
-                      <td>{{$d->byrAir}}</td>
-                      <td>{{$d->byrBeban}}</td>
-                      <td>{{$d->byrPemeliharaan}}</td>
-                      <td>{{$d->byrArkot}}</td>
-                      <td>{{$d->ttlAir}}</td>
-                      <td>{{$d->realisasiAir}}</td>
-                      <td>{{$d->selisihAir}}</td>
+                      <td>{{number_format($d->pakaiAir)}}</td>
+                      <td>{{number_format($d->byrAir)}}</td>
+                      <td>{{number_format($d->byrBeban)}}</td>
+                      <td>{{number_format($d->byrPemeliharaan)}}</td>
+                      <td>{{number_format($d->byrArkot)}}</td>
+                      <td>{{number_format($d->ttlAir)}}</td>
+                      <td>{{number_format($d->realisasiAir)}}</td>
+                      <td>{{number_format($d->selisihAir)}}</td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -109,15 +109,15 @@
                       <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
                       {{$bulan}}
                       </td>
-                      <td>{{$d->pakaiListrik}}</td>
-                      <td>{{$d->rekmin}}</td>
-                      <td>{{$d->bBlok1}}</td>
-                      <td>{{$d->bBlok2}}</td>
-                      <td>{{$d->bBeban}}</td>
-                      <td>{{$d->bpju}}</td>
-                      <td>{{$d->ttlListrik}}</td>
-                      <td>{{$d->realisasiListrik}}</td>
-                      <td>{{$d->selisihListrik}}</td>
+                      <td>{{number_format($d->pakaiListrik)}}</td>
+                      <td>{{number_format($d->rekmin)}}</td>
+                      <td>{{number_format($d->bBlok1)}}</td>
+                      <td>{{number_format($d->bBlok2)}}</td>
+                      <td>{{number_format($d->bBeban)}}</td>
+                      <td>{{number_format($d->bpju)}}</td>
+                      <td>{{number_format($d->ttlListrik)}}</td>
+                      <td>{{number_format($d->realisasiListrik)}}</td>
+                      <td>{{number_format($d->selisihListrik)}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -150,9 +150,9 @@
                       <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
                       {{$bulan}}
                       </td>
-                      <td>{{$d->ttlIpkeamanan}}</td>
-                      <td>{{$d->realisasiIpkeamanan}}</td>
-                      <td>{{$d->selisihIpkeamanan}}</td>
+                      <td>{{number_format($d->ttlIpkeamanan)}}</td>
+                      <td>{{number_format($d->realisasiIpkeamanan)}}</td>
+                      <td>{{number_format($d->selisihIpkeamanan)}}</td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -185,9 +185,9 @@
                       <?php $bulan = date("M", strtotime($d->BLN_TAGIHAN)); ?>>
                       {{$bulan}}
                       </td>
-                      <td>{{$d->ttlKebersihan}}</td>
-                      <td>{{$d->realisasiKebersihan}}</td>
-                      <td>{{$d->selisihKebersihan}}</td>
+                      <td>{{number_format($d->ttlKebersihan)}}</td>
+                      <td>{{number_format($d->realisasiKebersihan)}}</td>
+                      <td>{{number_format($d->selisihKebersihan)}}</td>
                     </tr>
                   @endforeach
                   </tbody>

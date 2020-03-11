@@ -45,12 +45,12 @@
                       <td class="text-center">{{$d->EXPIRED}}</td>
                       <td class="text-center">{{$d->KD_KONTROL}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td>{{$d->SELISIH}}</td>
+                      <td>{{number_format($d->SELISIH)}}</td>
                       <td>
                       @if($d->DENDA == NULL)
                         0
                       @else
-                        {{$d->DENDA}}
+                        {{number_format($d->DENDA)}}
                       @endif
                       </td>
                       <td class="text-center">

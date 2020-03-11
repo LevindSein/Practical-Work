@@ -50,33 +50,33 @@
                       @if($d->TTL_AIR == null)
                         &mdash;
                       @else
-                        {{$d->TTL_AIR}}
+                        {{number_format($d->TTL_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($d->TTL_LISTRIK == null)
                         &mdash;
                       @else
-                        {{$d->TTL_LISTRIK}}
+                        {{number_format($d->TTL_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($d->TTL_IPKEAMANAN == null)
                         &mdash;
                       @else
-                        {{$d->TTL_IPKEAMANAN}}
+                        {{number_format($d->TTL_IPKEAMANAN)}}
                       @endif
                       </td>
                       <td>
                       @if($d->TTL_KEBERSIHAN == null)
                         &mdash;
                       @else
-                        {{$d->TTL_KEBERSIHAN}}
+                        {{number_format($d->TTL_KEBERSIHAN)}}
                       @endif
                       </td>
-                      <td>{{$d->TTL_TAGIHAN}}</td>
-                      <td>{{$d->REALISASI}}</td>
-                      <td>{{$d->SELISIH}}</td>
+                      <td>{{number_format($d->TTL_TAGIHAN)}}</td>
+                      <td>{{number_format($d->REALISASI)}}</td>
+                      <td>{{number_format($d->SELISIH)}}</td>
                     </tr>
                   @endforeach
                   </tbody>

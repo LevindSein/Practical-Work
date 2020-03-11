@@ -21,7 +21,6 @@
                   <thead>
                     <tr>
                       <th>Action</th>
-                      <th>Bayar</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
                       <th>Lalu Air</th>
@@ -32,6 +31,7 @@
                       <th>B.Pemeliharaan (Rp.)</th>
                       <th>B.Air Kotor (Rp.)</th>
                       <th>Tagihan Air (Rp.)</th>
+                      <th>Daya Listrik</th>
                       <th>Lalu Listrik</th>
                       <th>Baru Listrik</th>
                       <th>Pakai Listrik (kWh)</th>
@@ -58,18 +58,9 @@
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
                       </td>
                       <td class="text-center" 
-                      <?php if($dataT->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
-                      <?php if($dataT->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
-                      @if($dataT->STT_BAYAR == 1)
-                        Dibayar
-                      @else
-                        Belum Dibayar
-                      @endif
-                      </td>
-                      <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($dataT->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($dataT->STT_BAYAR == 1)
+                      @if($dataT->STT_LUNAS == 1)
                         Lunas
                       @else
                         Belum Lunas
@@ -80,145 +71,152 @@
                       @if($dataT->AWAL_AIR == null)
                         0
                       @else
-                        {{$dataT->AWAL_AIR}}
+                        {{number_format($dataT->AWAL_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->AKHIR_AIR == null)
                         0
                       @else
-                        {{$dataT->AKHIR_AIR}}
+                        {{number_format($dataT->AKHIR_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->PAKAI_AIR == null)
                         0
                       @else
-                        {{$dataT->PAKAI_AIR}}
+                        {{number_format($dataT->PAKAI_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->BYR_AIR == null)
                         0
                       @else
-                        {{$dataT->BYR_AIR}}
+                        {{number_format($dataT->BYR_AIR)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->BYR_BEBAN == null)
                         0
                       @else
-                        {{$dataT->BYR_BEBAN}}
+                        {{number_format($dataT->BYR_BEBAN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->BYR_PEMELIHARAAN == null)
                         0
                       @else
-                        {{$dataT->BYR_PEMELIHARAAN}}
+                        {{number_format($dataT->BYR_PEMELIHARAAN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->BYR_ARKOT == null)
                         0
                       @else
-                        {{$dataT->BYR_ARKOT}}
+                        {{number_format($dataT->BYR_ARKOT)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->TTL_AIR == null)
                         0
                       @else
-                        {{$dataT->TTL_AIR}}
+                        {{number_format($dataT->TTL_AIR)}}
+                      @endif
+                      </td>
+                      <td>
+                      @if($dataT->DAYA_LISTRIK == null)
+                        0
+                      @else
+                        {{number_format($dataT->DAYA_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->AWAL_LISTRIK == null)
                         0
                       @else
-                        {{$dataT->AWAL_LISTRIK}}
+                        {{number_format($dataT->AWAL_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->AKHIR_LISTRIK == null)
                         0
                       @else
-                        {{$dataT->AKHIR_LISTRIK}}
+                        {{number_format($dataT->AKHIR_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->PAKAI_LISTRIK == null)
                         0
                       @else
-                        {{$dataT->PAKAI_LISTRIK}}
+                        {{number_format($dataT->PAKAI_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->REK_MIN == null)
                         0
                       @else
-                        {{$dataT->REK_MIN}}
+                        {{number_format($dataT->REK_MIN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->B_BLOK1 == null)
                         0
                       @else
-                        {{$dataT->B_BLOK1}}
+                        {{number_format($dataT->B_BLOK1)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->B_BLOK2 == null)
                         0
                       @else
-                        {{$dataT->B_BLOK2}}
+                        {{number_format($dataT->B_BLOK2)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->B_BEBAN == null)
                         0
                       @else
-                        {{$dataT->B_BEBAN}}
+                        {{number_format($dataT->B_BEBAN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->BPJU == null)
                         0
                       @else
-                        {{$dataT->BPJU}}
+                        {{number_format($dataT->BPJU)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->TTL_LISTRIK == null)
                         0
                       @else
-                        {{$dataT->TTL_LISTRIK}}
+                        {{number_format($dataT->TTL_LISTRIK)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->TTL_IPKEAMANAN == null)
                         0
                       @else
-                        {{$dataT->TTL_IPKEAMANAN}}
+                        {{number_format($dataT->TTL_IPKEAMANAN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->TTL_KEBERSIHAN == null)
                         0
                       @else
-                        {{$dataT->TTL_KEBERSIHAN}}
+                        {{number_format($dataT->TTL_KEBERSIHAN)}}
                       @endif
                       </td>
                       <td>
                       @if($dataT->TTL_TAGIHAN == null)
                         0
                       @else
-                        {{$dataT->TTL_TAGIHAN}}
+                        {{number_format($dataT->TTL_TAGIHAN)}}
                       @endif
                       </td>
-                      <td>{{$dataT->REALISASI}}</td>
-                      <td>{{$dataT->SELISIH}}</td>
-                      <td>{{$dataT->DENDA}}</td>
+                      <td>{{number_format($dataT->REALISASI)}}</td>
+                      <td>{{number_format($dataT->SELISIH)}}</td>
+                      <td>{{number_format($dataT->DENDA)}}</td>
                     </tr>
                   @endforeach
                   </tbody>

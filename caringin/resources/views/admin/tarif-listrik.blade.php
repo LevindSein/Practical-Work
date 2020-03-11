@@ -32,11 +32,15 @@
                   </div>
                   <div class="form-group">
                     Tarif BPJU
-                    <input value="{{$data->VAR_BPJU}}" required type="number" name="tarifbpju" class="form-control form-control-user" id="exampleInputTarifBebanDayaListrik" placeholder="Watt">
+                    <input value="{{$data->VAR_BPJU}}" required type="number" name="tarifbpju" class="form-control form-control-user" id="exampleInputTarifBebanDayaListrik" placeholder="Rp.">
                   </div>
                   <div class="form-group">
                     Tarif Denda
-                    <input value="{{$data->VAR_DENDA}}" required type="number" name="tarifdenda" class="form-control form-control-user" id="exampleInputTarifBebanRekMin" placeholder="Watt">
+                    <input value="{{$data->VAR_DENDA}}" required type="number" name="tarifdenda" class="form-control form-control-user" id="exampleInputTarifBebanRekMin" placeholder="Rp.">
+                  </div>
+                  <div class="form-group">
+                    Denda > 4400 Watt
+                    <input value="{{$data->DENDA_LEBIH}}" required type="number" name="dendalebih" class="form-control form-control-user" id="exampleInputTarifBebanRekMin" placeholder="% dari Total Tagihan">
                   </div>
                   <div class="form-group">
                     PPN Listrik

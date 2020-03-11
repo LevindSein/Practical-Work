@@ -81,16 +81,16 @@
                       </td>
                       <td class="text-left">{{$d->KD_KONTROL}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td>{{$d->AWAL_AIR}}</td>
-                      <td>{{$d->AKHIR_AIR}}</td>
-                      <td>{{$d->PAKAI_AIR}}</td>
-                      <td>{{$d->BYR_AIR}}</td>
-                      <td>{{$d->BYR_BEBAN}}</td>
-                      <td>{{$d->BYR_PEMELIHARAAN}}</td>
-                      <td>{{$d->BYR_ARKOT}}</td>
-                      <td>{{$d->TTL_AIR}}</td>
-                      <td>{{$d->REALISASI_AIR}}</td>
-                      <td>{{$d->SELISIH_AIR}}</td>
+                      <td>{{number_format($d->AWAL_AIR)}}</td>
+                      <td>{{number_format($d->AKHIR_AIR)}}</td>
+                      <td>{{number_format($d->PAKAI_AIR)}}</td>
+                      <td>{{number_format($d->BYR_AIR)}}</td>
+                      <td>{{number_format($d->BYR_BEBAN)}}</td>
+                      <td>{{number_format($d->BYR_PEMELIHARAAN)}}</td>
+                      <td>{{number_format($d->BYR_ARKOT)}}</td>
+                      <td>{{number_format($d->TTL_AIR)}}</td>
+                      <td>{{number_format($d->REALISASI_AIR)}}</td>
+                      <td>{{number_format($d->SELISIH_AIR)}}</td>
                     </tr>
                     @endif
                     @endforeach
@@ -131,7 +131,7 @@
                     <td class="text-center"
                       <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($d->STT_BAYAR == 1)
+                      @if($d->STT_LUNAS == 1)
                         Lunas
                       @else
                         Belum Lunas
@@ -143,18 +143,18 @@
                       </td>
                       <td class="text-left">{{$d->KD_KONTROL}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
-                      <td>{{$d->DAYA}}</td>
-                      <td>{{$d->AWAL_LISTRIK}}</td>
-                      <td>{{$d->AKHIR_LISTRIK}}</td>
-                      <td>{{$d->PAKAI_LISTRIK}}</td>
-                      <td>{{$d->REK_MIN}}</td>
-                      <td>{{$d->B_BLOK1}}</td>
-                      <td>{{$d->B_BLOK2}}</td>
-                      <td>{{$d->B_BEBAN}}</td>
-                      <td>{{$d->BPJU}}</td>
-                      <td>{{$d->TTL_LISTRIK}}</td>
-                      <td>{{$d->REALISASI_LISTRIK}}</td>
-                      <td>{{$d->SELISIH_LISTRIK}}</td>
+                      <td>{{number_format($d->DAYA_LISTRIK)}}</td>
+                      <td>{{number_format($d->AWAL_LISTRIK)}}</td>
+                      <td>{{number_format($d->AKHIR_LISTRIK)}}</td>
+                      <td>{{number_format($d->PAKAI_LISTRIK)}}</td>
+                      <td>{{number_format($d->REK_MIN)}}</td>
+                      <td>{{number_format($d->B_BLOK1)}}</td>
+                      <td>{{number_format($d->B_BLOK2)}}</td>
+                      <td>{{number_format($d->B_BEBAN)}}</td>
+                      <td>{{number_format($d->BPJU)}}</td>
+                      <td>{{number_format($d->TTL_LISTRIK)}}</td>
+                      <td>{{number_format($d->REALISASI_LISTRIK)}}</td>
+                      <td>{{number_format($d->SELISIH_LISTRIK)}}</td>
                     </tr>
                     @endif
                     @endforeach
@@ -188,7 +188,7 @@
                     <td class="text-center"
                       <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($d->STT_BAYAR == 1)
+                      @if($d->STT_LUNAS == 1)
                         Lunas
                       @else
                         Belum Lunas
@@ -202,9 +202,9 @@
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">{{$d->NO_ALAMAT}}</td>
                       <td class="text-center">{{$d->JML_ALAMAT}}</td>
-                      <td>{{$d->TTL_IPKEAMANAN}}</td>
-                      <td>{{$d->REALISASI_IPKEAMANAN}}</td>
-                      <td>{{$d->SELISIH_IPKEAMANAN}}</td>
+                      <td>{{number_format($d->TTL_IPKEAMANAN)}}</td>
+                      <td>{{number_format($d->REALISASI_IPKEAMANAN)}}</td>
+                      <td>{{number_format($d->SELISIH_IPKEAMANAN)}}</td>
                     </tr>
                   @endif
                   @endforeach
@@ -238,7 +238,7 @@
                     <td class="text-center"
                       <?php if($d->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($d->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
-                      @if($d->STT_BAYAR == 1)
+                      @if($d->STT_LUNAS == 1)
                         Lunas
                       @else
                         Belum Lunas
@@ -252,9 +252,9 @@
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">{{$d->NO_ALAMAT}}</td>
                       <td class="text-center">{{$d->JML_ALAMAT}}</td>
-                      <td>{{$d->TTL_KEBERSIHAN}}</td>
-                      <td>{{$d->REALISASI_KEBERSIHAN}}</td>
-                      <td>{{$d->SELISIH_KEBERSIHAN}}</td>
+                      <td>{{number_format($d->TTL_KEBERSIHAN)}}</td>
+                      <td>{{number_format($d->REALISASI_KEBERSIHAN)}}</td>
+                      <td>{{number_format($d->SELISIH_KEBERSIHAN)}}</td>
                     </tr>
                     @endif
                     @endforeach
