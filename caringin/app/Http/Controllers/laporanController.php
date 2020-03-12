@@ -137,6 +137,7 @@ class laporanController extends Controller
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where('STT_LUNAS',0)
         ->get();
+        $now = Carbon::now()->toDateString();
 
         $nunggak = json_decode($dataset,true);
         foreach($nunggak as $d){
@@ -145,7 +146,6 @@ class laporanController extends Controller
             $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
             $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            $now = Carbon::now()->toDateString();
             
             //Ambil Id Tagihannya
             $id_tagihan = $d['ID_TAGIHANKU'];
