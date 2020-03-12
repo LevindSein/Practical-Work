@@ -140,6 +140,13 @@ class laporanController extends Controller
 
         $nunggak = json_decode($dataset,true);
         foreach($nunggak as $d){
+            //Set Expired tagihan
+            $exp1 = $d['EXPIRED'];
+            $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
+            $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
+            $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
+            $now = Carbon::now()->toDateString();
+            
             //Ambil Id Tagihannya
             $id_tagihan = $d['ID_TAGIHANKU'];
 
@@ -148,7 +155,7 @@ class laporanController extends Controller
             ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->leftJoin('tarif_air','tempat_usaha.ID_TRFAIR','=','tarif_air.ID_TRFAIR')
             ->leftJoin('tarif_listrik','tempat_usaha.ID_TRFLISTRIK','=','tarif_listrik.ID_TRFLISTRIK')
-            ->select('tarif_air.TRF_DENDA','tarif_listrik.VAR_DENDA','tarif_listrik.DENDA_LEBIH','tagihanku.TTL_TAGIHAN','tagihanku.PAKAI_LISTRIK','tagihanku.DENDA')
+            ->select('tarif_air.TRF_DENDA','tarif_listrik.VAR_DENDA','tarif_listrik.DENDA_LEBIH','tagihanku.TTL_LISTRIK','tagihanku.PAKAI_LISTRIK','tagihanku.DENDA')
             ->where('ID_TAGIHANKU',$id_tagihan)
             ->get();
 
@@ -157,7 +164,7 @@ class laporanController extends Controller
                 $denda_seb = $data->DENDA;
                 $denda_air = $data->TRF_DENDA;
                 if($data->PAKAI_LISTRIK > 4400){
-                    $denda_listrik = $data->TTL_TAGIHAN * ($data->DENDA_LEBIH / 100);
+                    $denda_listrik = $data->TTL_LISTRIK * ($data->DENDA_LEBIH / 100);
                 }
                 else{
                     $denda_listrik = $data->VAR_DENDA;
@@ -166,53 +173,48 @@ class laporanController extends Controller
                 $total_denda = round($total_dnd);
             }
 
-            //Set Expired tagihan
-            $exp1 = $d['EXPIRED'];
-            $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
-            $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
-            $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            // $now = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            $now = Carbon::now()->toDateString();
-
             if($now > $exp1 && $now <= $exp2){
                 //Denda 1 Bulan
-                if($d['DENDA'] == 0){
+                if($d['STT_DENDA'] == 0){
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                        'DENDA'=>$total_denda
+                        'DENDA'=>$total_denda,
+                        'STT_DENDA'=>1
                     ]);
                 }
             }
             else if ($now > $exp2 && $now <= $exp3){
                 //Kena Denda 2 Bulan
-                if($d['DENDA'] ==  0){
+                if($d['STT_DENDA'] ==  0){
                     $total_denda = 2 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                        'DENDA'=>$total_denda
+                        'DENDA'=>$total_denda,
+                        'STT_DENDA'=>2
                     ]);
                 }
-                else if($d['DENDA'] == $total_denda){
+                else if($d['STT_DENDA'] == 1){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                        'DENDA'=>$total_denda
+                        'DENDA'=>$total_denda,
+                        'STT_DENDA'=>2
                     ]);
                 }
-                // echo "denda 2 bulan";
             }
             else if ($now > $exp3 && $now <= $exp4){
                 //kena Denda 3 Bulan
-                if($d['DENDA'] ==  0){
+                if($d['STT_DENDA'] ==  0){
                     $total_denda = 3 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                        'DENDA'=>$total_denda
+                        'DENDA'=>$total_denda,
+                        'STT_DENDA'=>3
                     ]);
                 }
-                else if($d['DENDA'] == ($total_denda + $denda_seb)){
+                else if($d['STT_DENDA'] == 2){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                        'DENDA'=>$total_denda
+                        'DENDA'=>$total_denda,
+                        'STT_DENDA'=>3
                     ]);
                 }
-                // echo "denda 3 bulan";
             }
             else if($now > $exp4){
                 // echo "lebih 3 bulan";

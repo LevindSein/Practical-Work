@@ -301,7 +301,8 @@ class tagihanController extends Controller
             'ttl_tagihan'=>$ttl_tagihan,
             'realisasi'=>0,
             'selisih'=>$ttl_tagihan,
-            'denda'=>0
+            'denda'=>0,
+            'stt_denda'=>0
         ]);
         $data->save();
 
