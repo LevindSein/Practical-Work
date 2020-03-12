@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 
+//ADMIN
 //Nasabah
 Route::get('showdatanasabah','nasabahController@showdata')->name('show');
 Route::get('showformnasabah','nasabahController@showform');
@@ -102,3 +103,11 @@ Route::get('showtambahuser','userController@tambahuser');
 
 //Dashboard
 Route::get('showdashboard','dashboardController@dashboard');
+//ENDADMIN
+
+//KASIR
+Route::get('showtagihankasir','laporanController@showTagihanKasir')->name('lapTagihanKasir');
+Route::get('datatagihankasir/{id}','tagihanController@dataTagihanKasir')->name('datatagihanKasir');
+Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name('bayartagihanKasir');
+Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
+//ENDKASIR

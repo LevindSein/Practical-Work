@@ -52,206 +52,14 @@
                 <a
                     class="sidebar-brand d-flex align-items-center justify-content-center"
                     href="#">
-                    <div class="sidebar-brand-text mx-3">ADMIN</div>
+                    <div class="sidebar-brand-text mx-3">KASIR</div>
                 </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="showdashboard">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
 
                 <!-- Nav Item - Tagihan -->
                 <li class="nav-item">
-
-                    <a class="nav-link" href="{{url('tambahtagihan')}}">
-                        <i class="fas fa-fw fa-plus"></i>
+                    <a class="nav-link" href="{{url('showtagihankasir')}}">
+                        <i class="fas fa-dollar-sign"></i>
                         <span>Tagihan</span></a>
-                </li>
-
-                <!-- Nav Item - Tarif -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseTarif"
-                        aria-expanded="true"
-                        aria-controls="collapseTarif">
-                        <i class="fas fa-fw fa-list"></i>
-                        <span>Tarif</span>
-                    </a>
-                    <div
-                        id="collapseTarif"
-                        class="collapse"
-                        aria-labelledby="headingPages"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <div class="collapse-divider"></div>
-                            <a class="collapse-item" href="{{url('showformtarifair')}}">Tarif Air</a>
-                            <a class="collapse-item" href="{{url('showformtariflistrik')}}">Tarif Listrik</a>
-                            <a class="collapse-item" href="{{url('showformtarifkebersihan')}}">Tarif Kebersihan</a>
-                            <a class="collapse-item" href="{{url('showformtarifipk')}}">Tarif IPK</a>
-                            <a class="collapse-item" href="{{url('showformtarifkeamanan')}}">Tarif Keamanan</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Laporan -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapsePages"
-                        aria-expanded="true"
-                        aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Laporan</span>
-                    </a>
-                    <div
-                        id="collapsePages"
-                        class="collapse"
-                        aria-labelledby="headingPages"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <div class="collapse-divider"></div>
-                            <a class="collapse-item" href="{{url('showlaporanharian')}}">Laporan Harian</a>
-                            <a class="collapse-item" href="{{url('showlaporanbulanan')}}">Laporan Bulanan</a>
-                            <a class="collapse-item" href="{{url('showlaporantahunan')}}">Laporan Tahunan</a>
-                            <a class="collapse-item" href="{{url('showlaporantagihan')}}">Laporan Tagihan</a>
-                            <a class="collapse-item" href="{{url('showlaporantunggakan')}}">Laporan Tunggakan</a>
-                            <a class="collapse-item" href="{{url('showlaporanbongkaran')}}">Laporan Bongkaran</a>
-                            <a class="collapse-item" href="{{url('showlaporanpenghapusan')}}">Laporan Penghapusan</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Nasabah -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseNasabah"
-                        aria-expanded="true"
-                        aria-controls="collapseNasabah">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Nasabah</span>
-                    </a>
-                    <div
-                        id="collapseNasabah"
-                        class="collapse"
-                        aria-labelledby="headingNasabah"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showformnasabah')}}">Tambah Nasabah</a>
-                            <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Tempat Usaha -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseUsaha"
-                        aria-expanded="true"
-                        aria-controls="collapseUsaha">
-                        <i class="fas fa-fw fa-store"></i>
-                        <span>Tempat Usaha</span>
-                    </a>
-                    <div
-                        id="collapseUsaha"
-                        class="collapse"
-                        aria-labelledby="headingUsaha"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showformtempatusaha')}}">Tambah Tempat Usaha</a>
-                            <a class="collapse-item" href="{{url('showtempatusaha')}}">Data Tempat Usaha</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - METERAN -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseMeter"
-                        aria-expanded="true"
-                        aria-controls="collapseMeter">
-                        <i class="fas fa-tools"></i>
-                        <span>Alat Meter</span>
-                    </a>
-                    <div
-                        id="collapseMeter"
-                        class="collapse"
-                        aria-labelledby="headingMeter"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('tambahalat')}}">Tambah Alat</a>
-                            <a class="collapse-item" href="{{url('dataalat')}}">Data Alat</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Hari Libur -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseLibur"
-                        aria-expanded="true"
-                        aria-controls="collapseLibur">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>Hari Libur</span>
-                    </a>
-                    <div
-                        id="collapseLibur"
-                        class="collapse"
-                        aria-labelledby="headingLibur"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('tambahlibur')}}">Tambah Hari Libur</a>
-                            <a class="collapse-item" href="{{url('showdatalibur')}}">Data Hari Libur</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - User -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseUser"
-                        aria-expanded="true"
-                        aria-controls="collapseUser">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>User</span>
-                    </a>
-                    <div
-                        id="collapseUser"
-                        class="collapse"
-                        aria-labelledby="headingUser"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showtambahuser')}}">Tambah User</a>
-                            <a class="collapse-item" href="{{url('showdatauser')}}">Data User</a>
-                        </div>
-                    </div>
                 </li>
 
                 <!-- Divider -->
@@ -364,7 +172,7 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    @include('admin.flash-message')
+                    @include('kasir.flash-message')
                     @yield('content')
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">

@@ -250,4 +250,17 @@ class laporanController extends Controller
     public function showPenghapusan(){
         return view('admin.laporan-penghapusan');
     }
+
+    //Kasir
+    public function showTagihanKasir(){
+        try{
+            $dataset = DB::table('tempat_usaha')
+            ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+            ->get();
+        }catch(\Exception $e){
+            return view('kasir.tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+        }
+            return view('kasir.tagihan',['dataset'=>$dataset]);
+    }
 }
