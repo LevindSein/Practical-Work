@@ -558,4 +558,23 @@ class tagihanController extends Controller
         return view('kasir.print-struk',['dataset'=>$dataset]);
     }
     //ENDKASIR
+
+    //Manager
+    public function dataTagihanManager($id){
+        try{
+            $dataset = DB::table('tempat_usaha')
+            ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH')
+            ->where('tempat_usaha.ID_TEMPAT',$id)
+            ->get();
+    
+            $dataTagihan = DB::table('tagihanku')
+            ->where('tagihanku.ID_TEMPAT',$id)
+            ->get();
+        }catch(\Exception $e){
+            return view('manajer.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
+        }
+            return view('manajer.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+        }
+    //EndManager
 }

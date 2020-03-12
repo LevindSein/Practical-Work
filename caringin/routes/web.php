@@ -112,3 +112,17 @@ Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name
 Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
 Route::get('printstruk/{id}','tagihanController@printStrukKasir');
 //ENDKASIR
+
+//MANAJER
+Route::get('showdashboardmanager','dashboardController@dashboardManager');
+Route::get('showlaporanharianmanager','laporanController@showHarianManager');
+Route::get('showlaporanharianmanager/filter','laporanController@filterHarianManager');
+Route::get('showlaporanbulananmanager','laporanController@showBulananManager');
+Route::get('showlaporanbulananmanager/filter','laporanController@filterBulananManager');
+Route::get('showlaporantahunanmanager','laporanController@showTahunanManager');
+Route::get('showlaporantagihanmanager','laporanController@showTagihanManager')->name('lapTagihanManager');
+Route::get('showlaporantunggakanmanager','laporanController@showTunggakanManager');
+Route::get('showlaporanbongkaranmanager','laporanController@showBongkaranManager');
+Route::get('showlaporanpenghapusanmanager','laporanController@showPenghapusanManager');
+Route::get('datatagihanmanager/{id}','tagihanController@dataTagihanManager')->name('datatagihanManager');
+//ENDMANAJER
