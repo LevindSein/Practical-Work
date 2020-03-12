@@ -547,4 +547,15 @@ class tagihanController extends Controller
         }
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
     }
+
+    public function printStrukKasir($id){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('ID_TAGIHANKU',$id)
+        ->get();
+
+        return view('kasir.print-struk',['dataset'=>$dataset]);
+    }
+    //ENDKASIR
 }

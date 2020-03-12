@@ -243,16 +243,6 @@
             <!-- Page level custom scripts -->
             <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
-            <!-- Button -->
-            <script src="{{asset('js/datatables.buttons.min.js')}}"></script>
-            <script src="{{asset('js/buttons.flash.min.js')}}"></script>
-            <script src="{{asset('js/jszip.min.js')}}"></script>
-            <script src="{{asset('js/pdfmake.min.js')}}"></script>
-            <script src="{{asset('js/vfs_fonts.js')}}"></script>
-            <script src="{{asset('js/buttons.html5.min.js')}}"></script>
-            <script src="{{asset('js/buttons.print.min.js')}}"></script>
-            <script src="{{asset('js/buttons.colvis.min.js')}}"></script>
-            
             <!--for column table toggle-->
             <script>
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -270,19 +260,9 @@
                 });
             </script>
             <script>
-                $(document).ready(function(){
-                    $('#dataAir,#dataListrik').DataTable({
-                        "scrollX": true,
-                        "processing": true,
-                        "bSortable": false,
-                        "deferRender": true
-                    });
-                });
-            </script>
-            <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
+                        '#tableTagihan'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,
@@ -293,53 +273,6 @@
                         "scrollX": true,
                         "bSortable": false,
                         "deferRender": true,
-                        "dom": "r" + "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
-                                "ow'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-                        "buttons": [
-                            {
-                                text: '<i class="fas fa-file-pdf fa-lg"></i>',
-                                extend: 'pdf',
-                                className: 'btn btn-danger bg-gradient-danger',
-                                title: 'BP3C PDF',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function (doc) {
-                                    doc.pageMargins = [25,25,25,25];
-                                    doc.defaultStyle.fontSize = 12;
-                                    doc.styles.tableHeader.fontSize = 14;
-                                    doc.styles.title.fontSize = 20;
-                                }
-                            }, {
-                                text: '<i class="fas fa-file-excel fa-lg"></i>',
-                                extend: 'excel',
-                                className: 'btn btn-success bg-gradient-success',
-                                title: 'BP3C Excel',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                }
-                            }, {
-                                text: '<i class="fas fa-print fa-lg"></i>',
-                                extend: 'print',
-                                className: 'btn btn-info bg-gradient-info',
-                                title: 'BP3C Print',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function ( win ) {
-                                    $(win.document.body)
-                                    .css( 'font-size', '11pt' )
-                                    .prepend(
-                                    '<img src="{{asset('img/bp3c.png')}}" style="position:absolute; top:0; left:0;" />'
-                                    );;
-                                }
-                            },{
-                                text: '<i class="fas fa-filter"></i>',
-                                extend: 'colvis',
-                                className: 'btn btn-warning bg-gradient-warning'
-                            }
-                        ]
                     });
                 });
             </script>

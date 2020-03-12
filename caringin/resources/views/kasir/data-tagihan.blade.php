@@ -21,6 +21,7 @@
                   <thead>
                     <tr>
                       <th>Action</th>
+                      <th>Struk</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
                       <th>Lalu Air</th>
@@ -56,6 +57,10 @@
                       <td class="text-center">
                           <a href="{{url('bayartagihankasir',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bayar</a>
+                      </td>
+                      <td class="text-center">
+                          <a href="{{url('printstruk',[$dataT->ID_TAGIHANKU])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Print</a>
                       </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
