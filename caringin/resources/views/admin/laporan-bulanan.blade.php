@@ -59,6 +59,7 @@
                       <th>Pembayaran (Rp.)</th>
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
+                      <th>Denda (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -91,6 +92,7 @@
                       <td>{{number_format($d->TTL_AIR)}}</td>
                       <td>{{number_format($d->REALISASI_AIR)}}</td>
                       <td>{{number_format($d->SELISIH_AIR)}}</td>
+                      <td>{{number_format($d->DENDA_AIR)}}</td>
                     </tr>
                     @endif
                     @endforeach
@@ -121,6 +123,7 @@
                       <th>Pembayaran (Rp.)</th>
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
+                      <th>Denda (Rp.)</th>
                     </tr>
                   </thead>
 
@@ -155,6 +158,7 @@
                       <td>{{number_format($d->TTL_LISTRIK)}}</td>
                       <td>{{number_format($d->REALISASI_LISTRIK)}}</td>
                       <td>{{number_format($d->SELISIH_LISTRIK)}}</td>
+                      <td>{{number_format($d->DENDA_LISTRIK)}}</td>
                     </tr>
                     @endif
                     @endforeach

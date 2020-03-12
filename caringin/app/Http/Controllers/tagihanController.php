@@ -276,6 +276,7 @@ class tagihanController extends Controller
             'ttl_air'=>$ttl_air,
             'realisasi_air'=>0,
             'selisih_air'=>$ttl_air,
+            'denda_air'=>0,
             'daya_listrik'=>$dayaListrik,
             'awal_listrik'=>$akhirListrik,
             'akhir_listrik'=>$inputListrik,
@@ -289,6 +290,7 @@ class tagihanController extends Controller
             'ttl_listrik'=>$ttl_listrik,
             'realisasi_listrik'=>0,
             'selisih_listrik'=>$ttl_listrik,
+            'denda_listrik'=>0,
             'byr_kebersihan'=>$tarif_kebersihan,
             'ttl_kebersihan'=>$ttl_kebersihan,
             'realisasi_kebersihan'=>0,
@@ -375,8 +377,8 @@ class tagihanController extends Controller
         $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
 
         $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA; 
-        $ttl_listrik = $dataset->TTL_LISTRIK;
-        $ttl_air = $dataset->TTL_AIR;
+        $ttl_listrik = $dataset->TTL_LISTRIK + $dataset->DENDA_LISTRIK;
+        $ttl_air = $dataset->TTL_AIR + $dataset->DENDA_AIR;
         $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
         $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
         
@@ -392,8 +394,7 @@ class tagihanController extends Controller
             'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
             'SELISIH_KEBERSIHAN'=>0,
             'REALISASI'=>$ttl_tagihan,
-            'SELISIH'=>0,
-            'DENDA'=>0
+            'SELISIH'=>0
         ]);
     } catch(\Exception $e){
         return redirect()->route('bayartagihan',['id'=>$id])->with('error','Pembayaran Gagal');

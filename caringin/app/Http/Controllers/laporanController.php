@@ -77,7 +77,8 @@ class laporanController extends Controller
             DB::raw('SUM(BYR_ARKOT) as byrArkot'),
             DB::raw('SUM(TTL_AIR) as ttlAir'),
             DB::raw('SUM(REALISASI_AIR) as realisasiAir'),
-            DB::raw('SUM(SELISIH_AIR) as selisihAir'),)
+            DB::raw('SUM(SELISIH_AIR) as selisihAir'),
+            DB::raw('SUM(DENDA_AIR) as dendaAir'))
         ->groupBy('BLN_TAGIHAN')
         ->get();
 
@@ -92,7 +93,8 @@ class laporanController extends Controller
             DB::raw('SUM(BPJU) as bpju'),
             DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
             DB::raw('SUM(REALISASI_LISTRIK) as realisasiListrik'),
-            DB::raw('SUM(SELISIH_LISTRIK) as selisihListrik'))
+            DB::raw('SUM(SELISIH_LISTRIK) as selisihListrik'),
+            DB::raw('SUM(DENDA_LISTRIK) as dendaListrik'))
         ->groupBy('BLN_TAGIHAN')
         ->get();
 
@@ -146,6 +148,7 @@ class laporanController extends Controller
             $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
             $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
+            $now = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             
             //Ambil Id Tagihannya
             $id_tagihan = $d['ID_TAGIHANKU'];
@@ -177,6 +180,8 @@ class laporanController extends Controller
                 //Denda 1 Bulan
                 if($d['STT_DENDA'] == 0){
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA_AIR'=>$denda_air,
+                        'DENDA_LISTRIK'=>$denda_listrik,
                         'DENDA'=>$total_denda,
                         'STT_DENDA'=>1
                     ]);
@@ -187,6 +192,8 @@ class laporanController extends Controller
                 if($d['STT_DENDA'] ==  0){
                     $total_denda = 2 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA_AIR'=>$denda_air,
+                        'DENDA_LISTRIK'=>$denda_listrik,
                         'DENDA'=>$total_denda,
                         'STT_DENDA'=>2
                     ]);
@@ -194,6 +201,8 @@ class laporanController extends Controller
                 else if($d['STT_DENDA'] == 1){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA_AIR'=>$denda_air,
+                        'DENDA_LISTRIK'=>$denda_listrik,
                         'DENDA'=>$total_denda,
                         'STT_DENDA'=>2
                     ]);
@@ -204,6 +213,8 @@ class laporanController extends Controller
                 if($d['STT_DENDA'] ==  0){
                     $total_denda = 3 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA_AIR'=>$denda_air,
+                        'DENDA_LISTRIK'=>$denda_listrik,
                         'DENDA'=>$total_denda,
                         'STT_DENDA'=>3
                     ]);
@@ -211,6 +222,8 @@ class laporanController extends Controller
                 else if($d['STT_DENDA'] == 2){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'DENDA_AIR'=>$denda_air,
+                        'DENDA_LISTRIK'=>$denda_listrik,
                         'DENDA'=>$total_denda,
                         'STT_DENDA'=>3
                     ]);

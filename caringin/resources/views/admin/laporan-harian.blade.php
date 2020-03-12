@@ -37,6 +37,7 @@
                       <th>Total (Rp.)</th>
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
+                      <th>Denda(Rp.)</th>
                     </tr>
                   </thead>
 
@@ -77,6 +78,7 @@
                       <td>{{number_format($d->TTL_TAGIHAN)}}</td>
                       <td>{{number_format($d->REALISASI)}}</td>
                       <td>{{number_format($d->SELISIH)}}</td>
+                      <td>{{number_format($d->DENDA)}}</td>
                     </tr>
                   @endforeach
                   </tbody>
