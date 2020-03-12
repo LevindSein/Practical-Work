@@ -148,7 +148,6 @@ class laporanController extends Controller
             $exp2 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             $exp3 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(2,'month')->toDateString();
             $exp4 = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(3,'month')->toDateString();
-            $now = Carbon::createFromFormat('Y-m-d',$d['EXPIRED'])->add(1,'month')->toDateString();
             
             //Ambil Id Tagihannya
             $id_tagihan = $d['ID_TAGIHANKU'];
@@ -230,7 +229,9 @@ class laporanController extends Controller
                 }
             }
             else if($now > $exp4){
-                // echo "lebih 3 bulan";
+                DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                    'STT_DENDA'=>4
+                ]);
             }
         }
     }catch(\Exception $e){
@@ -239,7 +240,12 @@ class laporanController extends Controller
         return view('admin.laporan-tunggakan',['dataset'=>$dataset]);
     }
     public function showBongkaran(){
-        return view('admin.laporan-bongkaran');
+        $dataset = DB::table('tagihanku')
+        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where([['STT_LUNAS',0],['STT_DENDA',4]])
+        ->get();
+        return view('admin.laporan-bongkaran',['dataset'=>$dataset]);
     }
     public function showPenghapusan(){
         return view('admin.laporan-penghapusan');

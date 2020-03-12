@@ -22,22 +22,22 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Fasilitas</th>
                       <th>Perintah</th>
                     </tr>
                   </thead>
                   
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">01-15-2020</td>
-                      <td class="text-center">A-1-005</td>
-                      <td class="text-left">New York</td>
-                      <td class="text-center">Air</td>
+                      <td class="text-center">{{$d->TGL_TAGIHAN}}</td>
+                      <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">
                       <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Print</a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>

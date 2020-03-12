@@ -352,7 +352,7 @@ class tagihanController extends Controller
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select(
             DB::raw('(tagihanku.TTL_TAGIHAN + tagihanku.DENDA) as total'),
-            'tagihanku.REALISASI','nasabah.ID_NASABAH')
+            'tagihanku.REALISASI','nasabah.ID_NASABAH','tagihanku.ID_TEMPAT')
         ->where('ID_TAGIHANKU',$id)
         ->first();
 
@@ -360,9 +360,28 @@ class tagihanController extends Controller
         $tagihan = $check->total;
         $idNas = $check->ID_NASABAH;
 
+        //Kalau Tagihan Sudah Dibayar
         if($bayar >= $tagihan){
             return redirect()->route('lapTagihan')->with('info','Tagihan Sudah Dibayar');
         }
+
+        //Apabila Tagihan Sebelumnya Belum Terbayar
+        $idTempat = $check->ID_TEMPAT;
+        $belum = DB::table('tagihanku')
+        ->where([['ID_TEMPAT',$idTempat],['STT_LUNAS',0]])
+        ->get();
+
+        $recTotal = $belum->count();
+        for($i=0;$i<$recTotal;$i++){
+            if($i > 0){
+                if($belum[$i]->ID_TAGIHANKU == $id){
+                    if($belum[$i-1] != null){
+                        return redirect()->route('lapTagihan')->with('info','Tagihan Sebelumnya Belum Terbayar');
+                    }
+                }
+            }
+        }
+
     }catch(\Eception $e){
         return redirect()->route('lapTagihan')->with('error','Kesalahan Sistem');
     }

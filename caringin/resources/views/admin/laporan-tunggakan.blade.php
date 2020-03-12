@@ -24,8 +24,9 @@
                       <th>Jatuh Tempo</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
-                      <th>Tunggakan</th>
-                      <th>Denda</th>
+                      <th>Tunggakan (Rp.)</th>
+                      <th>Denda (Rp.)</th>
+                      <th>Keterangan</th>
                     </tr>
                   </thead>
 
@@ -55,6 +56,13 @@
                         0
                       @else
                         {{number_format($d->DENDA)}}
+                      @endif
+                      </td>
+                      <td class="text-center" <?php if($d->STT_DENDA==4){ ?> style="color:red;" <?php } ?>>
+                      @if($d->STT_DENDA == 4)
+                        Bongkar
+                      @else
+                        &mdash;
                       @endif
                       </td>
                     </tr>
