@@ -39,30 +39,17 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" action="storeuser" method="POST">
+                  @csrf
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
+                      <input required type="text" class="form-control form-control-user" id="exampleInputUsername" name="username" aria-describedby="emailHelp" placeholder="Username">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input required type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                      <label for="sel1">Pilih Kategori:</label>
-                      <select class="form-control" id="sel1">
-                        <option>Admin</option>
-                        <option>Kasir</option>
-                        <option>Bag. Keuangan</option>
-                        <option>Manajer</option>
-                      </select>
-                    </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+                    <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
                   </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Lupa Password?</a>
-                  </div>
                 </div>
               </div>
             </div>

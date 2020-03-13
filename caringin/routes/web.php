@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//LOGIN
+Route::get('login','Auth\LoginController@index')->name('index');
+Route::post('storeuser','Auth\LoginController@storeUser');
 
 //ADMIN
 //Nasabah
@@ -102,7 +105,7 @@ Route::get('showdatauser','userController@showdatauser');
 Route::get('showtambahuser','userController@tambahuser');
 
 //Dashboard
-Route::get('showdashboard','dashboardController@dashboard');
+Route::get('showdashboard','dashboardController@dashboard')->name('showdashboard');
 //ENDADMIN
 
 //KASIR
@@ -114,7 +117,7 @@ Route::get('printstruk/{id}','tagihanController@printStrukKasir');
 //ENDKASIR
 
 //MANAJER
-Route::get('showdashboardmanager','dashboardController@dashboardManager');
+Route::get('showdashboardmanager','dashboardController@dashboardManager')->name('showdashboardmanajer');
 Route::get('showlaporanharianmanager','laporanController@showHarianManager');
 Route::get('showlaporanharianmanager/filter','laporanController@filterHarianManager');
 Route::get('showlaporanbulananmanager','laporanController@showBulananManager');
