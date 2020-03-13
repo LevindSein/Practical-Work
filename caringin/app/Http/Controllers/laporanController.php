@@ -248,7 +248,10 @@ class laporanController extends Controller
         return view('admin.laporan-bongkaran',['dataset'=>$dataset]);
     }
     public function showPenghapusan(){
-        return view('admin.laporan-penghapusan');
+        $dataset = DB::table('penghapusan')
+        ->join('tempat_usaha','penghapusan.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->get();
+        return view('admin.laporan-penghapusan',['dataset'=>$dataset]);
     }
 
     //Kasir

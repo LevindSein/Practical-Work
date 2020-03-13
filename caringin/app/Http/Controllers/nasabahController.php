@@ -413,6 +413,36 @@ class nasabahController extends Controller
             'ID_MLISTRIK'=>$id_mlistrik,
             'DAYA'=>$daya
         ]);
+
+        //Penghapusan
+        // if(empty($request->get('air')) && empty($request->get('listrik')) && empty($request->get('keamanan')) && empty($request->get('kebersihan'))){
+        //     DB::table('jasa_air')->where('id_tempat',$id)->delete();
+        //     DB::table('jasa_listrik')->where('id_tempat',$id)->delete();
+        //     DB::table('jasa_ipkeamanan')->where('id_tempat',$id)->delete();
+        //     DB::table('jasa_kebersihan')->where('id_tempat',$id)->delete();
+        //     DB::table('tagihanku')->where('id_tempat',$id)->delete();
+
+        //     DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
+        //         'BENTUK_USAHA'=>null,
+        //         'ID_NASABAH'=>null,
+        //         'ID_TRFKEBERSIHAN'=>null,
+        //         'ID_TRFIPK'=>null,
+        //         'ID_TRFKEAMANAN'=>null,
+        //         'ID_TRFLISTRIK'=>null,
+        //         'ID_TRFAIR'=>null,
+        //         'ID_MAIR'=>null,
+        //         'ID_MLISTRIK'=>null,
+        //         'DAYA'=>null
+        //     ]);
+
+        //     $data = new Penghapusan([
+        //         'nm_nasabah'=>$request->get('nama'),
+        //         'no_ktp'=>$request->get('ktp'),
+        //         'no_npwp'=>$request->get('npwp'),
+        //         'no_tlp'=>$request->get('telpon')
+        //     ]);
+        //     $data->save();
+        // }
     } catch(\Exception $e){
         return redirect()->back()->with('error','Data Gagal Disimpan');
     }

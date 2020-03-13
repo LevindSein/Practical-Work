@@ -19,24 +19,22 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      <th>Kantor</th>
-                      <th>Umur</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Gaji</th>
+                      <th>Tanggal</th>
+                      <th>Kode Kontrol</th>
+                      <th>Nama Nasabah</th>
+                      <th>Total Tunggakan</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                    @foreach($dataset as $d)
                     <tr>
-                      <td>Donna Snider</td>
-                      <td>Customer Support</td>
-                      <td>New York</td>
-                      <td>27</td>
-                      <td>2011/01/25</td>
-                      <td>$112,000</td>
+                      <td>{{$d->TGL_HAPUS}}</td>
+                      <td>{{$d->KD_KONTROL}}</td>
+                      <td>{{$d->NAMA}}</td>
+                      <td>{{$d->TTL_TUNGGAKAN}}</td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
