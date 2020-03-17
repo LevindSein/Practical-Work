@@ -26,8 +26,9 @@
                   Bentuk Usaha
                   <input value="{{$data->BENTUK_USAHA}}" style="text-transform: capitalize;" type="text" name="bentuk_usaha" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="(kosong)">
                 </div>
+                
                 <div class="form-group row">
-                  <div class="col-sm-2">Identitas</div>
+                  <div class="col-sm-2">Pemilik</div>
                   <div class="col-sm-10">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="identitas" id="myRadioKTP" value="k" checked>
@@ -50,7 +51,7 @@
                   </div>
                 </div>
 
-                <!-- Hidden Identitas -->
+                <!-- Hidden Pemilik -->
                 <div class="form-group" style="display:none" id="myDivKTP">
                   No. KTP
                   <input value="{{$noktp}}" type="text" name="ktp" id="ktpku" class="form-control form-control-user" placeholder="(kosong)">
@@ -62,6 +63,44 @@
                 <div class="form-group" style="display:none" id="myDivAnggota">
                   No. Anggota
                   <input value="{{$noanggota}}" type="text" name="anggota" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-2">Pengguna</div>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioKTP1" value="k1" checked>
+                      <label class="form-check-label" for="myRadioKTP1">
+                        KTP
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioNPWP1" value="n1">
+                      <label class="form-check-label" for="myRadioNPWP1">
+                        NPWP
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioAnggota1" value="a1">
+                      <label class="form-check-label" for="myRadioAnggota1">
+                        No.Anggota
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hidden Pengguna -->
+                <div class="form-group" style="display:none" id="myDivKTP1">
+                  No. KTP
+                  <input value="{{$noktp1}}" type="text" name="ktp1" id="ktpku1" class="form-control form-control-user" placeholder="(kosong)">
+                </div>
+                <div class="form-group" style="display:none" id="myDivNPWP1">
+                  No. NPWP
+                  <input value="{{$nonpwp1}}" type="text" name="npwp1" id="npwpku1" class="form-control form-control-user" placeholder="(kosong)">
+                </div>
+                <div class="form-group" style="display:none" id="myDivAnggota1">
+                  No. Anggota
+                  <input value="{{$noanggota1}}" type="text" name="anggota1" id="anggotaku1" class="form-control form-control-user" placeholder="BP3C261xxxxx">
                 </div>
 
                 <div class="form-group row">
@@ -163,7 +202,7 @@
   $('input[type="checkbox"]').click(evaluate).each(evaluate);
   </script>
 
-  <!-- Identitas Button -->
+  <!-- Pemilik Button -->
   <script>
   function radioKTP(){
     if($('#myRadioKTP').is(':checked'))
@@ -193,6 +232,38 @@
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);
+  </script>
+
+  <!-- Pengguna Button -->
+  <script>
+  function radioKTP1(){
+    if($('#myRadioKTP1').is(':checked'))
+    {
+      document.getElementById('myDivKTP1').style.display ='block';
+      document.getElementById('myDivNPWP1').style.display ='none';
+      document.getElementById('myDivAnggota1').style.display ='none';
+      document.getElementById('ktpku1').required = true;
+      document.getElementById('npwpku1').required = false;
+      document.getElementById('anggotaku1').required = false;
+    }
+    else if($('#myRadioNPWP1').is(':checked')){
+      document.getElementById('myDivKTP1').style.display ='none';
+      document.getElementById('myDivNPWP1').style.display ='block';
+      document.getElementById('myDivAnggota1').style.display ='none';
+      document.getElementById('ktpku1').required = false;
+      document.getElementById('npwpku1').required = true;
+      document.getElementById('anggotaku1').required = false;
+    }
+    else{
+      document.getElementById('myDivKTP1').style.display ='none';
+      document.getElementById('myDivNPWP1').style.display ='none';
+      document.getElementById('myDivAnggota1').style.display ='block';
+      document.getElementById('ktpku1').required = false;
+      document.getElementById('npwpku1').required = false;
+      document.getElementById('anggotaku1').required = true;
+    }
+  }
+  $('input[type="radio"]').click(radioKTP1).each(radioKTP1);
   </script>
 
   <!-- Checking -->

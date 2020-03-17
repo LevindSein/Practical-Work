@@ -42,8 +42,10 @@
                   <table class="table table-bordered" id="tableTempat" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Action</th>
                       <th>Kode Kontrol</th>
-                      <th>Nama Nasabah</th>
+                      <th>Pemilik</th>
+                      <th>Pengguna</th>
                       <th>No. Los</th>
                       <th>Jumlah Unit</th>
                       <th>Bentuk Usaha</th>
@@ -53,14 +55,18 @@
                       <th>Tarif IPK</th>
                       <th>Tarif Keamanan</th>
                       <th>Tarif Kebersihan</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
 
                   <tbody>
                   @foreach($dataset as $data)
                     <tr>
+                      <td class="text-center">
+                        <a href="{{url('updatetempat',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Update</a>
+                      </td>
                       <td class="text-left">{{$data->KD_KONTROL}}</td>
+                      <td class="text-left">{{$data->NM_PEMILIK}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
                       <td class="text-center" style="white-space:normal;">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">{{$data->JML_ALAMAT}}</td>
@@ -121,10 +127,6 @@
                         {{$data->TRF_KEBERSIHAN}}
                       @endif
                       </td>
-                      <td class="text-center">
-                        <a href="{{url('updatetempat',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Update</a>
-                      </td>
                     </tr>
                   @endforeach
                   </tbody>
@@ -147,9 +149,10 @@
                   </thead>
                  
                   <tbody>
-                  @foreach($dataJasaAir as $dataA)
+                  @foreach($dataset as $dataA)
+                  @if($dataA->ID_TRFAIR != null)
                     <tr>
-                      <td class="text-center">{{$dataA->TGL_JSAIR}}</td>
+                      <td class="text-center">{{$dataA->TGL_TEMPAT}}</td>
                       <td class="text-center">{{$dataA->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataA->NM_NASABAH}}</td>
                       <td class="text-center">
@@ -161,6 +164,7 @@
                       </td>
                       <td class="text-left">{{$dataA->BENTUK_USAHA}}</td>
                     </tr>
+                  @endif
                   @endforeach
                   </tbody>
                   </table>
@@ -183,9 +187,10 @@
                   </thead>
                  
                   <tbody>
-                  @foreach($dataJasaListrik as $dataL)
+                  @foreach($dataset as $dataL)
+                  @if($dataL->ID_TRFLISTRIK != null)
                     <tr>
-                      <td class="text-center">{{$dataL->TGL_JSLISTRIK}}</td>
+                      <td class="text-center">{{$dataL->TGL_TEMPAT}}</td>
                       <td class="text-center">{{$dataL->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataL->NM_NASABAH}}</td>
                       <td class="text-left">{{$dataL->DAYA}}</td>
@@ -198,6 +203,7 @@
                       </td>
                       <td class="text-left">{{$dataL->BENTUK_USAHA}}</td>
                     </tr>
+                  @endif
                   @endforeach
                   </tbody>
                   </table>
@@ -220,15 +226,17 @@
                   </thead>
                  
                   <tbody>
-                  @foreach($dataJasaKeamanan as $dataK)
+                  @foreach($dataset as $dataK)
+                  @if($dataK->ID_TRFKEAMANAN != null && $dataK->ID_TRFIPK != null)
                     <tr>
-                      <td class="text-center">{{$dataK->TGL_JSIPKEAMANAN}}</td>
+                      <td class="text-center">{{$dataK->TGL_TEMPAT}}</td>
                       <td class="text-center">{{$dataK->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataK->NM_NASABAH}}</td>
                       <td>{{$dataK->TRF_IPK}}</td>
                       <td>{{$dataK->TRF_KEAMANAN}}</td>
                       <td class="text-left">{{$dataK->BENTUK_USAHA}}</td>
                     </tr>
+                  @endif
                   @endforeach
                   </tbody>
                   </table>
@@ -250,14 +258,16 @@
                   </thead>
                  
                   <tbody>
-                  @foreach($dataJasaKebersihan as $dataB)
+                  @foreach($dataset as $dataB)
+                  @if($dataB->ID_TRFKEBERSIHAN != null)
                     <tr>
-                      <td class="text-center">{{$dataB->TGL_JSKEBERSIHAN}}</td>
+                      <td class="text-center">{{$dataB->TGL_TEMPAT}}</td>
                       <td class="text-center">{{$dataB->KD_KONTROL}}</td>
                       <td class="text-left">{{$dataB->NM_NASABAH}}</td>
                       <td>{{$dataB->TRF_KEBERSIHAN}}</td>
                       <td class="text-left">{{$dataB->BENTUK_USAHA}}</td>
                     </tr>
+                  @endif
                     @endforeach
                   </tbody>
                   </table>

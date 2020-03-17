@@ -10,6 +10,7 @@ use App\Jasa_ipkeamanan;
 use App\Jasa_kebersihan;
 use App\Tempat_usaha;
 use App\Penghapusan;
+use App\Pemilik;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
@@ -41,6 +42,14 @@ class nasabahController extends Controller
                 'no_tlp'=>$request->get('telpon')
             ]);
             $data->save();
+            $data = new Pemilik([
+                'nm_pemilik'=>$request->get('nama'),
+                'no_anggota'=>$no_anggota,
+                'no_ktp'=>$request->get('ktp'),
+                'no_npwp'=>$request->get('npwp'),
+                'no_tlp'=>$request->get('telpon')
+            ]);
+            $data->save();
         }
         catch(\Exception $e){
             return redirect('showformnasabah')->with('warning','Data Sudah Digunakan');
@@ -63,6 +72,12 @@ class nasabahController extends Controller
                 'NO_NPWP'=>$request->get('npwp'),
                 'NO_TLP'=>$request->get('telpon')
             ]);
+            DB::table('pemilik')->where('ID_PEMILIK', $id)->update([
+                'NM_PEMILIK'=>$request->get('nama'),
+                'NO_KTP'=>$request->get('ktp'),
+                'NO_NPWP'=>$request->get('npwp'),
+                'NO_TLP'=>$request->get('telpon')
+            ]);
         }
         catch(\Exception $e){
             return redirect()->back()->with('error','Data Gagal Disimpan');    
@@ -75,6 +90,7 @@ class nasabahController extends Controller
     try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
         ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
         ->leftJoin('tarif_air','tempat_usaha.ID_TRFAIR','=','tarif_air.ID_TRFAIR')
@@ -84,7 +100,7 @@ class nasabahController extends Controller
         ->leftJoin('tarif_kebersihan','tempat_usaha.ID_TRFKEBERSIHAN','=','tarif_kebersihan.ID_TRFKEBERSIHAN')
         ->select('tarif_ipk.ID_TRFIPK','tarif_keamanan.ID_TRFKEAMANAN','tarif_kebersihan.ID_TRFKEBERSIHAN',
             'tarif_air.ID_TRFAIR','tarif_listrik.ID_TRFLISTRIK',
-            'tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH',
+            'tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','pemilik.NM_PEMILIK',
             'meteran_air.NOMTR_AIR','meteran_listrik.NOMTR_LISTRIK', 
             'tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tarif_kebersihan.TRF_KEBERSIHAN',
             'tempat_usaha.NO_ALAMAT','tempat_usaha.JML_ALAMAT','tempat_usaha.BENTUK_USAHA',
@@ -92,89 +108,12 @@ class nasabahController extends Controller
             'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK')
         ->get();
 
-        $datasets = json_decode($dataset, true);
-        foreach($datasets as $data){
-            if($data['ID_TRFAIR'] != null){
-                $data_air = DB::table('jasa_air')->where('ID_TEMPAT',$data['ID_TEMPAT'])->get();
-                if($data_air->isEmpty()){
-                    $insert_air = new Jasa_air([
-                        'id_tempat'=>$data['ID_TEMPAT'],
-                        'tgl_jsair'=>$data['TGL_TEMPAT']
-                    ]);
-                    $insert_air->save();
-                }
-            }
-            if($data['ID_TRFLISTRIK'] != null){
-                $data_listrik = DB::table('jasa_listrik')->where('ID_TEMPAT',$data['ID_TEMPAT'])->get();
-                if($data_listrik->isEmpty()){
-                    $insert_listrik = new Jasa_listrik([
-                        'id_tempat'=>$data['ID_TEMPAT'],
-                        'tgl_jslistrik'=>$data['TGL_TEMPAT']
-                    ]);
-                    $insert_listrik->save();
-                }
-            }
-            if($data['ID_TRFKEBERSIHAN'] != null){
-                $data_kebersihan = DB::table('jasa_kebersihan')->where('ID_TEMPAT',$data['ID_TEMPAT'])->get();
-                if($data_kebersihan->isEmpty()){
-                    $insert_kebersihan = new Jasa_kebersihan([
-                        'id_tempat'=>$data['ID_TEMPAT'],
-                        'tgl_jskebersihan'=>$data['TGL_TEMPAT']
-                    ]);
-                    $insert_kebersihan->save();
-                }
-            }
-            if($data['ID_TRFIPK'] != null && $data['ID_TRFKEAMANAN'] != null){
-                $data_keamanan = DB::table('jasa_ipkeamanan')->where('ID_TEMPAT',$data['ID_TEMPAT'])->get();
-                if($data_keamanan->isEmpty()){
-                    $insert_keamanan = new Jasa_ipkeamanan([
-                        'id_tempat'=>$data['ID_TEMPAT'],
-                        'tgl_jsipkeamanan'=>$data['TGL_TEMPAT']
-                    ]);
-                    $insert_keamanan->save();
-                }
-            }
-        }
-        $dataJasaAir = DB::table('jasa_air')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_air.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->join('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
-        ->select('jasa_air.TGL_JSAIR','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_air.NOMTR_AIR','tempat_usaha.BENTUK_USAHA')
-        ->get();
-        $dataJasaListrik = DB::table('jasa_listrik')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_listrik.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
-        ->select('jasa_listrik.TGL_JSLISTRIK','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_listrik.NOMTR_LISTRIK','tempat_usaha.BENTUK_USAHA','tempat_usaha.DAYA')
-        ->get();
-        $dataJasaKebersihan = DB::table('jasa_kebersihan')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_kebersihan.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->join('tarif_kebersihan','tempat_usaha.ID_TRFKEBERSIHAN','=','tarif_kebersihan.ID_TRFKEBERSIHAN')
-        ->select('jasa_kebersihan.TGL_JSKEBERSIHAN','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tarif_kebersihan.TRF_KEBERSIHAN','tempat_usaha.BENTUK_USAHA')
-        ->get();
-        $dataJasaKeamanan = DB::table('jasa_ipkeamanan')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_ipkeamanan.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->join('tarif_ipk','tempat_usaha.ID_TRFIPK','=','tarif_ipk.ID_TRFIPK')
-        ->join('tarif_keamanan','tempat_usaha.ID_TRFKEAMANAN','=','tarif_keamanan.ID_TRFKEAMANAN')
-        ->select('jasa_ipkeamanan.TGL_JSIPKEAMANAN','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tempat_usaha.BENTUK_USAHA')
-        ->get();
     }catch(\Exception $e){
-        return view('admin.tempat-usaha',[
-            'dataset'=>$dataset,
-            'dataJasaAir'=>$dataJasaAir,
-            'dataJasaListrik'=>$dataJasaListrik,
-            'dataJasaKebersihan'=>$dataJasaKebersihan,
-            'dataJasaKeamanan'=>$dataJasaKeamanan])->with('error','Kesalahan Sistem');
+        return view('admin.tempat-usaha',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
     }
-        return view('admin.tempat-usaha',[
-            'dataset'=>$dataset,
-            'dataJasaAir'=>$dataJasaAir,
-            'dataJasaListrik'=>$dataJasaListrik,
-            'dataJasaKebersihan'=>$dataJasaKebersihan,
-            'dataJasaKeamanan'=>$dataJasaKeamanan]);
+        return view('admin.tempat-usaha',['dataset'=>$dataset]);
     }
+    
     public function showformtempat(){
     try{
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
@@ -287,6 +226,7 @@ class nasabahController extends Controller
             'jml_alamat'=>$jumLos,
             'bentuk_usaha'=>$request->get('bentuk_usaha'),
             'id_nasabah'=>$id_nas,
+            'id_pemilik'=>$id_nas,
             'id_trfkebersihan'=>$kebersihanId,
             'id_trfipk'=>$ipkId,
             'id_trfkeamanan'=>$keamananId,
@@ -313,6 +253,7 @@ class nasabahController extends Controller
         $id_air = $dataku->ID_TRFAIR;
         $id_listrik = $dataku->ID_TRFLISTRIK;
         $id_nasabah = $dataku->ID_NASABAH;
+        $id_pemilik = $dataku->ID_PEMILIK;
         $id_ipk = $dataku->ID_TRFIPK;
         $id_keamanan = $dataku->ID_TRFKEAMANAN;
         $id_kebersihan = $dataku->ID_TRFKEBERSIHAN;
@@ -330,11 +271,17 @@ class nasabahController extends Controller
             $trfaman = "Pilih Tarif";
         }
 
-        //identitas
-        $nasabah = DB::table('nasabah')->where('id_nasabah', $id_nasabah)->first();
+        //pemilik
+        $nasabah = DB::table('pemilik')->where('id_pemilik', $id_pemilik)->first();
         $noktp = $nasabah->NO_KTP;
         $nonpwp = $nasabah->NO_NPWP;
         $noanggota = $nasabah->NO_ANGGOTA;
+
+        //pengguna
+        $nasabah1 = DB::table('nasabah')->where('id_nasabah', $id_nasabah)->first();
+        $noktp1 = $nasabah1->NO_KTP;
+        $nonpwp1 = $nasabah1->NO_NPWP;
+        $noanggota1 = $nasabah1->NO_ANGGOTA;
 
         //tarif kebersihan
         if($id_kebersihan != null)
@@ -351,6 +298,7 @@ class nasabahController extends Controller
         $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
     }catch(\Exception $e){
         return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,'noanggota'=>$noanggota,
+                    'noktp1'=>$noktp1,'nonpwp1'=>$nonpwp1,'noanggota1'=>$noanggota1,
                     'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
                     'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
@@ -359,6 +307,7 @@ class nasabahController extends Controller
         ])->with('error','Kesalahan Sistem');
     }
         return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,'noanggota'=>$noanggota,
+                    'noktp1'=>$noktp1,'nonpwp1'=>$nonpwp1,'noanggota1'=>$noanggota1,
                     'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
                     'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
@@ -419,16 +368,28 @@ class nasabahController extends Controller
             DB::table('tagihanku')->where('id_tempat',$id)->delete();
         }
         else{
-            //Identitas
+            //pemilik
             $radio = $request->get('identitas');
             if($radio == "k"){
-                $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_ktp',$request->get('ktp'))->first();
             }
             else if($radio == "n"){
-                $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_npwp',$request->get('npwp'))->first();
             }
             else{
-                $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$request->get('anggota'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_anggota',$request->get('anggota'))->first();
+            }
+
+            //pengguna
+            $radio1 = $request->get('identitas1');
+            if($radio1 == "k1"){
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp1'))->first();
+            }
+            else if($radio1 == "n1"){
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp1'))->first();
+            }
+            else{
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$request->get('anggota1'))->first();
             }
         
             $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();
@@ -436,7 +397,8 @@ class nasabahController extends Controller
 
             $id_mair = $mAir->ID_MAIR;
             $id_mlistrik = $mListrik->ID_MLISTRIK;
-            $id_nas = $nasabah->ID_NASABAH;
+            $id_pemilik = $nasabah->ID_PEMILIK;
+            $id_nas = $nasabah1->ID_NASABAH;
         
             //fasilitas
             $daya = $request->get('dayaListrik');
@@ -471,6 +433,7 @@ class nasabahController extends Controller
             DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
                 'BENTUK_USAHA'=>$request->get('bentuk_usaha'),
                 'ID_NASABAH'=>$id_nas,
+                'ID_PEMILIK'=>$id_pemilik,
                 'ID_TRFKEBERSIHAN'=>$kebersihanId,
                 'ID_TRFIPK'=>$ipkId,
                 'ID_TRFKEAMANAN'=>$keamananId,
