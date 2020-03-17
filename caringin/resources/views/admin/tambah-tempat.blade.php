@@ -40,6 +40,12 @@
                         NPWP
                       </label>
                     </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioAnggota" value="a">
+                      <label class="form-check-label" for="myRadioAnggota">
+                        No.Anggota
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -51,6 +57,10 @@
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
                   <input name="npwp" type="text" class="form-control form-control-user" id="npwpku" placeholder="261xxxxxx">
+                </div>
+                <div class="form-group" style="display:none" id="myDivAnggota">
+                  No. Anggota
+                  <input name="anggota" type="text" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
                 </div>
 
                 <div class="form-group row">
@@ -156,14 +166,26 @@
     {
       document.getElementById('myDivKTP').style.display ='block';
       document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('myDivAnggota').style.display ='none';
       document.getElementById('ktpku').required = true;
       document.getElementById('npwpku').required = false;
+      document.getElementById('anggotaku').required = false;
+    }
+    else if($('#myRadioNPWP').is(':checked')){
+      document.getElementById('myDivKTP').style.display ='none';
+      document.getElementById('myDivNPWP').style.display ='block';
+      document.getElementById('myDivAnggota').style.display ='none';
+      document.getElementById('ktpku').required = false;
+      document.getElementById('npwpku').required = true;
+      document.getElementById('anggotaku').required = false;
     }
     else{
       document.getElementById('myDivKTP').style.display ='none';
-      document.getElementById('myDivNPWP').style.display ='block';
-      document.getElementById('npwpku').required = true;
+      document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('myDivAnggota').style.display ='block';
       document.getElementById('ktpku').required = false;
+      document.getElementById('npwpku').required = false;
+      document.getElementById('anggotaku').required = true;
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);

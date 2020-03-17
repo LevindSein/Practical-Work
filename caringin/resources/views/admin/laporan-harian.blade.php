@@ -38,6 +38,7 @@
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
                       <th>Denda(Rp.)</th>
+                      <th>Ket</th>
                     </tr>
                   </thead>
 
@@ -79,6 +80,13 @@
                       <td>{{number_format($d->REALISASI)}}</td>
                       <td>{{number_format($d->SELISIH)}}</td>
                       <td>{{number_format($d->DENDA)}}</td>
+                      <td class="text-left">
+                      @if($d->KET == null)
+                        &mdash;
+                      @else
+                        {{$d->KET}}
+                      @endif
+                      </td>
                     </tr>
                   @endforeach
                   </tbody>

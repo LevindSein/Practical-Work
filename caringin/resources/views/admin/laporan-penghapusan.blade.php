@@ -22,6 +22,9 @@
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
+                      <th>No.Anggota</th>
+                      <th>No.KTP</th>
+                      <th>No.NPWP</th>
                       <th>Total Tunggakan</th>
                     </tr>
                   </thead>
@@ -29,10 +32,31 @@
                   <tbody>
                     @foreach($dataset as $d)
                     <tr>
-                      <td>{{$d->TGL_HAPUS}}</td>
-                      <td>{{$d->KD_KONTROL}}</td>
-                      <td>{{$d->NAMA}}</td>
-                      <td>{{$d->TTL_TUNGGAKAN}}</td>
+                      <td class="text-center">{{$d->TGL_HAPUS}}</td>
+                      <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NAMA}}</td>
+                      <td class="text-center">
+                      @if($d->NMR_ANGGOTA == null)
+                        &mdash;
+                      @else
+                        {{$d->NMR_ANGGOTA}}
+                      @endif
+                      </td>
+                      <td class="text-center">
+                      @if($d->NMR_KTP == null)
+                        &mdash;
+                      @else
+                        {{$d->NMR_KTP}}
+                      @endif
+                      </td>
+                      <td class="text-center">
+                      @if($d->NMR_NPWP == null)
+                        &mdash;
+                      @else
+                        {{$d->NMR_NPWP}}
+                      @endif
+                      </td>
+                      <td>{{number_format($d->TTL_TUNGGAKAN)}}</td>
                     </tr>
                     @endforeach
                   </tbody>

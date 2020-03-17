@@ -43,6 +43,10 @@
                   PPN Air
                   <input value="{{$data->PPN_AIR}}" required type="number" name="ppnair" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
                 </div>
+                <div class="form-group">
+                  Pemasangan Alat Baru
+                  <input value="{{$data->PASANG_AIR}}" required type="number" name="pasangair" class="form-control form-control-user" id="exampleInputPasangAir" placeholder="Rp.">
+                </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
               </form>

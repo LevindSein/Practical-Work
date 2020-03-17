@@ -64,7 +64,13 @@
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
                       <td class="text-center" style="white-space:normal;">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">{{$data->JML_ALAMAT}}</td>
-                      <td class="text-left">{{$data->BENTUK_USAHA}}</td>
+                      <td class="text-left">
+                      @if($data->BENTUK_USAHA == null)
+                        (kosong)
+                      @else
+                        {{$data->BENTUK_USAHA}}
+                      @endif
+                    </td>
                       <td class="text-center">
                       @if($data->ID_TRFLISTRIK != null)
                         @if($data->NOMTR_LISTRIK == null)

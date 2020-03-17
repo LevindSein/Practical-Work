@@ -15,7 +15,8 @@ class tagihanController extends Controller
     try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
+        'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
     }catch(\Exception $e){
         return view('admin.tagihan-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
@@ -45,7 +46,7 @@ class tagihanController extends Controller
         $finalDate = date("Y-m-01", strtotime("+1 month", $time));    
             
         $pernah = DB::table('tagihanku')
-        ->select('tagihanku.TGL_TAGIHAN','tagihanku.CREATED_AT')
+        ->select('tagihanku.TGL_TAGIHAN','tagihanku.CREATED_AT','tagihanku.KET')
         ->where('tagihanku.ID_TEMPAT',$id)
         ->orderBy('tagihanku.CREATED_AT', 'desc')
         ->first();
@@ -55,7 +56,7 @@ class tagihanController extends Controller
         }
         else{
             $tgl_pernah = $pernah->TGL_TAGIHAN;
-            if($tgl_pernah == $finalDate){
+            if($tgl_pernah == $finalDate && $pernah->KET == NULL){
                 return redirect()->route('tagihan')->with('warning','Tagihan Sudah Ditambah');
             }
             else{
@@ -337,90 +338,6 @@ class tagihanController extends Controller
         return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
-    public function bayarTagihan($id){
-    try{
-        $dataset = DB::table('tagihanku')
-        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tagihanku.DENDA','tempat_usaha.ID_TEMPAT',
-        'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH','tagihanku.REALISASI')
-        ->where('ID_TAGIHANKU',$id)
-        ->get();
-
-        $check = DB::table('tagihanku')
-        ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select(
-            DB::raw('(tagihanku.TTL_TAGIHAN + tagihanku.DENDA) as total'),
-            'tagihanku.REALISASI','nasabah.ID_NASABAH','tagihanku.ID_TEMPAT')
-        ->where('ID_TAGIHANKU',$id)
-        ->first();
-
-        $bayar = $check->REALISASI;
-        $tagihan = $check->total;
-        $idNas = $check->ID_NASABAH;
-
-        //Kalau Tagihan Sudah Dibayar
-        if($bayar >= $tagihan){
-            return redirect()->route('lapTagihan')->with('info','Tagihan Sudah Dibayar');
-        }
-
-        //Apabila Tagihan Sebelumnya Belum Terbayar
-        $idTempat = $check->ID_TEMPAT;
-        $belum = DB::table('tagihanku')
-        ->where([['ID_TEMPAT',$idTempat],['STT_LUNAS',0]])
-        ->get();
-
-        $recTotal = $belum->count();
-        for($i=0;$i<$recTotal;$i++){
-            if($i > 0){
-                if($belum[$i]->ID_TAGIHANKU == $id){
-                    if($belum[$i-1] != null){
-                        return redirect()->route('lapTagihan')->with('info','Tagihan Sebelumnya Belum Terbayar');
-                    }
-                }
-            }
-        }
-
-    }catch(\Eception $e){
-        return redirect()->route('lapTagihan')->with('error','Kesalahan Sistem');
-    }
-        return view('admin.update-tagihan',['dataset'=>$dataset]);
-    }
-
-    public function storeBayar(Request $request,$id){
-    try{
-        $timezone = date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d", time());
-
-        $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
-
-        $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA; 
-        $ttl_listrik = $dataset->TTL_LISTRIK + $dataset->DENDA_LISTRIK;
-        $ttl_air = $dataset->TTL_AIR + $dataset->DENDA_AIR;
-        $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
-        $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
-        
-        DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
-            'TGL_BAYAR'=>$date,
-            'STT_LUNAS'=>1,
-            'REALISASI_AIR'=>$ttl_air,
-            'SELISIH_AIR'=>0,
-            'REALISASI_LISTRIK'=>$ttl_listrik,
-            'SELISIH_LISTRIK'=>0,
-            'REALISASI_IPKEAMANAN'=>$ttl_ipkeamanan,
-            'SELISIH_IPKEAMANAN'=>0,
-            'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
-            'SELISIH_KEBERSIHAN'=>0,
-            'REALISASI'=>$ttl_tagihan,
-            'SELISIH'=>0
-        ]);
-    } catch(\Exception $e){
-        return redirect()->route('bayartagihan',['id'=>$id])->with('error','Pembayaran Gagal');
-    }
-        return redirect()->route('lapTagihan')->with('success','Pembayaran Dilakukan');
-    }
-
     public function printTagihan(){
     try{
         //Set Tanggal Tagihan
@@ -437,7 +354,7 @@ class tagihanController extends Controller
                  'tagihanku.PAKAI_AIR','tagihanku.PAKAI_LISTRIK',
                  'tagihanku.TTL_AIR','tagihanku.TTL_LISTRIK',
                  'tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_KEBERSIHAN',
-                 'tagihanku.TGL_TAGIHAN')
+                 'tagihanku.TGL_TAGIHAN','tagihanku.KET')
         ->where('TGL_TAGIHAN',$finalDate)
         ->get();
     }catch(\Exception $e){

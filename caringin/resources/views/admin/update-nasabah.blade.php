@@ -19,6 +19,10 @@
                   <input value="{{$data->NM_NASABAH}}" style="text-transform: capitalize;" required type="text" name="nama" class="form-control form-control-user" id="exampleInputNamaNasabah" placeholder="Nama">
                 </div>
                 <div class="form-group">
+                  Nomor Anggota
+                  <input readonly value="{{$data->NO_ANGGOTA}}" type="number" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
+                </div>
+                <div class="form-group">
                   Nomor KTP Nasabah
                   <input value="{{$data->NO_KTP}}" type="number" name="ktp" class="form-control form-control-user" id="exampleInputNomorKtp" placeholder="321xxxxx">
                 </div>

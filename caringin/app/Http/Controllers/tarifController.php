@@ -31,7 +31,8 @@ class tarifController extends Controller
             'TRF_BEBAN'=>$request->get('tarifbeban'),
             'TRF_ARKOT'=>$request->get('tarifarkot'),
             'TRF_DENDA'=>$request->get('tarifdenda'),
-            'PPN_AIR'=>$request->get('ppnair')
+            'PPN_AIR'=>$request->get('ppnair'),
+            'PASANG_AIR'=>$request->get('pasangair')
         ]);
     } catch(\Exception $e){
         return redirect()->back()->with('error','Tarif Gagal Disimpan');
@@ -58,7 +59,8 @@ class tarifController extends Controller
             'VAR_BPJU'=>$request->get('tarifbpju'),
             'VAR_DENDA'=>$request->get('tarifdenda'),
             'DENDA_LEBIH'=>$request->get('dendalebih'),
-            'PPN_LISTRIK'=>$request->get('ppnlistrik')
+            'PPN_LISTRIK'=>$request->get('ppnlistrik'),
+            'PASANG_LISTRIK'=>$request->get('pasanglistrik')
         ]);
     }catch(\Exception $e){
         return redirect()->back()->with('error','Tarif Gagal Disimpan');

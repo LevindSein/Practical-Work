@@ -41,6 +41,12 @@
                         NPWP
                       </label>
                     </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas" id="myRadioAnggota" value="a">
+                      <label class="form-check-label" for="myRadioAnggota">
+                        No.Anggota
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -52,6 +58,10 @@
                 <div class="form-group" style="display:none" id="myDivNPWP">
                   No. NPWP
                   <input value="{{$nonpwp}}" type="text" name="npwp" id="npwpku" class="form-control form-control-user" placeholder="(kosong)">
+                </div>
+                <div class="form-group" style="display:none" id="myDivAnggota">
+                  No. Anggota
+                  <input value="{{$noanggota}}" type="text" name="anggota" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
                 </div>
 
                 <div class="form-group row">
@@ -91,11 +101,11 @@
                 <!-- Hidden Fasilitas -->
                 <div class="form-group" style="display:none">
                   ID Alat Meter Air
-                  <input value="{{$data->ID_MAIR}}" type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
+                  <input readonly value="{{$data->ID_MAIR}}" type="text" class="form-control form-control-user" name="meterAir" id="myDiv1" placeholder="1484xxxx">
                 </div>
                 <div class="form-group" style="display:none">
                   ID Alat Meter Listrik
-                  <input value="{{$data->ID_MLISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
+                  <input readonly value="{{$data->ID_MLISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                   <br>
                   Daya
                   <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
@@ -160,14 +170,26 @@
     {
       document.getElementById('myDivKTP').style.display ='block';
       document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('myDivAnggota').style.display ='none';
       document.getElementById('ktpku').required = true;
       document.getElementById('npwpku').required = false;
+      document.getElementById('anggotaku').required = false;
+    }
+    else if($('#myRadioNPWP').is(':checked')){
+      document.getElementById('myDivKTP').style.display ='none';
+      document.getElementById('myDivNPWP').style.display ='block';
+      document.getElementById('myDivAnggota').style.display ='none';
+      document.getElementById('ktpku').required = false;
+      document.getElementById('npwpku').required = true;
+      document.getElementById('anggotaku').required = false;
     }
     else{
       document.getElementById('myDivKTP').style.display ='none';
-      document.getElementById('myDivNPWP').style.display ='block';
-      document.getElementById('npwpku').required = true;
+      document.getElementById('myDivNPWP').style.display ='none';
+      document.getElementById('myDivAnggota').style.display ='block';
       document.getElementById('ktpku').required = false;
+      document.getElementById('npwpku').required = false;
+      document.getElementById('anggotaku').required = true;
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);

@@ -60,6 +60,7 @@
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
                       <th>Denda (Rp.)</th>
+                      <th>Ket</th>
                     </tr>
                   </thead>
 
@@ -93,6 +94,13 @@
                       <td>{{number_format($d->REALISASI_AIR)}}</td>
                       <td>{{number_format($d->SELISIH_AIR)}}</td>
                       <td>{{number_format($d->DENDA_AIR)}}</td>
+                      <td class="text-left">
+                      @if($d->KET == null)
+                        &mdash;
+                      @else
+                        {{$d->KET}}
+                      @endif
+                      </td>
                     </tr>
                     @endif
                     @endforeach
@@ -124,6 +132,7 @@
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
                       <th>Denda (Rp.)</th>
+                      <th>Ket</th>
                     </tr>
                   </thead>
 
@@ -159,6 +168,13 @@
                       <td>{{number_format($d->REALISASI_LISTRIK)}}</td>
                       <td>{{number_format($d->SELISIH_LISTRIK)}}</td>
                       <td>{{number_format($d->DENDA_LISTRIK)}}</td>
+                      <td class="text-left">
+                      @if($d->KET == null)
+                        &mdash;
+                      @else
+                        {{$d->KET}}
+                      @endif
+                      </td>
                     </tr>
                     @endif
                     @endforeach

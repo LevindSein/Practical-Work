@@ -32,6 +32,7 @@
                     <tr>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
+                      <th>No. Los</th>
                       <th>Nomor Alat</th>
                       <th>Meter Lalu</th>
                       <th>Meter Baru</th>
@@ -43,6 +44,7 @@
                     <tr>
                       <td class="text-center">{{$data->KD_KONTROL}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-center">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">
                       @if($data->NOMTR_AIR == null)
                           0
@@ -67,6 +69,7 @@
                     <tr>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
+                      <th>No. Los</th>
                       <th>Nomor Alat</th>
                       <th>Meter Lalu</th>
                       <th>Meter Baru</th>
@@ -78,6 +81,7 @@
                     <tr>
                       <td class="text-center">{{$data->KD_KONTROL}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-center">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">
                       @if($data->NOMTR_LISTRIK == null)
                           0

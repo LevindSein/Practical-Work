@@ -86,6 +86,11 @@ Route::get('bayartunggakan','tunggakanController@bayarTunggakan');
 Route::get('dataalat','meteranController@dataalat')->name('alat');
 Route::get('tambahalat','meteranController@formalat')->name('formalat');
 Route::post('storealat','meteranController@storealat');
+Route::get('gantialat','meteranController@gantialat')->name('ganti');
+Route::get('updategantialatair/{id}','meteranController@updategantialatair')->name('updategantiair');
+Route::get('updategantialatlistrik/{id}','meteranController@updategantialatlistrik')->name('updategantilistrik');
+Route::post('update/storegantialatair/{id}','meteranController@storegantialatair');
+Route::post('update/storegantialatlistrik/{id}','meteranController@storegantialatlistrik');
     //AIR
 Route::get('updatealatair/{id}','meteranController@updatealatair')->name('alatair');
 Route::post('update/storealatair/{id}','meteranController@storeupdatealatair');

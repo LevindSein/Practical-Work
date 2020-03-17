@@ -46,6 +46,10 @@
                     PPN Listrik
                     <input value="{{$data->PPN_LISTRIK}}" required type="number" name="ppnlistrik" class="form-control form-control-user" id="exampleInputPpnAir" placeholder="%">
                   </div>
+                  <div class="form-group">
+                    Pemasangan Alat Baru
+                    <input value="{{$data->PASANG_LISTRIK}}" required type="number" name="pasanglistrik" class="form-control form-control-user" id="exampleInputPasangListrik" placeholder="Rp.">
+                  </div>
                   @endforeach
                   <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
                 </form>

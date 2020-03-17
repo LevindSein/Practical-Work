@@ -20,6 +20,7 @@
                   <thead>
                     <tr>
                       <th>Nama Nasabah</th>
+                      <th>No. Anggota</th>
                       <th>No. KTP</th>
                       <th>No. NPWP</th>
                       <th>No. Telp</th>
@@ -31,6 +32,7 @@
                   @foreach($dataset as $data)
                     <tr>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-left">{{$data->NO_ANGGOTA}}</td>
                       <td class="text-left">{{$data->NO_KTP}}</td>
                       <td class="text-left">{{$data->NO_NPWP}}</td>
                       <td class="text-left">{{$data->NO_TLP}}</td>

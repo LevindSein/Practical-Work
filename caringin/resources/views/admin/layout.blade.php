@@ -202,6 +202,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{url('tambahalat')}}">Tambah Alat</a>
                             <a class="collapse-item" href="{{url('dataalat')}}">Data Alat</a>
+                            <a class="collapse-item" href="{{url('gantialat')}}">Ganti Alat</a>
                         </div>
                     </div>
                 </li>

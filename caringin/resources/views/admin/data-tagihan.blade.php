@@ -20,8 +20,7 @@
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Action</th>
-                      <th>Lunas</th>
+                      <th>Status</th>
                       <th>Tanggal</th>
                       <th>Lalu Air</th>
                       <th>Baru Air</th>
@@ -47,16 +46,13 @@
                       <th>Realisasi (Rp.)</th>
                       <th>Selisih (Rp.)</th>
                       <th>Denda (Rp.)</th>
+                      <th>Ket</th>
                     </tr>
                   </thead>
 
                   <tbody>
                   @foreach($dataTagihan as $dataT)
                     <tr>
-                      <td class="text-center">
-                          <a href="{{url('bayartagihan',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Bayar</a>
-                      </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($dataT->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
@@ -217,6 +213,13 @@
                       <td>{{number_format($dataT->REALISASI)}}</td>
                       <td>{{number_format($dataT->SELISIH)}}</td>
                       <td>{{number_format($dataT->DENDA)}}</td>
+                      <td class="text-left">
+                      @if($dataT->KET == null)
+                        &mdash;
+                      @else
+                        {{$dataT->KET}}
+                      @endif
+                      </td>
                     </tr>
                   @endforeach
                   </tbody>

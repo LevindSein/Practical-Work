@@ -29,6 +29,7 @@
 
                   <tbody>
                   @foreach($dataset as $data)
+                  @if($data->ID_TRFAIR != null || $data->ID_TRFLISTRIK != null || $data->ID_TRFKEBERSIHAN != null || $data->ID_TRFKEAMANAN != null || $data->ID_TRFIPK != null)
                     <tr>
                       <td class="text-left">{{$data->KD_KONTROL}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
@@ -39,6 +40,7 @@
                             class="fas fa- fa-sm text-white-50"></i>Tambah</a>
                       </td>
                     </tr>
+                  @endif
                   @endforeach
                   </tbody>
                 </table>

@@ -124,7 +124,7 @@ class laporanController extends Controller
     try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_ANGGOTA','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
         ->get();
     }catch(\Exception $e){
         return view('admin.laporan-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');

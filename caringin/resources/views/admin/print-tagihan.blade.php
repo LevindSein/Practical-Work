@@ -26,6 +26,7 @@
                       <th>IPK & Keamanan (Rp.)</th>
                       <th>Kebersihan (Rp.)</th>
                       <th>Total (Rp.)</th>
+                      <th>Ket</th>
                     </tr>
                   </thead>
 
@@ -82,6 +83,13 @@
                           0
                       @else
                           {{number_format($data->TTL_TAGIHAN)}}
+                      @endif
+                      </td>
+                      <td class="text-center">
+                      @if($data->KET == null)
+                          &mdash;
+                      @else
+                          {{$data->KET}}
                       @endif
                       </td>
                     </tr>

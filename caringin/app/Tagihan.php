@@ -54,6 +54,7 @@ class Tagihan extends Model
         'selisih',
         'denda',
         'stt_denda',
+        'ket',
         'updated_at',
         'created_at'
     ];
