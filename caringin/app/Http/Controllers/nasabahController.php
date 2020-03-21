@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Nasabah;
-use App\Jasa_air;
-use App\Jasa_listrik;
-use App\Jasa_ipkeamanan;
-use App\Jasa_kebersihan;
 use App\Tempat_usaha;
 use App\Penghapusan;
 use App\Pemilik;
@@ -360,11 +356,6 @@ class nasabahController extends Controller
                 'ttl_tunggakan'=>$ttl
             ]);
             $data->save();
-
-            DB::table('jasa_air')->where('id_tempat',$id)->delete();
-            DB::table('jasa_listrik')->where('id_tempat',$id)->delete();
-            DB::table('jasa_ipkeamanan')->where('id_tempat',$id)->delete();
-            DB::table('jasa_kebersihan')->where('id_tempat',$id)->delete();
             DB::table('tagihanku')->where('id_tempat',$id)->delete();
         }
         else{
@@ -424,11 +415,6 @@ class nasabahController extends Controller
             if(empty($request->get('kebersihan'))){
                 $kebersihanId = NULL;
             }
-
-            DB::table('jasa_air')->where('id_tempat',$id)->delete();
-            DB::table('jasa_listrik')->where('id_tempat',$id)->delete();
-            DB::table('jasa_ipkeamanan')->where('id_tempat',$id)->delete();
-            DB::table('jasa_kebersihan')->where('id_tempat',$id)->delete();
         
             DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
                 'BENTUK_USAHA'=>$request->get('bentuk_usaha'),

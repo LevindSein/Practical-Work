@@ -53,6 +53,7 @@
 
                   <tbody>
                   @foreach($dataTagihan as $dataT)
+                  @if($dataT->STT_LUNAS==0)
                     <tr>
                       <td class="text-center">
                           <a href="{{url('bayartagihankasir',[$dataT->ID_TAGIHANKU])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
@@ -223,6 +224,7 @@
                       <td>{{number_format($dataT->SELISIH)}}</td>
                       <td>{{number_format($dataT->DENDA)}}</td>
                     </tr>
+                  @endif
                   @endforeach
                   </tbody>
                 </table>

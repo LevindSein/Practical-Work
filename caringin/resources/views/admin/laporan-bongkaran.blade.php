@@ -19,7 +19,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tanggal</th>
+                      <th>Tanggal Tagihan</th>
                       <th>Kode Kontrol</th>
                       <th>Nama Nasabah</th>
                       <th>Perintah</th>

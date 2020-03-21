@@ -19,8 +19,7 @@ $now = date("d-m-Y", time());
       <div id="company" class="clearfix">
         <div>PT. Pengelola Pusat Perdagangan Caringin</div>
         <div>Jl. Soekarno Hatta No. 220 Blok A1 No. 21-24<br /> Pasar Induk Caringin, Bandung</div>
-        <div>(602) 519-0450</div>
-        <div><a href="mailto:company@example.com">caringin@google.com</a></div>
+        <div>(022) 540-4556</div>
       </div>
       <div id="project">
         <div><span>NAMA NASABAH</span> {{$d->NM_NASABAH}}</div>
@@ -29,6 +28,7 @@ $now = date("d-m-Y", time());
         <div><span>TGL TAGIHAN</span><?php $tag = date("d-m-Y", strtotime($d->TGL_TAGIHAN)); ?> {{$tag}}</div>
         <div><span>BULAN PEMBAYARAN</span><?php $time = date("M", strtotime($d->TGL_TAGIHAN)); ?> {{$time}}</div>
         <div><span>STRUK TAGIHAN</span> {{$now}}</div>
+        <div><span>DIBAYAR PADA</span><?php $bayar = date("d-m-Y", strtotime($d->TGL_BAYAR)); ?> @if($d->TGL_BAYAR == null) Belum Dibayar @else {{$bayar}}@endif</div>
       </div>
     </header>
     <main>

@@ -259,12 +259,16 @@ class laporanController extends Controller
         try{
             $dataset = DB::table('tempat_usaha')
             ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+            ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
+            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_ANGGOTA',
+            'nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH','pemilik.NM_PEMILIK','pemilik.ID_PEMILIK')
             ->get();
+
+            $datanas = DB::table('nasabah')->get();
         }catch(\Exception $e){
-            return view('kasir.tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+            return view('kasir.tagihan',['dataset'=>$dataset,'datanas'=>$datanas])->with('error','Kesalahan Sistem');
         }
-            return view('kasir.tagihan',['dataset'=>$dataset]);
+            return view('kasir.tagihan',['dataset'=>$dataset,'datanas'=>$datanas]);
     }
 
     //Manajer

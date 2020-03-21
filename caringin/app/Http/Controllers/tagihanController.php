@@ -72,6 +72,8 @@ class tagihanController extends Controller
     try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
         $dayaListrik = $usaha->DAYA;
+        $id_nasabah = $usaha->ID_NASABAH;
+        $id_pemilik = $usaha->ID_PEMILIK;
 
         $meterAirID = DB::table('tempat_usaha')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -263,6 +265,8 @@ class tagihanController extends Controller
         //Store Data Ke Database
         $data = new Tagihan([
             'id_tempat'=>$id,
+            'id_pemilik'=>$id_pemilik,
+            'id_nasabah'=>$id_nasabah,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
@@ -379,6 +383,22 @@ class tagihanController extends Controller
             return view('kasir.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
         }
         return view('kasir.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+    }
+
+    public function dataTagihanKasirAll($id){
+        // try{
+            $dataset = DB::table('nasabah')
+            ->where('ID_NASABAH',$id)
+            ->first();
+    
+            $dataTagihan = DB::table('tagihanku')
+            ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+            ->where('tagihanku.ID_NASABAH',$id)
+            ->get();
+        // }catch(\Exception $e){
+        //     return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
+        // }
+        return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
     public function bayarTagihanKasir($id){

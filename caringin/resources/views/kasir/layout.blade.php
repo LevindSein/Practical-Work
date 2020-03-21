@@ -262,7 +262,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableTagihan'
+                        '#tableTagihan,#dataTable1,#dataTable2'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,

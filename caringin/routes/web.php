@@ -116,6 +116,7 @@ Route::get('showdashboard','dashboardController@dashboard')->name('showdashboard
 //KASIR
 Route::get('showtagihankasir','laporanController@showTagihanKasir')->name('lapTagihanKasir');
 Route::get('datatagihankasir/{id}','tagihanController@dataTagihanKasir')->name('datatagihanKasir');
+Route::get('all/datatagihankasir/{id}','tagihanController@dataTagihanKasirAll')->name('datatagihanKasirAll');
 Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name('bayartagihanKasir');
 Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
 Route::get('printstruk/{id}','tagihanController@printStrukKasir');
