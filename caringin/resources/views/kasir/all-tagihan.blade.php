@@ -18,6 +18,7 @@
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
@@ -37,6 +38,10 @@
                   @foreach($dataTagihan as $dataT)
                   @if($dataT->STT_LUNAS==0)
                     <tr>
+                      <td class="text-center">
+                        <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          class="fas fa- fa-sm text-white-50"></i>Add to Cart</a>
+                      </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($dataT->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>

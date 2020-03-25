@@ -283,7 +283,6 @@
                     });
                 });
             </script>
-
             @yield('js')
         </body>
 
