@@ -66,9 +66,11 @@ class meteranController extends Controller
     }
         return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL]);
     }
+
     public function formalat(){
         return view('admin.tambah-alat');
     }
+    
     public function storealat(Request $request){
     try{    
         $radio = $request->get('alat');
@@ -123,6 +125,7 @@ class meteranController extends Controller
         return view('admin.update-ganti-air',['dataset'=>$dataset]);
     }
     public function storegantialatair(Request $request,$id){
+    try{
         $id_mair = $request->get('idMBaru');
 
         DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
@@ -152,8 +155,14 @@ class meteranController extends Controller
         $air = DB::table('tarif_air')->first();
         $ttl_air = $air->PASANG_AIR;
 
+        $dataku = DB::table('tempat_usaha')
+        ->where('ID_TEMPAT',$id)
+        ->first();
+
         $data = new Tagihan([
             'id_tempat'=>$id,
+            'id_pemilik'=>$dataku->ID_PEMILIK,
+            'id_nasabah'=>$dataku->ID_NASABAH,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
@@ -169,7 +178,9 @@ class meteranController extends Controller
             'ket'=>"Pasang Baru Alat Air"
         ]);
         $data->save();
-
+    }catch(\Exception $e){
+        return redirect()->route('ganti')->with('error','Kesalahan Sistem');
+    }
         return redirect()->route('ganti')->with('success','Alat Ukur Diganti');
     }
 
@@ -188,6 +199,7 @@ class meteranController extends Controller
         return view('admin.update-ganti-listrik',['dataset'=>$dataset]);
     }
     public function storegantialatlistrik(Request $request,$id){
+    try{
         $id_mlistrik = $request->get('idMBaru');
         $daya = $request->get('daya');
 
@@ -219,12 +231,19 @@ class meteranController extends Controller
         $listrik = DB::table('tarif_listrik')->first();
         $ttl_listrik = $listrik->PASANG_LISTRIK;
 
+        $dataku = DB::table('tempat_usaha')
+        ->where('ID_TEMPAT',$id)
+        ->first();
+
         $data = new Tagihan([
             'id_tempat'=>$id,
+            'id_pemilik'=>$dataku->ID_PEMILIK,
+            'id_nasabah'=>$dataku->ID_NASABAH,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
             'stt_lunas'=>0,
+            'stt_bayar'=>0,
             'ttl_listrik'=>$ttl_listrik,
             'realisasi_listrik'=>0,
             'selisih_listrik'=>$ttl_listrik,
@@ -236,6 +255,9 @@ class meteranController extends Controller
             'ket'=>"Pasang Baru Alat Listrik"
         ]);
         $data->save();
+    }catch(\Exception $e){
+        return redirect()->route('ganti')->with('error','Kesalahan Sistem');
+    }
         return redirect()->route('ganti')->with('success','Alat Ukur Diganti');
     }
 

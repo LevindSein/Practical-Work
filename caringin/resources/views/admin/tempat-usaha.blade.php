@@ -65,10 +65,14 @@
                         <a href="{{url('updatetempat',[$data->ID_TEMPAT])}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Update</a>
                       </td>
-                      <td class="text-left">{{$data->KD_KONTROL}}</td>
+                      <td class="text-left"
+                      <?php if($data->STT_CICIL==0){ ?> style="color:green;" <?php } ?>
+                      <?php if($data->STT_CICIL==1){ ?> style="color:red;" <?php } ?>>
+                      {{$data->KD_KONTROL}}
+                      </td>
                       <td class="text-left">{{$data->NM_PEMILIK}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
-                      <td class="text-center" style="white-space:normal;">{{$data->NO_ALAMAT}}</td>
+                      <td class="text-center">{{$data->NO_ALAMAT}}</td>
                       <td class="text-center">{{$data->JML_ALAMAT}}</td>
                       <td class="text-left">
                       @if($data->BENTUK_USAHA == null)

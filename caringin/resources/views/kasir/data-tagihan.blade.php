@@ -22,25 +22,10 @@
                     <tr>
                       <th>Action</th>
                       <th>Struk</th>
+                      <th>Bayar</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
-                      <th>Lalu Air</th>
-                      <th>Baru Air</th>
-                      <th>Pakai Air (M<sup>3</sup>)</th>
-                      <th>Bayar Pakai (Rp.)</th>
-                      <th>B.Beban (Rp.)</th>
-                      <th>B.Pemeliharaan (Rp.)</th>
-                      <th>B.Air Kotor (Rp.)</th>
                       <th>Tagihan Air (Rp.)</th>
-                      <th>Daya Listrik</th>
-                      <th>Lalu Listrik</th>
-                      <th>Baru Listrik</th>
-                      <th>Pakai Listrik (kWh)</th>
-                      <th>Rek.Min (Rp.)</th>
-                      <th>B.Blok 1 (Rp.)</th>
-                      <th>B.Blok 2 (Rp.)</th>
-                      <th>B.Beban (Rp.)</th>
-                      <th>BPJU (Rp.)</th>
                       <th>Tagihan Listrik (Rp.)</th>
                       <th>Tagihan IPK & Keamanan (Rp.)</th>
                       <th>Tagihan Kebersihan (Rp.)</th>
@@ -64,6 +49,15 @@
                             class="fas fa- fa-sm text-white-50"></i>Print</a>
                       </td>
                       <td class="text-center" 
+                      <?php if($dataT->STT_BAYAR==0){ ?> style="color:red;" <?php } ?>
+                      <?php if($dataT->STT_BAYAR==1){ ?> style="color:green;" <?php } ?>>
+                      @if($dataT->STT_BAYAR == 1)
+                        Dibayar
+                      @else
+                        Belum Dibayar
+                      @endif
+                      </td>
+                      <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
                       <?php if($dataT->STT_LUNAS==1){ ?> style="color:green;" <?php } ?>>
                       @if($dataT->STT_LUNAS == 1)
@@ -74,143 +68,31 @@
                       </td>
                       <td class="text-center">{{$dataT->TGL_TAGIHAN}}</td>
                       <td>
-                      @if($dataT->AWAL_AIR == null)
+                      @if($dataT->SELISIH_AIR == null)
                         0
                       @else
-                        {{number_format($dataT->AWAL_AIR)}}
+                        {{number_format($dataT->SELISIH_AIR)}}
                       @endif
                       </td>
                       <td>
-                      @if($dataT->AKHIR_AIR == null)
+                      @if($dataT->SELISIH_LISTRIK == null)
                         0
                       @else
-                        {{number_format($dataT->AKHIR_AIR)}}
+                        {{number_format($dataT->SELISIH_LISTRIK)}}
                       @endif
                       </td>
                       <td>
-                      @if($dataT->PAKAI_AIR == null)
+                      @if($dataT->SELISIH_IPKEAMANAN == null)
                         0
                       @else
-                        {{number_format($dataT->PAKAI_AIR)}}
+                        {{number_format($dataT->SELISIH_IPKEAMANAN)}}
                       @endif
                       </td>
                       <td>
-                      @if($dataT->BYR_AIR == null)
+                      @if($dataT->SELISIH_KEBERSIHAN == null)
                         0
                       @else
-                        {{number_format($dataT->BYR_AIR)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->BYR_BEBAN == null)
-                        0
-                      @else
-                        {{number_format($dataT->BYR_BEBAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->BYR_PEMELIHARAAN == null)
-                        0
-                      @else
-                        {{number_format($dataT->BYR_PEMELIHARAAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->BYR_ARKOT == null)
-                        0
-                      @else
-                        {{number_format($dataT->BYR_ARKOT)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->TTL_AIR == null)
-                        0
-                      @else
-                        {{number_format($dataT->TTL_AIR)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->DAYA_LISTRIK == null)
-                        0
-                      @else
-                        {{number_format($dataT->DAYA_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->AWAL_LISTRIK == null)
-                        0
-                      @else
-                        {{number_format($dataT->AWAL_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->AKHIR_LISTRIK == null)
-                        0
-                      @else
-                        {{number_format($dataT->AKHIR_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->PAKAI_LISTRIK == null)
-                        0
-                      @else
-                        {{number_format($dataT->PAKAI_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->REK_MIN == null)
-                        0
-                      @else
-                        {{number_format($dataT->REK_MIN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->B_BLOK1 == null)
-                        0
-                      @else
-                        {{number_format($dataT->B_BLOK1)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->B_BLOK2 == null)
-                        0
-                      @else
-                        {{number_format($dataT->B_BLOK2)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->B_BEBAN == null)
-                        0
-                      @else
-                        {{number_format($dataT->B_BEBAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->BPJU == null)
-                        0
-                      @else
-                        {{number_format($dataT->BPJU)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->TTL_LISTRIK == null)
-                        0
-                      @else
-                        {{number_format($dataT->TTL_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->TTL_IPKEAMANAN == null)
-                        0
-                      @else
-                        {{number_format($dataT->TTL_IPKEAMANAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($dataT->TTL_KEBERSIHAN == null)
-                        0
-                      @else
-                        {{number_format($dataT->TTL_KEBERSIHAN)}}
+                        {{number_format($dataT->SELISIH_KEBERSIHAN)}}
                       @endif
                       </td>
                       <td>

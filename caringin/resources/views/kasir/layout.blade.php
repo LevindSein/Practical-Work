@@ -262,7 +262,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableTagihan,#dataTable1,#dataTable2'
+                        '#dataTable1,#dataTable2'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,
@@ -272,7 +272,7 @@
                         },
                         "scrollX": true,
                         "bSortable": false,
-                        "deferRender": true,
+                        "deferRender": true
                     });
                 });
             </script>

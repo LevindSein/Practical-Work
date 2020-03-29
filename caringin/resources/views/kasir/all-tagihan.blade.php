@@ -13,12 +13,15 @@
             <div class="card-header py-3">
               <h6 class="h-3 m-0 font-weight-bold text-primary">{{$dataset->NM_NASABAH}}</h6>
             </div>
+            
+            <form id="form" action="{{url('checkout/tagihan',[$dataset->ID_NASABAH])}}" method="POST">
+            @csrf
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th></th>
+                      <th>Pilih</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
@@ -39,8 +42,7 @@
                   @if($dataT->STT_LUNAS==0)
                     <tr>
                       <td class="text-center">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                          class="fas fa- fa-sm text-white-50"></i>Add to Cart</a>
+                      <input class="form-check-input" type="checkbox" id="checkBox" name="check[]" value="{{$dataT->ID_TAGIHANKU}}">
                       </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>
@@ -99,6 +101,8 @@
                 </table>
               </div>
             </div>
+            <input id="checkout" type="submit" class="btn btn-primary" value="Checkout" style="margin-left:35px;margin-bottom:35px;" >
+            </form>
             <!-- End Tables -->
           </div>
           <!-- END Data LAPORAN -->
@@ -108,4 +112,27 @@
       </div>
       <!-- End of Main Content -->
 
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function () {
+  $(
+      '#tableTagihan'
+    ).DataTable({
+      "processing": true,
+      "bProcessing":true,
+      "language": {
+        'loadingRecords': '&nbsp;',
+        'processing': '<i class="fas fa-spinner"></i>'
+      },
+      "scrollX": true,
+      "scrollY": "400px",
+      "scrollCollapse": true,
+      "bSortable": false,
+      "deferRender": true,
+      "paging":false
+    });
+  });
+</script>
 @endsection

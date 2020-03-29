@@ -101,7 +101,7 @@ class nasabahController extends Controller
             'tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN','tarif_kebersihan.TRF_KEBERSIHAN',
             'tempat_usaha.NO_ALAMAT','tempat_usaha.JML_ALAMAT','tempat_usaha.BENTUK_USAHA',
             'tempat_usaha.ID_TEMPAT','tempat_usaha.TGL_TEMPAT','tempat_usaha.DAYA',
-            'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK')
+            'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.STT_CICIL')
         ->get();
 
     }catch(\Exception $e){
@@ -253,6 +253,7 @@ class nasabahController extends Controller
         $id_ipk = $dataku->ID_TRFIPK;
         $id_keamanan = $dataku->ID_TRFKEAMANAN;
         $id_kebersihan = $dataku->ID_TRFKEBERSIHAN;
+        $izin_cicil = $dataku->STT_CICIL;
 
         //tarif ipk & keamanan
         if($id_ipk != null && $id_keamanan != null)
@@ -299,7 +300,7 @@ class nasabahController extends Controller
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
                     'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
                     'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
-                    'id_air'=>$id_air,'id_listrik'=>$id_listrik
+                    'id_air'=>$id_air,'id_listrik'=>$id_listrik,'izin_cicil'=>$izin_cicil
         ])->with('error','Kesalahan Sistem');
     }
         return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,'noanggota'=>$noanggota,
@@ -308,7 +309,7 @@ class nasabahController extends Controller
                     'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
                     'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
                     'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
-                    'id_air'=>$id_air,'id_listrik'=>$id_listrik
+                    'id_air'=>$id_air,'id_listrik'=>$id_listrik,'izin_cicil'=>$izin_cicil
         ]);
     }
     public function updateStoreTempat(Request $request, $id){
@@ -386,8 +387,8 @@ class nasabahController extends Controller
             $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();
             $mListrik = DB::table('meteran_listrik')->select('ID_MLISTRIK')->where('id_mlistrik',$request->get('meterListrik'))->first();    
 
-            $id_mair = $mAir->ID_MAIR;
-            $id_mlistrik = $mListrik->ID_MLISTRIK;
+            // $id_mair = $mAir->ID_MAIR;
+            // $id_mlistrik = $mListrik->ID_MLISTRIK;
             $id_pemilik = $nasabah->ID_PEMILIK;
             $id_nas = $nasabah1->ID_NASABAH;
         
@@ -399,23 +400,35 @@ class nasabahController extends Controller
             $ipkId = $request->get('ipkId');
             $keamananId = $request->get('keamananId');
 
+            //air
             if(empty($request->get('air'))){
-                $id_mair = NULL;
+                // $id_mair = NULL;
                 $airId = NULL;
             }
+            //listrik
             if(empty($request->get('listrik'))){
-                $id_mlistrik = NULL;
+                // $id_mlistrik = NULL;
                 $listrikId = NULL;
-                $daya = NULL;
             }
+            //keamanan
             if(empty($request->get('keamanan'))){
                 $keamananId = NULL;
                 $ipkId = NULL;
             }
+            //kebersihan
             if(empty($request->get('kebersihan'))){
                 $kebersihanId = NULL;
             }
         
+            //cicilan
+            $cicilan = $request->get('cicilan');
+            if($cicilan == "1"){
+                $cicil = 1;
+            }
+            else{
+                $cicil = 0;
+            }
+
             DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
                 'BENTUK_USAHA'=>$request->get('bentuk_usaha'),
                 'ID_NASABAH'=>$id_nas,
@@ -425,9 +438,8 @@ class nasabahController extends Controller
                 'ID_TRFKEAMANAN'=>$keamananId,
                 'ID_TRFLISTRIK'=>$listrikId,
                 'ID_TRFAIR'=>$airId,
-                'ID_MAIR'=>$id_mair,
-                'ID_MLISTRIK'=>$id_mlistrik,
-                'DAYA'=>$daya
+                'DAYA'=>$daya,
+                'STT_CICIL'=>$cicil
             ]);
         }
     } catch(\Exception $e){

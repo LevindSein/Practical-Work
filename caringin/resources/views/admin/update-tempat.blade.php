@@ -175,6 +175,26 @@
                     @endforeach
                   </select>
                 </div>
+                
+                <div class="form-group row">
+                  <div class="col-sm-2">Cicilan</div>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="cicilan" id="myRadio1" value="1" 
+                      <?php if($izin_cicil == 1){ ?> checked="checked" <?php } ?>>
+                      <label class="form-check-label" for="myRadio1">
+                        Ya
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="cicilan" id="myRadio2" value="0"
+                      <?php if($izin_cicil == 0){ ?> checked="checked" <?php } ?>>
+                      <label class="form-check-label" for="myRadio2">
+                        Tidak
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
               </form>

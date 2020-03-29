@@ -271,6 +271,7 @@ class tagihanController extends Controller
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
             'stt_lunas'=>0,
+            'stt_bayar'=>0,
             'awal_air'=>$akhirAir,
             'akhir_air'=>$inputAir,
             'pakai_air'=>$pakai_air,
@@ -386,7 +387,7 @@ class tagihanController extends Controller
     }
 
     public function dataTagihanKasirAll($id){
-        // try{
+        try{
             $dataset = DB::table('nasabah')
             ->where('ID_NASABAH',$id)
             ->first();
@@ -395,9 +396,9 @@ class tagihanController extends Controller
             ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->where('tagihanku.ID_NASABAH',$id)
             ->get();
-        // }catch(\Exception $e){
-        //     return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
-        // }
+        }catch(\Exception $e){
+            return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
+        }
         return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
     }
 
@@ -406,8 +407,12 @@ class tagihanController extends Controller
             $dataset = DB::table('tagihanku')
             ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-            ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN','tagihanku.DENDA','tempat_usaha.ID_TEMPAT',
-            'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH','tagihanku.REALISASI')
+            ->select('tempat_usaha.KD_KONTROL','tempat_usaha.STT_CICIL',
+            'tagihanku.TTL_TAGIHAN','tagihanku.SELISIH','tagihanku.DENDA','tempat_usaha.ID_TEMPAT',
+            'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH','tagihanku.REALISASI',
+            'tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR',
+            'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK',
+            'tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH_KEBERSIHAN')
             ->where('ID_TAGIHANKU',$id)
             ->get();
     
@@ -416,7 +421,7 @@ class tagihanController extends Controller
             ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
             ->select(
                 DB::raw('(tagihanku.TTL_TAGIHAN + tagihanku.DENDA) as total'),
-                'tagihanku.REALISASI','nasabah.ID_NASABAH','tagihanku.ID_TEMPAT')
+                'tagihanku.REALISASI','nasabah.ID_NASABAH','tagihanku.STT_LUNAS','tagihanku.ID_TEMPAT')
             ->where('ID_TAGIHANKU',$id)
             ->first();
     
@@ -424,27 +429,27 @@ class tagihanController extends Controller
             $tagihan = $check->total;
             $idNas = $check->ID_NASABAH;
     
-            //Kalau Tagihan Sudah Dibayar
-            if($bayar >= $tagihan){
+            //Kalau Tagihan Sudah Lunas
+            if($check->STT_LUNAS == 1){
                 return redirect()->route('lapTagihanKasir')->with('info','Tagihan Sudah Dibayar');
             }
     
-            //Apabila Tagihan Sebelumnya Belum Terbayar
-            $idTempat = $check->ID_TEMPAT;
-            $belum = DB::table('tagihanku')
-            ->where([['ID_TEMPAT',$idTempat],['STT_LUNAS',0]])
-            ->get();
+        //Apabila Tagihan Sebelumnya Belum Terbayar
+            // $idTempat = $check->ID_TEMPAT;
+            // $belum = DB::table('tagihanku')
+            // ->where([['ID_TEMPAT',$idTempat],['STT_LUNAS',0]])
+            // ->get();
     
-            $recTotal = $belum->count();
-            for($i=0;$i<$recTotal;$i++){
-                if($i > 0){
-                    if($belum[$i]->ID_TAGIHANKU == $id){
-                        if($belum[$i-1] != null){
-                            return redirect()->route('lapTagihanKasir')->with('info','Tagihan Sebelumnya Belum Terbayar');
-                        }
-                    }
-                }
-            }
+            // $recTotal = $belum->count();
+            // for($i=0;$i<$recTotal;$i++){
+            //     if($i > 0){
+            //         if($belum[$i]->ID_TAGIHANKU == $id){
+            //             if($belum[$i-1] != null){
+            //                 return redirect()->route('lapTagihanKasir')->with('info','Tagihan Sebelumnya Belum Terbayar');
+            //             }
+            //         }
+            //     }
+            // }
     
         }catch(\Eception $e){
             return redirect()->route('lapTagihanKasir')->with('error','Kesalahan Sistem');
@@ -453,36 +458,153 @@ class tagihanController extends Controller
         }
     
         public function storeBayarKasir(Request $request,$id){
-        try{
+        // try{
             $timezone = date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d", time());
-    
+ 
+            $realisasi = $request->get('realisasi');
+
+            $check = DB::table('tagihanku')
+            ->select('tagihanku.ID_TEMPAT')
+            ->where('ID_TAGIHANKU',$id)
+            ->first();
+            $id_tempat = $check->ID_TEMPAT;
+
+            $status = DB::table('tempat_usaha')
+            ->select('STT_CICIL')
+            ->where('ID_TEMPAT',$id_tempat)
+            ->first();
+
             $dataset = DB::table('tagihanku')->where('ID_TAGIHANKU',$id)->first();
-    
-            $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA; 
-            $ttl_listrik = $dataset->TTL_LISTRIK + $dataset->DENDA_LISTRIK;
-            $ttl_air = $dataset->TTL_AIR + $dataset->DENDA_AIR;
-            $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
-            $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
+
+            if($status->STT_CICIL == 0){ 
+                $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA;
+                $selisih = 0;
+                $ttl_listrik = $dataset->TTL_LISTRIK + $dataset->DENDA_LISTRIK;
+                $sel_listrik = 0;
+                $ttl_air = $dataset->TTL_AIR + $dataset->DENDA_AIR;
+                $sel_air = 0;
+                $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
+                $sel_aman = 0;
+                $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
+                $sel_bersih = 0;
+                $stt_lunas = 1;
+                $stt_bayar = 1;
+            }
+            else{
+                if($realisasi >= ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK)+($dataset->SELISIH_AIR+$dataset->DENDA_AIR)+($dataset->SELISIH_IPKEAMANAN)+($dataset->SELISIH_KEBERSIHAN)){
+                    $ttl_tagihan = $dataset->TTL_TAGIHAN + $dataset->DENDA;
+                    $selisih = 0;
+                    $ttl_listrik = $dataset->TTL_LISTRIK + $dataset->DENDA_LISTRIK;
+                    $sel_listrik = 0;
+                    $ttl_air = $dataset->TTL_AIR + $dataset->DENDA_AIR;
+                    $sel_air = 0;
+                    $ttl_ipkeamanan = $dataset->TTL_IPKEAMANAN;
+                    $sel_aman = 0;
+                    $ttl_kebersihan = $dataset->TTL_KEBERSIHAN;
+                    $sel_bersih = 0;
+                    $stt_lunas = 1;
+                    $stt_bayar = 1;
+                }
+                else if($realisasi >= $dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK){
+                    $ttl_listrik = $dataset->SELISIH_LISTRIK + $dataset->DENDA_LISTRIK;
+                    $sel_listrik = 0;
+                    $ttl_air = 0;
+                    $sel_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
+                    $ttl_ipkeamanan = 0;
+                    $sel_aman = $dataset->SELISIH_IPKEAMANAN;
+                    $ttl_kebersihan = 0;
+                    $sel_bersih = $dataset->SELISIH_KEBERSIHAN;
+                    $sisa = $realisasi - $ttl_listrik;
+                    if($sisa >= $dataset->SELISIH_AIR + $dataset->DENDA_AIR){
+                        $ttl_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
+                        $sel_air = 0;
+                        $sisa = $sisa - $ttl_air;
+                        $ttl_ipkeamanan = 0;
+                        $sel_aman = $dataset->SELISIH_IPKEAMANAN;
+                        $ttl_kebersihan = 0;
+                        $sel_bersih = $dataset->SELISIH_KEBERSIHAN;
+                    }
+                    else if($sisa >= $dataset->SELISIH_IPKEAMANAN){
+                        $ttl_ipkeamanan = $dataset->SELISIH_IPKEAMANAN;
+                        $sel_aman = 0;
+                        $sisa = $sisa - $ttl_ipkeamanan;
+                        $ttl_air = 0;
+                        $sel_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
+                        $ttl_kebersihan = 0;
+                        $sel_bersih = $dataset->SELISIH_KEBERSIHAN;
+                    }
+                    else if($sisa >= $dataset->SELISIH_KEBERSIHAN){
+                        $ttl_kebersihan = $dataset->SELISIH_KEBERSIHAN;
+                        $sel_bersih = 0;
+                        $sisa = $sisa - $ttl_kebersihan;
+                        $ttl_air = 0;
+                        $sel_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
+                        $ttl_ipkeamanan = 0;
+                        $sel_aman = $dataset->SELISIH_IPKEAMANAN;
+                    }
+                    $ttl_tagihan = $ttl_listrik + $ttl_air + $ttl_ipkeamanan + $ttl_kebersihan;
+                    $selisih = $sel_listrik + $sel_air + $sel_aman + $sel_bersih;
+                    $stt_lunas = 0;
+                    $stt_bayar = 1;
+                }
+                
+                else{
+                    if($realisasi < $dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK){
+                        return redirect()->route('bayartagihanKasir',['id'=>$id])->with('warning',' Minimal Cicilan Lebih dari Tagihan Listrik');
+                    }
+                    else{
+                        return redirect()->route('bayartagihanKasir',['id'=>$id])->with('error',' Pembayaran Gagal');
+                    }
+                }
+            }
             
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
                 'TGL_BAYAR'=>$date,
-                'STT_LUNAS'=>1,
+                'STT_LUNAS'=>$stt_lunas,
+                'STT_BAYAR'=>$stt_bayar,
                 'REALISASI_AIR'=>$ttl_air,
-                'SELISIH_AIR'=>0,
+                'SELISIH_AIR'=>$sel_air,
                 'REALISASI_LISTRIK'=>$ttl_listrik,
-                'SELISIH_LISTRIK'=>0,
+                'SELISIH_LISTRIK'=>$sel_listrik,
                 'REALISASI_IPKEAMANAN'=>$ttl_ipkeamanan,
-                'SELISIH_IPKEAMANAN'=>0,
+                'SELISIH_IPKEAMANAN'=>$sel_aman,
                 'REALISASI_KEBERSIHAN'=>$ttl_kebersihan,
-                'SELISIH_KEBERSIHAN'=>0,
+                'SELISIH_KEBERSIHAN'=>$sel_bersih,
                 'REALISASI'=>$ttl_tagihan,
-                'SELISIH'=>0
+                'SELISIH'=>$selisih
             ]);
-        } catch(\Exception $e){
-            return redirect()->route('bayartagihanKasir',['id'=>$id])->with('error','Pembayaran Gagal');
-        }
+        // } catch(\Exception $e){
+        //     return redirect()->route('bayartagihanKasir',['id'=>$id])->with('error','Pembayaran Gagal');
+        // }
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
+    }
+
+    public function checkout(Request $request, $id){
+        if($request->get('check') != null){
+            $ids = $request->get('check');
+            $dataset = DB::table('tagihanku')
+            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN')
+            ->where([
+                ['ID_NASABAH',$id],
+                ['STT_LUNAS', 0],
+                ['STT_BAYAR', 0]
+            ])
+            ->whereIn('ID_TAGIHANKU',$ids)
+            ->get();
+            var_dump($dataset);
+        }
+        else{
+            $dataset = DB::table('tagihanku')
+            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN')
+            ->where([
+                ['ID_NASABAH',$id],
+                ['STT_LUNAS', 0],
+                ['STT_BAYAR', 0]
+            ])
+            ->get();
+            var_dump($dataset);
+        }
     }
 
     public function printStrukKasir($id){

@@ -17,6 +17,7 @@ class Tagihan extends Model
         'bln_tagihan',
         'tgl_bayar',
         'stt_lunas',
+        'stt_bayar',
         'awal_air',
         'akhir_air',
         'pakai_air',

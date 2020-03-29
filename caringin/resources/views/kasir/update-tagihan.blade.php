@@ -23,8 +23,29 @@
                   <input readonly value="{{$data->NM_NASABAH}}" type="text" name="nama" class="form-control form-control-user" id="exampleInputNama">
                 </div>
                 <div class="form-group">
+                  Tagihan Air
+                  <input readonly value="{{$data->SELISIH_AIR + $data->DENDA_AIR}}" class="form-control form-control-user" placeholder="Rp.">
+                </div>
+                <div class="form-group">
+                  Tagihan Listrik
+                  <input readonly value="{{$data->SELISIH_LISTRIK + $data->DENDA_LISTRIK}}" class="form-control form-control-user" placeholder="Rp.">
+                </div>
+                <div class="form-group">
+                  Tagihan IPK & Keamanan
+                  <input readonly value="{{$data->SELISIH_IPKEAMANAN}}" class="form-control form-control-user" placeholder="Rp.">
+                </div>
+                <div class="form-group">
+                  Tagihan Kebersihan
+                  <input readonly value="{{$data->SELISIH_KEBERSIHAN}}" class="form-control form-control-user" placeholder="Rp.">
+                </div>
+                <div class="form-group">
                   Total Tagihan
-                  <input readonly value="{{$data->TTL_TAGIHAN + $data->DENDA}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                  <input readonly value="{{$data->SELISIH + $data->DENDA}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                </div>
+                <div class="form-group">
+                  Realisasi
+                  <input type="number" name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi" placeholder="Rp."
+                  <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="{{$data->SELISIH + $data->DENDA}}" <?php } ?>>
                 </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
