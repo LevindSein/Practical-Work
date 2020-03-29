@@ -11,4 +11,5 @@ Please doing :
 4. php artisan key:generate
 
 on Progress
-Check Tanggal Tunggakan dengan Hari Libur
+Ketika Pembongkaran Selesai
+ID_MAIR atau ID_MLISTRIK harus NULL

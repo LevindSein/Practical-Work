@@ -584,7 +584,7 @@ class tagihanController extends Controller
         if($request->get('check') != null){
             $ids = $request->get('check');
             $dataset = DB::table('tagihanku')
-            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN')
+            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN','KET')
             ->where([
                 ['ID_NASABAH',$id],
                 ['STT_LUNAS', 0],

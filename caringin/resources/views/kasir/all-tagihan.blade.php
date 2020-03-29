@@ -42,7 +42,7 @@
                   @if($dataT->STT_LUNAS==0)
                     <tr>
                       <td class="text-center">
-                      <input class="form-check-input" type="checkbox" id="checkBox" name="check[]" value="{{$dataT->ID_TAGIHANKU}}">
+                      <input type="checkbox" id="checkBox" name="check[]" value="{{$dataT->ID_TAGIHANKU}}">
                       </td>
                       <td class="text-center" 
                       <?php if($dataT->STT_LUNAS==0){ ?> style="color:red;" <?php } ?>

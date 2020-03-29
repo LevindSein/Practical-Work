@@ -59,7 +59,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('showtagihankasir')}}">
                         <i class="fas fa-dollar-sign"></i>
-                        <span>Tagihan</span></a>
+                        <span>&ensp;Tagihan</span></a>
+                </li>
+                
+                <!-- Nav Item - Penerimaan -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Penerimaan</span></a>
                 </li>
 
                 <!-- Divider -->

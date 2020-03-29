@@ -239,6 +239,7 @@ class laporanController extends Controller
     }
         return view('admin.laporan-tunggakan',['dataset'=>$dataset]);
     }
+    
     public function showBongkaran(){
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
@@ -247,6 +248,7 @@ class laporanController extends Controller
         ->get();
         return view('admin.laporan-bongkaran',['dataset'=>$dataset]);
     }
+
     public function showPenghapusan(){
         $dataset = DB::table('penghapusan')
         ->join('tempat_usaha','penghapusan.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
