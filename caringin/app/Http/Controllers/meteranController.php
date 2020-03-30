@@ -176,6 +176,7 @@ class meteranController extends Controller
             'realisasi'=>0,
             'selisih'=>$ttl_air,
             'denda'=>0,
+            'stt_denda'=>0,
             'ket'=>"Pasang Baru Alat Air"
         ]);
         $data->save();
@@ -253,6 +254,7 @@ class meteranController extends Controller
             'realisasi'=>0,
             'selisih'=>$ttl_listrik,
             'denda'=>0,
+            'stt_denda'=>0,
             'ket'=>"Pasang Baru Alat Listrik"
         ]);
         $data->save();

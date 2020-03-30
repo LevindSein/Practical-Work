@@ -14,7 +14,7 @@
               <h6 class="h-3 m-0 font-weight-bold text-primary">{{$dataset->NM_NASABAH}} {{$dataset->NO_ANGGOTA}}</h6>
             </div>
             
-            <form id="form" action="{{url('checkout/tagihan',[$dataset->ID_NASABAH])}}" method="POST">
+            <form id="action" name="action" action="{{url('checkout/tagihan',[$dataset->ID_NASABAH])}}" method="POST">
             @csrf
             <div class="card-body">
               <div class="table-responsive">
@@ -101,7 +101,10 @@
                 </table>
               </div>
             </div>
-            <input id="checkout" type="submit" class="btn btn-primary" value="Checkout" style="margin-left:35px;margin-bottom:35px;" >
+            <div style="margin-left:35px;margin-bottom:35px;">
+                <input name="button" type="submit" class="btn btn-primary" value="Checkout">
+                <input name="button" type="submit" class="btn btn-primary" value="Print Faktur">
+            </div>
             </form>
             <!-- End Tables -->
           </div>

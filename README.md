@@ -11,5 +11,5 @@ Please doing :
 4. php artisan key:generate
 
 on Progress
-Ketika Pembongkaran Selesai
-ID_MAIR atau ID_MLISTRIK harus NULL
+Surat Peringatan
+Checkout by Pengguna

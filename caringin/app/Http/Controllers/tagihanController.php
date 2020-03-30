@@ -582,33 +582,91 @@ class tagihanController extends Controller
         } catch(\Exception $e){
             return redirect()->route('bayartagihanKasir',['id'=>$id])->with('error','Pembayaran Gagal');
         }
+
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
     }
 
     public function checkout(Request $request, $id){
-        if($request->get('check') != null){
-            $ids = $request->get('check');
-            $dataset = DB::table('tagihanku')
-            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN','KET')
-            ->where([
-                ['ID_NASABAH',$id],
-                ['STT_LUNAS', 0],
-                ['STT_BAYAR', 0]
-            ])
-            ->whereIn('ID_TAGIHANKU',$ids)
-            ->get();
-            var_dump($dataset);
-        }
-        else{
-            $dataset = DB::table('tagihanku')
-            ->select('ID_TAGIHANKU','TTL_AIR','DENDA_AIR','TTL_LISTRIK','DENDA_LISTRIK','TTL_IPKEAMANAN','TTL_KEBERSIHAN')
-            ->where([
-                ['ID_NASABAH',$id],
-                ['STT_LUNAS', 0],
-                ['STT_BAYAR', 0]
-            ])
-            ->get();
-            var_dump($dataset);
+        switch ($request->get('button')) {
+            case "Checkout":
+            $dataku = DB::table('nasabah')
+            ->where('ID_NASABAH',$id)
+            ->first();
+
+            if($request->get('check') != null){
+                $ids = $request->get('check');
+                $dataset = DB::table('tagihanku')
+                ->select(
+                DB::raw('SUM(TTL_AIR) as ttlAir'),
+                DB::raw('SUM(DENDA_AIR) as dendaAir'),
+                DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
+                DB::raw('SUM(DENDA_LISTRIK) as dendaListrik'),
+                DB::raw('SUM(TTL_IPKEAMANAN) as ttlIpkeamanan'),
+                DB::raw('SUM(TTL_KEBERSIHAN) as ttlKebersihan'),
+                DB::raw('SUM(TTL_TAGIHAN) as ttlTagihan'))
+                ->where([
+                    ['ID_NASABAH',$id],
+                    ['STT_LUNAS', 0],
+                    ['STT_BAYAR', 0]
+                ])
+                ->whereIn('ID_TAGIHANKU',$ids)
+                ->get();
+            }
+            else{
+                $dataset = DB::table('tagihanku')
+                ->select(
+                DB::raw('SUM(TTL_AIR) as ttlAir'),
+                DB::raw('SUM(DENDA_AIR) as dendaAir'),
+                DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
+                DB::raw('SUM(DENDA_LISTRIK) as dendaListrik'),
+                DB::raw('SUM(TTL_IPKEAMANAN) as ttlIpkeamanan'),
+                DB::raw('SUM(TTL_KEBERSIHAN) as ttlKebersihan'),
+                DB::raw('SUM(TTL_TAGIHAN) as ttlTagihan'))
+                ->where([
+                    ['ID_NASABAH',$id],
+                    ['STT_LUNAS', 0],
+                    ['STT_BAYAR', 0]
+                ])
+                ->get();
+            }
+            return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset]);
+            break;
+    
+            case "Print Faktur":
+            $dataku = DB::table('nasabah')
+            ->where('ID_NASABAH',$id)
+            ->first();
+
+            if($request->get('check') != null){
+                $ids = $request->get('check');
+                $dataset = DB::table('tagihanku')
+                ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+                ->select('tagihanku.TGL_TAGIHAN','tagihanku.TTL_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
+                         'tagihanku.TTL_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_TAGIHAN',
+                         'tagihanku.TTL_KEBERSIHAN')
+                ->where([
+                    ['tagihanku.ID_NASABAH',$id],
+                    ['tagihanku.STT_LUNAS', 0],
+                    ['tagihanku.STT_BAYAR', 0]
+                ])
+                ->whereIn('tagihanku.ID_TAGIHANKU',$ids)
+                ->get();
+            }
+            else{
+                $dataset = DB::table('tagihanku')
+                ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+                ->select('tagihanku.TGL_TAGIHAN','tagihanku.TTL_AIR','tagihanku.DENDA_AIR','tagihanku.TTL_LISTRIK',
+                         'tagihanku.DENDA_LISTRIK','tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_KEBERSIHAN','tagihanku.TTL_TAGIHAN',
+                         'tempat_usaha.KD_KONTROL')
+                ->where([
+                    ['tagihanku.ID_NASABAH',$id],
+                    ['tagihanku.STT_LUNAS', 0],
+                    ['tagihanku.STT_BAYAR', 0]
+                ])
+                ->get();
+            }
+            return view('kasir.print-faktur',['dataku'=>$dataku,'dataset'=>$dataset]);
+            break;
         }
     }
 
