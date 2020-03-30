@@ -167,6 +167,7 @@ class meteranController extends Controller
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
             'stt_lunas'=>0,
+            'stt_bayar'=>0,
             'ttl_air'=>$ttl_air,
             'realisasi_air'=>0,
             'selisih_air'=>$ttl_air,

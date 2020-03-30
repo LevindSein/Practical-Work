@@ -11,14 +11,14 @@
           <!-- Data LAPORAN -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="h-3 m-0 font-weight-bold text-primary">{{$dataset->NM_NASABAH}}</h6>
+              <h6 class="h-3 m-0 font-weight-bold text-primary">{{$dataset->NM_NASABAH}} {{$dataset->NO_ANGGOTA}}</h6>
             </div>
             
             <form id="form" action="{{url('checkout/tagihan',[$dataset->ID_NASABAH])}}" method="POST">
             @csrf
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table display table-bordered" id="tableTagihan" width="100%" cellspacing="0">
+                <table class="table display table-bordered" id="tableTagihan1" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Pilih</th>
@@ -118,7 +118,7 @@
 <script>
 $(document).ready(function () {
   $(
-      '#tableTagihan'
+      '#tableTagihan1'
     ).DataTable({
       "processing": true,
       "bProcessing":true,
