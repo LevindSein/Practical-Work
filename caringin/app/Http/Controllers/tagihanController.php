@@ -121,7 +121,11 @@ class tagihanController extends Controller
                  //Kal Air
                 if($usaha->ID_TRFAIR != Null){
                     $tarif_air = DB::table('tarif_air')->first();
-                    $inputAir = $request->get('mAir');
+                    $expInputAir = explode(",",$request->get('mAir'));
+                    $inputAir = "";
+                    for($m=0;$m<count($expInputAir);$m++){
+                        $inputAir = $inputAir.$expInputAir[$m];
+                    }
                     $awal_air = $akhirAir;
                     
                     if($inputAir < $awal_air)
@@ -163,7 +167,11 @@ class tagihanController extends Controller
                 if($usaha->ID_TRFLISTRIK != Null){
                     $tarif_listrik = DB::table('tarif_listrik')->first();
                 
-                    $inputListrik = $request->get('mListrik');
+                    $expInputListrik = explode(",",$request->get('mListrik'));
+                    $inputListrik = "";
+                    for($k=0;$k<count($expInputListrik);$k++){
+                        $inputListrik = $inputListrik.$expInputListrik[$k];
+                    }
                     $awal_listrik = $akhirListrik;
             
                     if($inputListrik < $akhirListrik)
@@ -597,13 +605,13 @@ class tagihanController extends Controller
                 $ids = $request->get('check');
                 $dataset = DB::table('tagihanku')
                 ->select(
-                DB::raw('SUM(TTL_AIR) as ttlAir'),
+                DB::raw('SUM(SELISIH_AIR) as ttlAir'),
                 DB::raw('SUM(DENDA_AIR) as dendaAir'),
-                DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
+                DB::raw('SUM(SELISIH_LISTRIK) as ttlListrik'),
                 DB::raw('SUM(DENDA_LISTRIK) as dendaListrik'),
-                DB::raw('SUM(TTL_IPKEAMANAN) as ttlIpkeamanan'),
-                DB::raw('SUM(TTL_KEBERSIHAN) as ttlKebersihan'),
-                DB::raw('SUM(TTL_TAGIHAN) as ttlTagihan'))
+                DB::raw('SUM(SELISIH_IPKEAMANAN) as ttlIpkeamanan'),
+                DB::raw('SUM(SELISIH_KEBERSIHAN) as ttlKebersihan'),
+                DB::raw('SUM(SELISIH) as ttlTagihan'))
                 ->where([
                     ['ID_NASABAH',$id],
                     ['STT_LUNAS', 0],
@@ -615,13 +623,13 @@ class tagihanController extends Controller
             else{
                 $dataset = DB::table('tagihanku')
                 ->select(
-                DB::raw('SUM(TTL_AIR) as ttlAir'),
+                DB::raw('SUM(SELISIH_AIR) as ttlAir'),
                 DB::raw('SUM(DENDA_AIR) as dendaAir'),
-                DB::raw('SUM(TTL_LISTRIK) as ttlListrik'),
+                DB::raw('SUM(SELISIH_LISTRIK) as ttlListrik'),
                 DB::raw('SUM(DENDA_LISTRIK) as dendaListrik'),
-                DB::raw('SUM(TTL_IPKEAMANAN) as ttlIpkeamanan'),
-                DB::raw('SUM(TTL_KEBERSIHAN) as ttlKebersihan'),
-                DB::raw('SUM(TTL_TAGIHAN) as ttlTagihan'))
+                DB::raw('SUM(SELISIH_IPKEAMANAN) as ttlIpkeamanan'),
+                DB::raw('SUM(SELISIH_KEBERSIHAN) as ttlKebersihan'),
+                DB::raw('SUM(SELISIH) as ttlTagihan'))
                 ->where([
                     ['ID_NASABAH',$id],
                     ['STT_LUNAS', 0],
@@ -641,9 +649,9 @@ class tagihanController extends Controller
                 $ids = $request->get('check');
                 $dataset = DB::table('tagihanku')
                 ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-                ->select('tagihanku.TGL_TAGIHAN','tagihanku.TTL_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
-                         'tagihanku.TTL_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_TAGIHAN',
-                         'tagihanku.TTL_KEBERSIHAN')
+                ->select('tagihanku.TGL_TAGIHAN','tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
+                         'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH',
+                         'tagihanku.SELISIH_KEBERSIHAN')
                 ->where([
                     ['tagihanku.ID_NASABAH',$id],
                     ['tagihanku.STT_LUNAS', 0],
@@ -655,9 +663,9 @@ class tagihanController extends Controller
             else{
                 $dataset = DB::table('tagihanku')
                 ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-                ->select('tagihanku.TGL_TAGIHAN','tagihanku.TTL_AIR','tagihanku.DENDA_AIR','tagihanku.TTL_LISTRIK',
-                         'tagihanku.DENDA_LISTRIK','tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_KEBERSIHAN','tagihanku.TTL_TAGIHAN',
-                         'tempat_usaha.KD_KONTROL')
+                ->select('tagihanku.TGL_TAGIHAN','tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
+                         'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH',
+                         'tagihanku.SELISIH_KEBERSIHAN')
                 ->where([
                     ['tagihanku.ID_NASABAH',$id],
                     ['tagihanku.STT_LUNAS', 0],

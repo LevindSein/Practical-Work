@@ -7,7 +7,7 @@ $total = 0;
 
 @foreach($dataset as $d)
 <?php
-$total = $d->TTL_TAGIHAN + $total;
+$total = $d->SELISIH + $total;
 ?>
 @endforeach
 
@@ -67,13 +67,13 @@ $total = $d->TTL_TAGIHAN + $total;
           <tr>
             <td class="tg-cegc">{{$d->TGL_TAGIHAN}}</td>
             <td class="tg-rtqe">{{$d->KD_KONTROL}}</td>
-            <td class="tg-g25h">{{number_format($d->TTL_LISTRIK)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_LISTRIK)}}</td>
             <td class="tg-g25h">{{number_format($d->DENDA_LISTRIK)}}</td>
-            <td class="tg-g25h">{{number_format($d->TTL_AIR)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_AIR)}}</td>
             <td class="tg-g25h">{{number_format($d->DENDA_AIR)}}</td>
-            <td class="tg-g25h">{{number_format($d->TTL_IPKEAMANAN)}}</td>
-            <td class="tg-g25h">{{number_format($d->TTL_KEBERSIHAN)}}</td>
-            <td class="tg-g25h">{{number_format($d->TTL_TAGIHAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_IPKEAMANAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_KEBERSIHAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH)}}</td>
           </tr>
           @endforeach
           <tr>

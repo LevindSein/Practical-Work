@@ -28,7 +28,6 @@ $now = date("d-m-Y", time());
         <div><span>TGL TAGIHAN</span><?php $tag = date("d-m-Y", strtotime($d->TGL_TAGIHAN)); ?> {{$tag}}</div>
         <div><span>BULAN PEMBAYARAN</span><?php $time = date("M", strtotime($d->TGL_TAGIHAN)); ?> {{$time}}</div>
         <div><span>STRUK TAGIHAN</span> {{$now}}</div>
-        <div><span>DIBAYAR PADA</span><?php $bayar = date("d-m-Y", strtotime($d->TGL_BAYAR)); ?> @if($d->TGL_BAYAR == null) Belum Dibayar @else {{$bayar}}@endif</div>
       </div>
     </header>
     <main>

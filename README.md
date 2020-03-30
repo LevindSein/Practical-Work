@@ -11,5 +11,6 @@ Please doing :
 4. php artisan key:generate
 
 on Progress
+BUG TANGGAL TAGIHAN
 Surat Peringatan
 Checkout by Pengguna

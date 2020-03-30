@@ -24,23 +24,23 @@
                 </div>
                 <div class="form-group">
                   Tagihan Air
-                  <input readonly value="{{$data->SELISIH_AIR + $data->DENDA_AIR}}" class="form-control form-control-user" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH_AIR + $data->DENDA_AIR)}}" class="form-control form-control-user" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tagihan Listrik
-                  <input readonly value="{{$data->SELISIH_LISTRIK + $data->DENDA_LISTRIK}}" class="form-control form-control-user" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH_LISTRIK + $data->DENDA_LISTRIK)}}" class="form-control form-control-user" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tagihan IPK & Keamanan
-                  <input readonly value="{{$data->SELISIH_IPKEAMANAN}}" class="form-control form-control-user" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH_IPKEAMANAN)}}" class="form-control form-control-user" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Tagihan Kebersihan
-                  <input readonly value="{{$data->SELISIH_KEBERSIHAN}}" class="form-control form-control-user" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH_KEBERSIHAN)}}" class="form-control form-control-user" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Total Tagihan
-                  <input readonly value="{{$data->SELISIH + $data->DENDA}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Realisasi
