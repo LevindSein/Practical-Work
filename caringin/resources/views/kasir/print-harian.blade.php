@@ -5,6 +5,7 @@
 @foreach($dataset as $d)
 <?php
     $total = $d->REALISASI + $total;
+    $tgl = date("d M Y", strtotime($tanggal->TGL_BAYAR));
 ?>
 @endforeach
 
@@ -26,6 +27,7 @@
       </div>
       <div id="project">
         <div><span>Nama Kasir</span>:</div>
+        <div><span>Tanggal Penerimaan</span>: {{$tgl}}</div>
       </div>
     </header>
     <main>

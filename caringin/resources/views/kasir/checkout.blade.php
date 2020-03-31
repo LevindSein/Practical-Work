@@ -1,5 +1,9 @@
 @extends('kasir.layout')
 @section('content')
+<?php
+$id = implode(",",$ids);
+?>
+
        <!-- Begin Page Content -->
        <div class="container-fluid">
 
@@ -12,7 +16,7 @@
           <div class="col-lg-6">
             <div class="p-4">
             @foreach ($dataset as $d)
-            <form class="user" action="#" method="POST">
+            <form class="user" action="{{url('storecheckout')}}" method="POST">
               @csrf
                 <div class="form-group">
                   Nama Nasabah
@@ -51,7 +55,7 @@
                   <input readonly value="Rp. {{number_format($d->ttlTagihan + $d->dendaAir + $d->dendaListrik)}}" class="form-control form-control-user">
                 </div>
                 @endforeach
-                <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
+                <button type="submit" class="btn btn-primary btn-user btn-block" name="bayar[]" value="{{$id}}">Bayar</button>
               </form>
             </div>
           </div>

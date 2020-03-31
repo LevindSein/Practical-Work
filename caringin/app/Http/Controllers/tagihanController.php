@@ -660,8 +660,24 @@ class tagihanController extends Controller
                     ['STT_BAYAR', 0]
                 ])
                 ->get();
+
+                $id_data = DB::table('tagihanku')
+                ->select('ID_TAGIHANKU')
+                ->where([
+                    ['ID_NASABAH',$id],
+                    ['STT_LUNAS', 0],
+                    ['STT_BAYAR', 0]
+                ])
+                ->get();
+                $ids = array();
+                $x = 0;
+                foreach($id_data as $id){                
+                    $idku = $id->ID_TAGIHANKU;
+                    $ids[$x] = $idku; 
+                    $x++;
+                }
             }
-            return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset]);
+            return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset,'ids'=>$ids]);
             break;
     
             case "Print Faktur":
@@ -702,6 +718,44 @@ class tagihanController extends Controller
         }
     }
 
+    public function storeCheckout(Request $request){
+    try{
+        $ids = $request->get('bayar');
+        foreach($ids as $id){
+            $id_exp = explode(",",$id);
+        }
+
+        $timezone = date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d", time());
+
+        $d = DB::table('tagihanku')
+        ->whereIn('ID_TAGIHANKU', $id_exp)
+        ->get();
+        foreach($d as $data){
+            DB::table('tagihanku')
+            ->where('ID_TAGIHANKU', $data->ID_TAGIHANKU)
+            ->update([
+                'TGL_BAYAR'=>$date,
+                'STT_LUNAS'=>1,
+                'STT_BAYAR'=>1,
+                'REALISASI_AIR'=>$data->TTL_AIR + $data->DENDA_AIR,
+                'SELISIH_AIR'=>0,
+                'REALISASI_LISTRIK'=>$data->TTL_LISTRIK + $data->DENDA_LISTRIK,
+                'SELISIH_LISTRIK'=>0,
+                'REALISASI_IPKEAMANAN'=>$data->TTL_IPKEAMANAN,
+                'SELISIH_IPKEAMANAN'=>0,
+                'REALISASI_KEBERSIHAN'=>$data->TTL_KEBERSIHAN,
+                'SELISIH_KEBERSIHAN'=>0,
+                'REALISASI'=>$data->TTL_AIR + $data->DENDA_AIR + $data->TTL_LISTRIK + $data->DENDA_LISTRIK + $data->TTL_IPKEAMANAN + $data->TTL_KEBERSIHAN,
+                'SELISIH'=>0
+            ]);    
+        }
+    }catch(\Exception $e){
+        return redirect()->back()->with('error','Pembayaran Gagal');
+    }
+        return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
+    }
+
     public function printStrukKasir($id){
         $dataset = DB::table('tagihanku')
         ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
@@ -730,8 +784,12 @@ class tagihanController extends Controller
             ['tagihanku.STT_BAYAR', 1]
         ])
         ->get();
+        $tanggal = DB::table('tagihanku')
+            ->select('TGL_BAYAR')
+            ->where('TGL_BAYAR',$tgl)
+            ->first();
 
-        return view('kasir.print-harian',['dataset'=>$dataset]);
+        return view('kasir.print-harian',['dataset'=>$dataset,'tanggal'=>$tanggal]);
     }
     //ENDKASIR
 

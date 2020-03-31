@@ -122,6 +122,7 @@ Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
 Route::get('printstruk/{id}','tagihanController@printStrukKasir');
 Route::get('penerimaanharian','tagihanController@penerimaan');
 Route::post('checkout/tagihan/{id}','tagihanController@checkout');
+Route::post('storecheckout','tagihanController@storeCheckout');
 Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 //ENDKASIR
 
