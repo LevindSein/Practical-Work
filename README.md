@@ -10,7 +10,6 @@ Please doing :
 3. cp .env.example .env
 4. php artisan key:generate
 
-on Progress
-BUG TANGGAL TAGIHAN
+on Progress :
+Manajemen dan Keuangan
 Surat Peringatan
-Checkout by Pengguna
