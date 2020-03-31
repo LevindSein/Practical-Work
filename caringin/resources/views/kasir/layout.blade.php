@@ -64,7 +64,7 @@
                 
                 <!-- Nav Item - Penerimaan -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{url('penerimaanharian')}}">
                         <i class="fas fa-hand-holding-usd"></i>
                         <span>Penerimaan</span></a>
                 </li>

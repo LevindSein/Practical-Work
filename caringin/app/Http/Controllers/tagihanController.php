@@ -711,6 +711,28 @@ class tagihanController extends Controller
 
         return view('kasir.print-struk',['dataset'=>$dataset]);
     }
+
+    public function penerimaan(){
+        $dataset = DB::table('tagihanku')
+            ->select('TGL_BAYAR','STT_BAYAR')
+            ->groupBy('TGL_BAYAR','STT_BAYAR')
+            ->get();
+
+        return view('kasir.penerimaan',['dataset'=>$dataset]);
+    }
+
+    public function printPenerimaan($tgl){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where([
+            ['tagihanku.TGL_BAYAR',$tgl],
+            ['tagihanku.STT_BAYAR', 1]
+        ])
+        ->get();
+
+        return view('kasir.print-harian',['dataset'=>$dataset]);
+    }
     //ENDKASIR
 
     //Manager

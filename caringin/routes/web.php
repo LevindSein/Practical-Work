@@ -120,7 +120,9 @@ Route::get('all/datatagihankasir/{id}','tagihanController@dataTagihanKasirAll')-
 Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name('bayartagihanKasir');
 Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
 Route::get('printstruk/{id}','tagihanController@printStrukKasir');
+Route::get('penerimaanharian','tagihanController@penerimaan');
 Route::post('checkout/tagihan/{id}','tagihanController@checkout');
+Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 //ENDKASIR
 
 //MANAJER

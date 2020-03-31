@@ -1,8 +1,9 @@
 @media print{
   @page {
-    size: auto;   /* auto is the initial value */
+    height: 21cm;   /* auto is the initial value */
+    weight: 29.7cm;
     size: A4 landscape;
-    margin: 3cm;  /* this affects the margin in the printer settings */
+    margin: auto;  /* this affects the margin in the printer settings */
     border: 1px solid black;  /* set a border for all printed pages */
   }
 }
@@ -18,11 +19,15 @@ a {
   text-decoration: underline;
 }
 
+td{
+  white-space: nowrap;
+}
+
 body {
   position: relative;
   width: 29.7cm;  
-  height: 18cm; 
-  margin: 0 auto; 
+  height: 21cm; 
+  margin: auto; 
   color: #000;
   background: #FFFFFF; 
   font-family: Arial, sans-serif; 

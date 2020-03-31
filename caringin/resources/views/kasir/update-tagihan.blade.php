@@ -40,12 +40,12 @@
                 </div>
                 <div class="form-group">
                   Total Tagihan
-                  <input readonly value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" type="number" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
+                  <input readonly value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" name="tagihan" class="form-control form-control-user" id="exampleInputTagihan" placeholder="Rp.">
                 </div>
                 <div class="form-group">
                   Realisasi
-                  <input type="number" name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi" placeholder="Rp."
-                  <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="{{$data->SELISIH + $data->DENDA}}" <?php } ?>>
+                  <input name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi" placeholder="Rp."
+                  <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" <?php } ?>>
                 </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
