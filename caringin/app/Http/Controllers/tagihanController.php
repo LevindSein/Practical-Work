@@ -7,6 +7,8 @@ use App\Tagihan;
 use App\Hari_libur;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
+use Carbon\Carbon;
+use DateTime;
 use Exception;
 
 class tagihanController extends Controller
@@ -68,8 +70,29 @@ class tagihanController extends Controller
     }
     }
 
+    public function add_months($months, DateTime $dateObject) 
+    {
+        $next = new DateTime($dateObject->format('Y-m-d'));
+        $next->modify('last day of +'.$months.' month');
+
+        if($dateObject->format('d') > $next->format('d')) {
+            return $dateObject->diff($next);
+        } else {
+            return new DateInterval('P'.$months.'M');
+        }
+    }
+
+    public function endCycle($d1, $months)
+    {
+        $date = new DateTime($d1);
+        $newDate = $date->add($this->add_months($months, $date));
+        $dateReturned = $newDate->format('Y-m-01'); 
+
+        return $dateReturned;
+    }
+
     public function storetagihan(Request $request ,$id){
-    try{
+    // try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
         $dayaListrik = $usaha->DAYA;
         $id_nasabah = $usaha->ID_NASABAH;
@@ -250,13 +273,14 @@ class tagihanController extends Controller
 
         $ttl_tagihan = $ttl_air + $ttl_listrik + $ttl_ipkeamanan + $ttl_kebersihan;
 
-        //Set Tanggal Tagihan
-        $timezone = date_default_timezone_set('Asia/Jakarta');
+        //Set Tanggal Tagihan    
+        date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
-        $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+        $nMonths = 1;
+        $finalDate = $this->endCycle($date, $nMonths);
+        $time = strtotime($finalDate);
+        $expired = date("Y-m-14", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-14", strtotime("+2 month", $time));
 
         //Cek Libur
         $tgl_exp = $expired;
@@ -328,9 +352,9 @@ class tagihanController extends Controller
         DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
             'MAKHIR_LISTRIK'=>$inputListrik
         ]);
-    } catch(\Exception $e){
-        return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
-    }
+    // } catch(\Exception $e){
+    //     return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
+    // }
         return redirect()->route('tagihan')->with('success','Tagihan Ditambah');
     }
 
