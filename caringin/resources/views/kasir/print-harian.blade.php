@@ -13,7 +13,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>PENERIMAAN HARIAN KASIR</title>
+    <title>PT. PENGELOLA PUSAT PERDAGANGAN CARINGIN</title>
     <link rel="stylesheet" href="{{asset('css/style-harian.css')}}" media="all" />
   </head>
   

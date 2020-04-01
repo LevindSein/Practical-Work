@@ -7,7 +7,7 @@ $now = date("d-m-Y", time());
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Print Tagihan</title>
+    <title>PT. PENGELOLA PUSAT PERDAGANGAN CARINGIN</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}" media="all" />
   </head>
   <body onload="window.print()">

@@ -273,6 +273,47 @@ class laporanController extends Controller
             return view('kasir.tagihan',['dataset'=>$dataset,'datanas'=>$datanas]);
     }
 
+    //Keuangan
+    public function showPenerimaanHarian(){
+        $dataset = DB::table('tagihanku')
+            ->select('TGL_BAYAR','STT_BAYAR')
+            ->groupBy('TGL_BAYAR','STT_BAYAR')
+            ->get();
+        return view('keuangan.penerimaan-harian',['dataset'=>$dataset]);
+    }
+
+    public function printHarianKeuangan(){
+        return view('keuangan.print-harian');
+    }
+
+    public function showPenerimaanBulanan(){
+        $dataset = DB::table('tagihanku')
+            ->select('BLN_BAYAR','STT_BAYAR')
+            ->groupBy('BLN_BAYAR','STT_BAYAR')
+            ->get();
+        return view('keuangan.penerimaan-bulanan',['dataset'=>$dataset]);
+    }
+
+    public function printBulananKeuangan(){
+        return view('keuangan.print-bulanan');
+    }
+
+    public function printRincianKeuangan(){
+        return view('keuangan.print-rincian-bulanan');
+    }
+
+    public function showPemakaianBulanan(){
+        return view('keuangan.pemakaian-bulanan');
+    }
+
+    public function showPendapatanTahunan(){
+        return view('keuangan.pendapatan-tahunan');
+    }
+
+    public function printTahunanKeuangan(){
+        return view('keuangan.print-tahunan');
+    }
+
     //Manajer
     public function showHarianManager(){
         try{

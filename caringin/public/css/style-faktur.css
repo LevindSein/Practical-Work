@@ -1,7 +1,7 @@
 @media print{
   @page {
     height: 21cm;   /* auto is the initial value */
-    weight: 29.7cm;
+    width: 29.7cm;
     size: A4 landscape;
     margin: auto;  /* this affects the margin in the printer settings */
     border: 1px solid black;  /* set a border for all printed pages */

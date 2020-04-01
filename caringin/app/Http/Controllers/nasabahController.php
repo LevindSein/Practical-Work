@@ -218,6 +218,7 @@ class nasabahController extends Controller
         $dataTempat = new Tempat_usaha([
             'blok'=>$request->get('blok'),
             'no_alamat'=>$request->get('los'),
+            'kd_kontrol'=>$join,
             'daya'=>$daya,
             'jml_alamat'=>$jumLos,
             'bentuk_usaha'=>$request->get('bentuk_usaha'),
@@ -228,7 +229,6 @@ class nasabahController extends Controller
             'id_trfkeamanan'=>$keamananId,
             'id_trflistrik'=>$listrikId,
             'id_trfair'=>$airId,
-            'kd_kontrol'=>$join,
             'id_mair'=>$id_mair,
             'id_mlistrik'=>$id_mlistrik
         ]);

@@ -126,6 +126,16 @@ Route::post('storecheckout','tagihanController@storeCheckout');
 Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 //ENDKASIR
 
+//KEUANGAN
+Route::get('showpenerimaanharian','laporanController@showPenerimaanHarian');
+Route::get('showpenerimaanbulanan','laporanController@showPenerimaanBulanan');
+Route::get('showpendapatantahunan','laporanController@showPendapatanTahunan');
+Route::get('print/harian/keuangan','laporanController@printHarianKeuangan');
+Route::get('print/bulanan/keuangan','laporanController@printBulananKeuangan');
+Route::get('print/rincian/keuangan','laporanController@printRincianKeuangan');
+Route::get('print/tahunan/keuangan','laporanController@printTahunanKeuangan');
+//ENDKEUANGAN
+
 //MANAJER
 Route::get('showdashboardmanager','dashboardController@dashboardManager')->name('showdashboardmanajer');
 Route::get('showlaporanharianmanager','laporanController@showHarianManager');

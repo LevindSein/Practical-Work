@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Carbon\Carbon;
 use DateTime;
+use DateInterval;
 use Exception;
 
 class tagihanController extends Controller
@@ -92,11 +93,12 @@ class tagihanController extends Controller
     }
 
     public function storetagihan(Request $request ,$id){
-    // try{
+    try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
         $dayaListrik = $usaha->DAYA;
         $id_nasabah = $usaha->ID_NASABAH;
         $id_pemilik = $usaha->ID_PEMILIK;
+        $blok = $usaha->BLOK;
 
         $meterAirID = DB::table('tempat_usaha')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -299,6 +301,7 @@ class tagihanController extends Controller
             'id_tempat'=>$id,
             'id_pemilik'=>$id_pemilik,
             'id_nasabah'=>$id_nasabah,
+            'blok_tempat'=>$blok,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
@@ -352,9 +355,9 @@ class tagihanController extends Controller
         DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
             'MAKHIR_LISTRIK'=>$inputListrik
         ]);
-    // } catch(\Exception $e){
-    //     return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
-    // }
+    } catch(\Exception $e){
+        return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
+    }
         return redirect()->route('tagihan')->with('success','Tagihan Ditambah');
     }
 
@@ -493,6 +496,7 @@ class tagihanController extends Controller
         try{
             $timezone = date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d", time());
+            $bln = date("Y-m", strtotime($date));
  
             $realisasi = $request->get('realisasi');
 
@@ -598,6 +602,7 @@ class tagihanController extends Controller
             
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
                 'TGL_BAYAR'=>$date,
+                'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>$stt_lunas,
                 'STT_BAYAR'=>$stt_bayar,
                 'REALISASI_AIR'=>$ttl_air,
@@ -727,6 +732,7 @@ class tagihanController extends Controller
 
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
+        $bln = date("Y-m", strtotime($date));
 
         $d = DB::table('tagihanku')
         ->whereIn('ID_TAGIHANKU', $id_exp)
@@ -736,6 +742,7 @@ class tagihanController extends Controller
             ->where('ID_TAGIHANKU', $data->ID_TAGIHANKU)
             ->update([
                 'TGL_BAYAR'=>$date,
+                'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>1,
                 'STT_BAYAR'=>1,
                 'REALISASI_AIR'=>$data->TTL_AIR + $data->DENDA_AIR,

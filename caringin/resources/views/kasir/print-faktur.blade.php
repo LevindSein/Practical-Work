@@ -15,7 +15,7 @@ $total = $d->SELISIH + $total;
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Faktur Tagihan</title>
+    <title>PT. PENGELOLA PUSAT PERDAGANGAN CARINGIN</title>
     <link rel="stylesheet" href="{{asset('css/style-faktur.css')}}" media="all" />
   </head>
   
