@@ -94,42 +94,6 @@ $(document).ready(function () {
         'loadingRecords': '&nbsp;',
         'processing': '<i class="fas fa-spinner"></i>'
         },
-        "dom": "r" + "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
-                                "ow'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-                        "buttons": [
-                            {
-                                text: '<i class="fas fa-file-pdf fa-lg"></i>',
-                                extend: 'pdf',
-                                className: 'btn btn-danger bg-gradient-danger',
-                                title: 'BP3C PDF',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function (doc) {
-                                    doc.pageMargins = [25,25,25,25];
-                                    doc.defaultStyle.fontSize = 12;
-                                    doc.styles.tableHeader.fontSize = 14;
-                                    doc.styles.title.fontSize = 20;
-                                }
-                            }, {
-                                text: '<i class="fas fa-file-excel fa-lg"></i>',
-                                extend: 'excel',
-                                className: 'btn btn-success bg-gradient-success',
-                                title: 'BP3C Excel',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                }
-                            }, {
-                                text: '<i class="fas fa-print fa-lg"></i>',
-                                extend: 'print',
-                                className: 'btn btn-info bg-gradient-info',
-                                title: 'BP3C Print',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                            }
-                        ],
         "scrollX": true,
         "scrollY": "300px",
         "scrollCollapse": true,
