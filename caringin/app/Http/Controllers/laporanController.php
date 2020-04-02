@@ -378,7 +378,7 @@ class laporanController extends Controller
             DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan')
         )
         ->where('BLN_BAYAR',$bln)
-        ->groupby('TGL_BAYAR')
+        ->groupBy('TGL_BAYAR')
         ->get();
 
         $data = DB::table('tagihanku')
@@ -459,85 +459,209 @@ class laporanController extends Controller
 
     //Manajer
     public function showHarianManager(){
-        try{
         $dataset = DB::table('tagihanku')
         ->select('TGL_BAYAR','STT_BAYAR')
         ->groupBy('TGL_BAYAR','STT_BAYAR')
         ->get();
-        }catch(\Exception $e){
-            return view('manajer.laporan-harian',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
-        }
-            return view('manajer.laporan-harian',['dataset'=>$dataset]);
-        }
+        return view('manajer.laporan-harian',['dataset'=>$dataset]);
+    }
         
-        public function showBulananManager(){
-            $dataset = DB::table('tagihanku')
-            ->select('BLN_BAYAR','STT_BAYAR')
-            ->groupBy('BLN_BAYAR','STT_BAYAR')
-            ->get();
-            return view('manajer.laporan-bulanan',['dataset'=>$dataset]);
-        }
+    public function showBulananManager(){
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_BAYAR','STT_BAYAR')
+        ->groupBy('BLN_BAYAR','STT_BAYAR')
+        ->get();
+        return view('manajer.laporan-bulanan',['dataset'=>$dataset]);
+    }
     
-        public function showTahunanManager(){
-            $dataset = DB::table('tagihanku')
-                ->select('THN_TAGIHAN')
-                ->groupBy('THN_TAGIHAN')
-                ->get();
-            return view('manajer.laporan-tahunan',['dataset'=>$dataset]);
-        }
+    public function showTahunanManager(){
+        $dataset = DB::table('tagihanku')
+        ->select('THN_TAGIHAN')
+        ->groupBy('THN_TAGIHAN')
+        ->get();
+        return view('manajer.laporan-tahunan',['dataset'=>$dataset]);
+    }
 
-        public function showPemakaianManager(){
-            return view('manajer.pemakaian');
-        }
+    public function showPemakaianManager(){
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        return view('manajer.pemakaian',['dataset'=>$dataset]);
+    }
 
-        public function printHarianManajer(){
-            return view('manajer.print-harian');
-        }
+    public function printHarianManajer($tgl){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('user','tagihanku.ID_USER','=','user.ID_USER')
+        ->select('user.NAMA_USER',
+            DB::raw('SUM(tagihanku.REALISASI_LISTRIK - tagihanku.DENDA_LISTRIK) as Listrik'),
+            DB::raw('SUM(tagihanku.REALISASI_AIR - tagihanku.DENDA_AIR) as Air'),
+            DB::raw('SUM(tagihanku.REALISASI_IPKEAMANAN) as Keamanan'),
+            DB::raw('SUM(tagihanku.REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(tagihanku.DENDA_LISTRIK) as DendaListrik'),
+            DB::raw('SUM(tagihanku.DENDA_AIR) as DendaAir'),
+            DB::raw('SUM(tagihanku.REALISASI) as Realisasi')
+        )
+        ->groupBy('user.NAMA_USER')
+        ->where('tagihanku.TGL_BAYAR',$tgl)
+        ->get();
 
-        public function printBulananManajer(){
-            return view('manajer.print-bulanan');
-        }
+        $data = DB::table('tagihanku')
+        ->select('TGL_BAYAR')
+        ->where('TGL_BAYAR',$tgl)
+        ->first();
+        return view('manajer.print-harian',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function printBulananManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->select(
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+        return view('manajer.print-bulanan',['dataset'=>$dataset,'data'=>$data]);
+    }
     
-        public function printRincianManajer(){
-            return view('manajer.print-rincian-bulanan');
-        }
+    public function printRincianManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('TGL_BAYAR',
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->groupBy('TGL_BAYAR')
+        ->get();
 
-        public function printTahunanManajer(){
-            return view('manajer.print-tahunan');
-        }
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+        return view('manajer.print-rincian-bulanan',['dataset'=>$dataset,'data'=>$data]);
+    }
 
-        public function printRekapAirManajer(){
-            return view('manajer.print-rekap-pemakaian-air');
-        }
+    public function printTahunanManajer($thn){
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(TTL_TAGIHAN) as Total'),
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan'),
+            DB::raw('SUM(SELISIH_LISTRIK) as selListrik'),
+            DB::raw('SUM(SELISIH_KEBERSIHAN) as selKebersihan'),
+            DB::raw('SUM(SELISIH_AIR) as selAir'),
+            DB::raw('SUM(SELISIH_IPKEAMANAN) as selKeamanan'),
+            DB::raw('SUM(REALISASI) as Realisasi'),
+            DB::raw('SUM(SELISIH) as Selisih')
+        )
+        ->where('THN_TAGIHAN',$thn)
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        
+        $data = DB::table('tagihanku')
+            ->select('THN_TAGIHAN','BLN_TAGIHAN')
+            ->where('THN_TAGIHAN',$thn)
+            ->first();
+        
+        return view('manajer.print-tahunan',['dataset'=>$dataset,'data'=>$data]);
+    }
 
-        public function printRincianAirManajer(){
-            return view('manajer.print-rincian-pemakaian-air');
-        }
+    public function printRekapAirManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.PAKAI_AIR) as pakaiAir'),
+            DB::raw('SUM(tagihanku.BYR_BEBAN) as bBeban'),
+            DB::raw('SUM(tagihanku.BYR_PEMELIHARAAN) as bPemeliharaan'),
+            DB::raw('SUM(tagihanku.BYR_ARKOT) as bArkot'),
+            DB::raw('SUM(tagihanku.TTL_AIR + tagihanku.DENDA_AIR) as tagihan'),
+            DB::raw('SUM(tagihanku.REALISASI_AIR) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_AIR) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
 
-        public function printRekapListrikManajer(){
-            return view('manajer.print-rekap-pemakaian-listrik');
-        }
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rekap-pemakaian-air',['dataset'=>$dataset,'data'=>$data]);
+    }
 
-        public function printRincianListrikManajer(){
-            return view('manajer.print-rincian-pemakaian-listrik');
-        }
+    public function printRincianAirManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
 
-        public function tempatUsahaManager(){
-            return view('manajer.tempat-usaha');
-        }
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rincian-pemakaian-air',['dataset'=>$dataset,'data'=>$data]);
+    }
 
-        public function showTagihanManager(){
-        try{
-            $dataset = DB::table('tempat_usaha')
-            ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-            ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
-            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL',
-                     'nasabah.NO_ANGGOTA','nasabah.NM_NASABAH','nasabah.NO_KTP',
-                     'nasabah.NO_NPWP','nasabah.ID_NASABAH','pemilik.NM_PEMILIK')
-            ->get();
-        }catch(\Exception $e){
-            return view('manajer.laporan-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
-        }
-            return view('manajer.laporan-tagihan',['dataset'=>$dataset]);
-        }
+    public function printRekapListrikManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.DAYA_LISTRIK) as daya'),
+            DB::raw('SUM(tagihanku.PAKAI_LISTRIK) as pakaiListrik'),
+            DB::raw('SUM(tagihanku.B_BEBAN) as bBeban'),
+            DB::raw('SUM(tagihanku.BPJU) as bpju'),
+            DB::raw('SUM(tagihanku.TTL_LISTRIK + tagihanku.DENDA_LISTRIK) as tagihan'),
+            DB::raw('SUM(tagihanku.REALISASI_LISTRIK) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_LISTRIK) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+
+        return view('manajer.print-rekap-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function printRincianListrikManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rincian-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function tempatUsahaManager(){
+        return view('manajer.tempat-usaha');
+    }
+
+    public function showTagihanManager(){
+        $dataset = DB::table('tempat_usaha')
+        ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL',
+                 'nasabah.NO_ANGGOTA','nasabah.NM_NASABAH','nasabah.NO_KTP',
+                 'nasabah.NO_NPWP','nasabah.ID_NASABAH','pemilik.NM_PEMILIK')
+       ->get();
+        return view('manajer.laporan-tagihan',['dataset'=>$dataset]);
+    }
 }

@@ -1,3 +1,17 @@
+<?php
+$bulan = date("M Y", strtotime($data->BLN_BAYAR));
+$ttl_listrik = 0;
+$ttl_kebersihan = 0;
+$ttl_air = 0;
+$ttl_keamanan = 0;
+foreach($dataset as $d){
+  $ttl_listrik = $ttl_listrik + $d->Listrik;
+  $ttl_kebersihan = $ttl_kebersihan + $d->Kebersihan;
+  $ttl_air = $ttl_air + $d->Air;
+  $ttl_keamanan = $ttl_keamanan + $d->Keamanan;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +29,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Bulan Penerimaan</span>: Mar 2020</div>
+        <div><span>Bulan Penerimaan</span>: {{$bulan}}</div>
       </div>
     </header>
     <main>
@@ -23,52 +37,60 @@
           <tr>
             <th class="tg-r8fv" rowspan="2">Tanggal</th>
             <th class="tg-r8fv" colspan="4">Penerimaan</th>
+            <th class="tg-r8fv" rowspan="2">Jumlah</th>
           </tr>
             <th class="tg-r8fv">Listrik</th>
             <th class="tg-r8fv">Kebersihan</th>
-            <th class="tg-r8fv">Air Bersih</th>
+            <th class="tg-r8fv">Air</th>
             <th class="tg-r8fv">Keamanan</th>
           <tr>
           </tr>
+          @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">20 Mar 2020</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
+            <td class="tg-cegc" <?php $tgl = date("d-m-Y", strtotime($d->TGL_BAYAR)); ?>>{{$tgl}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Air)}}</td>
+            <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik + $d->Kebersihan + $d->Air + $d->Keamanan)}}</td>
           </tr>
+          @endforeach
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
-            <td class="tg-8m6k">Rp. 100%</td>
-            <td class="tg-8m6k">Rp. 100%</td>
-            <td class="tg-8m6k">Rp. 100%</td>
-            <td class="tg-8m6k">Rp. 100%</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_listrik)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_kebersihan)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_air)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_keamanan)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_listrik + $ttl_kebersihan + $ttl_air + $ttl_keamanan)}}</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Dana Titipan</td>
-            <td class="tg-8m6k">Rp. 60%</td>
-            <td class="tg-8m6k">Rp. 90%</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_listrik * 0.6)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_kebersihan * 0.9)}}</td>
             <td class="tg-8m6k">Rp. 0</td>
             <td class="tg-8m6k">Rp. 0</td>
+            <td class="tg-8m6k">Rp. {{number_format(($ttl_listrik * 0.6) + ($ttl_kebersihan * 0.9))}}</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Jasa</td>
-            <td class="tg-8m6k">Rp. 40%</td>
-            <td class="tg-8m6k">Rp. 10%</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_listrik * 0.4)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_kebersihan * 0.1)}}</td>
             <td class="tg-8m6k">Rp. 0</td>
             <td class="tg-8m6k">Rp. 0</td>
+            <td class="tg-8m6k">Rp. {{number_format(($ttl_listrik * 0.4) + ($ttl_kebersihan * 0.1))}}</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">PPN</td>
-            <td class="tg-8m6k">Rp. 10% of Jasa</td>
-            <td class="tg-8m6k">Rp. 10% of Jasa</td>
+            <td class="tg-8m6k">Rp. {{number_format(($ttl_listrik * 0.4) * 0.1)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format(($ttl_kebersihan * 0.1) * 0.1)}}</td>
             <td class="tg-8m6k">Rp. 0</td>
             <td class="tg-8m6k">Rp. 0</td>
+            <td class="tg-8m6k">Rp. {{number_format((($ttl_listrik * 0.4) * 0.1) + (($ttl_kebersihan * 0.1) * 0.1))}}</td>
           </tr>
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
-        <div class="notice"></div>
+        <div class="notice">Manager</div>
       </div>
     </main>
   </body>

@@ -24,15 +24,19 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->STT_BAYAR == 1)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_BAYAR)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/bulanan/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/bulanan/manajer',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincian/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincian/manajer',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                 </table>
               </div>

@@ -38,15 +38,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekaplistrik/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekaplistrik/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincianlistrik/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincianlistrik/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -62,15 +64,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekapair/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekapair/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincianair/manajer')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincianair/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

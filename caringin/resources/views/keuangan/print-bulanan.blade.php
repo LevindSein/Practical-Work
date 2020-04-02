@@ -57,7 +57,7 @@ $bulan = date("M Y", strtotime($data->BLN_BAYAR));
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
-        <div class="notice"></div>
+        <div class="notice">Bag.Keuangan</div>
       </div>
     </main>
   </body>

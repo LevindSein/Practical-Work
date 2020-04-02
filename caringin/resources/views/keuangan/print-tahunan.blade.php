@@ -62,7 +62,7 @@ $tahun = date("Y", strtotime($data->THN_TAGIHAN));
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
-        <div class="notice"></div>
+        <div class="notice">Bag.Keuangan</div>
       </div>
     </main>
   </body>

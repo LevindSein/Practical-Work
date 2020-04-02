@@ -161,12 +161,12 @@ Route::get('tempatusahamanager','laporanController@tempatUsahaManager');
 Route::get('showlaporantagihanmanager','laporanController@showTagihanManager')->name('lapTagihanManager');
 Route::get('datatagihanmanager/{id}','tagihanController@dataTagihanManager')->name('datatagihanManager');
 
-Route::get('print/harian/manajer','laporanController@printHarianManajer');
-Route::get('print/bulanan/manajer','laporanController@printBulananManajer');
-Route::get('print/rincian/manajer','laporanController@printRincianManajer');
-Route::get('print/tahunan/manajer','laporanController@printTahunanManajer');
-Route::get('print/rekapair/manajer','laporanController@printRekapAirManajer');
-Route::get('print/rincianair/manajer','laporanController@printRincianAirManajer');
-Route::get('print/rekaplistrik/manajer','laporanController@printRekapListrikManajer');
-Route::get('print/rincianlistrik/manajer','laporanController@printRincianListrikManajer');
+Route::get('print/harian/manajer/{tgl}','laporanController@printHarianManajer');
+Route::get('print/bulanan/manajer/{bln}','laporanController@printBulananManajer');
+Route::get('print/rincian/manajer/{bln}','laporanController@printRincianManajer');
+Route::get('print/tahunan/manajer/{thn}','laporanController@printTahunanManajer');
+Route::get('print/rekapair/manajer/{bln}','laporanController@printRekapAirManajer');
+Route::get('print/rincianair/manajer/{bln}','laporanController@printRincianAirManajer');
+Route::get('print/rekaplistrik/manajer/{bln}','laporanController@printRekapListrikManajer');
+Route::get('print/rincianlistrik/manajer/{bln}','laporanController@printRincianListrikManajer');
 //ENDMANAJER

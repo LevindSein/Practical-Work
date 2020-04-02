@@ -1,3 +1,8 @@
+<?php
+$tahun = date("Y", strtotime($data->THN_TAGIHAN));
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +20,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Tahun</span>: </div>
+        <div><span>Tahun</span>: {{$tahun}}</div>
       </div>
     </header>
     <main>
@@ -39,24 +44,26 @@
             <th class="tg-r8fv">Realisasi</th>
             <th class="tg-r8fv">Selisih</th>
           </tr>
+          @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">Jan 2020</td>
-            <td class="tg-g25h">100%</td>
-            <td class="tg-g25h">80%</td>
-            <td class="tg-g25h">70%</td>
-            <td class="tg-g25h">90%</td>
-            <td class="tg-g25h">80%</td>
-            <td class="tg-g25h">20%</td>
-            <td class="tg-g25h">30%</td>
-            <td class="tg-g25h">10%</td>
-            <td class="tg-g25h">20%</td>
-            <td class="tg-g25h">83%</td>
-            <td class="tg-g25h">17%</td>
+            <td class="tg-cegc" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN));?>>{{$bulan}}</td>
+            <td class="tg-g25h">{{number_format($d->Total)}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->Air)}}</td>
+            <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan)}}</td>
+            <td class="tg-g25h">{{number_format($d->selListrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->selAir)}}</td>
+            <td class="tg-g25h">{{number_format($d->selKeamanan)}}</td>
+            <td class="tg-g25h">{{number_format($d->selKebersihan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Realisasi)}}</td>
+            <td class="tg-g25h">{{number_format($d->Selisih)}}</td>
           </tr>
+          @endforeach
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
-        <div class="notice"></div>
+        <div class="notice">Manager</div>
       </div>
     </main>
   </body>
