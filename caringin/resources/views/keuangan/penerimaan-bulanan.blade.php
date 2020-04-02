@@ -25,21 +25,25 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->STT_BAYAR == 1)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_BAYAR)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/bulanan/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/bulanan/keuangan',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincian/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincian/keuangan',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                       <td class="text-center">
-                          <a href="{{url('print/bulananno/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/bulananno/keuangan',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincianno/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincianno/keuangan',[$d->BLN_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                 </table>
               </div>

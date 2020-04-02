@@ -141,12 +141,12 @@ Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 Route::get('showpenerimaanharian','laporanController@showPenerimaanHarian');
 Route::get('showpenerimaanbulanan','laporanController@showPenerimaanBulanan');
 Route::get('showpendapatantahunan','laporanController@showPendapatanTahunan');
-Route::get('print/harian/keuangan','laporanController@printHarianKeuangan');
-Route::get('print/bulanan/keuangan','laporanController@printBulananKeuangan');
-Route::get('print/bulananno/keuangan','laporanController@printBulananNoKeuangan');
-Route::get('print/rincian/keuangan','laporanController@printRincianKeuangan');
-Route::get('print/rincianno/keuangan','laporanController@printRincianNoKeuangan');
-Route::get('print/tahunan/keuangan','laporanController@printTahunanKeuangan');
+Route::get('print/harian/keuangan/{tgl}','laporanController@printHarianKeuangan');
+Route::get('print/bulanan/keuangan/{bln}','laporanController@printBulananKeuangan');
+Route::get('print/bulananno/keuangan/{bln}','laporanController@printBulananNoKeuangan');
+Route::get('print/rincian/keuangan/{bln}','laporanController@printRincianKeuangan');
+Route::get('print/rincianno/keuangan/{bln}','laporanController@printRincianNoKeuangan');
+Route::get('print/tahunan/keuangan/{thn}','laporanController@printTahunanKeuangan');
 //ENDKEUANGAN
 
 //MANAJER

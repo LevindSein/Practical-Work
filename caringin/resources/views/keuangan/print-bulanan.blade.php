@@ -1,3 +1,7 @@
+<?php
+$bulan = date("M Y", strtotime($data->BLN_BAYAR));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +19,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Bulan Penerimaan</span>: Mar 2020</div>
+        <div><span>Bulan Penerimaan</span>: {{$bulan}}</div>
       </div>
     </header>
     <main>
@@ -27,27 +31,29 @@
             <th class="tg-r8fv">Jasa</th>
             <th class="tg-r8fv">PPN</th>
           </tr>
+          @foreach($dataset as $d)
           <tr>
             <td class="tg-cegc">Listrik</td>
-            <td class="tg-g25h">100%</td>
-            <td class="tg-g25h">60%</td>
-            <td class="tg-g25h">40%</td>
-            <td class="tg-g25h">10% of Jasa</td>
+            <td class="tg-g25h">{{number_format($d->Listrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik * 0.6)}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik * 0.4)}}</td>
+            <td class="tg-g25h">{{number_format(($d->Listrik * 0.4) * 0.1)}}</td>
           </tr>
           <tr>
             <td class="tg-cegc">Kebersihan</td>
-            <td class="tg-g25h">100%</td>
-            <td class="tg-g25h">90%</td>
-            <td class="tg-g25h">10%</td>
-            <td class="tg-g25h">10% of Jasa</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan * 0.9)}}</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan * 0.1)}}</td>
+            <td class="tg-g25h">{{number_format(($d->Kebersihan * 0.1) * 0.1)}}</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
-            <td class="tg-8m6k">Rp.</td>
-            <td class="tg-8m6k">Rp.</td>
-            <td class="tg-8m6k">Rp.</td>
-            <td class="tg-8m6k">Rp.</td>
+            <td class="tg-8m6k">Rp. {{number_format($d->Listrik + $d->Kebersihan)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format(($d->Listrik * 0.6) + ($d->Kebersihan * 0.9))}}</td>
+            <td class="tg-8m6k">Rp. {{number_format(($d->Listrik * 0.4) + ($d->Kebersihan * 0.1))}}</td>
+            <td class="tg-8m6k">Rp. {{number_format((($d->Kebersihan * 0.1) * 0.1) + (($d->Listrik * 0.4) * 0.1))}}</td>
           </tr>
+          @endforeach
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>

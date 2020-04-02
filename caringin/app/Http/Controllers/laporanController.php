@@ -323,8 +323,16 @@ class laporanController extends Controller
         return view('keuangan.penerimaan-harian',['dataset'=>$dataset]);
     }
 
-    public function printHarianKeuangan(){
-        return view('keuangan.print-harian');
+    public function printHarianKeuangan($tgl){
+        $dataset = DB::table('tagihanku')
+        ->where('TGL_BAYAR',$tgl)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('TGL_BAYAR')
+        ->where('TGL_BAYAR',$tgl)
+        ->first();
+        return view('keuangan.print-harian',['dataset'=>$dataset,'data'=>$data]);
     }
 
     public function showPenerimaanBulanan(){
@@ -332,23 +340,75 @@ class laporanController extends Controller
             ->select('BLN_BAYAR','STT_BAYAR')
             ->groupBy('BLN_BAYAR','STT_BAYAR')
             ->get();
+
         return view('keuangan.penerimaan-bulanan',['dataset'=>$dataset]);
     }
 
-    public function printBulananKeuangan(){
-        return view('keuangan.print-bulanan');
+    public function printBulananKeuangan($bln){
+        $dataset = DB::table('tagihanku')
+        ->select(
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+        return view('keuangan.print-bulanan',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianKeuangan(){
-        return view('keuangan.print-rincian-bulanan');
+    public function printRincianKeuangan($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('TGL_BAYAR',
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->groupby('TGL_BAYAR')
+        ->get();
+
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+        return view('keuangan.print-rincian-bulanan',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printBulananNoKeuangan(){
-        return view('keuangan.print-bulanan-no');
+    public function printBulananNoKeuangan($bln){
+        $dataset = DB::table('tagihanku')
+        ->select(
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+        return view('keuangan.print-bulanan-no',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianNoKeuangan(){
-        return view('keuangan.print-rincian-bulanan-no');
+    public function printRincianNoKeuangan($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('TGL_BAYAR',
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan')
+        )
+        ->where('BLN_BAYAR',$bln)
+        ->groupby('TGL_BAYAR')
+        ->get();
+
+        $data = DB::table('tagihanku')
+            ->select('BLN_BAYAR')
+            ->where('BLN_BAYAR',$bln)
+            ->first();
+
+        return view('keuangan.print-rincian-bulanan-no',['dataset'=>$dataset,'data'=>$data]);
     }
 
     public function showPendapatanTahunan(){
@@ -359,8 +419,31 @@ class laporanController extends Controller
         return view('keuangan.pendapatan-tahunan',['dataset'=>$dataset]);
     }
 
-    public function printTahunanKeuangan(){
-        return view('keuangan.print-tahunan');
+    public function printTahunanKeuangan($thn){
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(TTL_TAGIHAN) as Total'),
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan'),
+            DB::raw('SUM(SELISIH_LISTRIK) as selListrik'),
+            DB::raw('SUM(SELISIH_KEBERSIHAN) as selKebersihan'),
+            DB::raw('SUM(SELISIH_AIR) as selAir'),
+            DB::raw('SUM(SELISIH_IPKEAMANAN) as selKeamanan'),
+            DB::raw('SUM(REALISASI) as Realisasi'),
+            DB::raw('SUM(SELISIH) as Selisih')
+        )
+        ->where('THN_TAGIHAN',$thn)
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        
+        $data = DB::table('tagihanku')
+            ->select('THN_TAGIHAN','BLN_TAGIHAN')
+            ->where('THN_TAGIHAN',$thn)
+            ->first();
+
+        return view('keuangan.print-tahunan',['dataset'=>$dataset,'data'=>$data]);
     }
 
     //Manajer

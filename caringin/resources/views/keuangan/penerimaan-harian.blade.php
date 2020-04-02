@@ -29,7 +29,7 @@
                     <tr>
                       <td class="text-center"<?php $tgl = date("d-m-Y", strtotime($d->TGL_BAYAR));?>>{{$tgl}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/harian/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/harian/keuangan',[$d->TGL_BAYAR])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Print</a>
                       </td>
                   @endif

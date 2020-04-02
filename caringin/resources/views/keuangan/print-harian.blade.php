@@ -1,3 +1,12 @@
+<?php
+$total = 0;
+foreach($dataset as $d){
+  $total = $total + $d->REALISASI;
+}
+
+$tanggal = date("d M Y", strtotime($data->TGL_BAYAR));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +24,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Tanggal Penerimaan</span>: </div>
+        <div><span>Tanggal Penerimaan</span>: {{$tanggal}}</div>
       </div>
     </header>
     <main>
@@ -36,19 +45,21 @@
             <th class="tg-ccvv">Listrik</th>
             <th class="tg-ccvv">Air</th>
           </tr>
+          @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">Saya</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
+            <td class="tg-cegc">Belum Nih :(</td>
+            <td class="tg-g25h">{{number_format($d->REALISASI_LISTRIK - $d->DENDA_LISTRIK)}}</td>
+            <td class="tg-g25h">{{number_format($d->REALISASI_AIR - $d->DENDA_AIR)}}</td>
+            <td class="tg-g25h">{{number_format($d->REALISASI_IPKEAMANAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->REALISASI_KEBERSIHAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->DENDA_LISTRIK)}}</td>
+            <td class="tg-g25h">{{number_format($d->DENDA_AIR)}}</td>
+            <td class="tg-g25h">{{number_format($d->REALISASI_LISTRIK + $d->REALISASI_AIR + $d->REALISASI_IPKEAMANAN + $d->REALISASI_KEBERSIHAN)}}</td>
           </tr>
+          @endforeach
           <tr>
             <td class="tg-vbo4" style="text-align:center;" colspan="7">Total</td>
-            <td class="tg-8m6k">Rp.</td>
+            <td class="tg-8m6k">Rp. {{number_format($total)}}</td>
           </tr>
         </table>
       <div id="notices">

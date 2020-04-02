@@ -1,3 +1,14 @@
+<?php
+$bulan = date("M Y", strtotime($data->BLN_BAYAR));
+$ttl_air = 0;
+$ttl_keamanan = 0;
+
+foreach($dataset as $d){
+  $ttl_air = $ttl_air + $d->Air;
+  $ttl_keamanan = $ttl_keamanan + $d->Keamanan;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +26,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Bulan Penerimaan</span>: Mar 2020</div>
+        <div><span>Bulan Penerimaan</span>: {{$bulan}}</div>
       </div>
     </header>
     <main>
@@ -23,20 +34,25 @@
           <tr>
             <th class="tg-r8fv" rowspan="2">Tanggal</th>
             <th class="tg-r8fv" colspan="2">Penerimaan</th>
+            <th class="tg-r8fv" rowspan="2">Jumlah</th>
           </tr>
             <th class="tg-r8fv">Air Bersih</th>
             <th class="tg-r8fv">IPK & Keamanan</th>
           <tr>
           </tr>
+          @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">20 Mar 2020</td>
-            <td class="tg-g25h">0</td>
-            <td class="tg-g25h">0</td>
+            <td class="tg-cegc" <?php $tgl = date("d-m-Y", strtotime($d->TGL_BAYAR)); ?>>{{$tgl}}</td>
+            <td class="tg-g25h">{{number_format($d->Air)}}</td>
+            <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Air + $d->Keamanan)}}</td>
           </tr>
+          @endforeach
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
-            <td class="tg-8m6k">Rp. 100%</td>
-            <td class="tg-8m6k">Rp. 100%</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_air)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_keamanan)}}</td>
+            <td class="tg-8m6k">Rp. {{number_format($ttl_air + $ttl_keamanan)}}</td>
           </tr>
         </table>
       <div id="notices">

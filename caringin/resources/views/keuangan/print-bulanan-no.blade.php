@@ -1,3 +1,7 @@
+<?php
+$bulan = date("M Y", strtotime($data->BLN_BAYAR));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +19,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Bulan Penerimaan</span>: Mar 2020</div>
+        <div><span>Bulan Penerimaan</span>: {{$bulan}}</div>
       </div>
     </header>
     <main>
@@ -24,18 +28,20 @@
             <th class="tg-r8fv">Fasilitas</th>
             <th class="tg-r8fv">Penerimaan</th>
           </tr>
+          @foreach($dataset as $d)
           <tr>
             <td class="tg-cegc">Air Bersih</td>
-            <td class="tg-g25h">100%</td>
+            <td class="tg-g25h">{{number_format($d->Air)}}</td>
           </tr>
           <tr>
             <td class="tg-cegc">IPK & Keamanan</td>
-            <td class="tg-g25h">100%</td>
+            <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
-            <td class="tg-8m6k">Rp.</td>
+            <td class="tg-8m6k">Rp.{{number_format($d->Air + $d->Keamanan)}}</td>
           </tr>
+          @endforeach
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
