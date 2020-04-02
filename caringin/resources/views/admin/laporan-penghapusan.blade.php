@@ -21,7 +21,7 @@
                     <tr>
                       <th>Tanggal</th>
                       <th>Kode Kontrol</th>
-                      <th>Nama Nasabah</th>
+                      <th>Nama Pengguna</th>
                       <th>No.Anggota</th>
                       <th>No.KTP</th>
                       <th>No.NPWP</th>

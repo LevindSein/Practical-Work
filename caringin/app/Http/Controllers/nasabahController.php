@@ -322,8 +322,7 @@ class nasabahController extends Controller
                 'ID_TRFIPK'=>null,
                 'ID_TRFKEAMANAN'=>null,
                 'ID_TRFLISTRIK'=>null,
-                'ID_TRFAIR'=>null,
-                'DAYA'=>null
+                'ID_TRFAIR'=>null
             ]);
             
             $dataku = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->first();
@@ -337,7 +336,7 @@ class nasabahController extends Controller
 
             $tunggakan = DB::table('tagihanku')
             ->select(
-                     DB::raw('SUM(TTL_TAGIHAN) as ttl_tagihan'),
+                     DB::raw('SUM(SELISIH) as selisih'),
                      DB::raw('SUM(DENDA) as denda'))
             ->groupBy('ID_TEMPAT')
             ->where([
@@ -345,8 +344,14 @@ class nasabahController extends Controller
                 ['ID_TEMPAT',$id]
             ])
             ->first();
-                
-            $ttl = $tunggakan->ttl_tagihan + $tunggakan->denda;
+
+            if($tunggakan == null){
+                $ttl = 0;
+            }
+            else{
+                $ttl = $tunggakan->selisih + $tunggakan->denda;
+            }
+            var_dump($ttl);
 
             $data = new Penghapusan([
                 'id_tempat'=>$id,

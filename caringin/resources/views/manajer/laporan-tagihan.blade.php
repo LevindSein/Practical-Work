@@ -20,7 +20,9 @@
                   <thead>
                     <tr>
                       <th>Kode</th>
-                      <th>Nama</th>
+                      <th>Pemilik</th>
+                      <th>Pengguna</th>
+                      <th>No.Pengguna</th>
                       <th>No.KTP</th>
                       <th>No.NPWP</th>
                       <th>Action</th>
@@ -31,7 +33,9 @@
                   @foreach($dataset as $data)
                     <tr>
                     <td class="text-left">{{$data->KD_KONTROL}}</td>
+                      <td class="text-left">{{$data->NM_PEMILIK}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
+                      <td class="text-center">{{$data->NO_ANGGOTA}}</td>
                       <td class="text-center">{{$data->NO_KTP}}</td>
                       <td class="text-center">{{$data->NO_NPWP}}</td>
                       <td class="text-center">

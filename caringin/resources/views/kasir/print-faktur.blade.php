@@ -21,7 +21,7 @@ $total = $d->SELISIH + $total;
   
   <body onload="window.print()">
     <header class="clearfix">
-      <h1>Faktur Tagihan</h1>
+      <h1>Rincian Tagihan</h1>
       <div id="company" class="clearfix">
         <div>PT. Pengelola Pusat Perdagangan Caringin</div>
         <div>Jl. Soekarno Hatta No. 220 Blok A1 No. 21-24<br /> Pasar Induk Caringin, Bandung</div>
@@ -30,6 +30,7 @@ $total = $d->SELISIH + $total;
       <div id="project">
         <div><span>Nama Pengguna</span>: {{$dataku->NM_NASABAH}}</div>
         <div><span>No.Anggota</span>: {{$dataku->NO_ANGGOTA}}</div>
+        <div><span>Status Bayar</span>: Belum Dibayar</div>
       </div>
     </header>
     <main>
@@ -77,7 +78,7 @@ $total = $d->SELISIH + $total;
           </tr>
           @endforeach
           <tr>
-            <td class="tg-vbo4" style="text-align:center;" colspan="8">Total Bayar</td>
+            <td class="tg-vbo4" style="text-align:center;" colspan="8">Total Tagihan</td>
             <td class="tg-8m6k">Rp. {{number_format($total)}}</td>
           </tr>
         </table>

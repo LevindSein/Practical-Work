@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                   Realisasi
-                  <input name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi" placeholder="Rp."
+                  <input type="text" pattern="^[\d,]+$" name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi"
                   <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" <?php } ?>>
                 </div>
                 @endforeach
@@ -55,4 +55,11 @@
         </div>
       </div>
     <!-- End of Main Content -->
+@endsection
+
+@section('js')
+<script>
+  document.getElementById('exampleInputRealisasi').addEventListener('input', event =>
+  event.target.value = (parseInt(event.target.value.replace(/[^\d]+/gi, '')) || 0).toLocaleString('en-US'));
+</script>
 @endsection

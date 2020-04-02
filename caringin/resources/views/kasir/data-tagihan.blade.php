@@ -21,7 +21,7 @@
                   <thead>
                     <tr>
                       <th>Action</th>
-                      <th>Struk</th>
+                      <th>Rincian</th>
                       <th>Bayar</th>
                       <th>Lunas</th>
                       <th>Tanggal</th>

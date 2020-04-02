@@ -28,6 +28,7 @@ $now = date("d-m-Y", time());
         <div><span>TGL TAGIHAN</span><?php $tag = date("d-m-Y", strtotime($d->TGL_TAGIHAN)); ?> {{$tag}}</div>
         <div><span>BULAN PEMBAYARAN</span><?php $time = date("M", strtotime($d->TGL_TAGIHAN)); ?> {{$time}}</div>
         <div><span>STRUK TAGIHAN</span> {{$now}}</div>
+        <div><span>STATUS BAYAR</span> Belum Dibayar</div>
       </div>
     </header>
     <main>
@@ -135,8 +136,8 @@ $now = date("d-m-Y", time());
             <td class="grand dark total"><b>{{number_format($d->TTL_KEBERSIHAN)}}</b></td>
           </tr>
           <tr>
-            <td colspan="2" class="grand"><h3>TOTAL</h3> (Rp.)</td>
-            <td class="grand total"><b>{{number_format($d->TTL_TAGIHAN + $d->DENDA)}}</b></td>
+            <td colspan="2" class="grand"><h3>TOTAL</h3></td>
+            <td class="grand total"><b>RP. {{number_format($d->TTL_TAGIHAN + $d->DENDA)}}</b></td>
           </tr>
         </tbody>
       </table>

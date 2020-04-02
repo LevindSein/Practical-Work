@@ -160,7 +160,10 @@ class laporanController extends Controller
     try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_ANGGOTA','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+        ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 
+                 'nasabah.NM_NASABAH','nasabah.NO_ANGGOTA','nasabah.NO_KTP',
+                 'nasabah.NO_NPWP','nasabah.ID_NASABAH','pemilik.NM_PEMILIK')
         ->get();
     }catch(\Exception $e){
         return view('admin.laporan-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
@@ -173,6 +176,7 @@ class laporanController extends Controller
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->join('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
         ->where('STT_LUNAS',0)
         ->get();
         $now = Carbon::now()->toDateString();
@@ -280,6 +284,7 @@ class laporanController extends Controller
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->join('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
         ->where([['STT_LUNAS',0],['STT_DENDA',4]])
         ->get();
         return view('admin.laporan-bongkaran',['dataset'=>$dataset]);
@@ -431,7 +436,10 @@ class laporanController extends Controller
         try{
             $dataset = DB::table('tempat_usaha')
             ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.ID_NASABAH')
+            ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
+            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL',
+                     'nasabah.NO_ANGGOTA','nasabah.NM_NASABAH','nasabah.NO_KTP',
+                     'nasabah.NO_NPWP','nasabah.ID_NASABAH','pemilik.NM_PEMILIK')
             ->get();
         }catch(\Exception $e){
             return view('manajer.laporan-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');

@@ -500,7 +500,11 @@ class tagihanController extends Controller
             $date = date("Y-m-d", time());
             $bln = date("Y-m", strtotime($date));
  
-            $realisasi = $request->get('realisasi');
+            $expReal = explode(",",$request->get('realisasi'));
+            $realisasi = "";
+            for($k=0;$k<count($expReal);$k++){
+                $realisasi = $realisasi.$expReal[$k];
+            }
 
             $check = DB::table('tagihanku')
             ->select('tagihanku.ID_TEMPAT')
@@ -550,46 +554,53 @@ class tagihanController extends Controller
                 else if($realisasi < ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK)+
                                       ($dataset->SELISIH_AIR+$dataset->DENDA_AIR)+($dataset->SELISIH_IPKEAMANAN)+
                                       ($dataset->SELISIH_KEBERSIHAN) && $realisasi > 0){ //kondisi realisasi kurang dari tagihan maka dilakukan
-                    if($realisasi >= ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK)){
-                        $sisa = $realisasi - ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK); //ada sisa
-                        $ttl_listrik = $dataset->SELISIH_LISTRIK + $dataset->DENDA_LISTRIK;
-                        $sel_listrik = 0;
-                    }
-                    else{
-                        $ttl_listrik = $realisasi;
-                        $sel_listrik = ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK) - $realisasi;
-                        $sisa = 0; //sisa 0
-                    }
-                    $sisa_listrik = $sisa;
-                    if($sisa_listrik >= ($dataset->SELISIH_AIR+$dataset->DENDA_AIR)){
-                        $sisa = $sisa_listrik - ($dataset->SELISIH_AIR+$dataset->DENDA_AIR); //ada sisa
-                        $ttl_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
-                        $sel_air = 0;
-                    }
-                    else{
-                        $ttl_air = $sisa_listrik;
-                        $sel_air = ($dataset->SELISIH_AIR+$dataset->DENDA_AIR) - $sisa_listrik;
-                        $sisa = 0; //sisa 0
-                    }
-                    $sisa_air = $sisa;
-                    if($sisa_air >= $dataset->SELISIH_IPKEAMANAN){
-                        $sisa = $sisa_air - $dataset->SELISIH_IPKEAMANAN; //ada sisa
-                        $ttl_ipkeamanan = $dataset->SELISIH_IPKEAMANAN;
-                        $sel_aman = 0;
-                    }
-                    else{
-                        $ttl_ipkeamanan = $sisa_air;
-                        $sel_aman = $dataset->SELISIH_IPKEAMANAN - $sisa_air;
-                        $sisa = 0; //sisa 0
-                    }
-                    $sisa_keamanan = $sisa;
-                    if($sisa_keamanan >= $dataset->SELISIH_KEBERSIHAN){
+                    
+                    //Kebersihan
+                    if($realisasi >= $dataset->SELISIH_KEBERSIHAN){
+                        $sisa = $realisasi - $dataset->SELISIH_KEBERSIHAN; //ada sisa
                         $ttl_kebersihan = $dataset->SELISIH_KEBERSIHAN;
                         $sel_bersih = 0;
                     }
                     else{
-                        $ttl_kebersihan = $sisa_keamanan;
-                        $sel_bersih = $dataset->SELISIH_KEBERSIHAN - $sisa_keamanan;
+                        $ttl_kebersihan = $realisasi;
+                        $sel_bersih = $dataset->SELISIH_KEBERSIHAN - $realisasi;
+                        $sisa = 0; //sisa 0
+                    }
+                    $sisa_kebersihan = $sisa;
+                    //Keamanan
+                    if($sisa_kebersihan >= $dataset->SELISIH_IPKEAMANAN){
+                        $sisa = $sisa_kebersihan - $dataset->SELISIH_IPKEAMANAN; //ada sisa
+                        $ttl_ipkeamanan = $dataset->SELISIH_IPKEAMANAN;
+                        $sel_aman = 0;
+                    }
+                    else{
+                        $ttl_ipkeamanan = $sisa_kebersihan;
+                        $sel_aman = $dataset->SELISIH_IPKEAMANAN - $sisa_kebersihan;
+                        $sisa = 0; //sisa 0
+                    }
+                    $sisa_keamanan = $sisa;
+                    //Air
+                    if($sisa_keamanan >= ($dataset->SELISIH_AIR+$dataset->DENDA_AIR)){
+                        $sisa = $sisa_keamanan - ($dataset->SELISIH_AIR+$dataset->DENDA_AIR); //ada sisa
+                        $ttl_air = $dataset->SELISIH_AIR + $dataset->DENDA_AIR;
+                        $sel_air = 0;
+                    }
+                    else{
+                        $ttl_air = $sisa_keamanan;
+                        $sel_air = ($dataset->SELISIH_AIR+$dataset->DENDA_AIR) - $sisa_keamanan;
+                        $sisa = 0; //sisa 0
+                    }
+                    $sisa_air = $sisa;
+                    //Listrik
+                    if($sisa_air >= ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK)){
+                        $sisa = $sisa_air - ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK); //ada sisa
+                        $ttl_listrik = $dataset->SELISIH_LISTRIK + $dataset->DENDA_LISTRIK;
+                        $sel_listrik = 0;
+                    }
+                    else{
+                        $ttl_listrik = $sisa_air;
+                        $sel_listrik = ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK) - $sisa_air;
+                        $sisa = 0; //sisa 0
                     }
                     $stt_bayar = 1;
                     $stt_lunas = 0;
@@ -687,7 +698,7 @@ class tagihanController extends Controller
             return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset,'ids'=>$ids]);
             break;
     
-            case "Print Faktur":
+            case "Rincian":
             $dataku = DB::table('nasabah')
             ->where('ID_NASABAH',$id)
             ->first();

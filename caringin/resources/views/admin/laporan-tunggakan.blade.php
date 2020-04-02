@@ -22,7 +22,8 @@
                       <th>Tgl Tagihan</th>
                       <th>Jatuh Tempo</th>
                       <th>Kode Kontrol</th>
-                      <th>Nama Nasabah</th>
+                      <th>Pemilik</th>
+                      <th>Pengguna</th>
                       <th>Tunggakan (Rp.)</th>
                       <th>Denda (Rp.)</th>
                       <th>Ket</th>
@@ -44,6 +45,7 @@
                       <td class="text-center">{{$d->TGL_TAGIHAN}}</td>
                       <td class="text-center">{{$d->EXPIRED}}</td>
                       <td class="text-center">{{$d->KD_KONTROL}}</td>
+                      <td class="text-left">{{$d->NM_PEMILIK}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td>{{number_format($d->SELISIH)}}</td>
                       <td>

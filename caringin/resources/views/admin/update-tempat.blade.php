@@ -147,7 +147,7 @@
                   <input readonly value="{{$data->ID_MLISTRIK}}" type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1484xxxx">
                   <br>
                   Daya
-                  <input value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
+                  <input readonly value="{{$data->DAYA}}" type="text" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
