@@ -125,6 +125,7 @@
                             <div class="collapse-divider"></div>
                             <a class="collapse-item" href="{{url('showlaporanharian')}}">Laporan Harian</a>
                             <a class="collapse-item" href="{{url('showlaporanbulanan')}}">Laporan Bulanan</a>
+                            <a class="collapse-item" href="{{url('showpemakaian')}}">Pemakaian Bulanan</a>
                             <a class="collapse-item" href="{{url('showlaporantahunan')}}">Laporan Tahunan</a>
                             <a class="collapse-item" href="{{url('showlaporantagihan')}}">Laporan Tagihan</a>
                             <a class="collapse-item" href="{{url('showlaporantunggakan')}}">Laporan Tunggakan</a>
@@ -463,10 +464,17 @@
                 });
             </script>
             <script>
-                $(document).ready(function(){
-                    $('#dataAir,#dataListrik').DataTable({
-                        "scrollX": true,
+                $(document).ready(function () {
+                    $(
+                        '#tableListrikPakai,#tableAirPakai,#tableKebersihanPakai,#tableKeamananPakai,#dataAir,#dataListrik'
+                    ).DataTable({
                         "processing": true,
+                        "bProcessing":true,
+                        "language": {
+                            'loadingRecords': '&nbsp;',
+                            'processing': '<i class="fas fa-spinner"></i>'
+                        },
+                        "scrollX": true,
                         "bSortable": false,
                         "deferRender": true
                     });

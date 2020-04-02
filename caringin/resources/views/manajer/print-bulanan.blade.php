@@ -42,6 +42,20 @@
             <td class="tg-g25h">10% of Jasa</td>
           </tr>
           <tr>
+            <td class="tg-cegc">Air Bersih</td>
+            <td class="tg-g25h">100%</td>
+            <td class="tg-g25h">0</td>
+            <td class="tg-g25h">0</td>
+            <td class="tg-g25h">0</td>
+          </tr>
+          <tr>
+            <td class="tg-cegc">IPK & Keamanan</td>
+            <td class="tg-g25h">100%</td>
+            <td class="tg-g25h">0</td>
+            <td class="tg-g25h">0</td>
+            <td class="tg-g25h">0</td>
+          </tr>
+          <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
             <td class="tg-8m6k">Rp.</td>
             <td class="tg-8m6k">Rp.</td>

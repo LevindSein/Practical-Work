@@ -87,15 +87,24 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <div class="collapse-divider"></div>
-                            <a class="collapse-item" href="{{url('showlaporanharianmanager')}}">Laporan Harian</a>
-                            <a class="collapse-item" href="{{url('showlaporanbulananmanager')}}">Laporan Bulanan</a>
-                            <a class="collapse-item" href="{{url('showlaporantahunanmanager')}}">Laporan Tahunan</a>
-                            <a class="collapse-item" href="{{url('showlaporantagihanmanager')}}">Laporan Tagihan</a>
-                            <a class="collapse-item" href="{{url('showlaporantunggakanmanager')}}">Laporan Tunggakan</a>
-                            <a class="collapse-item" href="{{url('showlaporanbongkaranmanager')}}">Laporan Bongkaran</a>
-                            <a class="collapse-item" href="{{url('showlaporanpenghapusanmanager')}}">Laporan Penghapusan</a>
+                            <a class="collapse-item" href="{{url('showlaporanharianmanager')}}">Pendapatan Harian</a>
+                            <a class="collapse-item" href="{{url('showlaporanbulananmanager')}}">Pendapatan Bulanan</a>
+                            <a class="collapse-item" href="{{url('showlaporantahunanmanager')}}">Pendapatan Tahunan</a>
+                            <a class="collapse-item" href="{{url('showpemakaianmanager')}}">Pemakaian</a>
                         </div>
                     </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('tempatusahamanager')}}">
+                        <i class="fas fa-fw fa-store"></i>
+                        <span>Tempat Usaha</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('showlaporantagihanmanager')}}">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>&ensp;Tagihan</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -307,18 +316,16 @@
             </script>
             <script>
                 $(document).ready(function(){
-                    $('#dataAir,#dataListrik').DataTable({
-                        "scrollX": true,
-                        "processing": true,
-                        "bSortable": false,
-                        "deferRender": true
+                    $("#success-alert,#warning-alert,#error-alert,#info-alert").fadeTo(1700, 500).slideUp(500, function(){
+                        $("#success-alert,#warning-alert,#error-alert,#info-alert").slideUp(500);
                     });
                 });
             </script>
+            
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableAir,#tableListrik,#tableKeamanan,#tableKebersihan,#tableTempat,#tableUser,#tableTagihan,#dataNasabah,#tableTunggakan'
+                        '#tableTagihan,#tablePenerimaan,#tableListrikPakai,#tableAirPakai'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,
@@ -328,65 +335,10 @@
                         },
                         "scrollX": true,
                         "bSortable": false,
-                        "deferRender": true,
-                        "dom": "r" + "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
-                                "ow'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-                        "buttons": [
-                            {
-                                text: '<i class="fas fa-file-pdf fa-lg"></i>',
-                                extend: 'pdf',
-                                className: 'btn btn-danger bg-gradient-danger',
-                                title: 'BP3C PDF',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function (doc) {
-                                    doc.pageMargins = [25,25,25,25];
-                                    doc.defaultStyle.fontSize = 12;
-                                    doc.styles.tableHeader.fontSize = 14;
-                                    doc.styles.title.fontSize = 20;
-                                }
-                            }, {
-                                text: '<i class="fas fa-file-excel fa-lg"></i>',
-                                extend: 'excel',
-                                className: 'btn btn-success bg-gradient-success',
-                                title: 'BP3C Excel',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                }
-                            }, {
-                                text: '<i class="fas fa-print fa-lg"></i>',
-                                extend: 'print',
-                                className: 'btn btn-info bg-gradient-info',
-                                title: 'BP3C Print',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function ( win ) {
-                                    $(win.document.body)
-                                    .css( 'font-size', '11pt' )
-                                    .prepend(
-                                    '<img src="{{asset('img/bp3c.png')}}" style="position:absolute; top:0; left:0;" />'
-                                    );;
-                                }
-                            },{
-                                text: '<i class="fas fa-filter"></i>',
-                                extend: 'colvis',
-                                className: 'btn btn-warning bg-gradient-warning'
-                            }
-                        ]
+                        "deferRender": true
                     });
                 });
             </script>
-            <script>
-                $(document).ready(function(){
-                    $("#success-alert,#warning-alert,#error-alert,#info-alert").fadeTo(1700, 500).slideUp(500, function(){
-                        $("#success-alert,#warning-alert,#error-alert,#info-alert").slideUp(500);
-                    });
-                });
-            </script>
-
             @yield('js')
         </body>
 

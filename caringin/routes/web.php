@@ -70,6 +70,17 @@ Route::get('showlaporantunggakan','laporanController@showTunggakan');
 Route::get('showlaporanbongkaran','laporanController@showBongkaran');
 Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
 
+
+Route::get('showpemakaian','laporanController@showPemakaian');
+Route::get('print/rekapair','laporanController@printRekapAir');
+Route::get('print/rincianair','laporanController@printRincianAir');
+Route::get('print/rekaplistrik','laporanController@printRekapListrik');
+Route::get('print/rincianlistrik','laporanController@printRincianListrik');
+Route::get('print/rekapkebersihan','laporanController@printRekapKebersihan');
+Route::get('print/rinciankebersihan','laporanController@printRincianKebersihan');
+Route::get('print/rekapkeamanan','laporanController@printRekapKeamanan');
+Route::get('print/rinciankeamanan','laporanController@printRincianKeamanan');
+
 //Tagihan
 Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan')->name('datatagihan');
 Route::get('bayartagihan/{id}','tagihanController@bayarTagihan')->name('bayartagihan');
@@ -132,7 +143,9 @@ Route::get('showpenerimaanbulanan','laporanController@showPenerimaanBulanan');
 Route::get('showpendapatantahunan','laporanController@showPendapatanTahunan');
 Route::get('print/harian/keuangan','laporanController@printHarianKeuangan');
 Route::get('print/bulanan/keuangan','laporanController@printBulananKeuangan');
+Route::get('print/bulananno/keuangan','laporanController@printBulananNoKeuangan');
 Route::get('print/rincian/keuangan','laporanController@printRincianKeuangan');
+Route::get('print/rincianno/keuangan','laporanController@printRincianNoKeuangan');
 Route::get('print/tahunan/keuangan','laporanController@printTahunanKeuangan');
 //ENDKEUANGAN
 
@@ -143,9 +156,17 @@ Route::get('showlaporanharianmanager/filter','laporanController@filterHarianMana
 Route::get('showlaporanbulananmanager','laporanController@showBulananManager');
 Route::get('showlaporanbulananmanager/filter','laporanController@filterBulananManager');
 Route::get('showlaporantahunanmanager','laporanController@showTahunanManager');
+Route::get('showpemakaianmanager','laporanController@showPemakaianManager');
+Route::get('tempatusahamanager','laporanController@tempatUsahaManager');
 Route::get('showlaporantagihanmanager','laporanController@showTagihanManager')->name('lapTagihanManager');
-Route::get('showlaporantunggakanmanager','laporanController@showTunggakanManager');
-Route::get('showlaporanbongkaranmanager','laporanController@showBongkaranManager');
-Route::get('showlaporanpenghapusanmanager','laporanController@showPenghapusanManager');
 Route::get('datatagihanmanager/{id}','tagihanController@dataTagihanManager')->name('datatagihanManager');
+
+Route::get('print/harian/manajer','laporanController@printHarianManajer');
+Route::get('print/bulanan/manajer','laporanController@printBulananManajer');
+Route::get('print/rincian/manajer','laporanController@printRincianManajer');
+Route::get('print/tahunan/manajer','laporanController@printTahunanManajer');
+Route::get('print/rekapair/manajer','laporanController@printRekapAirManajer');
+Route::get('print/rincianair/manajer','laporanController@printRincianAirManajer');
+Route::get('print/rekaplistrik/manajer','laporanController@printRekapListrikManajer');
+Route::get('print/rincianlistrik/manajer','laporanController@printRincianListrikManajer');
 //ENDMANAJER

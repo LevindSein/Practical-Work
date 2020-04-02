@@ -17,6 +17,7 @@ class Tagihan extends Model
         'tgl_tagihan',
         'expired',
         'bln_tagihan',
+        'thn_tagihan',
         'tgl_bayar',
         'bln_bayar',
         'stt_lunas',

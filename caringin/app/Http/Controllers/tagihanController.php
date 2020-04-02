@@ -283,6 +283,7 @@ class tagihanController extends Controller
         $time = strtotime($finalDate);
         $expired = date("Y-m-14", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
+        $thn = date("Y", strtotime($finalDate));
 
         //Cek Libur
         $tgl_exp = $expired;
@@ -305,6 +306,7 @@ class tagihanController extends Controller
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
+            'thn_tagihan'=>$thn,
             'stt_lunas'=>0,
             'stt_bayar'=>0,
             'awal_air'=>$akhirAir,

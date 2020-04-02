@@ -11,6 +11,8 @@ use App\Nasabah;
 use App\Tagihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
+use DateTime;
+use DateInterval;
 use Exception;
 
 class meteranController extends Controller
@@ -124,6 +126,28 @@ class meteranController extends Controller
         
         return view('admin.update-ganti-air',['dataset'=>$dataset]);
     }
+
+    public function add_months($months, DateTime $dateObject) 
+    {
+        $next = new DateTime($dateObject->format('Y-m-d'));
+        $next->modify('last day of +'.$months.' month');
+
+        if($dateObject->format('d') > $next->format('d')) {
+            return $dateObject->diff($next);
+        } else {
+            return new DateInterval('P'.$months.'M');
+        }
+    }
+
+    public function endCycle($d1, $months)
+    {
+        $date = new DateTime($d1);
+        $newDate = $date->add($this->add_months($months, $date));
+        $dateReturned = $newDate->format('Y-m-01'); 
+
+        return $dateReturned;
+    }
+
     public function storegantialatair(Request $request,$id){
     try{
         $id_mair = $request->get('idMBaru');
@@ -133,12 +157,14 @@ class meteranController extends Controller
         ]);
 
         //Set Tanggal Tagihan
-        $timezone = date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
-        $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+        $nMonths = 1;
+        $finalDate = $this->endCycle($date, $nMonths);
+        $time = strtotime($finalDate);
+        $expired = date("Y-m-14", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-14", strtotime("+2 month", $time));
+        $thn = date("Y", strtotime($finalDate));
 
         //Cek Libur
         $tgl_exp = $expired;
@@ -158,14 +184,17 @@ class meteranController extends Controller
         $dataku = DB::table('tempat_usaha')
         ->where('ID_TEMPAT',$id)
         ->first();
+        $blok = $dataku->BLOK;
 
         $data = new Tagihan([
             'id_tempat'=>$id,
             'id_pemilik'=>$dataku->ID_PEMILIK,
             'id_nasabah'=>$dataku->ID_NASABAH,
+            'blok_tempat'=>$blok,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
+            'thn_tagihan'=>$thn,
             'stt_lunas'=>0,
             'stt_bayar'=>0,
             'ttl_air'=>$ttl_air,
@@ -211,12 +240,14 @@ class meteranController extends Controller
         ]);
 
         //Set Tanggal Tagihan
-        $timezone = date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
-        $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
+        $nMonths = 1;
+        $finalDate = $this->endCycle($date, $nMonths);
+        $time = strtotime($finalDate);
+        $expired = date("Y-m-14", strtotime("+1 month", $time));
         $bln = date("Y-m", strtotime($finalDate));
-        $expired = date("Y-m-14", strtotime("+2 month", $time));
+        $thn = date("Y", strtotime($finalDate));
 
         //Cek Libur
         $tgl_exp = $expired;
@@ -236,14 +267,18 @@ class meteranController extends Controller
         $dataku = DB::table('tempat_usaha')
         ->where('ID_TEMPAT',$id)
         ->first();
+        $blok = $dataku->BLOK;
+
 
         $data = new Tagihan([
             'id_tempat'=>$id,
             'id_pemilik'=>$dataku->ID_PEMILIK,
             'id_nasabah'=>$dataku->ID_NASABAH,
+            'blok_tempat'=>$blok,
             'tgl_tagihan'=>$finalDate,
             'expired'=>$tgl_exp,
             'bln_tagihan'=>$bln,
+            'thn_tagihan'=>$thn,
             'stt_lunas'=>0,
             'stt_bayar'=>0,
             'ttl_listrik'=>$ttl_listrik,

@@ -19,8 +19,8 @@
                   <thead>
                     <tr>
                       <th>Bulan</th>
-                      <th>Rincian</th>
-                      <th>Rekap</th>
+                      <th>Listrik & Kebersihan</th>
+                      <th>Air & Keamanan</th>
                     </tr>
                   </thead>
 
@@ -28,12 +28,16 @@
                     <tr>
                       <td class="text-center">Mar 2020</td>
                       <td class="text-center">
+                          <a href="{{url('print/bulanan/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rekap</a>
                           <a href="{{url('print/rincian/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Print</a>
+                            class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                       <td class="text-center">
-                          <a href="{{url('print/bulanan/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
-                            class="fas fa- fa-sm text-white-50"></i>Print</a>
+                          <a href="{{url('print/bulananno/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rekap</a>
+                          <a href="{{url('print/rincianno/keuangan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
                   </tbody>

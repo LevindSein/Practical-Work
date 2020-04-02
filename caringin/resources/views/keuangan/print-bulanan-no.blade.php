@@ -23,29 +23,17 @@
           <tr>
             <th class="tg-r8fv">Fasilitas</th>
             <th class="tg-r8fv">Penerimaan</th>
-            <th class="tg-r8fv">Dana Titipan</th>
-            <th class="tg-r8fv">Jasa</th>
-            <th class="tg-r8fv">PPN</th>
           </tr>
           <tr>
-            <td class="tg-cegc">Listrik</td>
+            <td class="tg-cegc">Air Bersih</td>
             <td class="tg-g25h">100%</td>
-            <td class="tg-g25h">60%</td>
-            <td class="tg-g25h">40%</td>
-            <td class="tg-g25h">10% of Jasa</td>
           </tr>
           <tr>
-            <td class="tg-cegc">Kebersihan</td>
+            <td class="tg-cegc">IPK & Keamanan</td>
             <td class="tg-g25h">100%</td>
-            <td class="tg-g25h">90%</td>
-            <td class="tg-g25h">10%</td>
-            <td class="tg-g25h">10% of Jasa</td>
           </tr>
           <tr>
             <td class="tg-vbo4" style="text-align:center;">Total</td>
-            <td class="tg-8m6k">Rp.</td>
-            <td class="tg-8m6k">Rp.</td>
-            <td class="tg-8m6k">Rp.</td>
             <td class="tg-8m6k">Rp.</td>
           </tr>
         </table>
