@@ -1,10 +1,10 @@
 <?php
+$tanggal = date("d M Y", strtotime($data->TGL_BAYAR));
+
 $total = 0;
 foreach($dataset as $d){
-  $total = $total + $d->REALISASI;
+  $total = $total + $d->Realisasi;
 }
-
-$tanggal = date("d M Y", strtotime($data->TGL_BAYAR));
 ?>
 
 <!DOCTYPE html>
@@ -47,14 +47,14 @@ $tanggal = date("d M Y", strtotime($data->TGL_BAYAR));
           </tr>
           @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">Belum Nih :(</td>
-            <td class="tg-g25h">{{number_format($d->REALISASI_LISTRIK - $d->DENDA_LISTRIK)}}</td>
-            <td class="tg-g25h">{{number_format($d->REALISASI_AIR - $d->DENDA_AIR)}}</td>
-            <td class="tg-g25h">{{number_format($d->REALISASI_IPKEAMANAN)}}</td>
-            <td class="tg-g25h">{{number_format($d->REALISASI_KEBERSIHAN)}}</td>
-            <td class="tg-g25h">{{number_format($d->DENDA_LISTRIK)}}</td>
-            <td class="tg-g25h">{{number_format($d->DENDA_AIR)}}</td>
-            <td class="tg-g25h">{{number_format($d->REALISASI_LISTRIK + $d->REALISASI_AIR + $d->REALISASI_IPKEAMANAN + $d->REALISASI_KEBERSIHAN)}}</td>
+            <td class="tg-cegc">{{$d->NAMA_USER}}</td>
+            <td class="tg-g25h">{{number_format($d->Listrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->Air)}}</td>
+            <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>
+            <td class="tg-g25h">{{number_format($d->Kebersihan)}}</td>
+            <td class="tg-g25h">{{number_format($d->DendaListrik)}}</td>
+            <td class="tg-g25h">{{number_format($d->DendaAir)}}</td>
+            <td class="tg-g25h">{{number_format($d->Realisasi)}}</td>
           </tr>
           @endforeach
           <tr>
