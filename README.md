@@ -11,5 +11,5 @@ Please doing :
 4. php artisan key:generate
 
 on Progress :
-Manajemen
+Manajemen Grafik
 Surat Peringatan

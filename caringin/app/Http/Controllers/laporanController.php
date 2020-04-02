@@ -651,7 +651,46 @@ class laporanController extends Controller
     }
 
     public function tempatUsahaManager(){
-        return view('manajer.tempat-usaha');
+        $blok = DB::table('tempat_usaha')
+        ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
+        ->groupBy('BLOK')
+        ->get();
+
+        $ttlBlok = $blok->count();
+        $Listrik = array();
+        $Air = array();
+        $Keamanan = array();
+        $Kebersihan = array();
+        $Blokku = array();
+
+        for($i=0; $i<$ttlBlok; $i++){
+            $bloks=$blok[$i];
+            $blokku = DB::table('tempat_usaha')
+                ->where('BLOK',$bloks->BLOK)
+                ->count();
+            $listrik = DB::table('tempat_usaha')
+                ->where([['ID_TRFLISTRIK','!=', NULL],['BLOK',$bloks->BLOK]])
+                ->count();
+            $air = DB::table('tempat_usaha')
+                ->where([['ID_TRFAIR','!=', NULL],['BLOK',$bloks->BLOK]])
+                ->count();
+            $keamanan = DB::table('tempat_usaha')
+                    ->where([['ID_TRFKEAMANAN','!=', NULL],['BLOK',$bloks->BLOK]])
+                    ->count();
+            $kebersihan = DB::table('tempat_usaha')
+                    ->where([['ID_TRFKEBERSIHAN','!=', NULL],['BLOK',$bloks->BLOK]])
+                    ->count();
+            $Listrik[$i] = $listrik;
+            $Air[$i] = $air;
+            $Keamanan[$i] = $keamanan;
+            $Kebersihan[$i] = $kebersihan;
+            $Blokku[$i] = $blokku;
+        }
+
+        return view('manajer.tempat-usaha',[
+            'Listrik'=>$Listrik,'Air'=>$Air,'Keamanan'=>$Keamanan,'Kebersihan'=>$Kebersihan,'blok'=>$blok,
+            'ttlBlok'=>$ttlBlok,'Blokku'=>$Blokku
+        ]);
     }
 
     public function showTagihanManager(){

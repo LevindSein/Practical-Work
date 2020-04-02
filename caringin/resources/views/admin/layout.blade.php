@@ -528,13 +528,6 @@
                                 exportOptions: {
                                     columns: ':visible(.export-col)'
                                 },
-                                customize: function ( win ) {
-                                    $(win.document.body)
-                                    .css( 'font-size', '11pt' )
-                                    .prepend(
-                                    '<img src="{{asset('img/bp3c.png')}}" style="position:absolute; top:0; left:0;" />'
-                                    );;
-                                }
                             },{
                                 text: '<i class="fas fa-filter"></i>',
                                 extend: 'colvis',
