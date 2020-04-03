@@ -66,39 +66,152 @@ class laporanController extends Controller
     }
 
     public function showPemakaian(){
-        return view('admin.pemakaian');
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        return view('admin.pemakaian',['dataset'=>$dataset]);
     }
     
-    public function printRekapAir(){
-        return view('admin.print-rekap-pemakaian-air');
+    public function printRekapAir($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.PAKAI_AIR) as pakaiAir'),
+            DB::raw('SUM(tagihanku.BYR_BEBAN) as bBeban'),
+            DB::raw('SUM(tagihanku.BYR_PEMELIHARAAN) as bPemeliharaan'),
+            DB::raw('SUM(tagihanku.BYR_ARKOT) as bArkot'),
+            DB::raw('SUM(tagihanku.TTL_AIR + tagihanku.DENDA_AIR) as tagihan'),
+            DB::raw('SUM(tagihanku.REALISASI_AIR) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_AIR) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rekap-pemakaian-air',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianAir(){
-        return view('admin.print-rincian-pemakaian-air');
+    public function printRincianAir($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rincian-pemakaian-air',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRekapListrik(){
-        return view('admin.print-rekap-pemakaian-listrik');
+    public function printRekapListrik($bln){
+        $dataset = DB::table('tagihanku')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.DAYA_LISTRIK) as daya'),
+            DB::raw('SUM(tagihanku.PAKAI_LISTRIK) as pakaiListrik'),
+            DB::raw('SUM(tagihanku.B_BEBAN) as bBeban'),
+            DB::raw('SUM(tagihanku.BPJU) as bpju'),
+            DB::raw('SUM(tagihanku.TTL_LISTRIK + tagihanku.DENDA_LISTRIK) as tagihan'),
+            DB::raw('SUM(tagihanku.REALISASI_LISTRIK) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_LISTRIK) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+
+        return view('admin.print-rekap-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianListrik(){
-        return view('admin.print-rincian-pemakaian-listrik');
+    public function printRincianListrik($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rincian-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRekapKebersihan(){
-        return view('admin.print-rekap-pemakaian-kebersihan');
+    public function printRekapKebersihan($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.TTL_KEBERSIHAN) as tagihan'),
+            DB::raw('SUM(tempat_usaha.JML_ALAMAT) as alamat'),
+            DB::raw('SUM(tagihanku.REALISASI_KEBERSIHAN) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_KEBERSIHAN) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rekap-pemakaian-kebersihan',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianKebersihan(){
-        return view('admin.print-rincian-pemakaian-kebersihan');
+    public function printRincianKebersihan($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rincian-pemakaian-kebersihan',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRekapKeamanan(){
-        return view('admin.print-rekap-pemakaian-keamanan');
+    public function printRekapKeamanan($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.TTL_IPKEAMANAN) as tagihan'),
+            DB::raw('SUM(tempat_usaha.JML_ALAMAT) as alamat'),
+            DB::raw('SUM(tagihanku.REALISASI_IPKEAMANAN) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_IPKEAMANAN) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rekap-pemakaian-keamanan',['dataset'=>$dataset,'data'=>$data]);
     }
 
-    public function printRincianKeamanan(){
-        return view('admin.print-rincian-pemakaian-keamanan');
+    public function printRincianKeamanan($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('admin.print-rincian-pemakaian-keamanan',['dataset'=>$dataset,'data'=>$data]);
     }
 
     public function showTahunan(){
@@ -756,6 +869,49 @@ class laporanController extends Controller
         }
 
         return view('manajer.tempat-usaha',[
+            'Listrik'=>$Listrik,'Air'=>$Air,'Keamanan'=>$Keamanan,'Kebersihan'=>$Kebersihan,'blok'=>$blok,
+            'ttlBlok'=>$ttlBlok,'Blokku'=>$Blokku
+        ]);
+    }
+
+    public function printTempatManajer(){
+        $blok = DB::table('tempat_usaha')
+        ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
+        ->groupBy('BLOK')
+        ->get();
+
+        $ttlBlok = $blok->count();
+        $Listrik = array();
+        $Air = array();
+        $Keamanan = array();
+        $Kebersihan = array();
+        $Blokku = array();
+
+        for($i=0; $i<$ttlBlok; $i++){
+            $bloks=$blok[$i];
+            $blokku = DB::table('tempat_usaha')
+                ->where('BLOK',$bloks->BLOK)
+                ->count();
+            $listrik = DB::table('tempat_usaha')
+                ->where([['ID_TRFLISTRIK','!=', NULL],['BLOK',$bloks->BLOK]])
+                ->count();
+            $air = DB::table('tempat_usaha')
+                ->where([['ID_TRFAIR','!=', NULL],['BLOK',$bloks->BLOK]])
+                ->count();
+            $keamanan = DB::table('tempat_usaha')
+                    ->where([['ID_TRFKEAMANAN','!=', NULL],['BLOK',$bloks->BLOK]])
+                    ->count();
+            $kebersihan = DB::table('tempat_usaha')
+                    ->where([['ID_TRFKEBERSIHAN','!=', NULL],['BLOK',$bloks->BLOK]])
+                    ->count();
+            $Listrik[$i] = $listrik;
+            $Air[$i] = $air;
+            $Keamanan[$i] = $keamanan;
+            $Kebersihan[$i] = $kebersihan;
+            $Blokku[$i] = $blokku;
+        }
+
+        return view('manajer.print-tempat',[
             'Listrik'=>$Listrik,'Air'=>$Air,'Keamanan'=>$Keamanan,'Kebersihan'=>$Kebersihan,'blok'=>$blok,
             'ttlBlok'=>$ttlBlok,'Blokku'=>$Blokku
         ]);

@@ -44,15 +44,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekaplistrik')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekaplistrik',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincianlistrik')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincianlistrik',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -68,15 +70,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekapair')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekapair',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rincianair')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rincianair',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -92,15 +96,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekapkebersihan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekapkebersihan',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rinciankebersihan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rinciankebersihan',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -116,15 +122,17 @@
                   </thead>
 
                   <tbody>
+                  @foreach($dataset as $d)
                     <tr>
-                      <td class="text-center">Mar 2020</td>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
                       <td class="text-center">
-                          <a href="{{url('print/rekapkeamanan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rekapkeamanan',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
-                          <a href="{{url('print/rinciankeamanan')}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                          <a href="{{url('print/rinciankeamanan',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

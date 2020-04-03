@@ -72,14 +72,14 @@ Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
 
 
 Route::get('showpemakaian','laporanController@showPemakaian');
-Route::get('print/rekapair','laporanController@printRekapAir');
-Route::get('print/rincianair','laporanController@printRincianAir');
-Route::get('print/rekaplistrik','laporanController@printRekapListrik');
-Route::get('print/rincianlistrik','laporanController@printRincianListrik');
-Route::get('print/rekapkebersihan','laporanController@printRekapKebersihan');
-Route::get('print/rinciankebersihan','laporanController@printRincianKebersihan');
-Route::get('print/rekapkeamanan','laporanController@printRekapKeamanan');
-Route::get('print/rinciankeamanan','laporanController@printRincianKeamanan');
+Route::get('print/rekapair/{bln}','laporanController@printRekapAir');
+Route::get('print/rincianair/{bln}','laporanController@printRincianAir');
+Route::get('print/rekaplistrik/{bln}','laporanController@printRekapListrik');
+Route::get('print/rincianlistrik/{bln}','laporanController@printRincianListrik');
+Route::get('print/rekapkebersihan/{bln}','laporanController@printRekapKebersihan');
+Route::get('print/rinciankebersihan/{bln}','laporanController@printRincianKebersihan');
+Route::get('print/rekapkeamanan/{bln}','laporanController@printRekapKeamanan');
+Route::get('print/rinciankeamanan/{bln}','laporanController@printRincianKeamanan');
 
 //Tagihan
 Route::get('datatagihannasabah/{id}','tagihanController@dataTagihan')->name('datatagihan');
@@ -173,4 +173,5 @@ Route::get('print/rekapkebersihan/manajer/{bln}','laporanController@printRekapKe
 Route::get('print/rinciankebersihan/manajer/{bln}','laporanController@printRincianKebersihanManajer');
 Route::get('print/rekapkeamanan/manajer/{bln}','laporanController@printRekapKeamananManajer');
 Route::get('print/rinciankeamanan/manajer/{bln}','laporanController@printRincianKeamananManajer');
+Route::get('print/tempat/manajer','laporanController@printTempatManajer');
 //ENDMANAJER

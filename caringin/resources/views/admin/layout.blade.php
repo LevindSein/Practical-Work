@@ -520,18 +520,6 @@
                                 exportOptions: {
                                     columns: ':visible(.export-col)'
                                 }
-                            }, {
-                                text: '<i class="fas fa-print fa-lg"></i>',
-                                extend: 'print',
-                                className: 'btn btn-info bg-gradient-info',
-                                title: 'BP3C Print',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                            },{
-                                text: '<i class="fas fa-filter"></i>',
-                                extend: 'colvis',
-                                className: 'btn btn-warning bg-gradient-warning'
                             }
                         ]
                     });
