@@ -37,6 +37,7 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
+                    @include('admin.flash-message')
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
                   <form class="user" action="storeuser" method="POST">
@@ -57,6 +58,7 @@
         </div>
 
       </div>
+      
       <!-- Footer -->
       <footer class="container my-auto">
           <div class="copyright text-center text-gray-100 my-auto">
@@ -77,6 +79,15 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+
+  <script>
+    $(document).ready(function(){
+      $("#success-alert,#warning-alert,#error-alert,#info-alert").fadeTo(1700, 500).slideUp(500, function(){
+         $("#success-alert,#warning-alert,#error-alert,#info-alert").slideUp(500);
+       });
+     });
+  </script>
 
 </body>
 

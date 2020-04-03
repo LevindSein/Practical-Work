@@ -67,18 +67,18 @@ class LoginController extends Controller
                     return redirect()->route('showdashboardmanajer')->with('success','Login Berhasil');
                 }
                 else if($user->ROLE == "keuangan"){
-                    return redirect()->route('index')->with('error','Login Gagal');
+                    return redirect()->route('index')->with('error','Login Berhasil');
                 }
                 else{
-                    return redirect()->route('index')->with('error','Login Gagal');    
+                    return redirect()->route('index')->with('error','Login Gagal Harap Hubungi Super Admin');    
                 }
             }
             else{
-                return redirect()->route('index')->with('error','Username atau Password Salah');
+                return redirect()->route('index')->with('error','Username atau Password Salah, Harap Hubungi Super Admin');
             }
         }
         else{
-            return redirect()->route('index')->with('error','Login Gagal');
+            return redirect()->route('index')->with('error','Login Gagal Harap Hubungi Super Admin');
         }
     }
 }
