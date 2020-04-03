@@ -650,6 +650,74 @@ class laporanController extends Controller
         return view('manajer.print-rincian-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
     }
 
+    public function printRekapKebersihanManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.TTL_KEBERSIHAN) as tagihan'),
+            DB::raw('SUM(tempat_usaha.JML_ALAMAT) as alamat'),
+            DB::raw('SUM(tagihanku.REALISASI_KEBERSIHAN) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_KEBERSIHAN) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rekap-pemakaian-kebersihan',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function printRincianKebersihanManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rincian-pemakaian-kebersihan',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function printRekapKeamananManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->select('tagihanku.BLOK_TEMPAT',
+            DB::raw('SUM(tagihanku.TTL_IPKEAMANAN) as tagihan'),
+            DB::raw('SUM(tempat_usaha.JML_ALAMAT) as alamat'),
+            DB::raw('SUM(tagihanku.REALISASI_IPKEAMANAN) as realisasi'),
+            DB::raw('SUM(tagihanku.SELISIH_IPKEAMANAN) as selisih')
+        )
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->groupBy('tagihanku.BLOK_TEMPAT')
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rekap-pemakaian-keamanan',['dataset'=>$dataset,'data'=>$data]);
+    }
+
+    public function printRincianKeamananManajer($bln){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('tagihanku.BLN_TAGIHAN',$bln)
+        ->get();
+
+        $data = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN')
+        ->where('BLN_TAGIHAN',$bln)
+        ->first();
+        return view('manajer.print-rincian-pemakaian-keamanan',['dataset'=>$dataset,'data'=>$data]);
+    }
+
     public function tempatUsahaManager(){
         $blok = DB::table('tempat_usaha')
         ->select('BLOK',DB::raw('count(*) as ttl_Blok'))

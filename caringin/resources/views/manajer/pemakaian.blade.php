@@ -24,6 +24,12 @@
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#menu1">AIR</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">KEBERSIHAN</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu3">KEAMANAN</a>
+                  </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -71,6 +77,58 @@
                           <a href="{{url('print/rekapair/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rekap</a>
                           <a href="{{url('print/rincianair/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rincian</a>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              </div>
+              <div id="menu2" class="container tab-pane fade"><br>
+              <div class="table-responsive">
+              <table class="table display table-bordered" id="tableKebersihanPakai" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Bulan</th>
+                      <th>Lihat</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  @foreach($dataset as $d)
+                    <tr>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
+                      <td class="text-center">
+                          <a href="{{url('print/rekapkebersihan/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rekap</a>
+                          <a href="{{url('print/rinciankebersihan/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rincian</a>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              </div>
+              <div id="menu3" class="container tab-pane fade"><br>
+              <div class="table-responsive">
+              <table class="table display table-bordered" id="tableKeamananPakai" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Bulan</th>
+                      <th>Lihat</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  @foreach($dataset as $d)
+                    <tr>
+                      <td class="text-center" <?php $bulan = date("M Y", strtotime($d->BLN_TAGIHAN)); ?>>{{$bulan}}</td>
+                      <td class="text-center">
+                          <a href="{{url('print/rekapkeamanan/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                            class="fas fa- fa-sm text-white-50"></i>Rekap</a>
+                          <a href="{{url('print/rinciankeamanan/manajer',[$d->BLN_TAGIHAN])}}" target="_blank" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Rincian</a>
                       </td>
                     </tr>

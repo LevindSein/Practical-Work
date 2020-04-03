@@ -169,4 +169,8 @@ Route::get('print/rekapair/manajer/{bln}','laporanController@printRekapAirManaje
 Route::get('print/rincianair/manajer/{bln}','laporanController@printRincianAirManajer');
 Route::get('print/rekaplistrik/manajer/{bln}','laporanController@printRekapListrikManajer');
 Route::get('print/rincianlistrik/manajer/{bln}','laporanController@printRincianListrikManajer');
+Route::get('print/rekapkebersihan/manajer/{bln}','laporanController@printRekapKebersihanManajer');
+Route::get('print/rinciankebersihan/manajer/{bln}','laporanController@printRincianKebersihanManajer');
+Route::get('print/rekapkeamanan/manajer/{bln}','laporanController@printRekapKeamananManajer');
+Route::get('print/rinciankeamanan/manajer/{bln}','laporanController@printRincianKeamananManajer');
 //ENDMANAJER

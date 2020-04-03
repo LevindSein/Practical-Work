@@ -325,7 +325,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableTagihan,#tablePenerimaan,#tableListrikPakai,#tableAirPakai'
+                        '#tableTagihan,#tablePenerimaan,#tableListrikPakai,#tableAirPakai,#tableKebersihanPakai,#tableKeamananPakai'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,
