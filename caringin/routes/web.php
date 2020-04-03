@@ -67,9 +67,11 @@ Route::get('showlaporanbulanan/filter','laporanController@filterBulanan');
 Route::get('showlaporantahunan','laporanController@showTahunan');
 Route::get('showlaporantagihan','laporanController@showTagihan')->name('lapTagihan');
 Route::get('showlaporantunggakan','laporanController@showTunggakan');
-Route::get('showlaporanbongkaran','laporanController@showBongkaran');
-Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
+Route::get('showlaporanbongkaran','laporanController@showBongkaran')->name('bongkaran');
 
+Route::get('showlaporanpenghapusan','laporanController@showPenghapusan');
+Route::get('bongkaralat/{id}/{selAir}/{selListrik}/{selKeamanan}/{selKebersihan}/{denAir}/{denListrik}','laporanController@bongkarAlat');
+Route::get('printperingatan/{id}/{selAir}/{selListrik}/{selKeamanan}/{selKebersihan}/{denAir}/{denListrik}/{exp}/{tglTagihan}','laporanController@printPeringatan');
 
 Route::get('showpemakaian','laporanController@showPemakaian');
 Route::get('print/rekapair/{bln}','laporanController@printRekapAir');

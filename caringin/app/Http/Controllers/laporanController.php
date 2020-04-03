@@ -310,7 +310,12 @@ class laporanController extends Controller
             ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->leftJoin('tarif_air','tempat_usaha.ID_TRFAIR','=','tarif_air.ID_TRFAIR')
             ->leftJoin('tarif_listrik','tempat_usaha.ID_TRFLISTRIK','=','tarif_listrik.ID_TRFLISTRIK')
-            ->select('tarif_air.TRF_DENDA','tarif_listrik.VAR_DENDA','tarif_listrik.DENDA_LEBIH','tagihanku.TTL_LISTRIK','tagihanku.PAKAI_LISTRIK','tagihanku.DENDA')
+            ->select('tarif_air.TRF_DENDA',
+            'tarif_listrik.VAR_DENDA',
+            'tarif_listrik.DENDA_LEBIH',
+            'tagihanku.TTL_LISTRIK',
+            'tagihanku.PAKAI_LISTRIK',
+            'tagihanku.DENDA')
             ->where('ID_TAGIHANKU',$id_tagihan)
             ->get();
 
@@ -330,7 +335,7 @@ class laporanController extends Controller
 
             if($now > $exp1 && $now <= $exp2){
                 //Denda 1 Bulan
-                if($d['STT_DENDA'] == 0){
+                if($d['STT_DENDA'] == 0 && $d['BONGKAR'] != 1){
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA_AIR'=>$denda_air,
                         'DENDA_LISTRIK'=>$denda_listrik,
@@ -341,7 +346,7 @@ class laporanController extends Controller
             }
             else if ($now > $exp2 && $now <= $exp3){
                 //Kena Denda 2 Bulan
-                if($d['STT_DENDA'] ==  0){
+                if($d['STT_DENDA'] ==  0 && $d['BONGKAR'] != 1){
                     $total_denda = 2 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA_AIR'=>$denda_air,
@@ -350,7 +355,7 @@ class laporanController extends Controller
                         'STT_DENDA'=>2
                     ]);
                 }
-                else if($d['STT_DENDA'] == 1){
+                else if($d['STT_DENDA'] == 1 && $d['BONGKAR'] != 1){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA_AIR'=>$denda_air,
@@ -362,7 +367,7 @@ class laporanController extends Controller
             }
             else if ($now > $exp3 && $now <= $exp4){
                 //kena Denda 3 Bulan
-                if($d['STT_DENDA'] ==  0){
+                if($d['STT_DENDA'] ==  0 && $d['BONGKAR'] != 1){
                     $total_denda = 3 * $total_denda;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA_AIR'=>$denda_air,
@@ -371,7 +376,7 @@ class laporanController extends Controller
                         'STT_DENDA'=>3
                     ]);
                 }
-                else if($d['STT_DENDA'] == 2){
+                else if($d['STT_DENDA'] == 2 && $d['BONGKAR'] != 1){
                     $total_denda = $total_denda + $denda_seb;
                     DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
                         'DENDA_AIR'=>$denda_air,
@@ -382,9 +387,11 @@ class laporanController extends Controller
                 }
             }
             else if($now > $exp4){
-                DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
-                    'STT_DENDA'=>4
-                ]);
+                if($d['BONGKAR'] != 1){
+                    DB::table('tagihanku')->where('ID_TAGIHANKU', $id_tagihan)->update([
+                        'STT_DENDA'=>4
+                    ]);
+                }
             }
         }
     }catch(\Exception $e){
@@ -398,9 +405,94 @@ class laporanController extends Controller
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->join('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
-        ->where([['STT_LUNAS',0],['STT_DENDA',4]])
+        ->where([['STT_LUNAS',0],['STT_DENDA','>=',3]])
         ->get();
+
         return view('admin.laporan-bongkaran',['dataset'=>$dataset]);
+    }
+
+    public function bongkarAlat($id,$selAir,$selListrik,$selKeamanan,$selKebersihan,$denAir,$denListrik){
+        if($selAir == 0){
+            $air = 1;
+        }
+        else{
+            $air = NULL;
+        }
+        if($selListrik == 0){
+            $listrik = 1;
+        }
+        else{
+            $listrik = NULL;
+        }
+        
+        DB::table('tempat_usaha')
+        ->where('ID_TEMPAT', $id)
+        ->update([
+            'ID_TRFAIR'=>$air,
+            'ID_TRFLISTRIK'=>$listrik,
+        ]);
+
+        DB::table('tagihanku')
+        ->where([
+            ['ID_TEMPAT', $id],
+            ['STT_DENDA',4]
+        ])
+        ->update([
+            'STT_DENDA'=>0,
+            'BONGKAR'=>1
+        ]);
+
+        if($selAir != 0 && $selListrik != 0){
+            return redirect()->route('bongkaran')->with('success','Alat Listrik dan Alat Air di Bongkar');
+        }
+        elseif($selAir == 0){
+            return redirect()->route('bongkaran')->with('success','Alat Listrik di Bongkar');
+        }
+        else{
+            return redirect()->route('bongkaran')->with('success','Alat di Bongkar');
+        }
+    }
+
+    public function printPeringatan(Request $request,$id,$selAir,$selListrik,$selKeamanan,$selKebersihan,$denAir,$denListrik,$exp,$tglTagihan){
+        $tempat = DB::table('tempat_usaha')
+        ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
+        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where('ID_TEMPAT',$id)
+        ->first();
+
+        $now = Carbon::now()->toDateString();
+        $exp4 = Carbon::createFromFormat('Y-m-d',$exp)->add(3,'month')->toDateString();
+        $expired = date("d M Y", strtotime($exp4));
+        $tgl_tagihan = date("M Y", strtotime($tglTagihan));
+        $tanggal = date("d", strtotime($now));
+        $bulan = date("M", strtotime($now));
+        $tahun = date("Y", strtotime($now));
+
+        $nama = $tempat->NM_NASABAH;
+        $alamat = $tempat->KD_KONTROL;
+        $jmltagihan = "Rp. ".number_format($selAir + $denAir + $selListrik + $denListrik + $selKeamanan + $selKebersihan);
+        $norekening = $tempat->NOMTR_LISTRIK;
+        $periode = $tgl_tagihan;
+        $tglbatas = $expired;
+        $tanggal = $tanggal;
+        $bulan = $bulan;
+        $tahun = $tahun;
+
+        $document = file_get_contents("css/SP.rtf");
+        
+        $document = str_replace("#NAMA", $nama, $document);
+        $document = str_replace("#ALAMAT", $alamat, $document);
+        $document = str_replace("#JMLTAGIHAN", $jmltagihan, $document);
+        $document = str_replace("#NOREKENING", $norekening, $document);
+        $document = str_replace("#PERIODE", $periode, $document);
+        $document = str_replace("#TGLBATAS", $tglbatas, $document);
+        $document = str_replace("#TANGGAL", $tanggal, $document);
+        $document = str_replace("#BULAN", $bulan, $document);
+        $document = str_replace("#TAHUN", $tahun, $document);
+
+        header("Content-type: application/msword");
+        header("Content-disposition: attachment; filename=surat_peringatan.doc");
+        echo $document;
     }
 
     public function showPenghapusan(){

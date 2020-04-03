@@ -117,9 +117,9 @@ class tagihanController extends Controller
         //ipk keamanan kebersihan
         $tarif_ipk = NULL;
         $tarif_keamanan = NULL;
-        $ttl_ipkeamanan = NULL;
+        $ttl_ipkeamanan = 0;
         $tarif_kebersihan = NULL;
-        $ttl_kebersihan = NULL;
+        $ttl_kebersihan = 0;
 
         //air
         $inputAir = NULL;
@@ -128,7 +128,7 @@ class tagihanController extends Controller
         $byr_pemeliharaan = NULL;
         $byr_arkot = NULL;
         $byr_beban = NULL;
-        $ttl_air = NULL;
+        $ttl_air = 0;
 
         //listrik
         $inputListrik = NULL;
@@ -139,7 +139,7 @@ class tagihanController extends Controller
         $b_blok2 = NULL;
         $b_beban = NULL;
         $bpju = NULL;
-        $ttl_listrik = NULL;
+        $ttl_listrik = 0;
 
         for($i=0;$i<4;$i++){
             if($i == 0){

@@ -36,12 +36,13 @@
                       <td class="text-left">{{$d->NM_PEMILIK}}</td>
                       <td class="text-left">{{$d->NM_NASABAH}}</td>
                       <td class="text-center">
-                      <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                      <a href="{{url('printperingatan/'.$d->ID_TEMPAT.'/'.$d->SELISIH_AIR.'/'.$d->SELISIH_LISTRIK.'/'.$d->SELISIH_IPKEAMANAN.'/'.$d->SELISIH_KEBERSIHAN.'/'.$d->DENDA_AIR.'/'.$d->DENDA_LISTRIK.'/'.$d->EXPIRED.'/'.$d->TGL_TAGIHAN)}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Print</a>
                       </td>
-                      <td class="text-center">
-                      <a href="#" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
+                      <td class="text-center">@if($d->STT_DENDA == 4)
+                      <a href="{{url('bongkaralat/'.$d->ID_TEMPAT.'/'.$d->SELISIH_AIR.'/'.$d->SELISIH_LISTRIK.'/'.$d->SELISIH_IPKEAMANAN.'/'.$d->SELISIH_KEBERSIHAN.'/'.$d->DENDA_AIR.'/'.$d->DENDA_LISTRIK)}}" class="d-none d-sm-inline-block btn btn-primary btn-sm shadow-sm"><i
                             class="fas fa- fa-sm text-white-50"></i>Bongkar</a>
+                      @endif
                       </td>
                     </tr>
                   @endforeach

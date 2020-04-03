@@ -314,10 +314,11 @@ class nasabahController extends Controller
     }
     public function updateStoreTempat(Request $request, $id){
     try{
+        $kosong = "(kosong)";
         //Penghapusan
         if(empty($request->get('air')) && empty($request->get('listrik')) && empty($request->get('keamanan')) && empty($request->get('kebersihan'))){
             DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
-                'BENTUK_USAHA'=>null,
+                'BENTUK_USAHA'=>$kosong,
                 'ID_TRFKEBERSIHAN'=>null,
                 'ID_TRFIPK'=>null,
                 'ID_TRFKEAMANAN'=>null,

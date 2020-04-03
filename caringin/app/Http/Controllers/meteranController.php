@@ -60,12 +60,8 @@ class meteranController extends Controller
     }
 
     public function dataalat(){
-    try{
         $datasetA = DB::table('meteran_air')->get();
         $datasetL = DB::table('meteran_listrik')->get();
-    }catch(\Exception $e){
-        return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL])->with('error','Kesalahan Sistem');
-    }
         return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL]);
     }
 
@@ -300,22 +296,11 @@ class meteranController extends Controller
     }
 
     public function printform(){
-    try{
-        $dataAir = DB::table('jasa_air')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_air.ID_TEMPAT')
+        $dataset = DB::table('tempat_usaha')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->join('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
-        ->select('tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_air.NOMTR_AIR','meteran_air.MAKHIR_AIR','tempat_usaha.NO_ALAMAT')
-        ->get();
-        $dataListrik = DB::table('jasa_listrik')
-        ->join('tempat_usaha','tempat_usaha.ID_TEMPAT','=','jasa_listrik.ID_TEMPAT')
-        ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
-        ->select('tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH','meteran_listrik.NOMTR_LISTRIK','meteran_listrik.MAKHIR_LISTRIK','tempat_usaha.NO_ALAMAT')
         ->get();
-    } catch(\Exception $e){
-        return view('admin.print-form',['dataAir'=>$dataAir,'dataListrik'=>$dataListrik])->with('error','Kesalahan SIstem');
-    }
-        return view('admin.print-form',['dataAir'=>$dataAir,'dataListrik'=>$dataListrik]);
+        return view('admin.print-form',['dataset'=>$dataset]);
     }
 }
