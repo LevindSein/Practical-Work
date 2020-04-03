@@ -11,5 +11,4 @@ Please doing :
 4. php artisan key:generate
 
 on Progress :
-Manajemen Grafik
-Surat Peringatan
+DEPLOY

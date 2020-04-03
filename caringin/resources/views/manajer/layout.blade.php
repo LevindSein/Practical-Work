@@ -31,13 +31,11 @@
             rel="stylesheet">
 
         <link rel="icon" href="{{asset('img/logo.png')}}">
-
         <script src="{{asset('js/animate.min.js')}}"></script>
 
     </head>
 
     <body id="page-top">
-        
     <div class="se-pre-con"></div>
 
         <!-- Page Wrapper -->
@@ -295,9 +293,8 @@
             <script src="{{asset('js/pdfmake.min.js')}}"></script>
             <script src="{{asset('js/vfs_fonts.js')}}"></script>
             <script src="{{asset('js/buttons.html5.min.js')}}"></script>
-            <script src="{{asset('js/buttons.print.min.js')}}"></script>
-            <script src="{{asset('js/buttons.colvis.min.js')}}"></script>
-            
+            <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
+
             <!--for column table toggle-->
             <script>
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
