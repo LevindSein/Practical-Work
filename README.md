@@ -11,4 +11,9 @@ Please doing :
 4. php artisan key:generate
 
 on Progress :
-DEPLOY
+1. STRUK KASIR
+2. Tambah User
+3. Reset User
+4. Hapus User
+5. Read ID_USER
+6. DEPLOY
