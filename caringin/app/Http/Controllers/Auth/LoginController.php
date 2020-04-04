@@ -57,8 +57,11 @@ class LoginController extends Controller
 
         if($user != null && $user->NAMA_USER == $username){
             if($pass == $user->PASSWORD){
-                if($user->ROLE == "Super Admin" || $user->ROLE == "admin"){
+                if($user->ROLE == "Super Admin"){
                     return redirect()->route('showdashboard')->with('success','Login Berhasil');
+                }
+                else if($user->ROLE == "admin"){
+                    return redirect()->route('tagihanAdmin')->with('success','Login Berhasil');
                 }
                 else if($user->ROLE == "kasir"){
                     return redirect()->route('lapTagihanKasir')->with('success','Login Berhasil');
@@ -67,7 +70,7 @@ class LoginController extends Controller
                     return redirect()->route('showdashboardmanajer')->with('success','Login Berhasil');
                 }
                 else if($user->ROLE == "keuangan"){
-                    return redirect()->route('index')->with('error','Login Berhasil');
+                    return redirect()->route('showpenerimaanharian')->with('success','Login Berhasil');
                 }
                 else{
                     return redirect()->route('index')->with('error','Login Gagal Harap Hubungi Super Admin');    

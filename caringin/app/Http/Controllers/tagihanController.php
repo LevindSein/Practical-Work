@@ -14,19 +14,341 @@ use Exception;
 
 class tagihanController extends Controller
 {
-    public function tagihanNas(){
-    try{
+    //Admin Biasa
+    public function tagihanNasAdmin(){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
-    }catch(\Exception $e){
-        return view('admin.tagihan-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
+        return view('normal.tagihan-nasabah',['dataset'=>$dataset]);
     }
+
+    public function formtagihanAdmin($id){
+        try{
+            $dataset = DB::table('tempat_usaha')
+            ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+            ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
+            ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
+            ->leftJoin('tarif_kebersihan','tempat_usaha.ID_TRFKEBERSIHAN','=','tarif_kebersihan.ID_TRFKEBERSIHAN')
+            ->leftJoin('tarif_ipk','tempat_usaha.ID_TRFIPK','=','tarif_ipk.ID_TRFIPK')
+            ->leftJoin('tarif_keamanan','tempat_usaha.ID_TRFKEAMANAN','=','tarif_keamanan.ID_TRFKEAMANAN')
+            ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','tempat_usaha.ID_TRFAIR',
+                    'meteran_air.MAKHIR_AIR','meteran_listrik.MAKHIR_LISTRIK',
+                    'tempat_usaha.ID_TRFLISTRIK', 'nasabah.NM_NASABAH',
+                    'tarif_kebersihan.TRF_KEBERSIHAN','tarif_ipk.TRF_IPK','tarif_keamanan.TRF_KEAMANAN')
+            ->where('tempat_usaha.ID_TEMPAT',$id)
+            ->get();
+    
+            $timezone = date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d", time());
+            $time = strtotime($date);
+            $finalDate = date("Y-m-01", strtotime("+1 month", $time));    
+                
+            $pernah = DB::table('tagihanku')
+            ->select('tagihanku.TGL_TAGIHAN','tagihanku.CREATED_AT','tagihanku.KET')
+            ->where('tagihanku.ID_TEMPAT',$id)
+            ->orderBy('tagihanku.CREATED_AT', 'desc')
+            ->first();
+    
+            if($pernah == NULL){
+                return view('normal.form-tagihan',['dataset'=>$dataset]);
+            }
+            else{
+                $tgl_pernah = $pernah->TGL_TAGIHAN;
+                if($tgl_pernah == $finalDate && $pernah->KET == NULL){
+                    return redirect()->route('tagihanAdmin')->with('warning','Tagihan Sudah Ditambah');
+                }
+                else{
+                    return view('normal.form-tagihan',['dataset'=>$dataset]);
+                }
+            }
+        }catch(\Exception $e){
+            return redirect()->route('tagihanAdmin')->with('error','Kesalahan Sistem');
+        }
+        }
+
+    public function storetagihanAdmin(Request $request ,$id){
+        try{
+            $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
+            $dayaListrik = $usaha->DAYA;
+            $id_nasabah = $usaha->ID_NASABAH;
+            $id_pemilik = $usaha->ID_PEMILIK;
+            $blok = $usaha->BLOK;
+    
+            $meterAirID = DB::table('tempat_usaha')
+            ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
+            ->where('tempat_usaha.ID_TEMPAT',$id)
+            ->first();
+            $akhirAir = $meterAirID->MAKHIR_AIR;
+            $airId = $meterAirID->ID_MAIR;
+    
+            $meterListrikID = DB::table('tempat_usaha')
+            ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
+            ->where('tempat_usaha.ID_TEMPAT',$id)
+            ->first();
+            $akhirListrik = $meterListrikID->MAKHIR_LISTRIK;
+            $listrikId = $meterListrikID->ID_MLISTRIK;
+    
+            //ipk keamanan kebersihan
+            $tarif_ipk = NULL;
+            $tarif_keamanan = NULL;
+            $ttl_ipkeamanan = 0;
+            $tarif_kebersihan = NULL;
+            $ttl_kebersihan = 0;
+    
+            //air
+            $inputAir = NULL;
+            $pakai_air = NULL;
+            $byr_air = NULL;
+            $byr_pemeliharaan = NULL;
+            $byr_arkot = NULL;
+            $byr_beban = NULL;
+            $ttl_air = 0;
+    
+            //listrik
+            $inputListrik = NULL;
+            $pakai = NULL;
+            $byr_listrik = NULL;
+            $rekmin = NULL;
+            $b_blok1 = NULL;
+            $b_blok2 = NULL;
+            $b_beban = NULL;
+            $bpju = NULL;
+            $ttl_listrik = 0;
+    
+            for($i=0;$i<4;$i++){
+                if($i == 0){
+                     //Kal Air
+                    if($usaha->ID_TRFAIR != Null){
+                        $tarif_air = DB::table('tarif_air')->first();
+                        $expInputAir = explode(",",$request->get('mAir'));
+                        $inputAir = "";
+                        for($m=0;$m<count($expInputAir);$m++){
+                            $inputAir = $inputAir.$expInputAir[$m];
+                        }
+                        $awal_air = $akhirAir;
+                        
+                        if($inputAir < $awal_air)
+                        {
+                            return redirect()->route('showformtagihanAdmin',['id'=>$id])->with('warning','Meter Baru Salah');
+                        }
+                        else
+                        {                
+                            $pakai_air = $inputAir - $awal_air;
+                            if($pakai_air > 10){
+                                $a = 10 * $tarif_air->TRF_AIR1;
+                                $b = ($pakai_air - 10) * $tarif_air->TRF_AIR2;
+                                $byr_air = $a + $b;
+                        
+                                $byr_pemeliharaan = $tarif_air->TRF_PEMELIHARAAN;
+                                $byr_beban = $tarif_air->TRF_BEBAN;
+                                $byr_arkot = ($tarif_air->TRF_ARKOT / 100) * $byr_air;
+                        
+                                $c = ($byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot) * ($tarif_air->PPN_AIR / 100);
+    
+                                $ttl_air = $byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot + $c;
+                            }
+                            else{
+                                $byr_air = $pakai_air * $tarif_air->TRF_AIR1;
+    
+                                $byr_pemeliharaan = $tarif_air->TRF_PEMELIHARAAN;
+                                $byr_beban = $tarif_air->TRF_BEBAN;
+                                $byr_arkot = ($tarif_air->TRF_ARKOT / 100) * $byr_air;
+                        
+                                $c = ($byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot) * ($tarif_air->PPN_AIR / 100);
+    
+                                $ttl_air = $byr_air + $byr_pemeliharaan + $byr_beban + $byr_arkot + $c;
+                            }
+                        }
+                    }
+                }
+                else if($i == 1){
+                    //Kal Listrik
+                    if($usaha->ID_TRFLISTRIK != Null){
+                        $tarif_listrik = DB::table('tarif_listrik')->first();
+                    
+                        $expInputListrik = explode(",",$request->get('mListrik'));
+                        $inputListrik = "";
+                        for($k=0;$k<count($expInputListrik);$k++){
+                            $inputListrik = $inputListrik.$expInputListrik[$k];
+                        }
+                        $awal_listrik = $akhirListrik;
+                
+                        if($inputListrik < $akhirListrik)
+                        {
+                            return redirect()->route('showformtagihanAdmin',['id'=>$id])->with('warning','Meter Baru Salah');
+                        }
+                        else
+                        {
+                            $pakai = $inputListrik - $awal_listrik;
+            
+                            $a = round($usaha->DAYA * $tarif_listrik->VAR_STANDAR / 1000);
+                            $b_blok1 = $tarif_listrik->VAR_BLOK1 * $a;
+    
+                            $b = $pakai - $a;
+                            $b_blok2 = $tarif_listrik->VAR_BLOK2 * $b;
+                            $b_beban = $usaha->DAYA * $tarif_listrik->VAR_BEBAN;
+    
+                            $c = $b_blok1 + $b_blok2 + $b_beban;
+                            $rekmin = 53.44 * $usaha->DAYA;
+    
+                            if($rekmin > $c){
+                                $bpju = ($tarif_listrik->VAR_BPJU / 100) * $rekmin;
+                                $b_blok1 = 0;
+                                $b_blok2 = 0;
+                                $b_beban = 0;
+                                $byr_listrik = $bpju + $rekmin;
+                                $ppn_listrik = ($tarif_listrik->PPN_LISTRIK / 100) * $byr_listrik;
+                                $ttl_listrik = $byr_listrik + $ppn_listrik;
+                            }
+                            else{
+                                $bpju = ($tarif_listrik->VAR_BPJU / 100) * $c;
+                                $rekmin = 0;
+                                $byr_listrik = $bpju + $b_blok1 + $b_blok2 + $b_beban;
+                                $ppn_listrik = ($tarif_listrik->PPN_LISTRIK / 100) * $byr_listrik;
+                                $ttl_listrik = $byr_listrik + $ppn_listrik;
+                            }
+                        }
+                    }
+                }
+                else if($i == 2){
+                    //Kal Kebersihan
+                    if($usaha->ID_TRFKEBERSIHAN != Null){
+                        $tarif = DB::table('tempat_usaha')
+                        ->leftJoin('tarif_kebersihan','tempat_usaha.ID_TRFKEBERSIHAN','=','tarif_kebersihan.ID_TRFKEBERSIHAN')
+                        ->where('tempat_usaha.ID_TEMPAT',$id)
+                        ->select('tarif_kebersihan.TRF_KEBERSIHAN')
+                        ->first();
+    
+                        $tarif_kebersihan = $tarif->TRF_KEBERSIHAN;
+                        $ttl_kebersihan = $tarif_kebersihan * $usaha->JML_ALAMAT;
+                    }
+                }
+                else{
+                    //Kal IPK Keamanan
+                    if($usaha->ID_TRFIPK != Null && $usaha->ID_TRFKEAMANAN != Null){
+                        $tipk = DB::table('tempat_usaha')
+                        ->leftJoin('tarif_ipk','tempat_usaha.ID_TRFIPK','=','tarif_ipk.ID_TRFIPK')
+                        ->where('tempat_usaha.ID_TEMPAT',$id)
+                        ->select('tarif_ipk.TRF_IPK')
+                        ->first();
+                        $tkeamanan = DB::table('tempat_usaha')
+                        ->leftJoin('tarif_keamanan','tempat_usaha.ID_TRFKEAMANAN','=','tarif_keamanan.ID_TRFKEAMANAN')
+                        ->where('tempat_usaha.ID_TEMPAT',$id)
+                        ->select('tarif_keamanan.TRF_KEAMANAN')
+                        ->first();
+    
+                        $tarif_ipk = $tipk->TRF_IPK;
+                        $tarif_keamanan = $tkeamanan->TRF_KEAMANAN;
+    
+                        $byr_ipk = $tarif_ipk * $usaha->JML_ALAMAT;
+                        $byr_keamanan = $tarif_keamanan * $usaha->JML_ALAMAT;
+                        $ttl_ipkeamanan = $byr_ipk + $byr_keamanan;
+                    }
+                }
+            }
+    
+            $ttl_tagihan = $ttl_air + $ttl_listrik + $ttl_ipkeamanan + $ttl_kebersihan;
+    
+            //Set Tanggal Tagihan    
+            date_default_timezone_set('Asia/Jakarta');
+            $date = date("Y-m-d", time());
+            $nMonths = 1;
+            $finalDate = $this->endCycle($date, $nMonths);
+            $time = strtotime($finalDate);
+            $expired = date("Y-m-14", strtotime("+1 month", $time));
+            $bln = date("Y-m", strtotime($finalDate));
+            $thn = date("Y", strtotime($finalDate));
+    
+            //Cek Libur
+            $tgl_exp = $expired;
+            $i = 0;
+            do{
+                $tgl_exp = date("Y-m-d", strtotime($tgl_exp.'+1 day'));
+                $libur = DB::table('hari_libur')
+                ->where('hari_libur.TGL_HARI',$tgl_exp)
+                ->select('TGL_HARI')
+                ->first();
+                $i++;
+            } while($libur != null);
+    
+            //Store Data Ke Database
+            $data = new Tagihan([
+                'id_tempat'=>$id,
+                'id_pemilik'=>$id_pemilik,
+                'id_nasabah'=>$id_nasabah,
+                'blok_tempat'=>$blok,
+                'tgl_tagihan'=>$finalDate,
+                'expired'=>$tgl_exp,
+                'bln_tagihan'=>$bln,
+                'thn_tagihan'=>$thn,
+                'stt_lunas'=>0,
+                'stt_bayar'=>0,
+                'awal_air'=>$akhirAir,
+                'akhir_air'=>$inputAir,
+                'pakai_air'=>$pakai_air,
+                'byr_air'=>$byr_air,
+                'byr_pemeliharaan'=>$byr_pemeliharaan,
+                'byr_beban'=>$byr_beban,
+                'byr_arkot'=>$byr_arkot,
+                'ttl_air'=>$ttl_air,
+                'realisasi_air'=>0,
+                'selisih_air'=>$ttl_air,
+                'denda_air'=>0,
+                'daya_listrik'=>$dayaListrik,
+                'awal_listrik'=>$akhirListrik,
+                'akhir_listrik'=>$inputListrik,
+                'pakai_listrik'=>$pakai,
+                'byr_listrik'=>$byr_listrik,
+                'rek_min'=>$rekmin,
+                'b_blok1'=>$b_blok1,
+                'b_blok2'=>$b_blok2,
+                'b_beban'=>$b_beban,
+                'bpju'=>$bpju,
+                'ttl_listrik'=>$ttl_listrik,
+                'realisasi_listrik'=>0,
+                'selisih_listrik'=>$ttl_listrik,
+                'denda_listrik'=>0,
+                'byr_kebersihan'=>$tarif_kebersihan,
+                'ttl_kebersihan'=>$ttl_kebersihan,
+                'realisasi_kebersihan'=>0,
+                'selisih_kebersihan'=>$ttl_kebersihan,
+                'byr_ipk'=>$tarif_ipk,
+                'byr_keamanan'=>$tarif_keamanan,
+                'ttl_ipkeamanan'=>$ttl_ipkeamanan,
+                'realisasi_ipkeamanan'=>0,
+                'selisih_ipkeamanan'=>$ttl_ipkeamanan,
+                'ttl_tagihan'=>$ttl_tagihan,
+                'realisasi'=>0,
+                'selisih'=>$ttl_tagihan,
+                'denda'=>0,
+                'stt_denda'=>0
+            ]);
+            $data->save();
+    
+            DB::table('meteran_air')->where('ID_MAIR',$airId)->update([
+                'MAKHIR_AIR'=>$inputAir
+            ]);
+            DB::table('meteran_listrik')->where('ID_MLISTRIK',$listrikId)->update([
+                'MAKHIR_LISTRIK'=>$inputListrik
+            ]);
+        } catch(\Exception $e){
+            return redirect()->route('showformtagihanAdmin',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
+        }
+            return redirect()->route('tagihanAdmin')->with('success','Tagihan Ditambah');
+        }
+    //End Admin Biasa
+    
+    public function tagihanNas(){
+        $dataset = DB::table('tempat_usaha')
+        ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
+        'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
+        ->get();
         return view('admin.tagihan-nasabah',['dataset'=>$dataset]);
     }
-    
+
     public function formtagihan($id){
     try{
         $dataset = DB::table('tempat_usaha')

@@ -320,9 +320,10 @@ class dashboardController extends Controller
         $selisih = 0;
         foreach($dapat as $d){
             $realisasi = $d->realisasi;
-            $selisihJan = $d->selisih;
+            $selisih = $d->selisih;
         }
         $semua = array($realisasi,$selisih);
+        
         return $semua;
     }
 }

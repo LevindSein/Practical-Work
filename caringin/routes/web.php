@@ -126,6 +126,12 @@ Route::get('showtambahuser','userController@tambahuser');
 Route::get('showdashboard','dashboardController@dashboard')->name('showdashboard');
 //ENDADMIN
 
+//ADMINNORMAL
+Route::get('tambahtagihan/admin','tagihanController@tagihanNasAdmin')->name('tagihanAdmin');
+Route::get('showformtagihan/admin/{id}','tagihanController@formtagihanAdmin')->name('showformtagihanAdmin');
+Route::post('tagihan/store/admin/{id}','tagihanController@storetagihanAdmin');
+//ENDADMINNORMAL
+
 //KASIR
 Route::get('showtagihankasir','laporanController@showTagihanKasir')->name('lapTagihanKasir');
 Route::get('datatagihankasir/{id}','tagihanController@dataTagihanKasir')->name('datatagihanKasir');
@@ -140,7 +146,7 @@ Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 //ENDKASIR
 
 //KEUANGAN
-Route::get('showpenerimaanharian','laporanController@showPenerimaanHarian');
+Route::get('showpenerimaanharian','laporanController@showPenerimaanHarian')->name('showpenerimaanharian');
 Route::get('showpenerimaanbulanan','laporanController@showPenerimaanBulanan');
 Route::get('showpendapatantahunan','laporanController@showPendapatanTahunan');
 Route::get('print/harian/keuangan/{tgl}','laporanController@printHarianKeuangan');
