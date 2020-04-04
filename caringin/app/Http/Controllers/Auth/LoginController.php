@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\User;
 use Exception;
 
@@ -47,7 +48,12 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-    public function storeUser(Request $request){
+    public function logoutUser(){
+        Session::flush();
+        return redirect('login')->with('Success','Logout Berhasil');
+    }
+
+    public function storeLogin(Request $request){
         $username = $request->get('username');
         $pass = md5($request->get('password'));
 
@@ -57,6 +63,9 @@ class LoginController extends Controller
 
         if($user != null && $user->NAMA_USER == $username){
             if($pass == $user->PASSWORD){
+                Session::put('username',$user->NAMA_USER);
+                Session::put('role',$user->ROLE);
+                Session::put('login',TRUE);
                 if($user->ROLE == "Super Admin"){
                     return redirect()->route('showdashboard')->with('success','Login Berhasil');
                 }

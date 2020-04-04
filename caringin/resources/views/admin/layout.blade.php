@@ -367,6 +367,7 @@
                     </nav>
                     <!-- End of Topbar -->
                     @include('admin.flash-message')
+                    @include('admin.message')
                     @yield('content')
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">
@@ -528,6 +529,13 @@
                 $(document).ready(function(){
                     $("#success-alert,#warning-alert,#error-alert,#info-alert").fadeTo(1700, 500).slideUp(500, function(){
                         $("#success-alert,#warning-alert,#error-alert,#info-alert").slideUp(500);
+                    });
+                });
+            </script>
+            <script>
+                $(document).ready(function(){
+                    $("#pass-alert").fadeTo(8000, 7000).slideUp(7000, function(){
+                        $("#pass-alert").slideUp(7000);
                     });
                 });
             </script>

@@ -12,28 +12,21 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user">
+              <form class="user" action="storeuser" method="POST">
+              @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="exampleInputNamaUser" placeholder="Nama User">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-user" id="exampleInputPasswordUser" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-user" id="exampleInputKonfirmasiPasswordUser" placeholder="Konfirmasi Password">
+                  <input type="text" required class="form-control form-control-user" id="exampleInputNamaUser" name="username" placeholder="Nama User">
                 </div>
                 <div class="form-group">
                   <label for="sel1">Kategori User:</label>
-                  <select class="form-control" id="sel1">
-                    <option>Admin</option>
-                    <option>Kasir</option>
-                    <option>Bag. Keuangan</option>
-                    <option>Manajer</option>
+                  <select class="form-control" id="sel1" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="kasir">Kasir</option>
+                    <option value="keuangan">Bag. Keuangan</option>
+                    <option value="manajer">Manager</option>
                   </select>
                 </div>
-                <a href="index.html" class="btn btn-primary btn-user btn-block">
-                  Tambah User
-                </a>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Tambah User</button>
               </form>
               
             </div>
@@ -43,4 +36,17 @@
 
     <!-- End of Main Content -->
 
+@endsection
+
+@section('js')
+<script>
+var field = document.querySelector('[name="username"]');
+
+field.addEventListener('keypress', function ( event ) {  
+   var key = event.keyCode;
+    if (key === 32) {
+      event.preventDefault();
+    }
+});
+</script>
 @endsection

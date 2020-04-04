@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 //LOGIN
 Route::get('login','Auth\LoginController@index')->name('index');
-Route::post('storeuser','Auth\LoginController@storeUser');
+Route::post('storelogin','Auth\LoginController@storeLogin');
+//LOGOUT
+Route::get('logout','Auth\LoginController@logoutUser');
 
 //ADMIN
 //Nasabah
@@ -119,8 +121,9 @@ Route::get('tambahlibur','liburanController@tambahLibur');
 Route::post('storelibur','liburanController@storeLibur');
 
 //User
-Route::get('showdatauser','userController@showdatauser');
+Route::get('showdatauser','userController@showdatauser')->name('datauser');
 Route::get('showtambahuser','userController@tambahuser');
+Route::post('storeuser','userController@storeUser');
 
 //Dashboard
 Route::get('showdashboard','dashboardController@dashboard')->name('showdashboard');

@@ -40,7 +40,7 @@
                     @include('admin.flash-message')
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
-                  <form class="user" action="storeuser" method="POST">
+                  <form class="user" action="storelogin" method="POST">
                   @csrf
                     <div class="form-group">
                       <input required type="text" class="form-control form-control-user" id="exampleInputUsername" name="username" aria-describedby="emailHelp" placeholder="Username">

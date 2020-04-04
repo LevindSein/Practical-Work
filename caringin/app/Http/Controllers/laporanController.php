@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class laporanController extends Controller
 {
@@ -521,11 +522,21 @@ class laporanController extends Controller
 
     //Keuangan
     public function showPenerimaanHarian(){
-        $dataset = DB::table('tagihanku')
-            ->select('TGL_BAYAR','STT_BAYAR')
-            ->groupBy('TGL_BAYAR','STT_BAYAR')
-            ->get();
-        return view('keuangan.penerimaan-harian',['dataset'=>$dataset]);
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
+                $dataset = DB::table('tagihanku')
+                ->select('TGL_BAYAR','STT_BAYAR')
+                ->groupBy('TGL_BAYAR','STT_BAYAR')
+                ->get();
+                return view('keuangan.penerimaan-harian',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printHarianKeuangan($tgl){
