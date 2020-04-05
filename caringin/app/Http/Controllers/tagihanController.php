@@ -1016,51 +1016,46 @@ class tagihanController extends Controller
             }
             return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset,'ids'=>$ids]);
             break;
-    
-            case "Rincian":
-            $dataku = DB::table('nasabah')
-            ->where('ID_NASABAH',$id)
-            ->first();
-
-            if($request->get('check') != null){
-                $ids = $request->get('check');
-                $dataset = DB::table('tagihanku')
-                ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-                ->select('tagihanku.TGL_TAGIHAN','tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
-                         'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH',
-                         'tagihanku.SELISIH_KEBERSIHAN')
-                ->where([
-                    ['tagihanku.ID_NASABAH',$id],
-                    ['tagihanku.STT_LUNAS', 0],
-                    ['tagihanku.STT_BAYAR', 0]
-                ])
-                ->whereIn('tagihanku.ID_TAGIHANKU',$ids)
-                ->get();
-            }
-            else{
-                $dataset = DB::table('tagihanku')
-                ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-                ->select('tagihanku.TGL_TAGIHAN','tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
-                         'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH',
-                         'tagihanku.SELISIH_KEBERSIHAN')
-                ->where([
-                    ['tagihanku.ID_NASABAH',$id],
-                    ['tagihanku.STT_LUNAS', 0],
-                    ['tagihanku.STT_BAYAR', 0]
-                ])
-                ->get();
-            }
-            return view('kasir.print-faktur',['dataku'=>$dataku,'dataset'=>$dataset]);
-            break;
         }
     }
 
-    public function storeCheckout(Request $request){
-    try{
+    public function printFaktur(Request $request, $id){
         $ids = $request->get('bayar');
         foreach($ids as $id){
             $id_exp = explode(",",$id);
         }
+
+        $dataset = DB::table('tagihanku')
+                ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+                ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+                ->select('tagihanku.ID_TAGIHANKU',
+                         'nasabah.NM_NASABAH','nasabah.NO_ANGGOTA','tagihanku.TGL_TAGIHAN',
+                         'tagihanku.SELISIH_AIR','tagihanku.DENDA_AIR','tempat_usaha.KD_KONTROL',
+                         'tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH',
+                         'tagihanku.SELISIH_KEBERSIHAN')
+                ->where([
+                    ['tagihanku.STT_LUNAS', 0],
+                    ['tagihanku.STT_BAYAR', 0]
+                ])
+                ->whereIn('tagihanku.ID_TAGIHANKU',$id_exp)
+                ->get();
+        
+        $dataku = DB::table('tagihanku')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->select('nasabah.NM_NASABAH','nasabah.NO_ANGGOTA')
+        ->where([
+            ['tagihanku.STT_LUNAS', 0],
+            ['tagihanku.STT_BAYAR', 0]
+        ])
+        ->where('tagihanku.ID_TAGIHANKU',$id_exp[0])
+        ->first();
+
+        return view('kasir.print-faktur',['dataku'=>$dataku,'dataset'=>$dataset,'id_exp'=>$id_exp]);
+    }
+
+    public function storeCheckout(Request $request,$ids){
+    try{
+        $id_exp = explode(",",$ids);
 
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
@@ -1069,6 +1064,7 @@ class tagihanController extends Controller
         $d = DB::table('tagihanku')
         ->whereIn('ID_TAGIHANKU', $id_exp)
         ->get();
+        
         foreach($d as $data){
             DB::table('tagihanku')
             ->where('ID_TAGIHANKU', $data->ID_TAGIHANKU)

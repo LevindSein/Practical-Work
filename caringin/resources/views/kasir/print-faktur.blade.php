@@ -2,6 +2,7 @@
 $timezone = date_default_timezone_set('Asia/Jakarta');
 $now = date("d M Y", time());
 $total = 0;
+$id = implode(",",$id_exp);
 ?>
 
 
@@ -19,7 +20,7 @@ $total = $d->SELISIH + $total;
     <link rel="stylesheet" href="{{asset('css/style-faktur.css')}}" media="all" />
   </head>
   
-  <body onload="window.print()">
+  <body>
     <header class="clearfix">
       <h1>Rincian Tagihan</h1>
       <div id="company" class="clearfix">
@@ -93,5 +94,11 @@ $total = $d->SELISIH + $total;
         <div><b>Said</b></div>
       </div>
     </main>
+    <script type="text/javascript">
+      window.print();
+      window.onafterprint=function(){
+        window.location.href = "{{URL::to('storecheckout',['id' => "$id"])}}"
+      }
+    </script>
   </body>
 </html>

@@ -142,9 +142,10 @@ Route::get('all/datatagihankasir/{id}','tagihanController@dataTagihanKasirAll')-
 Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name('bayartagihanKasir');
 Route::get('bayarankasir/store/{id}/{real}','tagihanController@storeBayarKasir');
 Route::post('printstruk/{id}','tagihanController@printStrukKasir');
+Route::post('printfaktur/{id}','tagihanController@printFaktur');
 Route::get('penerimaanharian','tagihanController@penerimaan');
 Route::post('checkout/tagihan/{id}','tagihanController@checkout');
-Route::post('storecheckout','tagihanController@storeCheckout');
+Route::get('storecheckout/{ids}','tagihanController@storeCheckout');
 Route::get('print/penerimaan/{tgl}','tagihanController@printPenerimaan');
 //ENDKASIR
 

@@ -153,9 +153,6 @@ $now = date("d-m-Y", time());
         <div class="notice"> <?php $exp = date("d M Y", strtotime($dataset->EXPIRED)); ?> Jatuh Tempo Pertama Tanggal {{$exp}}</div>
       </div>
     </main>
-    <footer>
-      Terima kasih.
-    </footer>
     <script type="text/javascript">
       window.print();
       window.onafterprint=function(){

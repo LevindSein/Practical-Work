@@ -16,7 +16,7 @@ $id = implode(",",$ids);
           <div class="col-lg-6">
             <div class="p-4">
             @foreach ($dataset as $d)
-            <form class="user" action="{{url('storecheckout')}}" method="POST">
+            <form class="user" action="{{url('printfaktur',[$id])}}" method="POST">
               @csrf
                 <div class="form-group">
                   Nama Nasabah

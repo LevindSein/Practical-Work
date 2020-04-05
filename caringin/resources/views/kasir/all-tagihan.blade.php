@@ -103,7 +103,6 @@
             </div>
             <div style="margin-left:35px;margin-bottom:35px;">
                 <input name="button" type="submit" class="btn btn-primary" value="Checkout">
-                <input name="button" type="submit" class="btn btn-primary" value="Rincian">
             </div>
             </form>
             <!-- End Tables -->
