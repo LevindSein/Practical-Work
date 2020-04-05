@@ -50,7 +50,7 @@ class LoginController extends Controller
 
     public function logoutUser(){
         Session::flush();
-        return redirect('login')->with('Success','Logout Berhasil');
+        return redirect('login')->with('success','Logout Berhasil');
     }
 
     public function storeLogin(Request $request){
