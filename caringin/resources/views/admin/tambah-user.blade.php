@@ -6,7 +6,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-center">
-          <h1 class="h3 mb-0 text-gray-800">Tambah User</h1>
+          <h1 class="h3 mb-0 text-gray-800">Tambah Pegawai</h1>
         </div>
 
         <div class="row justify-content-center">
@@ -20,13 +20,13 @@
                 <div class="form-group">
                   <label for="sel1">Kategori User:</label>
                   <select class="form-control" id="sel1" name="role">
-                    <option value="admin">Admin</option>
+                    <option value="admin">User</option>
                     <option value="kasir">Kasir</option>
                     <option value="keuangan">Bag. Keuangan</option>
                     <option value="manajer">Manager</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">Tambah User</button>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Tambah</button>
               </form>
               
             </div>

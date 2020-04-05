@@ -242,7 +242,7 @@
                         aria-expanded="true"
                         aria-controls="collapseUser">
                         <i class="fas fa-fw fa-user"></i>
-                        <span>User</span>
+                        <span>Pegawai</span>
                     </a>
                     <div
                         id="collapseUser"
@@ -250,8 +250,8 @@
                         aria-labelledby="headingUser"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showtambahuser')}}">Tambah User</a>
-                            <a class="collapse-item" href="{{url('showdatauser')}}">Data User</a>
+                            <a class="collapse-item" href="{{url('showtambahuser')}}">Tambah Pegawai</a>
+                            <a class="collapse-item" href="{{url('showdatauser')}}">Data Pegawai</a>
                         </div>
                     </div>
                 </li>

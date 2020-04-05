@@ -698,6 +698,40 @@ class laporanController extends Controller
         return view('manajer.laporan-tahunan',['dataset'=>$dataset]);
     }
 
+    public function rekapTunggakanManager(){
+        $dataset = DB::table('tagihanku')
+        ->select('THN_TAGIHAN')
+        ->groupBy('THN_TAGIHAN')
+        ->get();
+        return view('manajer.rekap-tunggakan',['dataset'=>$dataset]);
+    }
+
+    public function printTunggakanManajer($thn){
+        $dataset = DB::table('tagihanku')
+        ->select('BLN_TAGIHAN',
+            DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
+            DB::raw('SUM(REALISASI_KEBERSIHAN) as Kebersihan'),
+            DB::raw('SUM(REALISASI_AIR) as Air'),
+            DB::raw('SUM(REALISASI_IPKEAMANAN) as Keamanan'),
+            DB::raw('SUM(SELISIH_LISTRIK) as selListrik'),
+            DB::raw('SUM(SELISIH_KEBERSIHAN) as selKebersihan'),
+            DB::raw('SUM(SELISIH_AIR) as selAir'),
+            DB::raw('SUM(SELISIH_IPKEAMANAN) as selKeamanan'),
+            DB::raw('SUM(SELISIH) as Selisih'),
+            DB::raw('SUM(REALISASI) as Realisasi')
+        )
+        ->where('THN_TAGIHAN',$thn)
+        ->groupBy('BLN_TAGIHAN')
+        ->get();
+        
+        $data = DB::table('tagihanku')
+            ->select('THN_TAGIHAN','BLN_TAGIHAN')
+            ->where('THN_TAGIHAN',$thn)
+            ->first();
+        
+        return view('manajer.print-tunggakan',['dataset'=>$dataset,'data'=>$data]);
+    }
+
     public function showPemakaianManager(){
         $dataset = DB::table('tagihanku')
         ->select('BLN_TAGIHAN')

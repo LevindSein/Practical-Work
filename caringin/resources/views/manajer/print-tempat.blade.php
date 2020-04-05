@@ -19,7 +19,7 @@ for($i=0;$i<$ttlBlok;$i++){
   <head>
     <meta charset="utf-8">
     <title>PT. PENGELOLA PUSAT PERDAGANGAN CARINGIN</title>
-    <link rel="stylesheet" href="{{asset('css/style-bulanan.css')}}" media="all" />
+    <link rel="stylesheet" href="{{asset('css/style-harian.css')}}" media="all" />
   </head>
   
   <body onload="window.print()">
@@ -30,8 +30,13 @@ for($i=0;$i<$ttlBlok;$i++){
             <th class="tg-r8fv" rowspan="2">Blok</th>
             <th class="tg-r8fv" rowspan="2">Jumlah Unit</th>
             <th class="tg-r8fv" colspan="4">Pengguna</th>
+            <th class="tg-r8fv" colspan="4">Sisa</th>
           </tr>
           <tr>
+              <th>Listrik</th>
+              <th>Air</th>
+              <th>Kebersihan</th>
+              <th>Keamanan</th>
               <th>Listrik</th>
               <th>Air</th>
               <th>Kebersihan</th>
@@ -45,6 +50,10 @@ for($i=0;$i<$ttlBlok;$i++){
               <td class="tg-cegc">{{number_format($Air[$i])}}</td>
               <td class="tg-cegc">{{number_format($Kebersihan[$i])}}</td>
               <td class="tg-cegc">{{number_format($Keamanan[$i])}}</td>
+              <td class="tg-cegc">{{number_format($Blokku[$i] - $Listrik[$i])}}</td>
+              <td class="tg-cegc">{{number_format($Blokku[$i] - $Air[$i])}}</td>
+              <td class="tg-cegc">{{number_format($Blokku[$i] - $Kebersihan[$i])}}</td>
+              <td class="tg-cegc">{{number_format($Blokku[$i] - $Keamanan[$i])}}</td>
           </tr>
         @endfor
           <tr>
@@ -54,6 +63,10 @@ for($i=0;$i<$ttlBlok;$i++){
             <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Air)}}</td>
             <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Kebersihan)}}</td>
             <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Keamanan)}}</td>
+            <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Blok - $ttl_Listrik)}}</td>
+            <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Blok - $ttl_Air)}}</td>
+            <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Blok - $ttl_Kebersihan)}}</td>
+            <td class="tg-vbo4" style="text-align:center;">{{number_format($ttl_Blok - $ttl_Keamanan)}}</td>
           </tr>
         </table>
     </main>

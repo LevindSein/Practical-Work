@@ -38,8 +38,13 @@ for($i=0;$i<$ttlBlok;$i++){
                       <th rowspan="2">Blok</th>
                       <th rowspan="2">Jumlah Unit</th>
                       <th colspan="4">Pengguna</th>
+                      <th colspan="4">Sisa</th>
                     </tr>
                     <tr>
+                      <th>Listrik</th>
+                      <th>Air</th>
+                      <th>Kebersihan</th>
+                      <th>Keamanan</th>
                       <th>Listrik</th>
                       <th>Air</th>
                       <th>Kebersihan</th>
@@ -56,6 +61,10 @@ for($i=0;$i<$ttlBlok;$i++){
                         <td>{{number_format($Air[$i])}}</td>
                         <td>{{number_format($Kebersihan[$i])}}</td>
                         <td>{{number_format($Keamanan[$i])}}</td>
+                        <td>{{number_format($Blokku[$i] - $Listrik[$i])}}</td>
+                        <td>{{number_format($Blokku[$i] - $Air[$i])}}</td>
+                        <td>{{number_format($Blokku[$i] - $Kebersihan[$i])}}</td>
+                        <td>{{number_format($Blokku[$i] - $Keamanan[$i])}}</td>
                     </tr>
                   @endfor
                   </tbody>
@@ -67,6 +76,10 @@ for($i=0;$i<$ttlBlok;$i++){
                         <td style="font-weight: bold;">{{number_format($ttl_Air)}}</td>
                         <td style="font-weight: bold;">{{number_format($ttl_Kebersihan)}}</td>
                         <td style="font-weight: bold;">{{number_format($ttl_Keamanan)}}</td>
+                        <td style="font-weight: bold;">{{number_format($ttl_Blok - $ttl_Listrik)}}</td>
+                        <td style="font-weight: bold;">{{number_format($ttl_Blok - $ttl_Air)}}</td>
+                        <td style="font-weight: bold;">{{number_format($ttl_Blok - $ttl_Kebersihan)}}</td>
+                        <td style="font-weight: bold;">{{number_format($ttl_Blok - $ttl_Keamanan)}}</td>
                       </tr>
                   <t/foot>
                 </table>
@@ -100,7 +113,10 @@ $(document).ready(function () {
         "scrollCollapse": true,
         "paging": false,
         "bSortable": false,
-        "deferRender": true
+        "deferRender": true,
+        fixedColumns:   {
+            leftColumns: 1,
+        }
         });
     });
 </script>

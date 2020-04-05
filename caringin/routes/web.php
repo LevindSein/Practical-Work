@@ -167,6 +167,7 @@ Route::get('showlaporanharianmanager/filter','laporanController@filterHarianMana
 Route::get('showlaporanbulananmanager','laporanController@showBulananManager');
 Route::get('showlaporanbulananmanager/filter','laporanController@filterBulananManager');
 Route::get('showlaporantahunanmanager','laporanController@showTahunanManager');
+Route::get('rekaptunggakanmanager','laporanController@rekapTunggakanManager');
 Route::get('showpemakaianmanager','laporanController@showPemakaianManager');
 Route::get('tempatusahamanager','laporanController@tempatUsahaManager');
 Route::get('showlaporantagihanmanager','laporanController@showTagihanManager')->name('lapTagihanManager');
@@ -184,5 +185,6 @@ Route::get('print/rekapkebersihan/manajer/{bln}','laporanController@printRekapKe
 Route::get('print/rinciankebersihan/manajer/{bln}','laporanController@printRincianKebersihanManajer');
 Route::get('print/rekapkeamanan/manajer/{bln}','laporanController@printRekapKeamananManajer');
 Route::get('print/rinciankeamanan/manajer/{bln}','laporanController@printRincianKeamananManajer');
+Route::get('print/tunggakan/manajer/{thn}','laporanController@printTunggakanManajer');
 Route::get('print/tempat/manajer','laporanController@printTempatManajer');
 //ENDMANAJER
