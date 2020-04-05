@@ -540,6 +540,11 @@ class laporanController extends Controller
     }
 
     public function printHarianKeuangan($tgl){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->leftJoin('user','tagihanku.ID_USER','=','user.ID_USER')
         ->select('user.NAMA_USER',
@@ -560,18 +565,38 @@ class laporanController extends Controller
         ->where('TGL_BAYAR',$tgl)
         ->first();
         return view('keuangan.print-harian',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function showPenerimaanBulanan(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
             ->select('BLN_BAYAR','STT_BAYAR')
             ->groupBy('BLN_BAYAR','STT_BAYAR')
             ->get();
 
         return view('keuangan.penerimaan-bulanan',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printBulananKeuangan($bln){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->select(
             DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
@@ -585,9 +610,19 @@ class laporanController extends Controller
             ->where('BLN_BAYAR',$bln)
             ->first();
         return view('keuangan.print-bulanan',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printRincianKeuangan($bln){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->select('TGL_BAYAR',
             DB::raw('SUM(REALISASI_LISTRIK) as Listrik'),
@@ -602,9 +637,19 @@ class laporanController extends Controller
             ->where('BLN_BAYAR',$bln)
             ->first();
         return view('keuangan.print-rincian-bulanan',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printBulananNoKeuangan($bln){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->select(
             DB::raw('SUM(REALISASI_AIR) as Air'),
@@ -618,9 +663,19 @@ class laporanController extends Controller
             ->where('BLN_BAYAR',$bln)
             ->first();
         return view('keuangan.print-bulanan-no',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printRincianNoKeuangan($bln){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->select('TGL_BAYAR',
             DB::raw('SUM(REALISASI_AIR) as Air'),
@@ -636,17 +691,37 @@ class laporanController extends Controller
             ->first();
 
         return view('keuangan.print-rincian-bulanan-no',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function showPendapatanTahunan(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
             ->select('THN_TAGIHAN')
             ->groupBy('THN_TAGIHAN')
             ->get();
         return view('keuangan.pendapatan-tahunan',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printTahunanKeuangan($thn){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
         ->select('BLN_TAGIHAN',
             DB::raw('SUM(TTL_TAGIHAN) as Total'),
@@ -671,6 +746,11 @@ class laporanController extends Controller
             ->first();
 
         return view('keuangan.print-tahunan',['dataset'=>$dataset,'data'=>$data]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     //Manajer
