@@ -140,8 +140,8 @@ Route::get('showtagihankasir','laporanController@showTagihanKasir')->name('lapTa
 Route::get('datatagihankasir/{id}','tagihanController@dataTagihanKasir')->name('datatagihanKasir');
 Route::get('all/datatagihankasir/{id}','tagihanController@dataTagihanKasirAll')->name('datatagihanKasirAll');
 Route::get('bayartagihankasir/{id}','tagihanController@bayarTagihanKasir')->name('bayartagihanKasir');
-Route::post('bayarankasir/store/{id}','tagihanController@storeBayarKasir');
-Route::get('printstruk/{id}','tagihanController@printStrukKasir');
+Route::get('bayarankasir/store/{id}/{real}','tagihanController@storeBayarKasir');
+Route::post('printstruk/{id}','tagihanController@printStrukKasir');
 Route::get('penerimaanharian','tagihanController@penerimaan');
 Route::post('checkout/tagihan/{id}','tagihanController@checkout');
 Route::post('storecheckout','tagihanController@storeCheckout');

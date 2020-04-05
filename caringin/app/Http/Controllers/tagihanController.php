@@ -816,18 +816,17 @@ class tagihanController extends Controller
             return view('kasir.update-tagihan',['dataset'=>$dataset]);
         }
     
-        public function storeBayarKasir(Request $request,$id){
+        public function storeBayarKasir(Request $request,$id,$real){
         try{
             $timezone = date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d", time());
             $bln = date("Y-m", strtotime($date));
  
-            $expReal = explode(",",$request->get('realisasi'));
+            $expReal = explode(",",$real);
             $realisasi = "";
             for($k=0;$k<count($expReal);$k++){
                 $realisasi = $realisasi.$expReal[$k];
             }
-
             $check = DB::table('tagihanku')
             ->select('tagihanku.ID_TEMPAT')
             ->where('ID_TAGIHANKU',$id)
@@ -876,7 +875,6 @@ class tagihanController extends Controller
                 else if($realisasi < ($dataset->SELISIH_LISTRIK+$dataset->DENDA_LISTRIK)+
                                       ($dataset->SELISIH_AIR+$dataset->DENDA_AIR)+($dataset->SELISIH_IPKEAMANAN)+
                                       ($dataset->SELISIH_KEBERSIHAN) && $realisasi > 0){ //kondisi realisasi kurang dari tagihan maka dilakukan
-                    
                     //Kebersihan
                     if($realisasi >= $dataset->SELISIH_KEBERSIHAN){
                         $sisa = $realisasi - $dataset->SELISIH_KEBERSIHAN; //ada sisa
@@ -934,7 +932,6 @@ class tagihanController extends Controller
                     return redirect()->route('bayartagihanKasir',['id'=>$id])->with('error',' Pembayaran Gagal');
                 }
             }
-            
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
                 'TGL_BAYAR'=>$date,
                 'BLN_BAYAR'=>$bln,
@@ -1098,14 +1095,20 @@ class tagihanController extends Controller
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
     }
 
-    public function printStrukKasir($id){
+    public function printStrukKasir(Request $request,$id){
+        $expReal = explode(",",$request->get('realisasi'));
+        $realisasi = "";
+        for($m=0;$m<count($expReal);$m++){
+            $realisasi = $realisasi.$expReal[$m];
+        }
+
         $dataset = DB::table('tagihanku')
         ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where('ID_TAGIHANKU',$id)
-        ->get();
+        ->first();
 
-        return view('kasir.print-struk',['dataset'=>$dataset]);
+        return view('kasir.print-struk',['dataset'=>$dataset,'realisasi'=>$realisasi]);
     }
 
     public function penerimaan(){

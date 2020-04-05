@@ -12,7 +12,7 @@
           <div class="col-lg-6">
             <div class="p-4">
             @foreach ($dataset as $data)
-            <form class="user" action="{{url('bayarankasir/store',[$data->ID_TAGIHANKU])}}" method="POST">
+            <form class="user" action="{{url('printstruk',[$data->ID_TAGIHANKU])}}" method="POST">
               @csrf
                 <div class="form-group">
                   Kode Kontrol
@@ -45,7 +45,7 @@
                 <div class="form-group">
                   Realisasi
                   <input type="text" pattern="^[\d,]+$" name="realisasi" class="form-control form-control-user" id="exampleInputRealisasi"
-                  <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="Rp. {{number_format($data->SELISIH + $data->DENDA)}}" <?php } ?>>
+                  <?php if($data->STT_CICIL == 0){ ?> readonly="readonly" value="{{number_format($data->SELISIH + $data->DENDA)}}" <?php } ?>>
                 </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary btn-user btn-block">Bayar</button>
