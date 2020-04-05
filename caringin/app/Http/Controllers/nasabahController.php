@@ -10,22 +10,44 @@ use App\Pemilik;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
+use Illuminate\Support\Facades\Session;
 
 class nasabahController extends Controller
 {
     //Nasabah
     public function showdata(){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         $dataset = DB::table('nasabah')->get();
-    }catch(\Exception $e){
-        return view('admin.data-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
-    }
         return view('admin.data-nasabah',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function showform(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         return view('admin.tambah-nasabah');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function store(Request $request){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         try {
             $random = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT);
             $no_anggota = "BP3C".$random;
@@ -51,16 +73,32 @@ class nasabahController extends Controller
             return redirect('showformnasabah')->with('warning','Data Sudah Digunakan');
         }
         return redirect('showformnasabah')->with('success','Data Ditambah');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
     public function updateNasabah($id){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         $dataset = DB::table('nasabah')->where('ID_NASABAH',$id)->get();
-    }catch(\Exception $e){
-        return view('admin.update-nasabah',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
-    }
         return view('admin.update-nasabah',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function updateStore(Request $request, $id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         try{
             DB::table('nasabah')->where('ID_NASABAH', $id)->update([
                 'NM_NASABAH'=>$request->get('nama'),
@@ -79,11 +117,21 @@ class nasabahController extends Controller
             return redirect()->back()->with('error','Data Gagal Disimpan');    
         }
         return redirect()->route('show')->with('success','Data Tersimpan');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
+
     }
 
     //Tempat Usaha
     public function showtempatusaha(){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
@@ -104,25 +152,39 @@ class nasabahController extends Controller
             'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.STT_CICIL')
         ->get();
 
-    }catch(\Exception $e){
-        return view('admin.tempat-usaha',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
-    }
         return view('admin.tempat-usaha',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     
     public function showformtempat(){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
         $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
         $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
-    }catch(\Exception $e){
-        return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan])
-        ->with('error','Kesalahan Sistem');
-    }
         return view('admin.tambah-tempat', ['tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function storeTempat(Request $request){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         //Kode Kontrol
         $bl = $request->get("blok");
         $blok = strtoupper($bl); 
@@ -237,9 +299,20 @@ class nasabahController extends Controller
         return redirect('showformtempatusaha')->with('error','Data Gagal Ditambah');
     }
         return redirect('showformtempatusaha')->with('success','Data Ditambah');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
     public function updateTempat($id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
 
         //get value in row
@@ -311,9 +384,20 @@ class nasabahController extends Controller
                     'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
                     'id_air'=>$id_air,'id_listrik'=>$id_listrik,'izin_cicil'=>$izin_cicil
         ]);
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
     public function updateStoreTempat(Request $request, $id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $kosong = "(kosong)";
         //Penghapusan
         if(empty($request->get('air')) && empty($request->get('listrik')) && empty($request->get('keamanan')) && empty($request->get('kebersihan'))){
@@ -452,5 +536,10 @@ class nasabahController extends Controller
         return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('tempat')->with('success','Data Tersimpan');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 }

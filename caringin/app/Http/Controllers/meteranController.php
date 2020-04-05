@@ -14,20 +14,39 @@ use Illuminate\Routing\Redirector;
 use DateTime;
 use DateInterval;
 use Exception;
+use Illuminate\Support\Facades\Session;
 
 class meteranController extends Controller
 {
     //meteran air
     public function updatealatair($id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
     try{
         $dataset = DB::table('meteran_air')->where('ID_MAIR',$id)->get();
     }catch(\Exception $e){
         return view('admin.update-alat-air',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
     }
         return view('admin.update-alat-air',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
+
     public function storeupdatealatair(Request $request, $id){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         DB::table('meteran_air')->where('ID_MAIR', $id)->update([
             'NOMTR_AIR'=>$request->get('noalat'),
             'MAKHIR_AIR'=>$request->get('meteranair')
@@ -36,19 +55,42 @@ class meteranController extends Controller
         return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('alat')->with('success','Data Tersimpan');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     //meteran listrik
     public function updatealatlistrik($id){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $dataset = DB::table('meteran_listrik')->where('ID_MLISTRIK',$id)->get();
     }catch(\Exception $e){
         return view('admin.update-alat-listrik',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
     }
         return view('admin.update-alat-listrik',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
+
     public function storeupdatealatlistrik(Request $request, $id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         DB::table('meteran_listrik')->where('ID_MLISTRIK', $id)->update([
             'NOMTR_LISTRIK'=>$request->get('noalat'),
             'MAKHIR_LISTRIK'=>$request->get('meteranlistrik')
@@ -57,20 +99,53 @@ class meteranController extends Controller
         return redirect()->back()->with('error','Data Gagal Disimpan');
     }
         return redirect()->route('alat')->with('success','Data Tersimpan');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function dataalat(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $datasetA = DB::table('meteran_air')->get();
         $datasetL = DB::table('meteran_listrik')->get();
         return view('admin.data-alat',['datasetA'=>$datasetA,'datasetL'=>$datasetL]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function formalat(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         return view('admin.tambah-alat');
+            }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
     
     public function storealat(Request $request){
-    try{    
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{    
         $radio = $request->get('alat');
         if($radio == "A"){
             $noalat = strtoupper($request->get('noalat'));
@@ -92,9 +167,20 @@ class meteranController extends Controller
         return redirect()->back()->with('error','Data Gagal Ditambah');
     }
         return redirect('dataalat')->with('success','Data Ditambah');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function gantialat(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -106,9 +192,20 @@ class meteranController extends Controller
             'tempat_usaha.ID_TEMPAT')
         ->get();
         return view('admin.ganti-alat',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function updategantialatair($id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -121,6 +218,11 @@ class meteranController extends Controller
         ->get();
         
         return view('admin.update-ganti-air',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function add_months($months, DateTime $dateObject) 
@@ -145,7 +247,13 @@ class meteranController extends Controller
     }
 
     public function storegantialatair(Request $request,$id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $id_mair = $request->get('idMBaru');
 
         DB::table('tempat_usaha')->where('ID_TEMPAT', $id)->update([
@@ -209,9 +317,20 @@ class meteranController extends Controller
         return redirect()->route('ganti')->with('error','Kesalahan Sistem');
     }
         return redirect()->route('ganti')->with('success','Alat Ukur Diganti');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 
     public function updategantialatlistrik($id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
@@ -224,9 +343,20 @@ class meteranController extends Controller
         ->get();
         
         return view('admin.update-ganti-listrik',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function storegantialatlistrik(Request $request,$id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $id_mlistrik = $request->get('idMBaru');
         $daya = $request->get('daya');
 
@@ -293,14 +423,30 @@ class meteranController extends Controller
         return redirect()->route('ganti')->with('error','Kesalahan Sistem');
     }
         return redirect()->route('ganti')->with('success','Alat Ukur Diganti');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printform(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $dataset = DB::table('tempat_usaha')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->join('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
         ->join('meteran_listrik','tempat_usaha.ID_MLISTRIK','=','meteran_listrik.ID_MLISTRIK')
         ->get();
         return view('admin.print-form',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 }

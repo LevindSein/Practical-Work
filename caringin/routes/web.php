@@ -124,6 +124,8 @@ Route::post('storelibur','liburanController@storeLibur');
 Route::get('showdatauser','userController@showdatauser')->name('datauser');
 Route::get('showtambahuser','userController@tambahuser');
 Route::post('storeuser','userController@storeUser');
+Route::get('hapususer/{id}','userController@hapusUser');
+Route::get('resetpass/{id}','userController@resetPass');
 
 //Dashboard
 Route::get('showdashboard','dashboardController@dashboard')->name('showdashboard');

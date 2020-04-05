@@ -27,18 +27,22 @@
                   </thead>
                   
                   <tbody>
+                  @foreach($dataset as $d)
+                  @if($d->ROLE != "Super Admin")
                     <tr>
-                      <td class="text-left">Fahni Amsyari</td>
-                      <td class="text-center">Admin</td>
+                      <td class="text-left">{{$d->NAMA_USER}}</td>
+                      <td class="text-center">{{$d->ROLE}}</td>
                       <td class="text-center">
-                          <a href="#" class="d-none d-sm-inline-block btn btn-danger shadow-sm"><i
+                          <a href="{{url('hapususer',[$d->ID_USER])}}" class="d-none d-sm-inline-block btn btn-danger shadow-sm"><i
                               class="fas fa- fa-sm text-white-50"></i> Hapus</a>
                       </td>
                       <td class="text-center">
-                          <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                          <a href="{{url('resetpass',[$d->ID_USER])}}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
                               class="fas fa- fa-sm text-white-50"></i> Reset</a>
                       </td>
                     </tr>
+                    @endif
+                    @endforeach
                   </tbody>
                 </table>
               </div>

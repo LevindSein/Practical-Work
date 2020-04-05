@@ -5,26 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tagihan;
 use App\Hari_libur;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Carbon\Carbon;
 use DateTime;
 use DateInterval;
 use Exception;
+use Illuminate\Support\Facades\Session;
 
 class tagihanController extends Controller
 {
     //Admin Biasa
     public function tagihanNasAdmin(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "admin"){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
         return view('normal.tagihan-nasabah',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function formtagihanAdmin($id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "admin"){
         try{
             $dataset = DB::table('tempat_usaha')
             ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
@@ -66,9 +83,19 @@ class tagihanController extends Controller
         }catch(\Exception $e){
             return redirect()->route('tagihanAdmin')->with('error','Kesalahan Sistem');
         }
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
         }
 
     public function storetagihanAdmin(Request $request ,$id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "admin"){
         try{
             $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
             $dayaListrik = $usaha->DAYA;
@@ -337,20 +364,42 @@ class tagihanController extends Controller
             return redirect()->route('showformtagihanAdmin',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
         }
             return redirect()->route('tagihanAdmin')->with('success','Tagihan Ditambah');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
         }
     //End Admin Biasa
     
     public function tagihanNas(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
         return view('admin.tagihan-nasabah',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function formtagihan($id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('meteran_air','tempat_usaha.ID_MAIR','=','meteran_air.ID_MAIR')
@@ -391,6 +440,11 @@ class tagihanController extends Controller
     }catch(\Exception $e){
         return redirect()->route('tagihan')->with('error','Kesalahan Sistem');
     }
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function add_months($months, DateTime $dateObject) 
@@ -415,7 +469,13 @@ class tagihanController extends Controller
     }
 
     public function storetagihan(Request $request ,$id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $usaha = DB::table('tempat_usaha')->where('tempat_usaha.ID_TEMPAT',$id)->first();
         $dayaListrik = $usaha->DAYA;
         $id_nasabah = $usaha->ID_NASABAH;
@@ -683,10 +743,21 @@ class tagihanController extends Controller
         return redirect()->route('showformtagihan',['id'=>$id])->with('error','Tagihan Gagal Ditambah');
     }
         return redirect()->route('tagihan')->with('success','Tagihan Ditambah');
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function dataTagihan($id){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH')
@@ -700,10 +771,21 @@ class tagihanController extends Controller
         return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
     }
         return view('admin.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printTagihan(){
-    try{
+    	if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        try{
         //Set Tanggal Tagihan
         $timezone = date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d", time());
@@ -725,11 +807,20 @@ class tagihanController extends Controller
         return view('admin.print-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');
     }
         return view('admin.print-tagihan',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     //Kasir
     public function dataTagihanKasir($id){
-        try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){    
             $dataset = DB::table('tempat_usaha')
             ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
             ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL','nasabah.NM_NASABAH')
@@ -739,14 +830,20 @@ class tagihanController extends Controller
             $dataTagihan = DB::table('tagihanku')
             ->where('tagihanku.ID_TEMPAT',$id)
             ->get();
-        }catch(\Exception $e){
-            return view('kasir.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
-        }
         return view('kasir.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function dataTagihanKasirAll($id){
-        try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
             $dataset = DB::table('nasabah')
             ->where('ID_NASABAH',$id)
             ->first();
@@ -755,14 +852,21 @@ class tagihanController extends Controller
             ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->where('tagihanku.ID_NASABAH',$id)
             ->get();
-        }catch(\Exception $e){
-            return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
-        }
         return view('kasir.all-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function bayarTagihanKasir($id){
-        try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
+        try{ 
             $dataset = DB::table('tagihanku')
             ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
             ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
@@ -814,10 +918,27 @@ class tagihanController extends Controller
             return redirect()->route('lapTagihanKasir')->with('error','Kesalahan Sistem');
         }
             return view('kasir.update-tagihan',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
         }
+    }
     
         public function storeBayarKasir(Request $request,$id,$real){
-        try{
+            if(!Session::get('login')){
+                return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+            }
+            else{
+                if(Session::get('role') == "kasir"){
+            try{
+            $username = Session::get('username');
+
+            $user = DB::table('user')
+            ->where('NAMA_USER',$username)
+            ->first();
+            $id_user = $user->ID_USER;
+
             $timezone = date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d", time());
             $bln = date("Y-m", strtotime($date));
@@ -933,6 +1054,7 @@ class tagihanController extends Controller
                 }
             }
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
+                'ID_USER'=>$id_user,
                 'TGL_BAYAR'=>$date,
                 'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>$stt_lunas,
@@ -953,9 +1075,19 @@ class tagihanController extends Controller
         }
 
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 
     public function checkout(Request $request, $id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
         switch ($request->get('button')) {
             case "Checkout":
             $dataku = DB::table('nasabah')
@@ -1017,9 +1149,19 @@ class tagihanController extends Controller
             return view('kasir.checkout',['dataku'=>$dataku,'dataset'=>$dataset,'ids'=>$ids]);
             break;
         }
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 
     public function printFaktur(Request $request, $id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
         $ids = $request->get('bayar');
         foreach($ids as $id){
             $id_exp = explode(",",$id);
@@ -1051,10 +1193,27 @@ class tagihanController extends Controller
         ->first();
 
         return view('kasir.print-faktur',['dataku'=>$dataku,'dataset'=>$dataset,'id_exp'=>$id_exp]);
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 
     public function storeCheckout(Request $request,$ids){
-    try{
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
+        try{
+        $username = Session::get('username');
+
+        $user = DB::table('user')
+        ->where('NAMA_USER',$username)
+        ->first();
+        $id_user = $user->ID_USER;
+
         $id_exp = explode(",",$ids);
 
         $timezone = date_default_timezone_set('Asia/Jakarta');
@@ -1069,6 +1228,7 @@ class tagihanController extends Controller
             DB::table('tagihanku')
             ->where('ID_TAGIHANKU', $data->ID_TAGIHANKU)
             ->update([
+                'ID_USER'=>$id_user,
                 'TGL_BAYAR'=>$date,
                 'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>1,
@@ -1089,9 +1249,19 @@ class tagihanController extends Controller
         return redirect()->back()->with('error','Pembayaran Gagal');
     }
         return redirect()->route('lapTagihanKasir')->with('success','Pembayaran Dilakukan');
+        }
+        else{
+            abort(403, 'Oops! Access Forbidden');
+        }
+    }
     }
 
     public function printStrukKasir(Request $request,$id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
         $expReal = explode(",",$request->get('realisasi'));
         $realisasi = "";
         for($m=0;$m<count($expReal);$m++){
@@ -1105,37 +1275,76 @@ class tagihanController extends Controller
         ->first();
 
         return view('kasir.print-struk',['dataset'=>$dataset,'realisasi'=>$realisasi]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function penerimaan(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
         $dataset = DB::table('tagihanku')
             ->select('TGL_BAYAR','STT_BAYAR')
             ->groupBy('TGL_BAYAR','STT_BAYAR')
             ->get();
 
         return view('kasir.penerimaan',['dataset'=>$dataset]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function printPenerimaan($tgl){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "kasir"){
+        $username = Session::get('username');
+        $user = DB::table('user')
+        ->where('NAMA_USER',$username)
+        ->first();
+
+        $id_user = $user->ID_USER;
+        
         $dataset = DB::table('tagihanku')
         ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where([
+            ['tagihanku.ID_USER',$id_user],
             ['tagihanku.TGL_BAYAR',$tgl],
             ['tagihanku.STT_BAYAR', 1]
         ])
         ->get();
+
         $tanggal = DB::table('tagihanku')
-            ->select('TGL_BAYAR')
-            ->where('TGL_BAYAR',$tgl)
+            ->select('tagihanku.TGL_BAYAR')
+            ->where('tagihanku.TGL_BAYAR',$tgl)
             ->first();
 
-        return view('kasir.print-harian',['dataset'=>$dataset,'tanggal'=>$tanggal]);
+        return view('kasir.print-harian',['dataset'=>$dataset,'tanggal'=>$tanggal,'user'=>$user]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     //ENDKASIR
 
     //Manager
     public function dataTagihanManager($id){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "manajer"){
         try{
             $dataset = DB::table('tempat_usaha')
             ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
@@ -1150,6 +1359,12 @@ class tagihanController extends Controller
             return view('manajer.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan])->with('error','Kesalahan Sistem');
         }
             return view('manajer.data-tagihan',['dataset'=>$dataset,'dataTagihan'=>$dataTagihan]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
         }
+        }
+        
     //EndManager
 }

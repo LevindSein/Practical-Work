@@ -1,6 +1,8 @@
 <?php
 $timezone = date_default_timezone_set('Asia/Jakarta');
 $now = date("d-m-Y", time());
+
+$username = Session::get('username');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +29,7 @@ $now = date("d-m-Y", time());
         <div><span>TGL TAGIHAN</span><?php $tag = date("d-m-Y", strtotime($dataset->TGL_TAGIHAN)); ?> {{$tag}}</div>
         <div><span>BULAN PEMBAYARAN</span><?php $time = date("M", strtotime($dataset->TGL_TAGIHAN)); ?> {{$time}}</div>
         <div><span>STRUK TAGIHAN</span> {{$now}}</div>
-        <div><span>STATUS BAYAR</span> Dibayar</div>
+        <div><span>DITERIMA OLEH</span> {{$username}}</div>
       </div>
     </header>
     <main>

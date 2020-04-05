@@ -26,7 +26,7 @@
         <div>(022) 540-4556</div>
       </div>
       <div id="project">
-        <div><span>Nama Kasir</span>:</div>
+        <div><span>Nama Kasir</span>: {{$user->NAMA_USER}}</div>
         <div><span>Tanggal Penerimaan</span>: {{$tgl}}</div>
       </div>
     </header>
@@ -65,13 +65,13 @@
           </tr>
           @endforeach
           <tr>
-            <td class="tg-vbo4" style="text-align:center;" colspan="9">Total Bayar</td>
+            <td class="tg-vbo4" style="text-align:center;" colspan="9">Total Penerimaan</td>
             <td class="tg-8m6k">Rp. {{number_format($total)}}</td>
           </tr>
         </table>
       <div id="notices">
         <div><b>CATATAN :</b></div>
-        <div class="notice"></div>
+        <div class="notice">Kasir</div>
       </div>
     </main>
   </body>

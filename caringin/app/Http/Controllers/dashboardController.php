@@ -8,10 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Redirector;
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class dashboardController extends Controller
 {
     public function dashboard(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
         //Tempat Usaha
         $blok = DB::table('tempat_usaha')
         ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
@@ -180,7 +187,7 @@ class dashboardController extends Controller
         $reaAkum[11] = $realisasiDes + $reaAkum[10];
         $selAkum[11] = $selisihDes + $selAkum[10];
 
-        return view('manajer.dashboard',[
+        return view('admin.dashboard',[
             'reaAkum'=>$reaAkum,'selAkum'=>$selAkum,
             'Listrik'=>$Listrik,'Air'=>$Air,
             'Keamanan'=>$Keamanan,'Kebersihan'=>$Kebersihan,
@@ -199,8 +206,18 @@ class dashboardController extends Controller
             'realisasiNov'=>$realisasiNov,'selisihNov'=>$selisihNov,'tagihanNov'=>$tagihanNov,
             'realisasiDes'=>$realisasiDes,'selisihDes'=>$selisihDes,'tagihanDes'=>$tagihanDes
         ]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
     public function dashboardManager(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "manajer"){
         //Tempat Usaha
         $blok = DB::table('tempat_usaha')
         ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
@@ -388,6 +405,11 @@ class dashboardController extends Controller
             'realisasiNov'=>$realisasiNov,'selisihNov'=>$selisihNov,'tagihanNov'=>$tagihanNov,
             'realisasiDes'=>$realisasiDes,'selisihDes'=>$selisihDes,'tagihanDes'=>$tagihanDes
         ]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
     }
 
     public function dapat($bln,$thn){

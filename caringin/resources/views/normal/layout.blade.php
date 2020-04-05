@@ -1,3 +1,7 @@
+<?php
+    $username = Session::get('username');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,7 +150,7 @@
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nama User disini</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$username}}</span>
                                     <img
                                         class="img-profile rounded-circle"
                                         src="{{asset('img/icon_user.png')}}">

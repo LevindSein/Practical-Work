@@ -3,6 +3,8 @@ $timezone = date_default_timezone_set('Asia/Jakarta');
 $now = date("d M Y", time());
 $total = 0;
 $id = implode(",",$id_exp);
+
+$username = Session::get('username');
 ?>
 
 
@@ -31,7 +33,6 @@ $total = $d->SELISIH + $total;
       <div id="project">
         <div><span>Nama Pengguna</span>: {{$dataku->NM_NASABAH}}</div>
         <div><span>No.Anggota</span>: {{$dataku->NO_ANGGOTA}}</div>
-        <div><span>Status Bayar</span>: Belum Dibayar</div>
       </div>
     </header>
     <main>
@@ -91,7 +92,7 @@ $total = $d->SELISIH + $total;
         <div>Bandung, {{$now}}</div>
         <div><br/>Kasir</div>
         <div><br/><br/><br/><br/></div>
-        <div><b>Said</b></div>
+        <div><b>{{$username}}</b></div>
       </div>
     </main>
     <script type="text/javascript">
