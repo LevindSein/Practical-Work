@@ -252,7 +252,7 @@
                         <div class="modal-body">Pilih "Logout" di bawah ini jika anda siap untuk mengakhiri sesi anda saat ini.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="logout">Logout</a>
+                            <a class="btn btn-primary" href="{{url('logout')}}">Logout</a>
                         </div>
                     </div>
                 </div>
