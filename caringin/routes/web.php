@@ -190,4 +190,8 @@ Route::get('print/rekapkeamanan/manajer/{bln}','laporanController@printRekapKeam
 Route::get('print/rinciankeamanan/manajer/{bln}','laporanController@printRincianKeamananManajer');
 Route::get('print/tunggakan/manajer/{thn}','laporanController@printTunggakanManajer');
 Route::get('print/tempat/manajer','laporanController@printTempatManajer');
+
+Route::get('rincian/tunggakan/manajer','laporanController@rincianTunggakan');
+Route::get('bongkaranmanager','laporanController@bongkaranManager');
+Route::get('print/bongkaran/manajer','laporanController@printBongkaranManajer');
 //ENDMANAJER

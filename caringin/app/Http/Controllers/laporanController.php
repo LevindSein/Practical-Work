@@ -1574,4 +1574,77 @@ class laporanController extends Controller
             }
         }
     }
+
+    public function rincianTunggakan(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "manajer"){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->where('STT_LUNAS',0)
+        ->get();
+
+        return view('manajer.rincian-tunggakan',['dataset'=>$dataset]);
+                }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
+    }
+
+    public function bongkaranManager(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "manajer"){
+        $dataset = DB::table('tagihanku')
+        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
+        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
+        ->where([['STT_LUNAS',0],['STT_DENDA','>=',3]])
+        ->get();
+
+        return view('manajer.bongkaran',['dataset'=>$dataset]);
+                }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
+    }
+
+    public function printBongkaranManajer(){
+        $blok = DB::table('tempat_usaha')
+        ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
+        ->groupBy('BLOK')
+        ->get();
+
+        $ttlBlok = $blok->count();
+        $Bulan3 = array();
+        $Bulan4 = array();
+        $Blokku = array();
+
+        for($i=0; $i<$ttlBlok; $i++){
+            $bloks=$blok[$i];
+            $blokku = DB::table('tempat_usaha')
+                ->where('BLOK',$bloks->BLOK)
+                ->count();
+            $bulan3 = DB::table('tagihanku')
+                ->where([['STT_DENDA',3],['BLOK_TEMPAT',$bloks->BLOK]])
+                ->count();
+            $bulan4 = DB::table('tagihanku')
+                ->where([['STT_DENDA','>=', 4],['BLOK_TEMPAT',$bloks->BLOK]])
+                ->count();
+            $Bulan3[$i] = $bulan3;
+            $Bulan4[$i] = $bulan4;
+            $Blokku[$i] = $blokku;
+        }
+
+        return view('manajer.print-bongkaran',[
+            'Bulan3'=>$Bulan3,'Bulan4'=>$Bulan4,'blok'=>$blok,
+            'ttlBlok'=>$ttlBlok,'Blokku'=>$Blokku
+        ]);
+    }
 }

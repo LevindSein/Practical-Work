@@ -13,6 +13,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
               <h6 class="m-0 font-weight-bold text-primary">Tabel Laporan Tagihan</h6>
+              <a href="{{url('rincian/tunggakan/manajer')}}" target="_blank" type="submit" class="btn btn-primary"><i class="fas fa-download"></i> Rincian Tunggakan</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -20,7 +21,6 @@
                   <thead>
                     <tr>
                       <th>Kode</th>
-                      <th>Pemilik</th>
                       <th>Pengguna</th>
                       <th>No.Pengguna</th>
                       <th>No.KTP</th>
@@ -33,7 +33,6 @@
                   @foreach($dataset as $data)
                     <tr>
                     <td class="text-left">{{$data->KD_KONTROL}}</td>
-                      <td class="text-left">{{$data->NM_PEMILIK}}</td>
                       <td class="text-left">{{$data->NM_NASABAH}}</td>
                       <td class="text-center">{{$data->NO_ANGGOTA}}</td>
                       <td class="text-center">{{$data->NO_KTP}}</td>

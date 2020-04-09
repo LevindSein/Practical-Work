@@ -92,21 +92,40 @@
                             <a class="collapse-item" href="{{url('showlaporanbulananmanager')}}">Pendapatan Bulanan</a>
                             <a class="collapse-item" href="{{url('showlaporantahunanmanager')}}">Pendapatan Tahunan</a>
                             <a class="collapse-item" href="{{url('rekaptunggakanmanager')}}">Rekap Tunggakan</a>
-                            <a class="collapse-item" href="{{url('showpemakaianmanager')}}">Pemakaian</a>
+                            <a class="collapse-item" href="{{url('showpemakaianmanager')}}">Pemakaian Fasilitas</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Tempat Usaha -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseTempat"
+                        aria-expanded="true"
+                        aria-controls="collapseTempat">
+                        <i class="fas fa-fw fa-store"></i>
+                        <span>Tempat Usaha</span>
+                    </a>
+                    <div
+                        id="collapseTempat"
+                        class="collapse"
+                        aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <div class="collapse-divider"></div>
+                            <a class="collapse-item" href="{{url('tempatusahamanager')}}">Unit Bangunan</a>
+                            <a class="collapse-item" href="{{url('bongkaranmanager')}}">Bongkaran</a>
                         </div>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('tempatusahamanager')}}">
-                        <i class="fas fa-fw fa-store"></i>
-                        <span>Tempat Usaha</span></a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="{{url('showlaporantagihanmanager')}}">
                         <i class="fas fa-dollar-sign"></i>
-                        <span>&ensp;Tagihan</span></a>
+                        <span>&ensp;Rincian Tagihan</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -317,7 +336,7 @@
             <script>
                 $(document).ready(function () {
                     $(
-                        '#tableTagihan,#tablePenerimaan,#tableListrikPakai,#tableAirPakai,#tableKebersihanPakai,#tableKeamananPakai'
+                        '#tableTagihan,#tablePenerimaan,#tableListrikPakai,#tableAirPakai,#tableKebersihanPakai,#tableKeamananPakai,#tableBongkaran'
                     ).DataTable({
                         "processing": true,
                         "bProcessing":true,

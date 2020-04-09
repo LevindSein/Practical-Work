@@ -28,7 +28,7 @@ for($i=0;$i<$ttlBlok;$i++){
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
               <h6 class="h-3 m-0 font-weight-bold text-primary">Tabel Tempat Usaha</h6>
-              <a href="print/tempat/manajer" target="_blank" type="submit" class="btn btn-primary">Generate Report</a>
+              <a href="print/tempat/manajer" target="_blank" type="submit" class="btn btn-primary"><i class="fas fa-download"></i> Generate Report</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">

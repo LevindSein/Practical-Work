@@ -25,7 +25,7 @@ class tagihanController extends Controller
             if(Session::get('role') == "admin"){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.NO_ANGGOTA',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
         return view('normal.tagihan-nasabah',['dataset'=>$dataset]);
@@ -381,7 +381,7 @@ class tagihanController extends Controller
 
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP',
+        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.NO_ANGGOTA',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
         ->get();
         return view('admin.tagihan-nasabah',['dataset'=>$dataset]);
