@@ -65,6 +65,7 @@ class LoginController extends Controller
             if($pass == $user->PASSWORD){
                 Session::put('username',$user->NAMA_USER);
                 Session::put('role',$user->ROLE);
+                Session::put('id_user',$user->ID_USER);
                 Session::put('login',TRUE);
                 if($user->ROLE == "Super Admin"){
                     return redirect()->route('showdashboard')->with('success','Login Berhasil');

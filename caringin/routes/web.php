@@ -93,6 +93,8 @@ Route::get('tambahtagihan','tagihanController@tagihanNas')->name('tagihan');
 Route::get('showformtagihan/{id}','tagihanController@formtagihan')->name('showformtagihan');
 Route::post('tagihan/store/{id}','tagihanController@storetagihan');
 Route::get('semuatagihan','tagihanController@printTagihan');
+Route::get('otorisasitagihan','tagihanController@otoritas')->name('otoritas');
+Route::post('otoritasstore','tagihanController@storeOtoritas');
 
 //Tunggakan
 Route::get('bayartunggakan','tunggakanController@bayarTunggakan');

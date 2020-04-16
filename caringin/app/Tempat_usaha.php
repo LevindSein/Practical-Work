@@ -16,6 +16,7 @@ class Tempat_usaha extends Model
         'id_trfair',
         'id_nasabah',
         'id_pemilik',
+        'id_user',
         'kd_kontrol',
         'no_alamat',
         'jml_alamat',

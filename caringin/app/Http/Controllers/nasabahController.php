@@ -187,8 +187,9 @@ class nasabahController extends Controller
         try{
         //Kode Kontrol
         $bl = $request->get("blok");
-        $blok = strtoupper($bl); 
-        $los = $request->get("los"); 
+        $blok = strtoupper($bl);
+        $los = $request->get("los");
+        $losKap = strtoupper($los);
 
         $split = preg_split ('/,/', $los);
         $variable = $split[0];
@@ -276,16 +277,23 @@ class nasabahController extends Controller
             $kebersihanId = NULL;
         }
 
+        $user = DB::table('tempat_usaha')
+        ->select('ID_USER')
+        ->where('BLOK',$blok)
+        ->first();
+        $userId = $user->ID_USER;
+
         //Tambah Data
         $dataTempat = new Tempat_usaha([
-            'blok'=>$request->get('blok'),
-            'no_alamat'=>$request->get('los'),
+            'blok'=>$blok,
+            'no_alamat'=>$losKap,
             'kd_kontrol'=>$join,
             'daya'=>$daya,
             'jml_alamat'=>$jumLos,
             'bentuk_usaha'=>$request->get('bentuk_usaha'),
             'id_nasabah'=>$id_nas,
             'id_pemilik'=>$id_nas,
+            'id_user'=>$userId,
             'id_trfkebersihan'=>$kebersihanId,
             'id_trfipk'=>$ipkId,
             'id_trfkeamanan'=>$keamananId,
@@ -296,7 +304,7 @@ class nasabahController extends Controller
         ]);
         $dataTempat->save();
     } catch(\Exception $e){
-        return redirect('showformtempatusaha')->with('error','Data Gagal Ditambah');
+        return redirect('showformtempatusaha')->with('error','Data Gagal Ditambah, Identitas Tidak ada atau Meteran Terpakai');
     }
         return redirect('showformtempatusaha')->with('success','Data Ditambah');
         }
@@ -305,6 +313,7 @@ class nasabahController extends Controller
         }
     }
     }
+
     public function updateTempat($id){
     	if(!Session::get('login')){
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
@@ -312,7 +321,6 @@ class nasabahController extends Controller
         else{
             if(Session::get('role') == "Super Admin"){
 
-        try{
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
 
         //get value in row
@@ -366,16 +374,6 @@ class nasabahController extends Controller
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
         $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
         $tarif_kebersihan = DB::table('tarif_kebersihan')->select('TRF_KEBERSIHAN','ID_TRFKEBERSIHAN')->get();
-    }catch(\Exception $e){
-        return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,'noanggota'=>$noanggota,
-                    'noktp1'=>$noktp1,'nonpwp1'=>$nonpwp1,'noanggota1'=>$noanggota1,
-                    'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
-                    'trfipk'=>$trfipk,'id_ipk'=>$id_ipk,
-                    'trfaman'=>$trfaman,'id_keamanan'=>$id_keamanan, 
-                    'trfkebersihan'=>$trfkebersihan, 'id_kebersihan'=>$id_kebersihan,
-                    'id_air'=>$id_air,'id_listrik'=>$id_listrik,'izin_cicil'=>$izin_cicil
-        ])->with('error','Kesalahan Sistem');
-    }
         return view('admin.update-tempat',['dataset'=>$dataset,'noktp'=>$noktp,'nonpwp'=>$nonpwp,'noanggota'=>$noanggota,
                     'noktp1'=>$noktp1,'nonpwp1'=>$nonpwp1,'noanggota1'=>$noanggota1,
                     'tarif_ipk'=>$tarif_ipk,'tarif_keamanan'=>$tarif_keamanan,'tarif_kebersihan'=>$tarif_kebersihan,
@@ -390,6 +388,7 @@ class nasabahController extends Controller
         }
     }
     }
+
     public function updateStoreTempat(Request $request, $id){
     	if(!Session::get('login')){
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');

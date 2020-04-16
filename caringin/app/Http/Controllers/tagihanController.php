@@ -25,8 +25,9 @@ class tagihanController extends Controller
             if(Session::get('role') == "admin"){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.NO_ANGGOTA',
+        ->select('tempat_usaha.ID_USER','tempat_usaha.ID_TEMPAT','tempat_usaha.KD_KONTROL', 'nasabah.NM_NASABAH','nasabah.NO_KTP','nasabah.NO_NPWP','nasabah.NO_ANGGOTA',
         'tempat_usaha.ID_TRFAIR','tempat_usaha.ID_TRFLISTRIK','tempat_usaha.ID_TRFKEBERSIHAN','tempat_usaha.ID_TRFKEAMANAN','tempat_usaha.ID_TRFIPK')
+        ->where('tempat_usaha.ID_USER',Session::get('id_user'))
         ->get();
         return view('normal.tagihan-nasabah',['dataset'=>$dataset]);
             }
@@ -372,6 +373,64 @@ class tagihanController extends Controller
         }
     //End Admin Biasa
     
+
+    //Super Admin
+    public function otoritas(){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+
+        $blok = DB::table('tempat_usaha')
+        ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
+        ->groupBy('BLOK')
+        ->get();
+
+        $ttlBlok = $blok->count();
+        return view('admin.otoritas',['ttlBlok'=>$ttlBlok,'blok'=>$blok]);
+            }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
+    }
+
+    public function storeOtoritas(Request $request){
+        if(!Session::get('login')){
+            return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
+        }
+        else{
+            if(Session::get('role') == "Super Admin"){
+        
+        try{
+        $blok = DB::table('tempat_usaha')
+        ->select('BLOK',DB::raw('count(*) as ttl_Blok'))
+        ->groupBy('BLOK')
+        ->get();
+
+        $ttlBlok = $blok->count();
+        
+        for($i=0;$i<$ttlBlok;$i++){
+            $bloks=$blok[$i];
+            $user=$request->get('userId')[$i];
+            DB::table('tempat_usaha')
+                ->where('BLOK',$bloks->BLOK)
+                ->update([
+                    'ID_USER'=>$request->get('userId')[$i]
+                ]);
+        }
+        return redirect()->route('otoritas')->with('success','Otorisasi Tagihan Selesai');
+        }catch(\Exception $e){
+            return redirect()->route('otoritas')->with('error','Otorisasi Tagihan Gagal');
+        }
+        }
+            else{
+                abort(403, 'Oops! Access Forbidden');
+            }
+        }
+    }
+
     public function tagihanNas(){
         if(!Session::get('login')){
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
