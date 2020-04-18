@@ -845,22 +845,16 @@ class tagihanController extends Controller
             if(Session::get('role') == "Super Admin"){
 
         try{
-        //Set Tanggal Tagihan
-        $timezone = date_default_timezone_set('Asia/Jakarta');
-        $date = date("Y-m-d", time());
-        $time = strtotime($date);
-        $finalDate = date("Y-m-01", strtotime("+1 month", $time));
-
         $dataset = DB::table('tagihanku')
         ->join('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->join('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->select('tempat_usaha.KD_KONTROL','tagihanku.TTL_TAGIHAN',
+        ->select('tempat_usaha.KD_KONTROL','tagihanku.SELISIH',
                  'tagihanku.ID_TAGIHANKU','nasabah.NM_NASABAH',
                  'tagihanku.PAKAI_AIR','tagihanku.PAKAI_LISTRIK',
-                 'tagihanku.TTL_AIR','tagihanku.TTL_LISTRIK',
-                 'tagihanku.TTL_IPKEAMANAN','tagihanku.TTL_KEBERSIHAN',
+                 'tagihanku.SELISIH_AIR','tagihanku.SELISIH_LISTRIK','tagihanku.DENDA_LISTRIK','tagihanku.DENDA_AIR',
+                 'tagihanku.SELISIH_IPKEAMANAN','tagihanku.SELISIH_KEBERSIHAN',
                  'tagihanku.TGL_TAGIHAN','tagihanku.KET')
-        ->where('TGL_TAGIHAN',$finalDate)
+        ->where('STT_LUNAS',0)
         ->get();
     }catch(\Exception $e){
         return view('admin.print-tagihan',['dataset'=>$dataset])->with('error','Kesalahan Sistem');

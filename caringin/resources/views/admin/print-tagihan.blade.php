@@ -1,145 +1,63 @@
-@extends('admin.layout')
-@section('content')
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-center mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Print Tagihan</h1>
-          </div>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-body">
-              <div class="table-responsive">
-                  <table class="table table-bordered" id="printTagihan" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Tanggal</th>
-                      <th>Kode Kontrol</th>
-                      <th>Nama</th>
-                      <th>Pakai Air (M<sup>3</sup>)</th>
-                      <th>Pakai Listrik (Watt)</th>
-                      <th>Air Bersih (Rp.)</th>
-                      <th>Listrik (Rp.)</th>
-                      <th>IPK & Keamanan (Rp.)</th>
-                      <th>Kebersihan (Rp.)</th>
-                      <th>Total (Rp.)</th>
-                      <th>Ket</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                  @foreach($dataset as $data)
-                    <tr>
-                      <td class="text-center">{{$data->TGL_TAGIHAN}}</td>
-                      <td class="text-center">{{$data->KD_KONTROL}}</td>
-                      <td class="text-left">{{$data->NM_NASABAH}}</td>
-                      <td>
-                      @if($data->PAKAI_AIR == null)
-                          0
-                      @else
-                          {{number_format($data->PAKAI_AIR)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->PAKAI_LISTRIK == null)
-                          0
-                      @else
-                          {{number_format($data->PAKAI_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->TTL_AIR == null)
-                          0
-                      @else
-                          {{number_format($data->TTL_AIR)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->TTL_LISTRIK == null)
-                          0
-                      @else
-                          {{number_format($data->TTL_LISTRIK)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->TTL_IPKEAMANAN == null)
-                          0
-                      @else
-                          {{number_format($data->TTL_IPKEAMANAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->TTL_KEBERSIHAN == null)
-                          0
-                      @else
-                          {{number_format($data->TTL_KEBERSIHAN)}}
-                      @endif
-                      </td>
-                      <td>
-                      @if($data->TTL_TAGIHAN == null)
-                          0
-                      @else
-                          {{number_format($data->TTL_TAGIHAN)}}
-                      @endif
-                      </td>
-                      <td class="text-center">
-                      @if($data->KET == null)
-                          &mdash;
-                      @else
-                          {{$data->KET}}
-                      @endif
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-                  </div>
-                  </div>
-                </div>
-                <!--END Tab Panes-->
-              </div>
-        <!-- /.container-fluid -->
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PT. PENGELOLA PUSAT PERDAGANGAN CARINGIN</title>
+    <link rel="stylesheet" href="{{asset('css/style-tahunan.css')}}" media="all" />
+  </head>
+  
+  <body onload="window.print()">
+    <header class="clearfix">
+      <h1>TAGIHAN & TUNGGAKAN</h1>
+      <div id="company" class="clearfix">
+        <div>PT. Pengelola Pusat Perdagangan Caringin</div>
+        <div>Jl. Soekarno Hatta No. 220 Blok A1 No. 21-24<br /> Pasar Induk Caringin, Bandung</div>
+        <div>(022) 540-4556</div>
       </div>
-      <!-- End of Main Content -->
-@endsection
+      <div id="project">
+        <div><span>Nama Admin</span>: Super_Admin</div>
+      </div>
+    </header>
+    <main>
+      <table class="tg">
+          <tr>
+            <th class="tg-r8fv" rowspan="2">Tgl</th>
+            <th class="tg-r8fv" rowspan="2">Kode</th>
+            <th class="tg-r8fv" rowspan="2">Pengguna</th>
+            <th class="tg-r8fv" colspan="2">Pakai</th>
+            <th class="tg-r8fv" colspan="4">Jumlah Tagihan</th>
+            <th class="tg-r8fv" rowspan="2">Total</th>
+            <th class="tg-r8fv" rowspan="2">Ket.</th>
 
-@section('js')
-<script>
-    $(document).ready(function () {
-        $(
-            '#printTagihan'
-        ).DataTable({
-            "scrollX": true,
-            "processing": true,
-            "bSortable": false,
-            "deferRender": true,
-            "dom": "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'r" +
-                    "ow'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-            "buttons": [
-                {
-                    text: '<i class="fas fa-print fa-lg"></i>',
-                    extend: 'print',
-                    className: 'btn btn-info bg-gradient-info',
-                    title: 'Tagihan Tempat Usaha',
-                    exportOptions: {
-                        columns: ':visible(.export-col)'
-                    },
-                    customize: function (win) {
-                        $(win.document.body)
-                            .css('font-size', '11pt')
-                            .prepend(
-                                '<img src="{{asset('img/bp3c.png')}}" style="position:ab' +
-                                'solute; top:0; left:0;" />'
-                            );;
-                    }
-                }
-            ]
-        });
-    });
-</script>
-@endsection
+          </tr>
+          <tr>
+            <th class="tg-r8fv">Listrik</th>
+            <th class="tg-r8fv">Air</th>
+            <th class="tg-r8fv">Listrik</th>
+            <th class="tg-r8fv">Air</th>
+            <th class="tg-r8fv">Keamanan</th>
+            <th class="tg-r8fv">Kebersihan</th>
+          </tr>
+          @foreach($dataset as $d)
+          <tr>
+            <td class="tg-cegc">{{$d->TGL_TAGIHAN}}</td>
+            <td class="tg-rtqe">{{$d->KD_KONTROL}}</td>
+            <td class="tg-rtqe">{{$d->NM_NASABAH}}</td>
+            <td class="tg-g25h">{{number_format($d->PAKAI_LISTRIK)}}</td>
+            <td class="tg-g25h">{{number_format($d->PAKAI_AIR)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_LISTRIK + $d->DENDA_LISTRIK)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_AIR + $d->DENDA_AIR)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_IPKEAMANAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH_KEBERSIHAN)}}</td>
+            <td class="tg-g25h">{{number_format($d->SELISIH)}}</td>
+            <td class="tg-g25h">{{number_format($d->KET)}}</td>
+          </tr>
+          @endforeach
+        </table>
+      <div id="notices">
+        <div><b>CATATAN :</b></div>
+        <div class="notice">Super_Admin</div>
+      </div>
+    </main>
+  </body>
+</html>

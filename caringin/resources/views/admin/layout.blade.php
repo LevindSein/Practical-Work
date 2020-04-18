@@ -511,20 +511,6 @@
 
                         "buttons": [
                             {
-                                text: '<i class="fas fa-file-pdf fa-lg"></i>',
-                                extend: 'pdf',
-                                className: 'btn btn-danger bg-gradient-danger',
-                                title: 'BP3C PDF',
-                                exportOptions: {
-                                    columns: ':visible(.export-col)'
-                                },
-                                customize: function (doc) {
-                                    doc.pageMargins = [25,25,25,25];
-                                    doc.defaultStyle.fontSize = 12;
-                                    doc.styles.tableHeader.fontSize = 14;
-                                    doc.styles.title.fontSize = 20;
-                                }
-                            }, {
                                 text: '<i class="fas fa-file-excel fa-lg"></i>',
                                 extend: 'excel',
                                 className: 'btn btn-success bg-gradient-success',

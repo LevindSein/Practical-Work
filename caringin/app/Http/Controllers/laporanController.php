@@ -139,6 +139,7 @@ class laporanController extends Controller
         $dataset = DB::table('tagihanku')
         ->select('tagihanku.BLOK_TEMPAT',
             DB::raw('SUM(tagihanku.PAKAI_AIR) as pakaiAir'),
+            DB::raw('SUM(tagihanku.BYR_AIR) as bAir'),
             DB::raw('SUM(tagihanku.BYR_BEBAN) as bBeban'),
             DB::raw('SUM(tagihanku.BYR_PEMELIHARAAN) as bPemeliharaan'),
             DB::raw('SUM(tagihanku.BYR_ARKOT) as bArkot'),
@@ -169,17 +170,19 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "Super Admin"){
 
-        $dataset = DB::table('tagihanku')
-        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->where('tagihanku.BLN_TAGIHAN',$bln)
-        ->get();
-
         $data = DB::table('tagihanku')
         ->select('BLN_TAGIHAN')
         ->where('BLN_TAGIHAN',$bln)
         ->first();
-        return view('admin.print-rincian-pemakaian-air',['dataset'=>$dataset,'data'=>$data]);
+
+        $blok = DB::table('tagihanku')
+        ->select('BLOK_TEMPAT',DB::raw('count(*) as ttl_Blok'))
+        ->where('BLN_TAGIHAN',$bln)
+        ->groupBy('BLOK_TEMPAT')
+        ->get();
+
+        $ttlBlok = count($blok);
+        return view('admin.print-rincian-pemakaian-air',['data'=>$data,'blok'=>$blok,'ttlBlok'=>$ttlBlok,'bln'=>$bln]);
             }
             else{
                 abort(403, 'Oops! Access Forbidden');
@@ -228,17 +231,19 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "Super Admin"){
 
-        $dataset = DB::table('tagihanku')
-        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->where('tagihanku.BLN_TAGIHAN',$bln)
-        ->get();
-
-        $data = DB::table('tagihanku')
-        ->select('BLN_TAGIHAN')
-        ->where('BLN_TAGIHAN',$bln)
-        ->first();
-        return view('admin.print-rincian-pemakaian-listrik',['dataset'=>$dataset,'data'=>$data]);
+                $data = DB::table('tagihanku')
+                ->select('BLN_TAGIHAN')
+                ->where('BLN_TAGIHAN',$bln)
+                ->first();
+        
+                $blok = DB::table('tagihanku')
+                ->select('BLOK_TEMPAT',DB::raw('count(*) as ttl_Blok'))
+                ->where('BLN_TAGIHAN',$bln)
+                ->groupBy('BLOK_TEMPAT')
+                ->get();
+        
+                $ttlBlok = count($blok);
+                return view('admin.print-rincian-pemakaian-listrik',['data'=>$data,'blok'=>$blok,'ttlBlok'=>$ttlBlok,'bln'=>$bln]);
             }
             else{
                 abort(403, 'Oops! Access Forbidden');
