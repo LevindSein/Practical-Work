@@ -289,17 +289,19 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "Super Admin"){
 
-        $dataset = DB::table('tagihanku')
-        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->where('tagihanku.BLN_TAGIHAN',$bln)
-        ->get();
-
-        $data = DB::table('tagihanku')
-        ->select('BLN_TAGIHAN')
-        ->where('BLN_TAGIHAN',$bln)
-        ->first();
-        return view('admin.print-rincian-pemakaian-kebersihan',['dataset'=>$dataset,'data'=>$data]);
+                $data = DB::table('tagihanku')
+                ->select('BLN_TAGIHAN')
+                ->where('BLN_TAGIHAN',$bln)
+                ->first();
+        
+                $blok = DB::table('tagihanku')
+                ->select('BLOK_TEMPAT',DB::raw('count(*) as ttl_Blok'))
+                ->where('BLN_TAGIHAN',$bln)
+                ->groupBy('BLOK_TEMPAT')
+                ->get();
+        
+                $ttlBlok = count($blok);
+                return view('admin.print-rincian-pemakaian-kebersihan',['data'=>$data,'blok'=>$blok,'ttlBlok'=>$ttlBlok,'bln'=>$bln]);
             }
             else{
                 abort(403, 'Oops! Access Forbidden');
@@ -345,17 +347,19 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "Super Admin"){
 
-        $dataset = DB::table('tagihanku')
-        ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
-        ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
-        ->where('tagihanku.BLN_TAGIHAN',$bln)
-        ->get();
-
-        $data = DB::table('tagihanku')
-        ->select('BLN_TAGIHAN')
-        ->where('BLN_TAGIHAN',$bln)
-        ->first();
-        return view('admin.print-rincian-pemakaian-keamanan',['dataset'=>$dataset,'data'=>$data]);
+                $data = DB::table('tagihanku')
+                ->select('BLN_TAGIHAN')
+                ->where('BLN_TAGIHAN',$bln)
+                ->first();
+        
+                $blok = DB::table('tagihanku')
+                ->select('BLOK_TEMPAT',DB::raw('count(*) as ttl_Blok'))
+                ->where('BLN_TAGIHAN',$bln)
+                ->groupBy('BLOK_TEMPAT')
+                ->get();
+        
+                $ttlBlok = count($blok);
+                return view('admin.print-rincian-pemakaian-keamanan',['data'=>$data,'blok'=>$blok,'ttlBlok'=>$ttlBlok,'bln'=>$bln]);
             }
             else{
                 abort(403, 'Oops! Access Forbidden');
