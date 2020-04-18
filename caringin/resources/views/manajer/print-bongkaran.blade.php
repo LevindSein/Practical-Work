@@ -23,8 +23,12 @@
           <tr>
               <td class="tg-cegc" <?php $bloks=$blok[$i]?>>{{$bloks->BLOK}}</td>
               <td class="tg-cegc">{{number_format($Blokku[$i])}}</td>
-              <td class="tg-cegc">{{number_format($Bulan3[$i])}} unit</td>
-              <td class="tg-cegc">{{number_format($Bulan4[$i])}} unit</td>
+              <td class="tg-cegc"
+              <?php if($Bulan3[$i]!=0){ ?> style="color:#FFD700;" <?php } ?>>
+              {{number_format($Bulan3[$i])}} unit</td>
+              <td class="tg-cegc"
+              <?php if($Bulan4[$i]!=0){ ?> style="color:red;" <?php } ?>>
+              {{number_format($Bulan4[$i])}} unit</td>
           </tr>
         @endfor
         </table>
