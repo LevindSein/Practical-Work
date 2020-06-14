@@ -68,7 +68,7 @@
                 <!-- Nav Item - Tagihan -->
                 <li class="nav-item">
 
-                    <a class="nav-link" href="{{url('tambahtagihan')}}">
+                    <a class="nav-link" href="{{url('tambahtagihan/admin')}}">
                         <i class="fas fa-fw fa-plus"></i>
                         <span>Tagihan</span></a>
                 </li>

@@ -12,7 +12,7 @@ class Tagihan extends Model
         'id_tempat',
         'id_pemilik',
         'id_nasabah',
-        'id_user',
+        'user',
         'blok_tempat',
         'tgl_tagihan',
         'expired',

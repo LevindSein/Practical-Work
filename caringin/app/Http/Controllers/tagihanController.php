@@ -987,11 +987,6 @@ class tagihanController extends Controller
             try{
             $username = Session::get('username');
 
-            $user = DB::table('user')
-            ->where('NAMA_USER',$username)
-            ->first();
-            $id_user = $user->ID_USER;
-
             $timezone = date_default_timezone_set('Asia/Jakarta');
             $date = date("Y-m-d", time());
             $bln = date("Y-m", strtotime($date));
@@ -1107,7 +1102,7 @@ class tagihanController extends Controller
                 }
             }
             DB::table('tagihanku')->where('ID_TAGIHANKU', $id)->update([
-                'ID_USER'=>$id_user,
+                'USER'=>$username,
                 'TGL_BAYAR'=>$date,
                 'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>$stt_lunas,
@@ -1262,11 +1257,6 @@ class tagihanController extends Controller
         try{
         $username = Session::get('username');
 
-        $user = DB::table('user')
-        ->where('NAMA_USER',$username)
-        ->first();
-        $id_user = $user->ID_USER;
-
         $id_exp = explode(",",$ids);
 
         $timezone = date_default_timezone_set('Asia/Jakarta');
@@ -1281,7 +1271,7 @@ class tagihanController extends Controller
             DB::table('tagihanku')
             ->where('ID_TAGIHANKU', $data->ID_TAGIHANKU)
             ->update([
-                'ID_USER'=>$id_user,
+                'USER'=>$username,
                 'TGL_BAYAR'=>$date,
                 'BLN_BAYAR'=>$bln,
                 'STT_LUNAS'=>1,
@@ -1371,7 +1361,7 @@ class tagihanController extends Controller
         ->leftJoin('tempat_usaha','tagihanku.ID_TEMPAT','=','tempat_usaha.ID_TEMPAT')
         ->leftJoin('nasabah','tagihanku.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->where([
-            ['tagihanku.ID_USER',$id_user],
+            ['tagihanku.USER',$username],
             ['tagihanku.TGL_BAYAR',$tgl],
             ['tagihanku.STT_BAYAR', 1]
         ])
