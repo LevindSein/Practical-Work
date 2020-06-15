@@ -47,7 +47,7 @@ foreach($dataset as $d){
           </tr>
           @foreach($dataset as $d)
           <tr>
-            <td class="tg-cegc">{{$d->NAMA_USER}}</td>
+            <td class="tg-cegc">{{$d->USER}}</td>
             <td class="tg-g25h">{{number_format($d->Listrik)}}</td>
             <td class="tg-g25h">{{number_format($d->Air)}}</td>
             <td class="tg-g25h">{{number_format($d->Keamanan)}}</td>

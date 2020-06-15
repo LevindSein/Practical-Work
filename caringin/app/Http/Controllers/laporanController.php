@@ -785,8 +785,7 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "keuangan"){
         $dataset = DB::table('tagihanku')
-        ->leftJoin('user','tagihanku.ID_USER','=','user.ID_USER')
-        ->select('user.NAMA_USER',
+        ->select('tagihanku.USER',
             DB::raw('SUM(tagihanku.REALISASI_LISTRIK - tagihanku.DENDA_LISTRIK) as Listrik'),
             DB::raw('SUM(tagihanku.REALISASI_AIR - tagihanku.DENDA_AIR) as Air'),
             DB::raw('SUM(tagihanku.REALISASI_IPKEAMANAN) as Keamanan'),
@@ -795,7 +794,7 @@ class laporanController extends Controller
             DB::raw('SUM(tagihanku.DENDA_AIR) as DendaAir'),
             DB::raw('SUM(tagihanku.REALISASI) as Realisasi')
         )
-        ->groupBy('user.NAMA_USER')
+        ->groupBy('tagihanku.USER')
         ->where('tagihanku.TGL_BAYAR',$tgl)
         ->get();
 
@@ -1126,8 +1125,7 @@ class laporanController extends Controller
         else{
             if(Session::get('role') == "manajer"){
         $dataset = DB::table('tagihanku')
-        ->leftJoin('user','tagihanku.ID_USER','=','user.ID_USER')
-        ->select('user.NAMA_USER',
+        ->select('tagihanku.USER',
             DB::raw('SUM(tagihanku.REALISASI_LISTRIK - tagihanku.DENDA_LISTRIK) as Listrik'),
             DB::raw('SUM(tagihanku.REALISASI_AIR - tagihanku.DENDA_AIR) as Air'),
             DB::raw('SUM(tagihanku.REALISASI_IPKEAMANAN) as Keamanan'),
@@ -1136,7 +1134,7 @@ class laporanController extends Controller
             DB::raw('SUM(tagihanku.DENDA_AIR) as DendaAir'),
             DB::raw('SUM(tagihanku.REALISASI) as Realisasi')
         )
-        ->groupBy('user.NAMA_USER')
+        ->groupBy('tagihanku.USER')
         ->where('tagihanku.TGL_BAYAR',$tgl)
         ->get();
 
