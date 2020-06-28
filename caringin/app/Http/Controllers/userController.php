@@ -35,9 +35,14 @@ class userController extends Controller
         }
         else{
             if(Session::get('role') == "Super Admin"){
-
-        DB::table('user')->where('ID_USER',$id)->delete();
-        return redirect()->route('datauser')->with('Success','Berhasil Dihapus');
+        try{
+            DB::table('user')->where('ID_USER',$id)->delete();
+            return redirect()->route('datauser')->with('success','Berhasil Dihapus');
+        }
+        catch(\Exception $e){
+            return redirect()->route('datauser')->with('error','User tidak dapat Dihapus');
+        }
+        
             }
             else{
                 abort(403, 'Oops! Access Forbidden');

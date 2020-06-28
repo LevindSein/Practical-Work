@@ -1,6 +1,8 @@
 <?php
 use App\Blok;
 use App\Nasabah;
+use App\Meteran_air;
+use App\Meteran_listrik;
 use Illuminate\Support\Facades\DB;
 
 $dataset = DB::table('blok')
@@ -10,6 +12,7 @@ $blok = array();
 for($i = 0; $i < $dataset->count(); $i++){
   $blok[$i] = $dataset[$i]->NM_BLOK;
 }
+
 $dataset1 = DB::table('nasabah')
   ->select('NM_NASABAH','NO_ANGGOTA','NO_KTP','NO_NPWP')
   ->get();
@@ -20,6 +23,22 @@ for($j = 0; $j < $dataset1->count(); $j++){
   $anggota[$j] = $dataset1[$j]->NO_ANGGOTA." - ".$dataset1[$j]->NM_NASABAH;
   $ktp[$j] = $dataset1[$j]->NO_KTP." - ".$dataset1[$j]->NM_NASABAH;
   $npwp[$j] = $dataset1[$j]->NO_NPWP." - ".$dataset1[$j]->NM_NASABAH;
+}
+
+$meterAir = DB::table('meteran_air')
+  ->select('ID_MAIR','NOMTR_AIR')
+  ->get();
+$mAir = array();
+for($k = 0; $k < $meterAir->count(); $k++){
+  $mAir[$k] = $meterAir[$k]->ID_MAIR." - ".$meterAir[$k]->NOMTR_AIR;
+}
+
+$meterListrik = DB::table('meteran_listrik')
+  ->select('ID_MLISTRIK','NOMTR_LISTRIK')
+  ->get();
+$mListrik = array();
+for($L = 0; $L < $meterListrik->count(); $L++){
+  $mListrik[$L] = $meterListrik[$L]->ID_MLISTRIK." - ".$meterListrik[$L]->NOMTR_LISTRIK;
 }
 ?>
 
@@ -123,16 +142,18 @@ for($j = 0; $j < $dataset1->count(); $j++){
                 </div>
                 
                 <!-- Hidden Fasilitas -->
-                <div class="form-group" style="display:none">
+                <div class="autocomplete" style="display:none">
                   ID Alat Meter Air
-                  <input type="number" min="0" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1xx">
+                  <input type="text" class="form-control form-control-user" name="meterAir"  id="myDiv1" placeholder="1xx">
+                  <a href="{{url('dataalat')}}">Data Alat disini !</a>
                 </div>
-                <div class="form-group" style="display:none">
-                  ID Alat Meter Listrik
-                  <input type="number" min="0" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1xx">
-                  <br>
+                <div class="autocomplete" style="display:none">
                   Daya
-                  <input type="number" min="0" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">
+                  <input type="number" min="0" class="form-control form-control-user" name="dayaListrik" id="dayaL" placeholder="12xx">  
+                  <br>
+                  ID Alat Meter Listrik
+                  <input type="text" class="form-control form-control-user" name="meterListrik" id="myDiv2" placeholder="1xx">
+                  <a href="{{url('dataalat')}}">Data Alat disini !</a>
                 </div>
                 <div class="form-group" style="display:none">
                   <label for="sel1">Kategori Tarif IPK</label>
@@ -254,6 +275,8 @@ for($j = 0; $j < $dataset1->count(); $j++){
     var anggota = <?php echo json_encode($anggota); ?>;
     var ktp = <?php echo json_encode($ktp); ?>;
     var npwp = <?php echo json_encode($npwp); ?>;
+    var mair = <?php echo json_encode($mAir); ?>;
+    var mlistrik = <?php echo json_encode($mListrik); ?>;
   </script>
 
   <script>
@@ -261,5 +284,7 @@ for($j = 0; $j < $dataset1->count(); $j++){
   autocomplete(document.getElementById("ktpku"), ktp);
   autocomplete(document.getElementById("npwpku"), npwp);
   autocomplete(document.getElementById("anggotaku"), anggota);
+  autocomplete(document.getElementById("myDiv1"), mair);
+  autocomplete(document.getElementById("myDiv2"), mlistrik);
   </script>
 @endsection

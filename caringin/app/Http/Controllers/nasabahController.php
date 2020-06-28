@@ -248,8 +248,13 @@ class nasabahController extends Controller
             $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$nomor_anggota)->first();
         }
 
-        $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();
-        $mListrik = DB::table('meteran_listrik')->select('ID_MLISTRIK')->where('id_mlistrik',$request->get('meterListrik'))->first();
+        $meter_air = explode(" - ",$request->get('meterAir'));
+        $meter_air = $meter_air[0];
+        $meter_listrik = explode(" - ",$request->get('meterListrik'));
+        $meter_listrik = $meter_listrik[0];
+
+        $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$meter_air)->first();
+        $mListrik = DB::table('meteran_listrik')->select('ID_MLISTRIK')->where('id_mlistrik',$meter_listrik)->first();
 
         if(!empty($request->get('air')))
             $id_mair = $mAir->ID_MAIR;
@@ -318,7 +323,8 @@ class nasabahController extends Controller
             'id_trflistrik'=>$listrikId,
             'id_trfair'=>$airId,
             'id_mair'=>$id_mair,
-            'id_mlistrik'=>$id_mlistrik
+            'id_mlistrik'=>$id_mlistrik,
+            'stt_cicil'=>0
         ]);
         $dataTempat->save();
     } catch(\Exception $e){
