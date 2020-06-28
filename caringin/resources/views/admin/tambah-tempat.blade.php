@@ -41,8 +41,12 @@ for($L = 0; $L < $meterListrik->count(); $L++){
   $mListrik[$L] = $meterListrik[$L]->ID_MLISTRIK." - ".$meterListrik[$L]->NOMTR_LISTRIK;
 }
 ?>
+<?php
+    $role = Session::get('role');
+?>
 
-@extends('admin.layout')
+
+@extends( $role == 'Super Admin' ? 'admin.layout' : 'normal.layout')
 @section('content')
 
        <!-- Begin Page Content -->

@@ -27,7 +27,7 @@
             rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
 
         <!-- Custom styles for this page -->
         <link
@@ -67,10 +67,56 @@
 
                 <!-- Nav Item - Tagihan -->
                 <li class="nav-item">
-
                     <a class="nav-link" href="{{url('tambahtagihan/admin')}}">
                         <i class="fas fa-fw fa-plus"></i>
                         <span>Tagihan</span></a>
+                </li>
+
+                <!-- Nav Item - Tempat Usaha -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseUsaha"
+                        aria-expanded="true"
+                        aria-controls="collapseUsaha">
+                        <i class="fas fa-fw fa-store"></i>
+                        <span>Tempat Usaha</span>
+                    </a>
+                    <div
+                        id="collapseUsaha"
+                        class="collapse"
+                        aria-labelledby="headingUsaha"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{url('showformtempatusaha')}}">Tambah Tempat Usaha</a>
+                            <a class="collapse-item" href="{{url('showtempatusaha')}}">Data Tempat Usaha</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Nasabah -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseNasabah"
+                        aria-expanded="true"
+                        aria-controls="collapseNasabah">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Nasabah</span>
+                    </a>
+                    <div
+                        id="collapseNasabah"
+                        class="collapse"
+                        aria-labelledby="headingNasabah"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->
@@ -237,6 +283,7 @@
 
             <!-- Custom scripts for all pages-->
             <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+            <script src="{{asset('js/autocomplete.js')}}"></script>
 
             <!-- Page level plugins -->
             <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>

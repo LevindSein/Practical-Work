@@ -21,7 +21,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
         $dataset = DB::table('nasabah')->get();
         return view('admin.data-nasabah',['dataset'=>$dataset]);
             }
@@ -35,7 +35,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin"  || Session::get('role') == "admin"){
         return view('admin.tambah-nasabah');
             }
             else{
@@ -48,7 +48,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin"  || Session::get('role') == "admin"){
         try {
             $random = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT);
             $no_anggota = "BP3C".$random;
@@ -85,7 +85,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin"  || Session::get('role') == "admin"){
         $dataset = DB::table('nasabah')->where('ID_NASABAH',$id)->get();
         return view('admin.update-nasabah',['dataset'=>$dataset]);
             }
@@ -99,7 +99,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin"  || Session::get('role') == "admin"){
         try{
             DB::table('nasabah')->where('ID_NASABAH', $id)->update([
                 'NM_NASABAH'=>$request->get('nama'),
@@ -132,7 +132,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
         $dataset = DB::table('tempat_usaha')
         ->leftJoin('nasabah','tempat_usaha.ID_NASABAH','=','nasabah.ID_NASABAH')
         ->leftJoin('pemilik','tempat_usaha.ID_PEMILIK','=','pemilik.ID_PEMILIK')
@@ -166,7 +166,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
 
         $tarif_ipk = DB::table('tarif_ipk')->select('TRF_IPK','ID_TRFIPK')->get();
         $tarif_keamanan = DB::table('tarif_keamanan')->select('TRF_KEAMANAN','ID_TRFKEAMANAN')->get();
@@ -183,7 +183,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
 
         try{
         //Kode Kontrol
@@ -343,7 +343,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
 
         $dataset = DB::table('tempat_usaha')->where('ID_TEMPAT',$id)->get();
 
@@ -418,7 +418,7 @@ class nasabahController extends Controller
             return redirect('login')->with('error','Silahkan Login Terlebih Dahulu');
         }
         else{
-            if(Session::get('role') == "Super Admin"){
+            if(Session::get('role') == "Super Admin" || Session::get('role') == "admin"){
 
         try{
         $kosong = "(kosong)";

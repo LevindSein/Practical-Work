@@ -14,8 +14,12 @@ for($j = 0; $j < $dataset1->count(); $j++){
   $npwp[$j] = $dataset1[$j]->NO_NPWP." - ".$dataset1[$j]->NM_NASABAH;
 }
 ?>
+<?php
+    $role = Session::get('role');
+?>
 
-@extends('admin.layout')
+
+@extends( $role == 'Super Admin' ? 'admin.layout' : 'normal.layout')
 @section('content')
        <!-- Begin Page Content -->
        <div class="container-fluid">
