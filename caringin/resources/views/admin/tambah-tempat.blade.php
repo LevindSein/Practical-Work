@@ -1,5 +1,31 @@
+<?php
+use App\Blok;
+use App\Nasabah;
+use Illuminate\Support\Facades\DB;
+
+$dataset = DB::table('blok')
+  ->select('NM_BLOK')
+  ->get();
+$blok = array();
+for($i = 0; $i < $dataset->count(); $i++){
+  $blok[$i] = $dataset[$i]->NM_BLOK;
+}
+$dataset1 = DB::table('nasabah')
+  ->select('NM_NASABAH','NO_ANGGOTA','NO_KTP','NO_NPWP')
+  ->get();
+$anggota = array();
+$ktp = array();
+$npwp = array();
+for($j = 0; $j < $dataset1->count(); $j++){
+  $anggota[$j] = $dataset1[$j]->NO_ANGGOTA." - ".$dataset1[$j]->NM_NASABAH;
+  $ktp[$j] = $dataset1[$j]->NO_KTP." - ".$dataset1[$j]->NM_NASABAH;
+  $npwp[$j] = $dataset1[$j]->NO_NPWP." - ".$dataset1[$j]->NM_NASABAH;
+}
+?>
+
 @extends('admin.layout')
 @section('content')
+
        <!-- Begin Page Content -->
        <div class="container-fluid">
 
@@ -11,9 +37,9 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="p-4">
-              <form class="user" action="storetempat" method="POST">
+              <form autocomplete="off" class="user" action="storetempat" method="POST">
               @csrf
-                <div class="form-group">
+                <div class="autocomplete">
                   Blok
                   <input required name="blok" style="text-transform: uppercase;" type="text" class="form-control form-control-user" id="exampleInputKodeBlok" placeholder="A-1">
                 </div>
@@ -50,17 +76,20 @@
                 </div>
 
                 <!-- Hidden Identitas -->
-                <div class="form-group" style="display:none" id="myDivKTP">
+                <div class="autocomplete" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input name="ktp" type="text" class="form-control form-control-user" id="ktpku" placeholder="1484xxxx">
+                  <input name="ktp" type="text" class="form-control form-control-user inline-block" id="ktpku" placeholder="1484xxxx">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivNPWP">
+                <div class="autocomplete" style="display:none" id="myDivNPWP">
                   No. NPWP
                   <input name="npwp" type="text" class="form-control form-control-user" id="npwpku" placeholder="261xxxxxx">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivAnggota">
+                <div class="autocomplete" style="display:none" id="myDivAnggota">
                   No. Anggota
                   <input name="anggota" type="text" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
 
                 <div class="form-group row">
@@ -218,5 +247,19 @@
     }
   }
   $('input[type="checkbox"]').click(checkAir).each(checkAir);
+  </script>
+
+  <script>
+    var blok = <?php echo json_encode($blok); ?>;
+    var anggota = <?php echo json_encode($anggota); ?>;
+    var ktp = <?php echo json_encode($ktp); ?>;
+    var npwp = <?php echo json_encode($npwp); ?>;
+  </script>
+
+  <script>
+  autocomplete(document.getElementById("exampleInputKodeBlok"), blok);
+  autocomplete(document.getElementById("ktpku"), ktp);
+  autocomplete(document.getElementById("npwpku"), npwp);
+  autocomplete(document.getElementById("anggotaku"), anggota);
   </script>
 @endsection

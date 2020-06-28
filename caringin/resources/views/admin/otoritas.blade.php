@@ -13,7 +13,7 @@ use Illuminate\Routing\Redirector;
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-center">
-          <h1 class="h3 mb-0 text-gray-800">Otoritas Tagihan</h1>
+          <h1 class="h3 mb-0 text-gray-800">Otoritas Pegawai</h1>
         </div>
 
         <div class="row justify-content-center">

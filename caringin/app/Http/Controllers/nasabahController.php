@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Nasabah;
+use App\Blok;
 use App\Tempat_usaha;
 use App\Penghapusan;
 use App\Pemilik;
@@ -228,17 +229,23 @@ class nasabahController extends Controller
             $join = $blok."-".$split[0];
         }
 
+        $nomor_ktp = explode(" - ",$request->get('ktp'));
+        $nomor_ktp = $nomor_ktp[0];
+        $nomor_npwp = explode(" - ",$request->get('npwp'));
+        $nomor_npwp = $nomor_npwp[0];
+        $nomor_anggota = explode(" - ",$request->get('anggota'));
+        $nomor_anggota = $nomor_anggota[0];
 
         //Identitas
         $radio = $request->get('identitas');
         if($radio == "k"){
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp'))->first();
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$nomor_ktp)->first();
         }
         else if($radio == "n"){
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp'))->first();
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$nomor_npwp)->first();
         }
         else{
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$request->get('anggota'))->first();
+            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$nomor_anggota)->first();
         }
 
         $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();
@@ -284,6 +291,17 @@ class nasabahController extends Controller
         $userId = $user->ID_USER;
 
         //Tambah Data
+        try {
+            $dataBlok = new Blok([
+                'nm_blok'=>$blok
+            ]);
+            $dataBlok->save();  
+        } catch(\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == '1062'){
+            }
+        }
+
         $dataTempat = new Tempat_usaha([
             'blok'=>$blok,
             'no_alamat'=>$losKap,
@@ -449,28 +467,42 @@ class nasabahController extends Controller
             DB::table('tagihanku')->where('id_tempat',$id)->delete();
         }
         else{
+            
+            $nomor_ktp = explode(" - ",$request->get('ktp'));
+            $nomor_ktp = $nomor_ktp[0];
+            $nomor_npwp = explode(" - ",$request->get('npwp'));
+            $nomor_npwp = $nomor_npwp[0];
+            $nomor_anggota = explode(" - ",$request->get('anggota'));
+            $nomor_anggota = $nomor_anggota[0];
+            $nomor_ktp1 = explode(" - ",$request->get('ktp1'));
+            $nomor_ktp1 = $nomor_ktp1[0];
+            $nomor_npwp1 = explode(" - ",$request->get('npwp1'));
+            $nomor_npwp1 = $nomor_npwp1[0];
+            $nomor_anggota1 = explode(" - ",$request->get('anggota1'));
+            $nomor_anggota1 = $nomor_anggota1[0];
+
             //pemilik
             $radio = $request->get('identitas');
             if($radio == "k"){
-                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_ktp',$request->get('ktp'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_ktp',$nomor_ktp)->first();
             }
             else if($radio == "n"){
-                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_npwp',$request->get('npwp'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_npwp',$nomor_npwp)->first();
             }
             else{
-                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_anggota',$request->get('anggota'))->first();
+                $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_anggota',$nomor_anggota)->first();
             }
 
             //pengguna
             $radio1 = $request->get('identitas1');
             if($radio1 == "k1"){
-                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$request->get('ktp1'))->first();
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$nomor_ktp1)->first();
             }
             else if($radio1 == "n1"){
-                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$request->get('npwp1'))->first();
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$nomor_npwp1)->first();
             }
             else{
-                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$request->get('anggota1'))->first();
+                $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$nomor_anggota1)->first();
             }
         
             $mAir = DB::table('meteran_air')->select('ID_MAIR')->where('id_mair',$request->get('meterAir'))->first();

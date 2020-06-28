@@ -27,7 +27,7 @@
             rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
 
         <!-- Custom styles for this page -->
         <link
@@ -92,7 +92,6 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <div class="collapse-divider"></div>
                             <a class="collapse-item" href="{{url('tambahtagihan')}}">Tambah Tagihan</a>
-                            <a class="collapse-item" href="{{url('otorisasitagihan')}}">Otoritas Tagihan</a>
                         </div>
                     </div>
                 </li>
@@ -174,7 +173,6 @@
                         aria-labelledby="headingNasabah"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showformnasabah')}}">Tambah Nasabah</a>
                             <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
                         </div>
                     </div>
@@ -273,6 +271,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{url('showtambahuser')}}">Tambah Pegawai</a>
                             <a class="collapse-item" href="{{url('showdatauser')}}">Data Pegawai</a>
+                            <a class="collapse-item" href="{{url('otorisasitagihan')}}">Otoritas Pegawai</a>
                         </div>
                     </div>
                 </li>
@@ -442,6 +441,7 @@
 
             <!-- Custom scripts for all pages-->
             <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+            <script src="{{asset('js/autocomplete.js')}}"></script>
 
             <!-- Page level plugins -->
             <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>

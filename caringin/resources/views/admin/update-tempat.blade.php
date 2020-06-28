@@ -1,3 +1,20 @@
+<?php
+use App\Nasabah;
+use Illuminate\Support\Facades\DB;
+
+$dataset1 = DB::table('nasabah')
+  ->select('NM_NASABAH','NO_ANGGOTA','NO_KTP','NO_NPWP')
+  ->get();
+$anggota = array();
+$ktp = array();
+$npwp = array();
+for($j = 0; $j < $dataset1->count(); $j++){
+  $anggota[$j] = $dataset1[$j]->NO_ANGGOTA." - ".$dataset1[$j]->NM_NASABAH;
+  $ktp[$j] = $dataset1[$j]->NO_KTP." - ".$dataset1[$j]->NM_NASABAH;
+  $npwp[$j] = $dataset1[$j]->NO_NPWP." - ".$dataset1[$j]->NM_NASABAH;
+}
+?>
+
 @extends('admin.layout')
 @section('content')
        <!-- Begin Page Content -->
@@ -12,7 +29,7 @@
           <div class="col-lg-6">
             <div class="p-4">
             @foreach ($dataset as $data)
-              <form class="user" action="{{url('update/storetempat',[$data->ID_TEMPAT])}}" method="POST">
+              <form autocomplete="off" class="user" action="{{url('update/storetempat',[$data->ID_TEMPAT])}}" method="POST">
               @csrf
                 <div class="form-group">
                   Blok
@@ -52,17 +69,20 @@
                 </div>
 
                 <!-- Hidden Pemilik -->
-                <div class="form-group" style="display:none" id="myDivKTP">
+                <div class="autocomplete" style="display:none" id="myDivKTP">
                   No. KTP
                   <input value="{{$noktp}}" type="text" name="ktp" id="ktpku" class="form-control form-control-user" placeholder="(kosong)">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivNPWP">
+                <div class="autocomplete" style="display:none" id="myDivNPWP">
                   No. NPWP
                   <input value="{{$nonpwp}}" type="text" name="npwp" id="npwpku" class="form-control form-control-user" placeholder="(kosong)">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivAnggota">
+                <div class="autocomplete" style="display:none" id="myDivAnggota">
                   No. Anggota
                   <input value="{{$noanggota}}" type="text" name="anggota" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
 
                 <div class="form-group row">
@@ -90,17 +110,20 @@
                 </div>
 
                 <!-- Hidden Pengguna -->
-                <div class="form-group" style="display:none" id="myDivKTP1">
+                <div class="autocomplete" style="display:none" id="myDivKTP1">
                   No. KTP
                   <input value="{{$noktp1}}" type="text" name="ktp1" id="ktpku1" class="form-control form-control-user" placeholder="(kosong)">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivNPWP1">
+                <div class="autocomplete" style="display:none" id="myDivNPWP1">
                   No. NPWP
                   <input value="{{$nonpwp1}}" type="text" name="npwp1" id="npwpku1" class="form-control form-control-user" placeholder="(kosong)">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
-                <div class="form-group" style="display:none" id="myDivAnggota1">
+                <div class="autocomplete" style="display:none" id="myDivAnggota1">
                   No. Anggota
                   <input value="{{$noanggota1}}" type="text" name="anggota1" id="anggotaku1" class="form-control form-control-user" placeholder="BP3C261xxxxx">
+                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
                 </div>
 
                 <div class="form-group row">
@@ -313,5 +336,20 @@
     }
   }
   $('input[type="checkbox"]').click(checkAir).each(checkAir);
+  </script>
+
+  <script>
+    var anggota = <?php echo json_encode($anggota); ?>;
+    var ktp = <?php echo json_encode($ktp); ?>;
+    var npwp = <?php echo json_encode($npwp); ?>;
+  </script>
+
+  <script>
+  autocomplete(document.getElementById("ktpku"), ktp);
+  autocomplete(document.getElementById("npwpku"), npwp);
+  autocomplete(document.getElementById("anggotaku"), anggota);
+  autocomplete(document.getElementById("ktpku1"), ktp);
+  autocomplete(document.getElementById("npwpku1"), npwp);
+  autocomplete(document.getElementById("anggotaku1"), anggota);
   </script>
 @endsection
