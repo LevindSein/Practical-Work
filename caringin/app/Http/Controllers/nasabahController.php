@@ -235,17 +235,35 @@ class nasabahController extends Controller
         $nomor_npwp = $nomor_npwp[0];
         $nomor_anggota = explode(" - ",$request->get('anggota'));
         $nomor_anggota = $nomor_anggota[0];
+        $nomor_ktp1 = explode(" - ",$request->get('ktp1'));
+        $nomor_ktp1 = $nomor_ktp1[0];
+        $nomor_npwp1 = explode(" - ",$request->get('npwp1'));
+        $nomor_npwp1 = $nomor_npwp1[0];
+        $nomor_anggota1 = explode(" - ",$request->get('anggota1'));
+        $nomor_anggota1 = $nomor_anggota1[0];
 
-        //Identitas
+        //pemilik
         $radio = $request->get('identitas');
         if($radio == "k"){
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$nomor_ktp)->first();
+            $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_ktp',$nomor_ktp)->first();
         }
         else if($radio == "n"){
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$nomor_npwp)->first();
+            $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_npwp',$nomor_npwp)->first();
         }
         else{
-            $nasabah = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$nomor_anggota)->first();
+            $nasabah = DB::table('pemilik')->select('ID_PEMILIK')->where('no_anggota',$nomor_anggota)->first();
+        }
+
+        //pengguna
+        $radio1 = $request->get('identitas1');
+        if($radio1 == "k1"){
+            $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_ktp',$nomor_ktp1)->first();
+        }
+        else if($radio1 == "n1"){
+            $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_npwp',$nomor_npwp1)->first();
+        }
+        else{
+            $nasabah1 = DB::table('nasabah')->select('ID_NASABAH')->where('no_anggota',$nomor_anggota1)->first();
         }
 
         $meter_air = explode(" - ",$request->get('meterAir'));
@@ -259,7 +277,8 @@ class nasabahController extends Controller
         if(!empty($request->get('air')))
             $id_mair = $mAir->ID_MAIR;
 
-        $id_nas = $nasabah->ID_NASABAH;
+        $id_pemilik = $nasabah->ID_PEMILIK;
+        $id_nas = $nasabah1->ID_NASABAH;
 
         if(!empty($request->get('listrik')))
             $id_mlistrik = $mListrik->ID_MLISTRIK;
@@ -315,7 +334,7 @@ class nasabahController extends Controller
             'jml_alamat'=>$jumLos,
             'bentuk_usaha'=>$request->get('bentuk_usaha'),
             'id_nasabah'=>$id_nas,
-            'id_pemilik'=>$id_nas,
+            'id_pemilik'=>$id_pemilik,
             'id_user'=>$userId,
             'id_trfkebersihan'=>$kebersihanId,
             'id_trfipk'=>$ipkId,

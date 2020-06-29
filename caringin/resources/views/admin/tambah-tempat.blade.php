@@ -75,7 +75,7 @@ for($L = 0; $L < $meterListrik->count(); $L++){
                   <input required name="bentuk_usaha" style="text-transform: capitalize;" type="text" class="form-control form-control-user" id="exampleInputBentukUsaha" placeholder="Misal : Penjual Buah">
                 </div>
                 <div class="form-group row">
-                  <div class="col-sm-2">Identitas</div>
+                  <div class="col-sm-2">Pemilik</div>
                   <div class="col-sm-10">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="identitas" id="myRadioKTP" value="k" checked>
@@ -98,21 +98,56 @@ for($L = 0; $L < $meterListrik->count(); $L++){
                   </div>
                 </div>
 
-                <!-- Hidden Identitas -->
+                <!-- Hidden Pemilik -->
                 <div class="autocomplete" style="display:none" id="myDivKTP">
                   No. KTP
-                  <input name="ktp" type="text" class="form-control form-control-user inline-block" id="ktpku" placeholder="1484xxxx">
-                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
+                  <input type="text" name="ktp" id="ktpku" class="form-control form-control-user" placeholder="325xxxx">
                 </div>
                 <div class="autocomplete" style="display:none" id="myDivNPWP">
                   No. NPWP
-                  <input name="npwp" type="text" class="form-control form-control-user" id="npwpku" placeholder="261xxxxxx">
-                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
+                  <input type="text" name="npwp" id="npwpku" class="form-control form-control-user" placeholder="99xxxx">
                 </div>
                 <div class="autocomplete" style="display:none" id="myDivAnggota">
                   No. Anggota
-                  <input name="anggota" type="text" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
-                  <a href="{{url('showformnasabah')}}">Nasabah Tidak Ada ?</a>
+                  <input type="text" name="anggota" class="form-control form-control-user" id="anggotaku" placeholder="BP3C261xxxxx">
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-2">Pengguna</div>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioKTP1" value="k1" checked>
+                      <label class="form-check-label" for="myRadioKTP1">
+                        KTP
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioNPWP1" value="n1">
+                      <label class="form-check-label" for="myRadioNPWP1">
+                        NPWP
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="identitas1" id="myRadioAnggota1" value="a1">
+                      <label class="form-check-label" for="myRadioAnggota1">
+                        No.Anggota
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hidden Pengguna -->
+                <div class="autocomplete" style="display:none" id="myDivKTP1">
+                  No. KTP
+                  <input type="text" name="ktp1" id="ktpku1" class="form-control form-control-user" placeholder="325xxxx">
+                </div>
+                <div class="autocomplete" style="display:none" id="myDivNPWP1">
+                  No. NPWP
+                  <input type="text" name="npwp1" id="npwpku1" class="form-control form-control-user" placeholder="99xxxx">
+                </div>
+                <div class="autocomplete" style="display:none" id="myDivAnggota1">
+                  No. Anggota
+                  <input type="text" name="anggota1" id="anggotaku1" class="form-control form-control-user" placeholder="BP3C261xxxxx">
                 </div>
 
                 <div class="form-group row">
@@ -213,7 +248,7 @@ for($L = 0; $L < $meterListrik->count(); $L++){
   $('input[type="checkbox"]').click(evaluate).each(evaluate);
   </script>
 
-  <!-- Identitas Button -->
+  <!-- Pemilik Button -->
   <script>
   function radioKTP(){
     if($('#myRadioKTP').is(':checked'))
@@ -243,6 +278,38 @@ for($L = 0; $L < $meterListrik->count(); $L++){
     }
   }
   $('input[type="radio"]').click(radioKTP).each(radioKTP);
+  </script>
+
+  <!-- Pengguna Button -->
+  <script>
+  function radioKTP1(){
+    if($('#myRadioKTP1').is(':checked'))
+    {
+      document.getElementById('myDivKTP1').style.display ='block';
+      document.getElementById('myDivNPWP1').style.display ='none';
+      document.getElementById('myDivAnggota1').style.display ='none';
+      document.getElementById('ktpku1').required = true;
+      document.getElementById('npwpku1').required = false;
+      document.getElementById('anggotaku1').required = false;
+    }
+    else if($('#myRadioNPWP1').is(':checked')){
+      document.getElementById('myDivKTP1').style.display ='none';
+      document.getElementById('myDivNPWP1').style.display ='block';
+      document.getElementById('myDivAnggota1').style.display ='none';
+      document.getElementById('ktpku1').required = false;
+      document.getElementById('npwpku1').required = true;
+      document.getElementById('anggotaku1').required = false;
+    }
+    else{
+      document.getElementById('myDivKTP1').style.display ='none';
+      document.getElementById('myDivNPWP1').style.display ='none';
+      document.getElementById('myDivAnggota1').style.display ='block';
+      document.getElementById('ktpku1').required = false;
+      document.getElementById('npwpku1').required = false;
+      document.getElementById('anggotaku1').required = true;
+    }
+  }
+  $('input[type="radio"]').click(radioKTP1).each(radioKTP1);
   </script>
 
   <!-- Checking -->
@@ -288,6 +355,9 @@ for($L = 0; $L < $meterListrik->count(); $L++){
   autocomplete(document.getElementById("ktpku"), ktp);
   autocomplete(document.getElementById("npwpku"), npwp);
   autocomplete(document.getElementById("anggotaku"), anggota);
+  autocomplete(document.getElementById("ktpku1"), ktp);
+  autocomplete(document.getElementById("npwpku1"), npwp);
+  autocomplete(document.getElementById("anggotaku1"), anggota);
   autocomplete(document.getElementById("myDiv1"), mair);
   autocomplete(document.getElementById("myDiv2"), mlistrik);
   </script>

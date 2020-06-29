@@ -65,6 +65,30 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
+                <!-- Nav Item - Nasabah -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-toggle="collapse"
+                        data-target="#collapseNasabah"
+                        aria-expanded="true"
+                        aria-controls="collapseNasabah">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Nasabah</span>
+                    </a>
+                    <div
+                        id="collapseNasabah"
+                        class="collapse"
+                        aria-labelledby="headingNasabah"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{url('showformnasabah')}}">Tambah Nasabah</a>
+                            <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
+                        </div>
+                    </div>
+                </li>
+
                 <!-- Nav Item - Tagihan -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('tambahtagihan/admin')}}">
@@ -92,29 +116,6 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{url('showformtempatusaha')}}">Tambah Tempat Usaha</a>
                             <a class="collapse-item" href="{{url('showtempatusaha')}}">Data Tempat Usaha</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Nasabah -->
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="#"
-                        data-toggle="collapse"
-                        data-target="#collapseNasabah"
-                        aria-expanded="true"
-                        aria-controls="collapseNasabah">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Nasabah</span>
-                    </a>
-                    <div
-                        id="collapseNasabah"
-                        class="collapse"
-                        aria-labelledby="headingNasabah"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{url('showdatanasabah')}}">Data Nasabah</a>
                         </div>
                     </div>
                 </li>
